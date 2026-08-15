@@ -1,0 +1,125 @@
+@reference "../../styles/index.css";
+
+@layer components {
+  /* Modal Backdrop / Overlay */
+  .modal-overlay {
+    @apply fixed inset-0 z-[1050] flex justify-center items-start bg-black/60 pt-[42px] p-2 overflow-y-auto;
+
+  /* Modal Dialog Container */
+  .modal-dialog {
+    @apply w-full max-w-[500px] mx-auto my-0;
+  }
+
+  /* Modal Content Card */
+  .modal-content {
+    @apply bg-white border-0 rounded-none shadow-2xl overflow-hidden;
+  }
+
+  /* Modal Header */
+  .modal-header {
+    @apply bg-black text-white p-2.5! flex items-center justify-between border-0 rounded-none;
+  }
+
+  .modal-header .modal-title,
+  .modal-header .modal-title.h4 {
+    @apply text-white font-bold text-[20px]! m-0 leading-tight tracking-wide font-sans;
+  }
+
+  /* Single Crisp White Close Button (Prevents Double Close Icon) */
+  .modal-header .btn-close,
+  .modal-header .btn-close-custom {
+    @apply text-white bg-transparent border-0 text-lg font-bold cursor-pointer p-0 m-0 w-8 h-8 flex items-center justify-center leading-none hover:opacity-80 transition-opacity;
+    background-image: none !important;
+  }
+
+  /* Modal Body */
+  .modal-body {
+    @apply p-2.5 bg-white text-black;
+  }
+
+  /* Navigation Pills / Tabs */
+  .set-button-value-modal .nav-pills,
+  .nav-pills {
+    @apply flex border-0 mb-2 mt-0;
+  }
+
+  .set-button-value-modal .nav-link,
+  .nav-link {
+    @apply px-4! py-1! text-base font-normal! rounded-none! text-black! bg-[#cccc]! no-underline block cursor-pointer transition-colors border-0 font-sans;
+  }
+
+  .set-button-value-modal .nav-link.active,
+  .set-button-value-modal .nav-link:hover.active,
+  .nav-link.active {
+    @apply bg-[#296F91]! text-white!;
+  }
+
+  .set-button-value-modal .nav-link:hover:not(.active),
+  .nav-link:hover:not(.active) {
+    @apply bg-[#296F91] text-black;
+  }
+
+  /* Form Labels & Controls */
+  .set-button-value-modal .form-label,
+  b {
+    @apply mb-0! text-base! font-bold! text-black font-sans;
+  }
+
+  .set-button-value-modal .form-label b,
+  .form-label b {
+    @apply text-xs font-bold text-black;
+  }
+
+  .set-button-value-modal .form-control,
+  .form-control {
+    @apply w-full p-[5px]! text-base! font-medium! text-gray-900 bg-white border border-gray-300 rounded-none! shadow-none focus:outline-none! focus:border-gray-300!;
+  }
+
+  /* Row & Grid Layouts */
+  .set-button-value-modal .row10,
+  .row10 {
+    @apply flex flex-wrap -mx-1 mb-2;
+  }
+
+  .set-button-value-modal .row10 > [class*="col-"],
+  .row10 > [class*="col-"] {
+    @apply px-1;
+  }
+
+  .row10 .col-6 {
+    @apply w-1/2;
+  }
+
+  .row10 .col-md-6 {
+    @apply w-1/2;
+  }
+
+  /* Submit / Update Button */
+  .set-button-value-modal .btn-primary,
+  .btn-primary {
+    @apply bg-black! hover:bg-black! text-white font-bold! font-sans! text-base! py-1.5 px-3 rounded-none! border-0! uppercase cursor-pointer tracking-wider w-full;
+  }
+
+  /* Dynamic Position Classes */
+  .modal-overlay.modal-pos-top {
+    @apply items-start pt-[42px] mb-auto;
+  }
+
+  .modal-overlay.modal-pos-center {
+    @apply items-center pt-0;
+  }
+
+  .modal-overlay.modal-pos-bottom {
+    @apply items-end pb-[25px] pt-0;
+  }
+
+  .modal-overlay.modal-pos-top-left {
+    @apply items-start pt-[42px] justify-start pl-5;
+  }
+
+  .modal-overlay.modal-pos-top-right {
+    @apply items-start pt-[42px] justify-end pr-5;
+  }
+  }
+
+}

@@ -1,0 +1,45 @@
+@reference "../../styles/global.css";
+
+/* ===== RacingTable Component Styles in Tailwind CSS v4 ===== */
+
+@layer components {
+  .racing-table-container {
+    @apply w-full bg-white border border-[#d4d4d4] border-t-0 font-sans;
+  }
+
+  .country-tabs {
+    @apply flex flex-row items-center bg-[#dedede];
+  }
+
+  .country-tab {
+    @apply px-4 py-[3px] text-[16px] font-normal text-[#222222] bg-[#bebebe] rounded-xs cursor-pointer hover:bg-[#b0b0b0] transition-colors;
+  }
+
+  .country-tab.active {
+    @apply bg-[#1c5d7c]! text-white! border-[#1c5d7c]!;
+  }
+
+  .racing-table {
+    @apply flex flex-col;
+  }
+
+  .track-row {
+    @apply flex md:items-center items-start md:flex-row flex-col border-b md:gap-0 gap-2 border-[#e2e2e2] px-3 py-2 min-h-[38px] bg-white hover:bg-[#f9f9f9] transition-colors;
+  }
+
+  .track-name-col {
+    @apply w-[180px] flex items-center shrink-0 font-bold text-[12px] text-[#333];
+  }
+
+  .track-times-col {
+    @apply flex flex-row flex-wrap items-center gap-1.5 flex-1;
+  }
+
+  .time-pill {
+    @apply relative px-3 py-1 bg-[#d8d8d8] text-[#222222] font-bold text-[12px] rounded-xs cursor-pointer hover:bg-[#c6c6c6] transition-colors flex items-center justify-center min-w-[52px];
+  }
+
+  .green-corner {
+    @apply absolute top-0 left-0 w-0 h-0 border-t-[8px] border-t-[#28a745] border-r-[8px] border-r-transparent;
+  }
+}

@@ -1,0 +1,230 @@
+@reference "../../styles/global.css";
+
+/* ===== BetTable Component Styles in Tailwind CSS v4 ===== */
+
+@layer components {
+  .bet-table {
+    @apply w-full border-t-0 bg-[#f7f7f7];
+  
+
+  .bet-table-header {
+    @apply flex items-center border border-l-0 border-r-0 border-[#c7c8ca] px-2 py-[4px] text-[14px] font-bold text-black;
+  }
+
+ .bet-nation-name {
+    @apply w-[64%] text-[#222222] font-bold;
+  }
+
+  .bet-table-header .bet-nation-odd {
+    @apply w-[12%] text-center text-[#222222] font-bold;
+  }
+
+  .bet-table-body {
+    @apply flex flex-col;
+  }
+
+  .bet-table-row {
+    @apply flex items-center border-b md:flex-nowrap flex-wrap border-[#c7c8ca] px-[5px] bg-[#f2f2f2] md:text-[14px] text-[12px] transition-colors;
+  }
+
+  .bet-table-row .bet-nation-name {
+    @apply flex items-center justify-between pr-3 min-w-0;
+  }
+
+  .bet-nation-game-name {
+    @apply text-[#333]! font-normal no-underline! overflow-hidden text-ellipsis whitespace-nowrap inline-block;
+    max-width: calc(100% - 210px);
+  }
+
+
+  .game-icons {
+    @apply flex items-center shrink-0 w-[210px] justify-end;
+  }
+
+  .game-icon {
+    @apply inline-flex items-center justify-center w-[35px];
+  }
+
+  .game-icon span.active {
+    @apply w-3 h-3 bg-[#28a745] rounded-full inline-block;
+  }
+
+  .icon-tv {
+    @apply text-[#333333] text-[12px];
+  }
+
+  .badge-f {
+    @apply font-bold italic font-serif text-[#333333];
+  }
+
+  .badge-bm {
+    @apply font-bold text-[#333333];
+  }
+
+  .game-icon.e-games {
+    @apply w-5 h-5 rounded-full bg-[#d1d1d1] text-[#202020] text-[14px] font-bold flex items-center justify-center leading-none;
+  }
+
+  .icon-gamepad {
+    @apply text-[#333333] text-[11px];
+  }
+
+  .bet-table-row .bet-nation-odd {
+    @apply w-[12%] flex items-center justify-center gap-[2px] shrink-0 relative;
+  }
+
+  /* ===== Continuous Suspended Bar across all odds columns ===== */
+  .suspended-full-bar {
+    @apply w-[316px] h-[25px] bg-[#384148] flex items-center justify-between shrink-0 rounded-[1px];
+  }
+
+  .suspended-col {
+    @apply flex-1 flex items-center justify-between px-2 text-[12px] font-bold h-full border-r border-[#4c565e] last:border-r-0;
+  }
+
+  /* ===== Single Column Suspended Box ===== */
+  .bet-nation-odd.suspended-box {
+    @apply relative w-[104px] h-[25px] flex items-center justify-center gap-[2px] shrink-0 cursor-not-allowed;
+  }
+
+  .suspended-box::before {
+    background-image: url(/img/icons/lock.svg);
+    background-size: 17px 17px;
+    filter: invert(1);
+    -webkit-filter: invert(1);
+    background-repeat: no-repeat;
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    pointer-events: none;
+  }
+
+  .suspended-box::after {
+    content: "";
+    background-color: #373636d6;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    cursor: not-allowed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .lock-ic {
+    @apply text-white! text-[12px] shrink-0 mx-1;
+  }
+
+  .suspended-odd {
+    @apply font-bold text-[#20272c]! text-[12px] flex-1 text-center overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+
+  .odd-box {
+    @apply flex-1 h-[25px] flex items-center justify-center font-bold text-[14px] cursor-pointer rounded-[1px] transition-opacity relative;
+  }
+
+  .back.odd-box {
+    @apply bg-[#72bbef] text-[#273a47];
+  }
+
+  .lay.odd-box {
+    @apply bg-[#faa9ba] text-[#273a47];
+  }
+
+  /* ===== Locked Box using ::before ===== */
+  .lay.odd-box.locked-box,
+  .back.odd-box.locked-box {
+    background-color: #384148 !important;
+    color: #ffffff !important;
+  }
+
+  .lay.odd-box.locked-box::before,
+  .back.odd-box.locked-box::before {
+    content: "\f023";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #ffffff;
+    font-size: 10px;
+    margin-right: 3px;
+  }
+
+  .bet-odd {
+    @apply font-bold;
+  }
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .bet-table-header {
+    display: none;
+  }
+
+  .bet-table-row {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #c7c8ca;
+  }
+
+
+  .bet-nation-name {
+    width: 100%;
+  }
+
+  .bet-nation-odd {
+    width: 33.33%;
+  }
+
+  .bet-nation-name .bet-nation-game-name {
+    max-width: calc(100% - 120px);
+  }
+
+  .bet-nation-name .game-icons {
+    width: 120px;
+  }
+
+  .bet-nation-name .game-icons .game-icon {
+    width: 20px;
+  }
+
+  .bet-nation-name .game-icons .game-icon .active {
+    height: 10px;
+    width: 10px;
+  }
+
+  .bet-nation-name .game-icons .game-icon i {
+    font-size: 10px;
+  }
+
+
+
+
+  .bet-nation-game-name span:first-child {
+    font-weight: bold;
+  }
+
+
+
+  .bet-nation-game-name span:last-child {
+    font-size: 12px;
+  }
+}
+
+
+
+@media only screen and (max-width: 767px) {
+  .bet-nation-game-name span {
+    width: 100%;
+    display: block;
+    line-height: normal;
+  }
+}
+
+
+

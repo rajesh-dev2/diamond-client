@@ -1,0 +1,106 @@
+@reference "../../styles/global.css";
+
+/* ===== SportsTab Component Styles in Tailwind CSS v4 ===== */
+
+@layer components {
+  .sports-tab {
+    @apply flex! flex-row! flex-nowrap! overflow-x-auto! bg-[#cccccc] m-0! p-0! list-none!;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .sports-tab::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sports-tab .nav-item {
+    @apply m-0! p-0! shrink-0;
+  }
+
+  .sports-tab .nav-link {
+    @apply flex! items-center! justify-center! px-3! py-[5px]! md:text-base! text-[12px] md:font-normal! font-bold! md:text-[#222222]! text-white! md:bg-[#cccccc]! border-r! border-[#296F91]! rounded-none! no-underline! cursor-pointer whitespace-nowrap transition-colors;
+  }
+
+  .sports-tab .nav-link.active {
+    @apply bg-[#296F91]! text-white! border-r-[#296F91]!;
+  }
+}
+
+.home-page .center-container .nav.sports-tab {
+  height: auto;
+  flex-wrap: nowrap;
+}
+
+.home-page .center-container .nav.sports-tab .nav-item {
+  width: auto;
+}
+
+@media only screen and (max-width: 1199px) {
+  .home-page .center-container .nav.sports-tab {
+    background-color: var(--bg-secondary, #296F91);
+  }
+
+  .center-container .nav.sports-tab,
+  .center-container .nav.casino-tab,
+  .center-container .nav.casino-sub-tab {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .center-container .nav.sports-tab,
+  .center-container .nav.casino-tab {
+    position: relative;
+    margin: 0;
+  }
+
+  .center-container .nav.sports-tab .nav-item,
+  .center-container .nav.casino-tab .nav-item,
+  .center-container .nav.casino-sub-tab .nav-item {
+    flex: 0 0 auto;
+  }
+  
+
+  .sports-tab.nav-pills .nav-link.active,
+  .sports-tab.nav-pills .show > .nav-link,
+  .casino-tab.nav-pills .nav-link.active,
+  .casino-tab.nav-pills .show > .nav-link {
+    position: relative;
+  }
+
+  .sports-tab.nav-pills .nav-link,
+  .casino-tab.nav-pills .nav-link {
+    background-color: transparent !important;
+    color: var(--text-secondary, #ffffff);
+    font-size: 12px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    flex-direction:column;
+  }
+  
+  .sports-tab.nav-pills .nav-link{
+    background: #296F91 !important;
+  }
+
+  .sports-tab .nav-link i,
+  .casino-tab .nav-link i {
+    font-size: 15px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .sports-tab.nav-pills .nav-link.active::before,
+  .sports-tab.nav-pills .show > .nav-link::before,
+  .casino-tab.nav-pills .nav-link.active::before,
+  .casino-tab.nav-pills .show > .nav-link::before {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--bg-sidebar, #BBBBBB);
+    top: 0;
+    content: "";
+    left: 0;
+  }
+}
+
+
+

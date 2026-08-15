@@ -1,0 +1,33 @@
+@reference "../../styles/global.css";
+
+/* ===== CasinoList Component Styles in Tailwind CSS v4 ===== */
+
+@layer components {
+  .casino-list {
+    @apply grid grid-cols-4 md:grid-cols-10 md:gap-1 gap-0.5 mt-2 w-full;
+  }
+
+  .casino-list-item {
+    @apply relative overflow-hidden rounded-xs border border-[#222222] bg-[#111111] transition-transform duration-150 hover:scale-[1.03] cursor-pointer;
+  }
+
+  .casino-list-item a {
+    @apply block w-full h-full no-underline!;
+  }
+
+  .casino-list-item-banner {
+    @apply w-full aspect-square bg-cover bg-center bg-no-repeat relative;
+  }
+
+  .casino-list-name {
+    @apply absolute bottom-0 left-0 right-0 bg-black/90 text-white text-[9px] sm:text-[10px] font-bold text-center py-[3px] px-0.5 uppercase tracking-tight overflow-hidden text-ellipsis whitespace-nowrap z-10;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .casino-list-item .casino-list-name {
+    padding: 2px;
+    font-size: 8px;
+  }
+}
+

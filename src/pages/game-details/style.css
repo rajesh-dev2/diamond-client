@@ -1,0 +1,1011 @@
+@reference "../../styles/global.css";
+
+@keyframes blink-text {
+  0%, 100% {
+    color: #ff3b30;
+  }
+  50% {
+    color: transparent;
+  }
+}
+
+/* ===== Game Details Page Component Styles Matching Screenshots 100% ===== */
+
+@layer components {
+  .detail-page {
+    @apply w-full bg-[#f2f2f2] text-[#333333] font-sans pb-4 text-[12px];
+  
+
+  .detail-page-container,
+  .center-container {
+    @apply flex flex-col gap-1;
+    width: calc(100% - 450px);
+    padding-bottom: 10px;
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .detail-page-container,
+    .center-container,
+    .detail-page .center-container {
+      width: calc(100% - 352px) !important;
+    }
+  }
+
+  .detail-layout {
+    @apply flex flex-col xl:flex-row gap-1 items-start w-full;
+  }
+
+  /* Game Header Bar */
+  .game-header {
+    background-color: var(--bg-secondary, #296F91);
+    color: var(--text-secondary, #ffffff);
+    padding: 4px 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+
+  .game-header .matka-link {
+    @apply text-[#ff3b30] hover:text-red-400 font-bold no-underline flex items-center gap-1 text-[13px];
+  }
+
+  /* Mobile Tabs (Matching Screenshot 100%) */
+  .detail-page .menu-tabs {
+    background-color: #000000;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    border: none;
+  }
+
+  .detail-page .menu-tabs .nav-item {
+    flex: 1;
+    display: flex;
+  }
+
+  .detail-page .menu-tabs .nav-item:not(:last-child) {
+    border-right: 1px solid #444444;
+  }
+
+  .detail-page .menu-tabs .nav-link {
+    width: 100%;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+    position: relative;
+    padding: 0 8px;
+  }
+
+  .detail-page .menu-tabs .nav-link.active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #a7a8aa;
+  }
+
+  .nav-tabs .nav-link.active::after {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--bg-sidebar, #cccccc);
+    top: -12px;
+    content: "";
+    left: 0;
+  }
+
+
+
+  /* Game Market Card */
+  .game-market {
+    @apply bg-white mb-1 overflow-hidden;
+  }
+
+  .market-title {
+    @apply flex items-center justify-between bg-[#4883A0] text-white px-2 py-1 font-bold text-[15px];
+  }
+  .market-title span{
+        display: inline-block;
+    max-width: calc(100% - 30px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: normal;
+  }
+
+  .market-title .btn-success {
+    @apply bg-[#28a745] text-white font-bold text-[11px] px-2 py-[2px] rounded cursor-pointer border-none opacity-90 hover:opacity-100 disabled:opacity-60;
+  }
+
+  /* Market Header */
+  .market-header {
+    @apply flex items-center border-b border-[#c7c8ca] px-1 py-0 text-[12px] font-bold text-[#222] pr-0;
+  }
+
+  .market-nation-detail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 5px;
+    font-size: 14px;
+    width: calc(100% - 480px);
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .market-nation-detail {
+      width: calc(100% - 330px) !important;
+      font-size: 13px !important;
+    }
+  }
+
+  .market-nation-name {
+    @apply font-bold text-[#222] text-[13px] overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+
+  .market-header .market-nation-detail .market-nation-name {
+    @apply text-[12px] text-[#097c93];
+  }
+
+
+  .market-nation-book {
+    @apply text-[11px] font-semibold text-[#008800];
+  }
+
+  /* Grid helper for 2 columns matching standard bootstrap structure */
+  .row10 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+
+  .row10 > .col-md-6,
+  .row10 > [class*="col-"] {
+    position: relative;
+    width: 100%;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .row10 > .col-md-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+      width: 50%;
+    }
+  }
+
+  /* Odds Boxes */
+  .market-odd-box {
+    @apply w-[80px] font-semibold text-base min-h-[34px] flex flex-col items-center justify-center cursor-pointer select-none text-center transition-colors shrink-0 border-l border-[#c7c8ca] last:border-r-0;
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .market-odd-box {
+      width: 55px !important;
+    }
+  }
+
+  .market-odd-box.no-border {
+    @apply bg-transparent border-r-0 cursor-default;
+  }
+
+  .market-odd-box.back {
+    @apply bg-[#72bbef] text-[#111111];
+  }
+
+  .market-odd-box.back1 {
+    @apply bg-[#b9dbf7] text-[#111111];
+  }
+
+  .market-odd-box.back2 {
+    @apply bg-[#d2e8f9] text-[#111111];
+  }
+
+  .market-odd-box.lay {
+    @apply bg-[#faa9ba] text-[#111111];
+  }
+
+  .market-odd-box.lay1 {
+    @apply bg-[#fcd4e1] text-[#111111];
+  }
+
+  .market-odd-box.lay2 {
+    @apply bg-[#fde3eb] text-[#111111];
+  }
+  
+  .market-odd-box.no-border{
+    @apply border-0;
+  }
+
+  .market-odd {
+    @apply font-bold text-[13px] leading-tight;
+  }
+
+  .market-volume {
+    @apply text-[10px] text-[#555555] font-normal leading-tight;
+  }
+
+  /* Market Body & Rows */
+  .market-body {
+    @apply flex flex-col;
+  }
+
+  .market-row {
+    @apply flex items-center border-b border-[#c7c8ca] px-1 py-0 bg-[#f2f2f2] transition-colors relative pr-0;
+  }
+
+  /* Suspended Overlay for Bookmaker Row */
+  .market-row.suspended-row {
+    @apply relative bg-[#ececec];
+  }
+
+  .market-4 .suspended-row::after,
+  .market-4 .suspended-table::after,
+  .market-13 .suspended-row::after,
+  .market-13 .suspended-table::after {
+    width: 480px;
+  }
+
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .market-4 .suspended-row::after,
+    .market-4 .suspended-table::after,
+    .market-13 .suspended-row::after,
+    .market-13 .suspended-table::after {
+      width: 330px !important;
+    }
+
+    .suspended-row::after,
+    .suspended-table::after {
+      font-size: 10px !important;
+    }
+  }
+
+  .suspended-row::after {
+    content: attr(data-title);
+    background-color: #373636d6;
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    position: absolute;
+    height: 100%;
+    right: 0px;
+    top: 0px;
+    cursor: not-allowed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Starting Soon & Suspended Overlay for Fancy Market Item */
+  .fancy-market.starting-soon,
+  .fancy-market.suspended-row {
+    @apply relative;
+  }
+
+  .fancy-market.starting-soon .market-odd-box.lay,
+  .fancy-market.starting-soon .market-odd-box.back,
+  .fancy-market.suspended-row .market-odd-box.lay,
+  .fancy-market.suspended-row .market-odd-box.back {
+    @apply opacity-0;
+  }
+
+  .fancy-market.starting-soon::after,
+  .fancy-market.suspended-row::after {
+    content: attr(data-title);
+    background-color: rgba(55, 54, 54, 0.84);
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+    position: absolute;
+    height: 100%;
+    width: 160px;
+    right: 60px;
+    top: 0;
+    cursor: not-allowed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .fancy-market.suspended-row::after {
+    background-color: rgba(55, 54, 54, 0.84);
+    color: rgb(255, 0, 0);
+  }
+
+  .fancy-market.starting-soon::after{
+    right: 80px;
+  }
+
+  .market-remark {
+    @apply text-[#1c5d7c] font-normal text-[11px] m-0! w-full;
+  }
+
+  /* Fancy Market Styles */
+  .fancy-market {
+    @apply bg-white border-b border-[#e2e2e2] mb-0;
+  }
+
+  .fancy-market .market-row {
+    @apply border-b-0 min-h-[34px];
+  }
+
+  .fancy-min-max-box {
+    @apply text-[11px] text-[#097c93] font-bold flex flex-col text-right ml-1.5 mr-2 shrink-0 min-w-[60px];
+  }
+
+  .fancy-min-max {
+    @apply flex flex-col leading-tight text-[#097c93] font-bold text-[12px];
+    word-break: break-all;
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .fancy-min-max {
+      font-size: 9px !important;
+    }
+  }
+
+  /* Right Sidebar (Matching User SS 100%) */
+  .detail-page-right,
+  .right-sidebar {
+    @apply shrink-0 self-start ml-0 w-full xl:w-[450px];
+    width: 450px;
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .detail-page-right,
+    .right-sidebar {
+      width: 350px !important;
+    }
+  }
+
+  .bet-nation-game-name {
+    @apply flex items-center gap-1.5 px-2 py-1 bg-white text-[#ff3b30] font-bold text-[18px] leading-tight cursor-pointer no-underline mb-1;
+  }
+
+  .bet-nation-game-name div {
+    @apply text-[#ff3b30] underline;
+  }
+
+  .bet-nation-game-name i {
+    @apply text-black! text-[16px] no-underline;
+  }
+
+/* Keyframes moved outside @layer components */
+
+  .blink-message {
+    animation: blink-text 1s infinite;
+  }
+
+  .blink-message i {
+    color: #000 !important;
+    animation: none;
+  }
+
+  .sidebar-box {
+    @apply mb-[2px];
+  }
+
+  .sidebar-title {
+    @apply bg-[#296F8E] px-2.5 py-[5px];
+  }
+
+  .sidebar-title h4 {
+    @apply text-white! text-[14px]! font-bold! m-0! leading-tight;
+  }
+
+  .place-bet-box.back {
+    @apply bg-[#7CB5EC];
+  }
+
+  .place-bet-box-header {
+    @apply flex items-center bg-[#CECFD2] px-2.5 py-[5px] font-bold text-[13px] text-black;
+  }
+
+  .place-bet-box-header .place-bet-for {
+    width: calc(100% - 246px);
+    display: flex;
+    align-items: center;
+    line-height: normal;
+  }
+
+  .place-bet-box-header .place-bet-odds {
+        width: 76px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .place-bet-box-header .place-bet-stake {
+    width: 80px;
+    margin-left: 10px;
+  }
+
+  .place-bet-box-header .place-bet-profit {
+       width: 80px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  .place-bet-box-body {
+    @apply flex items-center bg-[#7CB5EC] px-2.5 py-1.5;
+  }
+
+  .place-bet-box-body .place-bet-for {
+    @apply font-bold text-[13px] text-black;
+  }
+
+  .place-bet-box-body .place-bet-odds {
+    @apply flex items-center justify-center;
+  }
+
+  .place-bet-box-body .place-bet-odds .input-group {
+    @apply flex items-center justify-end flex-nowrap!;
+  }
+  
+  .place-bet-box-body .place-bet-odds input.form-control {
+    @apply w-full! h-[26px] bg-white! text-black font-semibold focus:shadow-none! text-[13px] max-w-[42px]! text-center rounded-none! px-1 shadow-none! outline-none!;
+    width: stretch !important;
+  }
+
+
+  
+  .place-bet-box-body .place-bet-for {
+    width: calc(100% - 246px);
+    display: flex;
+    align-items: center;
+    line-height: normal;
+  }
+
+  .place-bet-box-body .place-bet-odds {
+        width: 76px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .place-bet-box-body .place-bet-stake {
+    width: 80px;
+    margin-left: 10px;
+  }
+
+  .place-bet-box-body .place-bet-profit {
+       width: 80px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+
+  .spinner-buttons {
+    @apply flex flex-col h-[26px];
+  }
+
+  .spinner-buttons .btn-default {
+    @apply h-[13px] w-[18px] p-0 m-0 bg-[#e9ecef] border border-[#b0b4b8] flex items-center justify-center cursor-pointer text-[#333] hover:bg-[#dedede] leading-none;
+  }
+
+  .spinner-buttons .btn-default i {
+    @apply text-[10px] text-black;
+  }
+
+  .spinner-buttons .btn-default:first-child {
+    @apply rounded-tr-[2px] rounded-tl-none;
+  }
+
+  .spinner-buttons .btn-default:last-child {
+    @apply rounded-br-[2px] rounded-bl-none border-t-0;
+  }
+
+  .place-bet-box-body .place-bet-stake {
+    @apply flex items-center justify-center;
+    width: 80px;
+    margin-left: 10px;
+  }
+  .place-bet-box-body .place-bet-stake .form-control{
+    @apply rounded-none!;
+  }
+
+  .place-bet-box-body .place-bet-stake input.form-control {
+    @apply w-[85px] h-[26px] bg-white text-black font-semibold text-[13px] text-center border border-[#b0b4b8] rounded-[2px] px-1 shadow-none outline-none;
+  }
+
+  .place-bet-box-body .place-bet-profit {
+    @apply w-[70px] text-right font-bold text-[13px] text-black;
+  }
+
+  .place-bet-buttons {
+    @apply flex flex-wrap bg-[#7CB5EC] px-2 pt-[2px] pb-1.5 gap-[3px] items-center;
+  }
+
+  .place-bet-buttons .btn-place-bet {
+    width: calc(20% - 3px);
+    max-width: calc(20% - 3px);
+    @apply h-[32px] bg-[#CCCCCC]! text-black font-bold! text-[14px]! rounded-none! p-0! flex items-center justify-center cursor-pointer hover:bg-[#bebfb2];
+  }
+
+  .place-bet-buttons .btn-link {
+    @apply font-semibold text-[13px] text-black! underline cursor-pointer bg-transparent border-none p-0 pr-1 hover:text-black;
+  }
+
+  .place-bet-action-buttons {
+    @apply flex items-center justify-between bg-[#7CB5EC] px-2 pb-2 pt-1;
+  }
+
+  .place-bet-action-buttons .btn-info {
+    @apply bg-[#097c93]! text-white! font-bold text-[14px] rounded-none! border-none px-5 h-[34px] cursor-pointer;
+    min-width: 80px;
+    width: 25%;
+    height: 38px;
+  }
+
+  .place-bet-action-buttons .btn-danger {
+    @apply bg-[#dc3545]! text-white! font-bold text-[14px] border-none rounded-none! px-[18px] h-[34px] cursor-pointer;
+  }
+  
+  .place-bet-action-buttons .btn-success {
+    @apply bg-[#086f3f]! text-white! font-bold text-[14px] border-none rounded-none! px-[18px] h-[34px] cursor-pointer;
+  }
+
+  .my-bet-container {
+    @apply mt-[2px];
+  }
+
+  .my-bets .table-responsive {
+    @apply w-full overflow-x-auto;
+  }
+
+  .my-bets .table {
+    @apply w-full mb-0 border-collapse;
+  }
+
+  .my-bets .table thead {
+    @apply bg-[#CECFD2];
+  }
+
+  .my-bets .table th {
+    @apply text-black font-bold text-[13px] px-2.5 py-[5px] border-b border-[#b2b6ba] text-left;
+  }
+
+  .my-bets .table th.text-end {
+    @apply text-right;
+  }
+
+  .fancy-market .market-nation-detail,
+  .market-6 .market-nation-detail {
+    width: calc(100% - 240px);
+    position: relative;
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .fancy-market .market-nation-detail,
+    .market-6 .market-nation-detail {
+      width: calc(100% - 165px) !important;
+    }
+  }
+
+  .market-nation-detail .market-nation-name {
+    font-weight: 400;
+    max-width: 100%;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    line-height: normal;
+  }
+
+  .fancy-market.suspended-row::after,
+  .fancy-market.starting-soon::after,
+  .fancy-market .suspended-row::after,
+  .fancy-market .starting-soon::after,
+  .fancy-market .suspended-table::after,
+  .market-6 .suspended-row::after,
+  .market-6 .starting-soon::after,
+  .market-6 .suspended-table::after {
+    width: 240px;
+  }
+
+
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .fancy-market.suspended-row::after,
+    .fancy-market .suspended-row::after,
+    .fancy-market .suspended-table::after,
+    .market-6 .suspended-row::after,
+    .market-6 .suspended-table::after {
+      width: 165px !important;
+    }
+  }
+  
+
+  .fancy-market .market-nation-detail .market-nation-name,
+  .market-6 .market-nation-detail .market-nation-name {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-width: calc(100% - 50px);
+  }
+
+  .market-odd-box .market-odd {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+
+  .market-odd-box .market-volume {
+    font-size: 12px;
+    line-height: 1;
+  }
+
+.market-4 .market-nation-detail .market-nation-name, .market-13 .market-nation-detail .market-nation-name {
+    font-weight: bold;
+  }
+}
+}
+
+.detail-page .center-container {
+  width: calc(100% - 450px);
+  padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+  .game-header {
+    font-size: 12px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .market-title {
+    font-size: 13px;
+    padding: 3px 6px;
+  }
+
+  .detail-page .center-container {
+    width: 100%;
+  }
+
+
+
+  .market-1, .market-2, .market-2.width30, .market-3, .market-4, .market-4.width70, .market-5, .market-6, .market-9, .market-10, .market-11, .market-12, .market-13, .market-18 {
+    min-width: 100%;
+    margin: 0;
+  }
+
+
+  .market-4 .market-header .market-nation-detail {
+    width: calc(100% - 48%);
+  }
+
+  .market-4 .market-nation-detail {
+    width: calc(100% - 72%);
+  }
+
+  .market-2 .market-nation-detail,
+  .market-6 .market-nation-detail {
+    width: calc(100% - 40%);
+  }
+
+
+  .market-nation-detail {
+    font-size: 13px;
+  }
+
+
+
+  .market-4 .market-odd-box,
+  .market-13 .market-odd-box {
+    width: 12%;
+  }
+
+  .market-odd-box {
+    width: 20%;
+    padding: 2px 0;
+  }
+
+
+  .fancy-min-max-box {
+    width: 20%;
+    padding: 0 2px;
+    display: none;
+  }
+
+  .market-4 .suspended-row::after,
+  .market-4 .suspended-table::after,
+  .market-4 .starting-soon::after {
+    width: 72%;
+  }
+
+  .market-2 .suspended-row::after,
+  .market-2 .suspended-table::after,
+  .market-2 .starting-soon::after,
+  .market-6 .suspended-row::after,
+  .market-6 .suspended-table::after,
+  .market-6 .starting-soon::after,
+  .market-6.starting-soon::after,
+  .market-6.suspended-row::after,
+  .fancy-market.starting-soon::after,
+  .fancy-market.suspended-row::after {
+    width: 40%;
+  }
+
+
+  .suspended-row::after,
+  .suspended-table::after,
+  .starting-soon::after {
+    font-size: 12px;
+  }
+
+  .market-odd-box .market-odd {
+    font-size: 15px;
+  }
+
+  .market-odd-box .market-volume {
+    font-size: 11px;
+  }
+}
+
+
+.market-header .market-odd-box {
+  min-height: 28px;
+}
+
+.market-header .market-odd-box b {
+  font-size: 16px;
+}
+
+
+.market-4, .market-13 {
+  flex: 1;
+  max-width: calc(100% - 4px);
+}
+
+.game-market {
+  background: var(--bg-table, #ffffff);
+  color: var(--text-table, #333333);
+}
+
+.no-border {
+  border: 0 !important;
+}
+
+.detail-page{
+
+
+.modal-dialog,
+.place-bet-modal-top {
+  max-width: 480px !important;
+  margin-top: 30px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.modal-header {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  padding: 8px 14px !important;
+  border-bottom: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.modal-content{
+  border-radius: 0 !important;
+  background-color: transparent !important;
+}
+
+.modal-header .modal-title,
+.modal-header .modal-title.h4 {
+  color: #ffffff !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  margin: 0 !important;
+}
+
+.modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%) !important;
+  opacity: 0.9 !important;
+  cursor: pointer !important;
+}
+
+.modal-body {
+  background-color: #fff !important;
+  padding: 12px !important;
+}
+
+.place-bet-modal {
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.place-bet-modal.back {
+  background-color: #66b5f2 !important;
+}
+
+.place-bet-modal.lay {
+  background-color: #faa9ba !important;
+}
+
+.row5 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3px;
+  margin-right: -3px;
+}
+
+.row5 > [class*="col-"] {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.odd-stake-box {
+  margin-top: 4px;
+}
+
+.odd-stake-box .float-end {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 2px !important;
+}
+
+.stakeactionminus {
+  background-color: #21638b !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  border-radius: 2px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  border: none !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 28px !important;
+  width: 30px !important;
+  flex-shrink: 0 !important;
+}
+
+.stakeactionminus:hover {
+  background-color: #174b6b !important;
+}
+
+.stakeinput {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  text-align: center !important;
+  font-weight: bold !important;
+  border: 1px solid #cccccc !important;
+  border-radius: 2px !important;
+  height: 28px !important;
+  width: 80px !important;
+  padding: 0 4px !important;
+  font-size: 13px !important;
+  outline: none !important;
+}
+
+.place-bet-buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 3px !important;
+  margin-top: 8px !important;
+}
+
+.place-bet-buttons .btn-place-bet {
+  width: calc(20% - 2.4px) !important;
+  max-width: calc(20% - 2.4px) !important;
+  height: 30px !important;
+  background-color: #CCCCCC !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+  font-size: 13px !important;
+  border-radius: 2px !important;
+  border: none !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}
+
+.place-bet-buttons .btn-place-bet:hover {
+  background-color: #bebfb2 !important;
+}
+
+.place-bet-btn-box {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-top: 8px !important;
+}
+
+.place-bet-btn-box .btn-link {
+  color: #0056b3 !important;
+  font-weight: bold !important;
+  font-size: 13px !important;
+  text-decoration: underline !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.place-bet-btn-box .btn-info {
+  background-color: #0d7d8f !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  border: none !important;
+  border-radius: 2px !important;
+  padding: 4px 16px !important;
+  font-size: 13px !important;
+}
+
+.place-bet-btn-box .btn-danger {
+  background-color: #cc2433 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  border: none !important;
+  border-radius: 2px !important;
+  padding: 4px 16px !important;
+  font-size: 13px !important;
+}
+
+.place-bet-btn-box .btn-success {
+  background-color: #389885 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  border: none !important;
+  border-radius: 2px !important;
+  padding: 4px 16px !important;
+  font-size: 13px !important;
+}
+
+.odds-count {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin-top: 8px !important;
+  padding-top: 4px !important;
+}
+
+.runner-row-item {
+  padding: 3px 6px;
+  border-radius: 2px;
+  font-weight: 600;
+  color: #000000;
+  transition: background-color 0.15s ease;
+}
+
+.runner-row-item:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.runner-row-item.selected {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+}
+

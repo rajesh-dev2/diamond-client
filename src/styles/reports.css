@@ -1,0 +1,226 @@
+@reference "./global.css";
+
+/* React Datepicker CSS Import */
+@import "react-datepicker/dist/react-datepicker.css";
+
+@layer components {
+  /* Common Container for all user report pages */
+  .report-page,
+  .current-bets,
+  .activity-log,
+  .casino-results,
+  .live-casino-bets,
+  .change-password-page {
+    @apply w-full bg-white text-[#333333] font-sans;
+  }
+
+  .report-page .card,
+  .current-bets .card,
+  .activity-log .card,
+  .casino-results .card,
+  .live-casino-bets .card,
+  .change-password-page .card {
+    @apply border border-[#b0c4de] rounded-none bg-white overflow-visible;
+    box-shadow: 0 0 5px #a4a4a4;
+  }
+
+  .report-page .card-header,
+  .current-bets .card-header,
+  .activity-log .card-header,
+  .casino-results .card-header,
+  .live-casino-bets .card-header,
+  .change-password-page .card-header {
+    @apply bg-[#296F91]! text-white px-3.5 py-2 border-b-0;
+  }
+
+  .report-page .card-title,
+  .current-bets .card-title,
+  .activity-log .card-title,
+  .casino-results .card-title,
+  .live-casino-bets .card-title,
+  .change-password-page .card-title {
+    @apply text-white! text-[20px]! font-normal m-0! leading-snug;
+  }
+
+  .report-page .card-body,
+  .current-bets .card-body,
+  .activity-log .card-body,
+  .casino-results .card-body,
+  .live-casino-bets .card-body,
+  .change-password-page .card-body {
+    @apply p-[6px]! bg-white overflow-visible;
+  }
+
+  /* Datepicker wrapper & input container */
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container {
+    @apply block w-full;
+  }
+
+  .custom-datepicker {
+    @apply relative flex items-center cursor-pointer w-full mb-2;
+  }
+
+  .custom-datepicker .form-control {
+    @apply h-[36px] text-[13px] border border-[#dee2e6] rounded-none! bg-white text-[#333333] pr-8 pl-3 w-full cursor-pointer transition-colors focus:shadow-none! focus:border-[#dee2e6]!;
+  }
+
+  .custom-datepicker i {
+    @apply absolute right-2.5 top-1/2 -translate-y-1/2 text-[#333333] text-sm pointer-events-none;
+  }
+
+  /* Form controls */
+  .report-page .form-control,
+  .report-page .form-select,
+  .current-bets .form-control,
+  .current-bets .form-select,
+  .activity-log .form-control,
+  .activity-log .form-select,
+  .casino-results .form-control,
+  .casino-results .form-select,
+  .live-casino-bets .form-control,
+  .live-casino-bets .form-select,
+  .change-password-page .form-control {
+    @apply h-[36px] text-[13px] border border-[#dee2e6]! rounded-none! text-[#333333] bg-white w-full px-3;
+  }
+
+  .report-page .form-control:focus,
+  .report-page .form-select:focus,
+  .current-bets .form-control:focus,
+  .current-bets .form-select:focus,
+  .activity-log .form-control:focus,
+  .activity-log .form-select:focus,
+  .casino-results .form-control:focus,
+  .casino-results .form-select:focus,
+  .live-casino-bets .form-control:focus,
+  .live-casino-bets .form-select:focus,
+  .change-password-page .form-control:focus {
+    @apply border-[#1c6889] outline-none;
+    box-shadow: none !important;
+  }
+
+  .report-page .btn-primary,
+  .current-bets .btn-primary,
+  .activity-log .btn-primary,
+  .casino-results .btn-primary,
+  .live-casino-bets .btn-primary,
+  .change-password-page .btn-primary {
+    @apply bg-black! border-black! text-white font-bold text-sm h-[36px] rounded-none! w-full transition-colors cursor-pointer;
+  }
+  
+  .report-page .table-responsive,
+  .current-bets .table-responsive,
+  .activity-log .table-responsive,
+  .casino-results .table-responsive,
+  .live-casino-bets .table-responsive {
+    @apply w-full overflow-x-auto min-h-[300px] mt-2;
+  }
+
+  .report-page table.table,
+  .current-bets table.table,
+  .activity-log table.table,
+  .casino-results table.table,
+  .live-casino-bets table.table {
+    @apply w-full mb-0 border-collapse bg-[#f7f7f7]! border border-[#dedede];
+  }
+
+  .report-page table.table-bordered th,
+  .report-page table.table-bordered td,
+  .current-bets table.table-bordered th,
+  .current-bets table.table-bordered td,
+  .activity-log table.table-bordered th,
+  .activity-log table.table-bordered td,
+  .casino-results table.table-bordered th,
+  .casino-results table.table-bordered td,
+  .live-casino-bets table.table-bordered th,
+  .live-casino-bets table.table-bordered td {
+    @apply border border-[#dedede] px-2.5 py-2 text-[13px] align-middle;
+  }
+
+  .report-page table thead th,
+  .current-bets table thead th,
+  .activity-log table thead th,
+  .casino-results table thead th,
+  .live-casino-bets table thead th {
+    @apply md:bg-[#f7f7f7]! bg-[#296F91]! md:text-[#333333]! text-white! md:text-base! text-[12px] font-bold! border-b-2 border-[#dedede] text-nowrap;
+  }
+
+  /* Specific column widths */
+  .report-date {
+    @apply w-[190px];
+  }
+  .report-sr {
+    @apply w-[70px];
+  }
+  .report-amount {
+    @apply w-[100px];
+  }
+  .report-type {
+    @apply w-[100px];
+  }
+  .game-name {
+    @apply w-[180px];
+  }
+  .round-id-col {
+    @apply w-[200px];
+  }
+  .report-action {
+    @apply w-[60px];
+  }
+
+  .input-group {
+    @apply items-center!;
+  }
+}
+
+/* Global focus shadow removal */
+.report-page input:focus,
+.report-page select:focus,
+.report-page button:focus,
+.current-bets input:focus,
+.current-bets select:focus,
+.current-bets button:focus,
+.activity-log input:focus,
+.activity-log select:focus,
+.activity-log button:focus,
+.casino-results input:focus,
+.casino-results select:focus,
+.casino-results button:focus,
+.live-casino-bets input:focus,
+.live-casino-bets select:focus,
+.live-casino-bets button:focus,
+.change-password-page input:focus,
+.change-password-page button:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* React Datepicker Popup */
+.react-datepicker-popper {
+  z-index: 99999 !important;
+}
+
+.react-datepicker {
+  font-family: inherit !important;
+  background-color: #ffffff !important;
+  border: 1px solid #d4d4d4 !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  display: inline-block !important;
+  width: 245px !important;
+  max-width: calc(100vw - 20px) !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+@media only screen and (max-width: 1199px) {
+  .report-page .table thead th,
+  .current-bets .table thead th,
+  .activity-log .table thead th,
+  .casino-results .table thead th,
+  .live-casino-bets .table thead th {
+    background: #296F91 !important;
+  }
+}

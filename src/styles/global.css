@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('../assets/fonts/ieVl2ZhZI2eCN5jzbjEETS9weq8-19K7DQ.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Roboto Condensed', 'CustomIceBookFont', sans-serif;
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+}
+
+:root {
+  font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+/* Ensure bold tags render at font-weight 700 instead of browser default 900 (bolder) */
+b, strong {
+  font-weight: 700 !important;
+}
+
+/* Remove default link underline across the app */
+a {
+  text-decoration: none !important;
+}
+
+/* Global Blink Utility Classes */
+@keyframes blinkAnimation {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes blinkRedToWarning {
+  0%, 100% {
+    color: #ff3b30;
+    opacity: 1;
+  }
+  50% {
+    color: #ffc107;
+    opacity: 0.35;
+  }
+}
+
+.blink,
+.blink-icon,
+.blink-animation {
+  animation: blinkAnimation 1s infinite ease-in-out;
+}
+
+.blink-message,
+.blink_message,
+.bet-nation-game-name.blink-message {
+  animation: blinkRedToWarning 1s infinite ease-in-out !important;
+}
+
+/* Target ONLY icon, text, and child elements inside .blink_me so background stays static */
+.blink_me > *,
+.blink_me i,
+.blink_me span {
+  animation: blinkAnimation 1s infinite ease-in-out;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 12px !important;
+  }
+}

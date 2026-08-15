@@ -1,0 +1,187 @@
+@reference "../../styles/global.css";
+
+/* ===== Sidebar Component Styles in Tailwind CSS v4 ===== */
+
+@layer components {
+  .sidebar-container,
+  .left-sidebar {
+    @apply shrink-0 bg-[#BBBBBB] text-black h-fit overflow-y-auto overflow-x-hidden text-[14px]! font-sans hidden xl:block;
+    padding: 0;
+    min-height: calc(100vh - 175px);
+    width: 280px;
+  }
+
+  .sidebar-container.is-open,
+  .left-sidebar.is-open {
+    @apply block;
+  }
+
+  .sidebar-mobile-search-header {
+    @apply xl:hidden p-2 bg-[#d2d2d2] border-b border-[#b0b0b0] flex items-center justify-between;
+  }
+
+  .sidebar-mobile-search-wrapper {
+    @apply grow mr-2 relative;
+  }
+
+  .sidebar-mobile-search-input {
+    @apply w-full bg-white text-black text-[13px] h-8 px-2.5 rounded-none border border-[#b5b5b5] outline-none placeholder:text-[#888888];
+  }
+
+  .sidebar-mobile-close-btn {
+    @apply cursor-pointer text-[#333333] hover:text-black text-[22px] ml-1 flex items-center justify-center;
+  }
+
+  .sidebar-accordion-section {
+    @apply border-b border-[#a8a8a8];
+  }
+
+  .sidebar-accordion-header {
+    @apply bg-[#c0c0c0];
+  }
+
+  .sidebar-title,
+  .sidebar-accordion-title {
+    @apply m-0 p-0;
+  }
+
+  .sidebar-accordion-btn,
+  .accordion-button {
+    @apply w-full bg-black text-white font-bold !text-[15px] px-3 py-2 flex items-center justify-between cursor-pointer border-0 rounded-none shadow-none tracking-wide;
+  }
+
+  .left-sidebar .accordion-button:not(.collapsed)::after {
+    font-family: "Font Awesome 5 Free" !important;
+    content: "\f106" !important;
+    padding-right: 3px !important;
+    font-weight: 700 !important;
+    float: right !important;
+    color: var(--text-primary) !important;
+    background-image: none !important;
+    transform: unset;
+    -webkit-transform: unset;
+    -moz-transform: unset;
+    -ms-transform: unset;
+    -o-transform: unset;
+  }
+
+  .left-sidebar .accordion-button::after {
+    font-family: "Font Awesome 5 Free" !important;
+    content: "\f107" !important;
+    padding-right: 3px !important;
+    font-weight: 700 !important;
+    float: right !important;
+    color: var(--text-primary) !important;
+    background-image: none !important;
+    transform: unset;
+    -webkit-transform: unset;
+    -moz-transform: unset;
+    -ms-transform: unset;
+    -o-transform: unset;
+  }
+
+  .sidebar-accordion-icon {
+    @apply text-[12px] text-white font-bold;
+  }
+
+  .sidebar-accordion-content {
+    @apply bg-[#c0c0c0] block h-auto opacity-100 visible;
+  }
+
+  .sidebar-menu-list {
+    @apply !m-0 !p-0 list-none bg-[#c0c0c0];
+  }
+
+  .sidebar-menu-item {
+    @apply border-b border-[#a8a8a8];
+  }
+
+  .sidebar-menu-link {
+    @apply block text-black! text-[13.5px]! font-normal! px-3 py-1.5 no-underline transition-colors hover:bg-[#bebebe];
+  }
+
+  .sidebar-blink-text {
+    animation: sidebarBlink 1.2s infinite ease-in-out;
+  }
+
+  .sidebar-submenu-wrapper {
+    @apply pl-3.5 bg-[#c0c0c0];
+  }
+
+  .sidebar-submenu-item {
+    @apply border-b border-[#a8a8a8];
+  }
+
+  .sidebar-tree-link {
+    @apply flex items-center text-black! text-[13.5px]! font-normal! px-3 py-1.5 no-underline cursor-pointer leading-tight break-words border-b border-[#a8a8a8] hover:bg-[#bebebe];
+  }
+
+  .sidebar-tree-icon {
+    @apply text-[13.5px] text-black mr-2 shrink-0 font-normal;
+  }
+
+  .sidebar-nested-wrapper {
+    @apply pl-3.5 bg-[#c0c0c0];
+  }
+
+  .sidebar-match-item {
+    @apply border-b border-[#a8a8a8];
+  }
+
+  .sidebar-match-link {
+    @apply flex items-start text-black! text-[13.5px]! font-normal! px-3 py-1.5 no-underline leading-tight break-words;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .left-sidebar,
+  .sidebar-container {
+    width: 210px !important;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .left-sidebar {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    width: 80%;
+    background: var(--bg-sidebar, #d2d2d2);
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .left-sidebar:not(.is-open),
+  .sidebar-container:not(.is-open) {
+    display: none;
+  }
+
+  .left-sidebar.is-open,
+  .sidebar-container.is-open {
+    display: block !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    z-index: 1050 !important;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+  }
+}
+
+
+@keyframes sidebarBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
