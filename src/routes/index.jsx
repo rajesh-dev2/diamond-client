@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from '../layout'
+import ProtectedRoute from './ProtectedRoute'
 import Home from '../pages/home'
 import Login from '../pages/login'
 import GameDetails from '../pages/game-details'
@@ -20,16 +21,18 @@ export default function AppRoutes() {
       <Route path="/terms-and-conditions" element={<Terms />} />
       <Route path="/responsible-gaming" element={<ResponsibleGaming />} />
 
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/game-details/:sportId/:eventId" element={<GameDetails />} />
-        <Route path="/account-statement" element={<AccountStatement />} />
-        <Route path="/current-bet" element={<CurrentBets />} />
-        <Route path="/activity-log" element={<ActivityLog />} />
-        <Route path="/casino-results" element={<CasinoResults />} />
-        <Route path="/live-casino-bets" element={<LiveCasinoBets />} />
-        <Route path="/change-password" element={<ChangePassword />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/game-details/:sportId/:eventId" element={<GameDetails />} />
+          <Route path="/account-statement" element={<AccountStatement />} />
+          <Route path="/current-bet" element={<CurrentBets />} />
+          <Route path="/activity-log" element={<ActivityLog />} />
+          <Route path="/casino-results" element={<CasinoResults />} />
+          <Route path="/live-casino-bets" element={<LiveCasinoBets />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFound />} />

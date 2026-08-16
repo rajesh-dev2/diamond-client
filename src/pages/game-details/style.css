@@ -164,7 +164,11 @@
 
 
   .market-nation-book {
-    @apply text-[11px] font-semibold text-[#008800];
+    @apply text-[12px] font-bold text-[#008800] shrink-0 ml-2;
+  }
+
+  .market-nation-book.negative {
+    @apply text-[#dc3545];
   }
 
   /* Grid helper for 2 columns matching standard bootstrap structure */
@@ -321,7 +325,7 @@
     position: absolute;
     height: 100%;
     width: 160px;
-    right: 60px;
+    right: 0px;
     top: 0;
     cursor: not-allowed;
     display: flex;
@@ -846,6 +850,19 @@
 
 .place-bet-modal.back {
   background-color: #66b5f2 !important;
+}
+
+/* Unlayered on purpose: Bootstrap's own .table > :not(caption) > * > * rule sets
+   each td's background directly and always beats anything inside @layer components,
+   regardless of specificity — so these need to live outside the Tailwind layer too. */
+.my-bets .table tbody tr.back td {
+  background-color: #72bbef !important;
+  color: #111111 !important;
+}
+
+.my-bets .table tbody tr.lay td {
+  background-color: #faa9ba !important;
+  color: #111111 !important;
 }
 
 .place-bet-modal.lay {

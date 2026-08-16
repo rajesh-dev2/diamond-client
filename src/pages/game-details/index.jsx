@@ -1,9 +1,16 @@
 import { useState, useEffect, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
-import { Alert } from 'react-bootstrap'
+import { Toast, ToastContainer } from 'react-bootstrap'
 import PlaceBetModal from '../../components/PlaceBetModal'
 import useMatchOddsSocket from '../../hooks/useMatchOddsSocket'
-import { useGetEventsQuery, usePlaceFancyBetMutation, usePlaceBookmakerBetMutation, useGetBetsQuery } from '../../store/api/authApi'
+import {
+  useGetEventsQuery,
+  usePlaceBetMutation,
+  useGetBetsQuery,
+  useGetMatchOddsBookQuery,
+  useGetBookmakerBookQuery,
+  useGetFancyPlQuery,
+} from '../../store/api/authApi'
 import './style.css'
 
 // MATCH_ODDS / Bookmaker markets carry a 3-tier back/lay ladder per runner.
@@ -25,8 +32,11 @@ function oddsByName(section) {
 }
 
 // Suspended/active state lives on section.gstatus, not the market's top-level status.
+// Fancy markets leave gstatus blank while tradable and only set it to "SUSPENDED"
+// (or similar) when a section actually stops taking bets — blank is NOT suspended.
 function isSuspended(section) {
-  return (section.gstatus || '').toUpperCase() !== 'ACTIVE'
+  const status = (section.gstatus || '').toUpperCase()
+  return status !== '' && status !== 'ACTIVE'
 }
 
 function formatOdd(entry) {
@@ -37,10 +47,46 @@ function formatVol(entry) {
   return entry && entry.size ? String(entry.size) : ''
 }
 
-function LadderMarket({ market, onOddClick }) {
+// Bookmaker/MATCH_ODDS/Tied Match render as a back/lay ladder keyed by marketId+sid.
+// Everything else (Normal, khado, oddeven, meter, fancy1, Ball By Ball, Over By Over,
+// 0-9 Number, Score More Runs, football exchange group, ...) is a single-select
+// market keyed by fancyId — even when the feed happens to tag it gtype "match1"
+// (e.g. "Score More Runs"), so gtype alone can't tell the two apart.
+function isLadderMarket(market) {
+  if (market.gtype === 'match') return true
+  const name = (market.mname || '').toLowerCase()
+  return name.startsWith('bookmaker') || name.includes('tied match')
+}
+
+function findSectionByFancyId(markets, fancyId) {
+  for (const market of markets) {
+    const section = market.section?.find((s) => s.fancyId === fancyId)
+    if (section) return section
+  }
+  return null
+}
+
+function bookBySid(book) {
+  const map = {}
+  ;(book || []).forEach((b) => { map[String(b.sid)] = b })
+  return map
+}
+
+function plByFancyId(pl) {
+  const map = {}
+  ;(pl || []).forEach((p) => { map[p.fancyId] = p })
+  return map
+}
+
+function LadderMarket({ market, onOddClick, bookType }) {
+  const marketId = market?.marketId
+  const { data: matchBook } = useGetMatchOddsBookQuery(marketId, { skip: !marketId || bookType !== 'match' })
+  const { data: bookmakerBook } = useGetBookmakerBookQuery(marketId, { skip: !marketId || bookType !== 'bookmaker' })
+
   if (!market) return null
   const runnerNames = market.section.map((s) => s.nat)
   const maxLabel = market.min ? `Min: ${market.min} Max: ${market.max}` : `Max: ${market.max}`
+  const book = bookBySid(bookType === 'match' ? matchBook : bookmakerBook)
 
   return (
     <div className="game-market market-4">
@@ -64,11 +110,16 @@ function LadderMarket({ market, onOddClick }) {
         {market.section.map((section) => {
           const odds = oddsByName(section)
           const suspended = isSuspended(section)
+          const runnerBook = book[String(section.sid)]
           return (
             <div className={`market-row ${suspended ? 'suspended-row' : ''}`} data-title={suspended ? 'SUSPENDED' : 'ACTIVE'} key={section.sid}>
               <div className="market-nation-detail">
                 <span className="market-nation-name">{section.nat}</span>
-                <div className="market-nation-book"></div>
+                {runnerBook && (
+                  <div className={`market-nation-book ${runnerBook.profit < 0 ? 'negative' : ''}`}>
+                    {runnerBook.profit > 0 ? `+${runnerBook.profit}` : runnerBook.profit}
+                  </div>
+                )}
               </div>
               {LADDER_COLUMNS.map(({ key, cssClass, side }) => (
                 <div
@@ -100,7 +151,7 @@ function LadderMarket({ market, onOddClick }) {
   )
 }
 
-function FancyMarket({ market, onOddClick }) {
+function FancyMarket({ market, onOddClick, pl }) {
   const sections = market.section.slice().sort((a, b) => a.sno - b.sno)
   const hasLay = sections.some((s) => oddsByName(s).lay1)
 
@@ -126,6 +177,7 @@ function FancyMarket({ market, onOddClick }) {
           {sections.map((section) => {
             const odds = oddsByName(section)
             const suspended = isSuspended(section)
+            const runnerPl = pl?.[section.fancyId]
             return (
               <Fragment key={section.sid}>
                 <div className="col-md-6">
@@ -133,6 +185,11 @@ function FancyMarket({ market, onOddClick }) {
                     <div className="market-row">
                       <div className="market-nation-detail">
                         <span className="market-nation-name">{section.nat}</span>
+                        {runnerPl?.pl !== 0 && runnerPl?.pl != null && (
+                          <div className={`market-nation-book ${runnerPl.pl < 0 ? 'negative' : ''}`}>
+                            {runnerPl.pl > 0 ? `+${runnerPl.pl}` : runnerPl.pl}
+                          </div>
+                        )}
                       </div>
                       {hasLay && (
                         <div className="market-odd-box lay" onClick={() => !suspended && onOddClick(section.nat, formatOdd(odds.lay1), 'lay', [section.nat], { fancyId: section.fancyId })}>
@@ -180,12 +237,6 @@ export default function GameDetails() {
   const [betModalData, setBetModalData] = useState(null)
   const [betFeedback, setBetFeedback] = useState(null)
 
-  useEffect(() => {
-    if (!betFeedback) return
-    const timer = setTimeout(() => setBetFeedback(null), 3000)
-    return () => clearTimeout(timer)
-  }, [betFeedback])
-
   const { marketData } = useMatchOddsSocket({
     gmid: Number(eventId),
     etid: Number(sportId) || 1,
@@ -197,17 +248,21 @@ export default function GameDetails() {
   const title = eventInfo?.ename || 'Loading match...'
   const date = eventInfo?.stime || ''
 
-  const { data: myBets } = useGetBetsQuery(Number(eventId), { skip: !eventId })
-  const bets = myBets || []
+  const { data: myBets } = useGetBetsQuery()
+  const bets = (myBets || []).filter((bet) => String(bet.gmid) === String(eventId))
+
+  const { data: fancyPl } = useGetFancyPlQuery(Number(eventId), { skip: !eventId })
+  const fancyPlByFancyId = plByFancyId(fancyPl)
 
   const matchOddsMarket = marketData.find((m) => m.gtype === 'match')
-  const bookmakerMarket = marketData.find((m) => m.gtype === 'match1')
+  const bookmakerMarkets = marketData
+    .filter((m) => m !== matchOddsMarket && isLadderMarket(m))
+    .sort((a, b) => a.sno - b.sno)
   const otherMarkets = marketData
-    .filter((m) => m.gtype !== 'match' && m.gtype !== 'match1')
+    .filter((m) => m !== matchOddsMarket && !isLadderMarket(m))
     .sort((a, b) => a.sno - b.sno)
 
-  const [placeFancyBet] = usePlaceFancyBetMutation()
-  const [placeBookmakerBet] = usePlaceBookmakerBetMutation()
+  const [placeBet, { isLoading: isPlacingBet }] = usePlaceBetMutation()
 
   const [sidebarOdds, setSidebarOdds] = useState('')
   const [sidebarAmount, setSidebarAmount] = useState('')
@@ -248,8 +303,8 @@ export default function GameDetails() {
   const handleSidebarClear = () => setSidebarAmount('')
 
   const handleSidebarReset = () => {
-    setSidebarOdds(betModalData?.odds || '1.00')
-    setSidebarAmount('')
+    setBetModalData(null)
+    setShowBetModal(false)
   }
 
   const sidebarNumericOdds = parseFloat(sidebarOdds) || 0
@@ -259,9 +314,8 @@ export default function GameDetails() {
     : '0'
 
   const handleSidebarSubmit = () => {
-    if (!betModalData || !sidebarAmount || parseFloat(sidebarAmount) <= 0) return
+    if (!betModalData || !sidebarAmount || parseFloat(sidebarAmount) <= 0 || isPlacingBet) return
     handlePlaceBet({ runner: betModalData.runnerName, odds: sidebarOdds, amount: sidebarAmount })
-    setSidebarAmount('')
   }
 
   const handlePlaceBet = async (newBet) => {
@@ -272,9 +326,18 @@ export default function GameDetails() {
 
     try {
       if (betModalData?.betMeta?.fancyId) {
-        await placeFancyBet({ fancyId: betModalData.betMeta.fancyId, otype, stake }).unwrap()
+        const { fancyId } = betModalData.betMeta
+        // Re-read the live odds/size right before submitting — the provider fresh-checks
+        // these against what it's currently quoting, so a click-time snapshot can go stale.
+        const section = findSectionByFancyId(marketData, fancyId)
+        const liveOdds = section && oddsByName(section)[otype === 'lay' ? 'lay1' : 'back1']
+        if (!liveOdds?.odds) {
+          setBetFeedback({ type: 'error', message: 'Odds changed, please try again' })
+          return
+        }
+        await placeBet({ fancyId, otype, stake, odds: liveOdds.odds, size: liveOdds.size }).unwrap()
       } else if (betModalData?.betMeta?.marketId) {
-        await placeBookmakerBet({ marketId: betModalData.betMeta.marketId, sid: betModalData.betMeta.sid, otype, stake }).unwrap()
+        await placeBet({ marketId: betModalData.betMeta.marketId, sid: betModalData.betMeta.sid, otype, stake }).unwrap()
       }
     } catch (err) {
       setBetFeedback({ type: 'error', message: err?.data?.message || 'Failed to place bet' })
@@ -330,10 +393,12 @@ export default function GameDetails() {
                 </div>
               ) : (
                 <>
-                  <LadderMarket market={matchOddsMarket} onOddClick={handleOddBoxClick} />
-                  <LadderMarket market={bookmakerMarket} onOddClick={handleOddBoxClick} />
+                  <LadderMarket market={matchOddsMarket} onOddClick={handleOddBoxClick} bookType="match" />
+                  {bookmakerMarkets.map((market) => (
+                    <LadderMarket key={market.marketId} market={market} onOddClick={handleOddBoxClick} bookType="bookmaker" />
+                  ))}
                   {otherMarkets.map((market) => (
-                    <FancyMarket key={market.marketId} market={market} onOddClick={handleOddBoxClick} />
+                    <FancyMarket key={market.marketId} market={market} onOddClick={handleOddBoxClick} pl={fancyPlByFancyId} />
                   ))}
                 </>
               )}
@@ -353,16 +418,6 @@ export default function GameDetails() {
                 <h4>Live Match</h4>
               </div>
             </div>
-            {betFeedback && (
-              <Alert
-                variant={betFeedback.type === 'success' ? 'success' : 'danger'}
-                className="mb-2 py-2 px-3 text-center"
-                dismissible
-                onClose={() => setBetFeedback(null)}
-              >
-                {betFeedback.message}
-              </Alert>
-            )}
             {betModalData && (
             <div className="sidebar-box place-bet-container">
               <div className="sidebar-title">
@@ -417,10 +472,10 @@ export default function GameDetails() {
                     <button className="btn btn-danger me-1" onClick={handleSidebarReset}>Reset</button>
                     <button
                       className="btn btn-success"
-                      disabled={!sidebarAmount || parseFloat(sidebarAmount) <= 0}
+                      disabled={!sidebarAmount || parseFloat(sidebarAmount) <= 0 || isPlacingBet}
                       onClick={handleSidebarSubmit}
                     >
-                      Submit
+                      {isPlacingBet ? 'Submitting...' : 'Submit'}
                     </button>
                   </div>
                 </div>
@@ -443,7 +498,7 @@ export default function GameDetails() {
                     </thead>
                     <tbody>
                       {bets.map((bet) => (
-                        <tr key={`${bet.mid}-${bet.sid}-${bet.createdAt}`}>
+                        <tr key={`${bet.mid}-${bet.sid}-${bet.createdAt}`} className={bet.otype === 'lay' ? 'lay' : 'back'}>
                           <td>{bet.nat} ({bet.otype})</td>
                           <td className="text-end">{bet.odds}</td>
                           <td className="text-end">{bet.stake}</td>
@@ -465,6 +520,21 @@ export default function GameDetails() {
         betData={betModalData}
         onPlaceBet={handlePlaceBet}
       />
+
+      <ToastContainer position="top-end" className="p-3" style={{ position: 'fixed', zIndex: 2000 }}>
+        <Toast
+          show={Boolean(betFeedback)}
+          onClose={() => setBetFeedback(null)}
+          bg={betFeedback?.type === 'success' ? 'success' : 'danger'}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header closeButton>
+            <strong className="me-auto">{betFeedback?.type === 'success' ? 'Bet Placed' : 'Bet Failed'}</strong>
+          </Toast.Header>
+          <Toast.Body className="text-white">{betFeedback?.message}</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </div>
   )
 }

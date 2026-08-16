@@ -16,15 +16,36 @@ import {
 } from '../../data/sportsData'
 import './style.css'
 
+// Best price is tno 0 in each ladder (back: highest odds first, lay: lowest odds first).
+function bestPrice(ladder) {
+  return ladder?.find((o) => o.tno === 0)?.odds ?? ladder?.[0]?.odds
+}
+
+// Blank gstatus means tradable — only an explicit non-"ACTIVE" value means suspended.
+function isSuspended(selection) {
+  const status = (selection?.gstatus || '').toUpperCase()
+  return status !== '' && status !== 'ACTIVE'
+}
+
 function mapEventsToMatches(events, etid) {
-  return events.map((event) => ({
-    id: event._id,
-    title: event.ename,
-    link: `/game-details/${etid}/${event.gmid}`,
-    date: event.stime,
-    live: event.isLive,
-    icons: []
-  }))
+  return events.map((event) => {
+    const [sel1, sel2] = event.matchOdds || []
+
+    return {
+      id: event._id,
+      title: event.ename,
+      link: `/game-details/${etid}/${event.gmid}`,
+      date: event.stime,
+      live: event.isLive,
+      icons: [],
+      back1: bestPrice(sel1?.back),
+      lay1: bestPrice(sel1?.lay),
+      back2: bestPrice(sel2?.back),
+      lay2: bestPrice(sel2?.lay),
+      suspended1: sel1 ? isSuspended(sel1) : false,
+      suspended2: sel2 ? isSuspended(sel2) : false,
+    }
+  })
 }
 
 export default function Home() {

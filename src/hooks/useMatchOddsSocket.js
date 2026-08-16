@@ -2,7 +2,9 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { io } from 'socket.io-client'
 import { useSelector } from 'react-redux'
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL
+const SOCKET_URL =
+  import.meta.env.VITE_SOCKET_URL ||
+  (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/api\/?$/, '')
 
 export function useMatchOddsSocket({
   gmid = 0,
