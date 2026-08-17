@@ -11,7 +11,6 @@ export default function RunAmountModal({ show, onHide, fancyId }) {
       onHide={onHide}
       dialogClassName="run-amount-modal-top"
       backdropClassName="run-amount-backdrop"
-      centered
     >
       <div className="modal-header">
         <div className="modal-title h4">Run Amount</div>
