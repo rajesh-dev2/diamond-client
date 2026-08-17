@@ -53,10 +53,10 @@
     }
 
     @media only screen and (max-width: 1199px) {
-    .search-box input.search-input-show {
+      .search-box input.search-input-show {
         height: 26px;
         width: 150px;
-    }
+      }
     }
 
     .header-search-btn {
@@ -113,7 +113,7 @@
 
     .header-dropdown-menu {
       @apply absolute right-0 top-full mt-1.5 w-[185px] bg-white rounded-xs shadow-2xl py-[0.5rem]! z-[1050] text-base font-normal border border-slate-200 list-none m-0! p-0! text-left;
-      border: 1px solid rgba(0,0,0,.15);
+      border: 1px solid rgba(0, 0, 0, .15);
     }
 
     .header-dropdown-link {
@@ -171,6 +171,7 @@
     .header-nav-link {
       @apply text-white! font-bold text-[14px]! uppercase px-[15px] py-2 whitespace-nowrap tracking-wide transition-colors block no-underline relative;
     }
+
 
     .header-bottom .navbar-nav .nav-link::before,
     .header-nav-link::before {
@@ -233,6 +234,7 @@
 
   .search-box {
     height: 26px;
+    width: 26px;
     margin-top: 4px;
     margin-right: 4px;
   }

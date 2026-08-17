@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Modal } from 'react-bootstrap'
+import './game-details/Sidebar/style.css'
 
 export default function PlaceBetModal({ show, onHide, betData, onPlaceBet }) {
   const [selectedRunner, setSelectedRunner] = useState('')
@@ -16,7 +17,6 @@ export default function PlaceBetModal({ show, onHide, betData, onPlaceBet }) {
 
   if (!betData) return null
 
-  const runnerList = betData.runnersList || ['Australia', 'Bangladesh', 'The Draw']
   const betType = betData.type || 'back'
 
   const handleOddsChange = (delta) => {
@@ -50,66 +50,68 @@ export default function PlaceBetModal({ show, onHide, betData, onPlaceBet }) {
       dialogClassName="place-bet-modal-top"
       backdropClassName="place-bet-backdrop"
     >
-        <div className="modal-header">
-          <div className="modal-title h4">Place Bet</div>
-          <button type="button" className="btn-close" aria-label="Close" onClick={onHide}></button>
-        </div>
-        <div className="modal-body">
-          <div className={`place-bet-modal ${betType}`}>
-            <div className="row row5">
-              <div className="col-6"><b>{selectedRunner}</b></div>
-              <div className="col-6 text-end"><span>Profit: {profit}</span></div>
-            </div>
-            <div className="odd-stake-box">
-              <div className="row row5 mt-1">
-                <div className="col-6 text-center">Odds</div>
-                <div className="col-6 text-center">Amount</div>
-              </div>
-              <div className="row row5 mt-1">
-                <div className="col-6">
-                  <div className="float-end">
-                    <button type="button" className="stakeactionminus btn" onClick={() => handleOddsChange(-0.01)}>
-                      <span className="fa fa-minus"></span>
-                    </button>
-                    <input
-                      type="text"
-                      className="stakeinput"
-                      disabled
-                      value={odds}
-                      onChange={(e) => setOdds(e.target.value)}
-                    />
-                    <button type="button" className="stakeactionminus btn" onClick={() => handleOddsChange(0.01)}>
-                      <span className="fa fa-plus"></span>
-                    </button>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <input
-                    type="number"
-                    className="stakeinput w-100"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                  />
+      <div className="modal-header">
+        <div className="modal-title h4">Place Bet</div>
+        <button type="button" className="btn-close" aria-label="Close" onClick={onHide}></button>
+      </div>
+      <div className="modal-body p-0">
+        <div className={`gdv2-bet-box gdv2-bet-${betType}`}>
+          {/* Header labels */}
+          <div className="gdv2-bet-header">
+            <div className="gdv2-bet-for">(Bet for)</div>
+            <div className="gdv2-bet-odds-label">Odds</div>
+            <div className="gdv2-bet-stake-label">Stake</div>
+            <div className="gdv2-bet-profit-label">Profit</div>
+          </div>
+
+          {/* Body inputs */}
+          <div className="gdv2-bet-body">
+            <div className="gdv2-bet-for"><span>{selectedRunner}</span></div>
+
+            <div className="gdv2-bet-odds-input">
+              <div className="gdv2-odds-group">
+                <input type="text" disabled value={odds || '-'} className="gdv2-odds-field" readOnly />
+                <div className="gdv2-odds-spinner">
+                  <button type="button" onClick={() => handleOddsChange(0.01)}>
+                    <i className="fa fa-angle-up" />
+                  </button>
+                  <button type="button" onClick={() => handleOddsChange(-0.01)}>
+                    <i className="fa fa-angle-down" />
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="place-bet-buttons mt-1">
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(1000)}>+1k</button>
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(2000)}>+2k</button>
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(5000)}>+5k</button>
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(10000)}>+10k</button>
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(20000)}>+20k</button>
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(25000)}>+25k</button>
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(50000)}>+50k</button>
-              <button type="button" className="btn btn-place-bet" onClick={() => handleAddStake(75000)}>+75k</button>
+
+            <div className="gdv2-bet-stake-input">
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="gdv2-stake-field"
+              />
             </div>
-            <div className="mt-1 place-bet-btn-box">
-              <button type="button" className="btn btn-link" onClick={handleClear}>Clear</button>
-              <button type="button" className="btn btn-info">Edit</button>
-              <button type="button" className="btn btn-danger" onClick={handleReset}>Reset</button>
+
+            <div className="gdv2-bet-profit">{profit}</div>
+          </div>
+
+          {/* Quick-add */}
+          <div className="gdv2-bet-buttons">
+            {[1000, 2000, 5000, 10000, 20000, 25000, 50000, 75000].map((val) => (
+              <button key={val} type="button" className="gdv2-btn-stake" onClick={() => handleAddStake(val)}>
+                +{val >= 1000 ? `${val / 1000}k` : val}
+              </button>
+            ))}
+            <button type="button" className="gdv2-btn-clear" onClick={handleClear}>clear</button>
+          </div>
+
+          {/* Actions */}
+          <div className="gdv2-bet-actions">
+            <div><button type="button" className="gdv2-btn-edit">Edit</button></div>
+            <div>
+              <button type="button" className="gdv2-btn-reset" onClick={handleReset}>Reset</button>
               <button
                 type="button"
-                className="btn btn-success"
+                className="gdv2-btn-submit"
                 disabled={!amount || parseFloat(amount) <= 0}
                 onClick={() => {
                   if (onPlaceBet) {
@@ -118,26 +120,13 @@ export default function PlaceBetModal({ show, onHide, betData, onPlaceBet }) {
                   onHide()
                 }}
               >
-                Place Bet
+                Submit
               </button>
-            </div>
-            <div className="mt-1 d-flex"></div>
-            <div className="odds-count mt-1">
-              {runnerList.map((runner, idx) => (
-                <div
-                  key={idx}
-                  className="row row5 mt-2"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => setSelectedRunner(runner)}
-                >
-                  <div className="col-6"><span>{runner}</span></div>
-                  <div className="col-3 text-center"></div>
-                  <div className="col-3 text-end"></div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
+      </div>
     </Modal>
   )
 }
+
