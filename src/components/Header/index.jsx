@@ -5,6 +5,7 @@ import { logout } from '../../store/authSlice'
 import { useGetUserInfoQuery } from '../../store/api/authApi'
 import logo from '../../assets/brand-logo/logo.png'
 import SetButtonValuesModal from '../SetButtonValuesModal'
+import RulesModal from '../RulesModal'
 import './style.css'
 
 export default function Header({ onToggleSidebar }) {
@@ -15,6 +16,7 @@ export default function Header({ onToggleSidebar }) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [setButtonModalOpen, setSetButtonModalOpen] = useState(false)
+  const [rulesModalOpen, setRulesModalOpen] = useState(false)
 
   const handleLogout = () => {
     dispatch(logout())
@@ -61,7 +63,11 @@ export default function Header({ onToggleSidebar }) {
 
           {/* Rules Link */}
           <div className="header-rules-wrapper depowith header-rules">
-            <a className="header-rules-link">
+            <a 
+              className="header-rules-link"
+              onClick={() => setRulesModalOpen(true)}
+              style={{ cursor: 'pointer' }}
+            >
               Rules
             </a>
           </div>
@@ -114,7 +120,11 @@ export default function Header({ onToggleSidebar }) {
                 <Link to="/change-password" onClick={() => setDropdownOpen(false)} className="header-dropdown-link">
                   <li className="header-dropdown-item">Change Password</li>
                 </Link>
-                <a className="header-dropdown-link mobile-only" onClick={() => setDropdownOpen(false)}>
+                <a 
+                  className="header-dropdown-link mobile-only" 
+                  onClick={() => { setDropdownOpen(false); setRulesModalOpen(true); }}
+                  style={{ cursor: 'pointer' }}
+                >
                   <li className="header-dropdown-item">Rules</li>
                 </a>
                 <hr className="header-dropdown-divider" />
@@ -194,6 +204,12 @@ export default function Header({ onToggleSidebar }) {
         show={setButtonModalOpen}
         onHide={() => setSetButtonModalOpen(false)}
       />
+
+      <RulesModal
+        show={rulesModalOpen}
+        onHide={() => setRulesModalOpen(false)}
+      />
     </section>
   )
 }
+

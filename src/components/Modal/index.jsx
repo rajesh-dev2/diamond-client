@@ -12,9 +12,13 @@ export default function CommonModal({
   title = 'Set Button Value',
   children,
   showHeader = true,
+  showFooter = false,
+  footer,
   dialogClassName = '',
+  bodyClassName = 'p-2',
   position = 'top'
 }) {
+
   // ESC key listener & body scroll lock
   useEffect(() => {
     if (!show) return
@@ -60,11 +64,28 @@ export default function CommonModal({
               </button>
             </div>
           )}
-          <div className="modal-body p-2">
+          <div className={`modal-body ${bodyClassName}`}>
             {children}
           </div>
+
+          {(showFooter || footer) && (
+            <div className="modal-footer">
+              {footer ? (
+                footer
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-close-footer"
+                  onClick={onClose}
+                >
+                  Close
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
   )
 }
+
