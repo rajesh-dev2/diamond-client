@@ -2,11 +2,13 @@ import PlaceBetSidebar from './PlaceBetSidebar'
 import MyBetsSidebar from './MyBetsSidebar'
 
 export default function RightSidebar({
+  ref,
   betData, odds, amount, profit, isPlacing,
   onOddsChange, onAmountChange, onAddStake, onClear, onReset, onSubmit, bets,
 }) {
   return (
-    <div className="gdv2-right-sidebar">
+    <div ref={ref} className="gdv2-right-sidebar">
+
       <div className="gdv2-sidebar">
         <a className="gdv2-matka-link" href="/casino/worli3">
           <i className="fas fa-info-circle" />

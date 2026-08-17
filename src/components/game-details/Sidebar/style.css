@@ -4,8 +4,12 @@
 .gdv2-right-sidebar {
   min-width: 0;
   width: 100%;
-  align-self: flex-start;
+  position: sticky !important;
+  top: 4px !important;
+  align-self: start !important;
+  z-index: 10;
 }
+
 
 .gdv2-sidebar {
   display: flex;

@@ -32,7 +32,12 @@
 .gdv2-right-sidebar {
   min-width: 0;
   width: 100%;
+  position: sticky !important;
+  top: 4px !important;
+  align-self: start !important;
+  z-index: 10;
 }
+
 
 /* ── Responsive breakpoints ──────────────────────────────── */
 @media (max-width: 1199px) {
@@ -63,6 +68,8 @@
 .place-bet-modal-top .modal-content {
   border-radius: 0;
   background-color: transparent;
+  border: none;
+  overflow: hidden;
 }
 
 .place-bet-modal-close-wrap {
@@ -78,9 +85,22 @@
   opacity: 0.9;
 }
 
+.place-bet-modal-top .gdv2-bet-box {
+  border-radius: 0;
+}
+
+.place-bet-modal-top .gdv2-bet-lay {
+  background-color: #faa9ba !important;
+}
+
+.place-bet-modal-top .gdv2-bet-back {
+  background-color: #7CB5EC !important;
+}
+
 .place-bet-backdrop.show {
   opacity: 0.6;
 }
+
 
 /* ── Suspended Overlay (RunnerRow & FancyMarket) ────────── */
 .gdv2-runner-row.gdv2-suspended .gdv2-runner-odds,

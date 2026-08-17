@@ -184,22 +184,21 @@ export default function GameDetails() {
         </div>
 
         {/* Desktop Sidebar (Place Bet slip + My Bets) */}
-        <div ref={sidebarRef}>
-          <RightSidebar
-            betData={betModalData}
-            odds={sidebarOdds}
-            amount={sidebarAmount}
-            profit={sidebarProfit}
-            isPlacing={isPlacingBet}
-            onOddsChange={handleSidebarOddsChange}
-            onAmountChange={setSidebarAmount}
-            onAddStake={handleSidebarAddStake}
-            onClear={() => setSidebarAmount('')}
-            onReset={() => { setBetModalData(null); setShowBetModal(false) }}
-            onSubmit={handleSidebarSubmit}
-            bets={bets}
-          />
-        </div>
+        <RightSidebar
+          ref={sidebarRef}
+          betData={betModalData}
+          odds={sidebarOdds}
+          amount={sidebarAmount}
+          profit={sidebarProfit}
+          isPlacing={isPlacingBet}
+          onOddsChange={handleSidebarOddsChange}
+          onAmountChange={setSidebarAmount}
+          onAddStake={handleSidebarAddStake}
+          onClear={() => setSidebarAmount('')}
+          onReset={() => { setBetModalData(null); setShowBetModal(false) }}
+          onSubmit={handleSidebarSubmit}
+          bets={bets}
+        />
       </div>
 
       {/* Mobile Place Bet Modal — reuses the same PlaceBetSidebar module as desktop */}

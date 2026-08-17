@@ -76,7 +76,7 @@ export default function Home() {
   }
 
   return (
-    <div className="center-main-container home-page">
+    <div className="center-main-container home-page pr-1.5">
       <div className="center-container">
         {/* Latest Events Top Ticker */}
         <LatestEvents />

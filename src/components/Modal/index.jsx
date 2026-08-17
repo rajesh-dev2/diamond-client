@@ -10,11 +10,16 @@ export default function CommonModal({
   show,
   onClose,
   title = 'Set Button Value',
+  headerRight,
   children,
   showHeader = true,
+  showFooter = false,
+  footer,
   dialogClassName = '',
+  bodyClassName = 'p-2',
   position = 'top'
 }) {
+
   // ESC key listener & body scroll lock
   useEffect(() => {
     if (!show) return
@@ -50,21 +55,42 @@ export default function CommonModal({
           {showHeader && (
             <div className="modal-header">
               <div className="modal-title h4">{title}</div>
-              <button
-                type="button"
-                className="btn-close-custom"
-                aria-label="Close"
-                onClick={onClose}
-              >
-                ✕
-              </button>
+              <div className="modal-header-actions flex items-center gap-2">
+                {headerRight}
+                <button
+                  type="button"
+                  className="btn-close-custom"
+                  aria-label="Close"
+                  onClick={onClose}
+                >
+                  ✕
+                </button>
+              </div>
             </div>
           )}
-          <div className="modal-body p-2">
+
+          <div className={`modal-body ${bodyClassName}`}>
             {children}
           </div>
+
+          {(showFooter || footer) && (
+            <div className="modal-footer">
+              {footer ? (
+                footer
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-close-footer"
+                  onClick={onClose}
+                >
+                  Close
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
   )
 }
+
