@@ -86,3 +86,42 @@
   background-color: #fff;
   padding: 12px;
 }
+
+/* ── Suspended Overlay (RunnerRow & FancyMarket) ────────── */
+.gdv2-runner-row.gdv2-suspended .gdv2-runner-odds,
+.gdv2-fancy-suspended .gdv2-fancy-right {
+  position: relative;
+}
+
+.gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after,
+.gdv2-fancy-suspended .gdv2-fancy-right::after {
+  content: attr(data-title);
+  position: absolute;
+  inset: 0;
+  background-color: rgba(55, 54, 54, 0.84);
+  color: #ff0000;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  pointer-events: none;
+  z-index: 2;
+  letter-spacing: 0.5px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after,
+  .gdv2-fancy-suspended .gdv2-fancy-right::after {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after,
+  .gdv2-fancy-suspended .gdv2-fancy-right::after {
+    font-size: 12px;
+  }
+}

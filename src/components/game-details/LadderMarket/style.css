@@ -32,13 +32,6 @@
   .gdv2-market-ladder .gdv2-market-header .gdv2-odd-box b {
     font-size: 11px;
   }
-
-  /* Suspended overlay covers all 6 boxes (6 * 40px = 240px) */
-  .gdv2-market-ladder .gdv2-runner-row.gdv2-suspended::after {
-    width: 240px;
-    right: 0;
-    font-size: 12px;
-  }
 }
 
 @media (max-width: 374px) {
@@ -53,9 +46,5 @@
 
   .gdv2-market-ladder .gdv2-odd-volume {
     font-size: 8px;
-  }
-
-  .gdv2-market-ladder .gdv2-runner-row.gdv2-suspended::after {
-    width: 216px;
   }
 }
