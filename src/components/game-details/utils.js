@@ -33,7 +33,7 @@ export function oddsByName(section) {
 export function isSuspended(section) {
   if (!section) return false
   const status = (section.gstatus || section.status || '').toUpperCase()
-  return status !== '' && status !== 'ACTIVE'
+  return status !== '' && status !== 'ACTIVE' && status !== 'OPEN'
 }
 
 /**
@@ -42,7 +42,7 @@ export function isSuspended(section) {
 export function getSuspendedStatus(section, fallback = 'SUSPENDED') {
   if (!section) return fallback
   const raw = section.gstatus || section.status
-  if (raw && typeof raw === 'string' && raw.trim() !== '' && raw.trim().toUpperCase() !== 'ACTIVE') {
+  if (raw && typeof raw === 'string' && raw.trim() !== '' && !['ACTIVE', 'OPEN'].includes(raw.trim().toUpperCase())) {
     return raw.trim().toUpperCase()
   }
   return fallback

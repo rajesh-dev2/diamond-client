@@ -1,9 +1,14 @@
 import './style.css'
+import { useGetButtonSettingsQuery } from '../../../store/api/authApi'
+import { DEFAULT_GAME_BUTTONS } from '../../SetButtonValuesModal/defaultButtonValues'
 
 export default function PlaceBetSidebar({
   betData, odds, amount, profit, isPlacing,
   onOddsChange, onAmountChange, onAddStake, onClear, onReset, onSubmit,
 }) {
+  const { data: settings } = useGetButtonSettingsQuery()
+  const stakeButtons = settings?.gameButtons?.length ? settings.gameButtons : DEFAULT_GAME_BUTTONS
+
   if (!betData) return null
 
   return (
@@ -51,9 +56,9 @@ export default function PlaceBetSidebar({
 
         {/* Quick-add */}
         <div className="gdv2-bet-buttons">
-          {[1000, 2000, 5000, 10000, 20000, 25000, 50000, 75000].map((val) => (
-            <button key={val} type="button" className="gdv2-btn-stake" onClick={() => onAddStake(val)}>
-              +{val >= 1000 ? `${val / 1000}k` : val}
+          {stakeButtons.map((btn, idx) => (
+            <button key={idx} type="button" className="gdv2-btn-stake" onClick={() => onAddStake(Number(btn.value))}>
+              +{btn.label}
             </button>
           ))}
           <button type="button" className="gdv2-btn-clear" onClick={onClear}>clear</button>
@@ -70,10 +75,20 @@ export default function PlaceBetSidebar({
               disabled={!amount || parseFloat(amount) <= 0 || isPlacing}
               onClick={onSubmit}
             >
-              {isPlacing ? 'Submitting…' : 'Submit'}
+              Submit
             </button>
           </div>
         </div>
+
+        {isPlacing && (
+          <div className="gdv2-bet-loading-overlay">
+            <span className="gdv2-spinner">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <span key={i} style={{ '--i': i }} />
+              ))}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   )

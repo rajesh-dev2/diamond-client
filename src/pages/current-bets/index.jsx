@@ -1,31 +1,43 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useGetCurrentBetsQuery } from '../../store/api/authApi'
 import './style.css'
 
 export default function CurrentBets() {
   const [reportType, setReportType] = useState('1')
   const [entriesCount, setEntriesCount] = useState(10)
   const [filter, setFilter] = useState('all')
+  const [searchInput, setSearchInput] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectAll, setSelectAll] = useState(false)
-  const [betsData] = useState([])
+  const [page, setPage] = useState(1)
+
+  // Debounce free-text search so we don't fire a request on every keystroke.
+  useEffect(() => {
+    const timer = setTimeout(() => setSearchQuery(searchInput), 400)
+    return () => clearTimeout(timer)
+  }, [searchInput])
+
+  // Reset to page 1 whenever a filter changes.
+  useEffect(() => {
+    setPage(1)
+  }, [reportType, entriesCount, filter, searchQuery])
+
+  const { data, isFetching } = useGetCurrentBetsQuery({
+    type: reportType === '2' ? 'casino' : 'sports',
+    otype: filter,
+    search: searchQuery,
+    limit: entriesCount,
+    page,
+  })
+
+  const rows = data?.rows || []
+  const total = data?.total || 0
+  const totalPages = Math.max(1, Math.ceil(total / entriesCount))
+  const totalAmount = rows.reduce((sum, row) => sum + (Number(row.amount) || 0), 0)
 
   const handleSubmit = (e) => {
     e.preventDefault()
   }
-
-  const filteredData = betsData.filter((item) => {
-    if (filter === 'back' && item.type !== 'back') return false
-    if (filter === 'lay' && item.type !== 'lay') return false
-    if (!searchQuery) return true
-    const q = searchQuery.toLowerCase()
-    return (
-      item.eventName?.toLowerCase().includes(q) ||
-      item.nation?.toLowerCase().includes(q) ||
-      item.userRate?.toString().includes(q) ||
-      item.amount?.toString().includes(q) ||
-      item.placeDate?.toLowerCase().includes(q)
-    )
-  })
 
   return (
     <div className="current-bets">
@@ -38,8 +50,8 @@ export default function CurrentBets() {
             <form className="row row5" onSubmit={handleSubmit}>
               <div className="col-lg-2 col-md-3">
                 <div className="mb-2 input-group position-relative">
-                  <select 
-                    className="form-select" 
+                  <select
+                    className="form-select"
                     name="gtype"
                     value={reportType}
                     onChange={(e) => setReportType(e.target.value)}
@@ -59,7 +71,7 @@ export default function CurrentBets() {
               <div className="col-lg-2 col-5">
                 <div className="mb-2 input-group position-relative">
                   <span className="me-2">Show</span>
-                  <select 
+                  <select
                     className="form-select"
                     value={entriesCount}
                     onChange={(e) => setEntriesCount(Number(e.target.value))}
@@ -76,36 +88,36 @@ export default function CurrentBets() {
 
               <div className="col-lg-4 col-md-6 col-7 text-center">
                 <div className="form-check form-check-inline">
-                  <input 
-                    type="radio" 
-                    className="form-check-input" 
-                    id="all" 
-                    name="filter" 
-                    value="all" 
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    id="all"
+                    name="filter"
+                    value="all"
                     checked={filter === 'all'}
                     onChange={() => setFilter('all')}
                   />
                   <label className="form-check-label" htmlFor="all">All</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input 
-                    type="radio" 
-                    className="form-check-input" 
-                    id="back" 
-                    name="filter" 
-                    value="back" 
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    id="back"
+                    name="filter"
+                    value="back"
                     checked={filter === 'back'}
                     onChange={() => setFilter('back')}
                   />
                   <label className="form-check-label" htmlFor="back">Back</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input 
-                    type="radio" 
-                    className="form-check-input" 
-                    id="lay" 
-                    name="filter" 
-                    value="lay" 
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    id="lay"
+                    name="filter"
+                    value="lay"
                     checked={filter === 'lay'}
                     onChange={() => setFilter('lay')}
                   />
@@ -114,18 +126,18 @@ export default function CurrentBets() {
               </div>
 
               <div className="col-lg-3 col-md-6 text-left col-7">
-                <div>Total Bets: <span className="me-2">0</span> Total Amount: <span className="me-2">0</span></div>
+                <div>Total Bets: <span className="me-2">{total}</span> Total Amount: <span className="me-2">{totalAmount}</span></div>
               </div>
 
               <div className="col-lg-2 col-5">
                 <div className="mb-2 input-group position-relative">
                   <span className="me-2">Search:</span>
-                  <input 
-                    type="search" 
-                    className="form-control" 
-                    placeholder="0 records..." 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                  <input
+                    type="search"
+                    className="form-control"
+                    placeholder={`${total} records...`}
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
                   />
                 </div>
               </div>
@@ -143,10 +155,10 @@ export default function CurrentBets() {
                     <th colSpan={1} role="columnheader" className="report-action">
                       <div className="text-end">
                         <div className="form-check form-check-inline me-0">
-                          <input 
-                            type="checkbox" 
-                            className="form-check-input" 
-                            title="Toggle All Current Page Rows Selected" 
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            title="Toggle All Current Page Rows Selected"
                             style={{ cursor: 'pointer' }}
                             checked={selectAll}
                             onChange={(e) => setSelectAll(e.target.checked)}
@@ -157,9 +169,13 @@ export default function CurrentBets() {
                   </tr>
                 </thead>
                 <tbody role="rowgroup">
-                  {filteredData.length > 0 ? (
-                    filteredData.slice(0, entriesCount).map((row, index) => (
-                      <tr key={index} role="row">
+                  {isFetching ? (
+                    <tr role="row">
+                      <td colSpan={6} className="text-center">Loading…</td>
+                    </tr>
+                  ) : rows.length > 0 ? (
+                    rows.map((row, index) => (
+                      <tr key={row.id || row._id || index} role="row">
                         <td>{row.eventName}</td>
                         <td>{row.nation}</td>
                         <td className="report-amount text-end">{row.userRate}</td>
@@ -170,10 +186,38 @@ export default function CurrentBets() {
                         </td>
                       </tr>
                     ))
-                  ) : null}
+                  ) : (
+                    <tr role="row">
+                      <td colSpan={6} className="text-center">No records found</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
+
+            {totalPages > 1 && (
+              <div className="row row5 mt-2 justify-content-between align-items-center">
+                <div className="col-auto">Page {page} of {totalPages}</div>
+                <div className="col-auto d-flex gap-2">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-secondary"
+                    disabled={page <= 1}
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  >
+                    Previous
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-secondary"
+                    disabled={page >= totalPages}
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

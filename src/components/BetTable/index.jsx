@@ -2,6 +2,24 @@ import { Link } from 'react-router-dom'
 import './style.css'
 
 export default function BetTable({ matches = [] }) {
+  if (matches.length === 0) {
+    return (
+      <div className="bet-table">
+        <div className="bet-table-empty">
+          <svg viewBox="0 0 120 120" className="bet-table-empty-icon" aria-hidden="true">
+            <circle cx="60" cy="60" r="56" fill="#eef1f3" />
+            <rect x="30" y="42" width="60" height="42" rx="4" fill="#fff" stroke="#c7c8ca" strokeWidth="2" />
+            <rect x="30" y="42" width="60" height="12" rx="4" fill="#c7c8ca" />
+            <circle cx="60" cy="70" r="12" fill="#fff" stroke="#9aa1a7" strokeWidth="2" />
+            <path d="M55 70h10M60 65v10" stroke="#9aa1a7" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+          <div className="bet-table-empty-title">No Matches Available</div>
+          <div className="bet-table-empty-subtitle">Please check back later</div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="bet-table">
       <div className="bet-table-header">
