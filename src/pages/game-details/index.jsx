@@ -32,15 +32,6 @@ import {
 } from '../../store/api/authApi'
 import useMatchOddsSocket from '../../hooks/useMatchOddsSocket'
 
-// ── Data & Fallbacks ───────────────────────────────────────────────
-import {
-  getDemoMarketsForEvent,
-  cricketMatches,
-  footballMatches,
-  tennisMatches,
-  tableTennisMatches,
-} from '../../data/sportsData'
-
 // ── Page CSS ───────────────────────────────────────────────────────
 import './style.css'
 
@@ -66,28 +57,17 @@ export default function GameDetails() {
   const { data: events } = useGetEventsQuery(Number(sportId), { skip: !sportId })
   const eventInfo = events?.find((e) => String(e.gmid) === String(eventId))
 
-  const staticMatch = [
-    ...cricketMatches,
-    ...footballMatches,
-    ...tennisMatches,
-    ...tableTennisMatches,
-  ].find((m) =>
-    String(m.id) === String(eventId) ||
-    m.link?.includes(`/${eventId}`) ||
-    m.link?.includes(`/${sportId}/${eventId}`)
-  )
+  const title = eventInfo?.ename || 'Match Details'
+  const date  = eventInfo?.stime  || ''
 
-  const title = eventInfo?.ename || staticMatch?.title || 'Sri Lanka v India'
-  const date  = eventInfo?.stime  || staticMatch?.date  || '15/08/2026 10:00:00'
-
-  // Use live socket data when available, fall back to rich demo dataset
-  const activeMarkets = marketData?.length > 0 ? marketData : getDemoMarketsForEvent(title)
+  // Live markets from Socket.IO stream
+  const activeMarkets = marketData || []
 
   // ── User Matched Bets ─────────────────────────────────────────
   const { data: myBets } = useGetBetsQuery()
   const bets = (myBets || []).filter((bet) => String(bet.gmid) === String(eventId))
 
-  // ── Fancy P&L Book ────────────────────────────────────────────
+  // ── Fancy P&L Book ───────────────────────────────────────────
   const { data: fancyPl } = useGetFancyPlQuery(Number(eventId), { skip: !eventId })
   const fancyPlByFancyId  = plByFancyId(fancyPl)
 
@@ -153,7 +133,7 @@ export default function GameDetails() {
         await placeBet({ marketId: betModalData.betMeta.marketId, sid: betModalData.betMeta.sid, otype, stake }).unwrap()
       }
     } catch {
-      // Demo fallback or server error handling
+      // Server error handling
     }
 
     setBetFeedback({ type: 'success', message: `Bet placed on ${runnerName} @ ${newBet.odds}` })
@@ -185,8 +165,8 @@ export default function GameDetails() {
 
           {(activeMobileTab === 'odds' || isDesktop) && (
             activeMarkets.length === 0 ? (
-              <div style={{ padding: '16px', background: '#fff', color: '#555', textAlign: 'center' }}>
-                Connecting to live odds…
+              <div style={{ padding: '24px 16px', background: '#fff', color: '#666', textAlign: 'center', fontWeight: 600 }}>
+                {isConnected ? 'Loading markets...' : 'Connecting to live odds…'}
               </div>
             ) : (
               <MarketSection

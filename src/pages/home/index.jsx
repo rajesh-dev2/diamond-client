@@ -12,7 +12,7 @@ import {
   tennisMatches,
   tableTennisMatches,
   horseRacingData,
-  greyhoundRacingData
+  greyhoundRacingData,
 } from '../../data/sportsData'
 import './style.css'
 
@@ -28,21 +28,24 @@ function isSuspended(selection) {
 }
 
 function mapEventsToMatches(events, etid) {
-  return events.map((event) => {
-    const [sel1, sel2] = event.matchOdds || []
+  return (events || []).map((event) => {
+    const [sel1, sel2, selX] = event.matchOdds || []
 
     return {
-      id: event._id,
+      id: event._id || event.gmid,
       title: event.ename,
       link: `/game-details/${etid}/${event.gmid}`,
       date: event.stime,
-      live: event.isLive,
-      icons: [],
+      live: Boolean(event.isLive || event.iB),
+      icons: ['tv', 'f', 'BM'],
       back1: bestPrice(sel1?.back),
       lay1: bestPrice(sel1?.lay),
+      backX: bestPrice(selX?.back),
+      layX: bestPrice(selX?.lay),
       back2: bestPrice(sel2?.back),
       lay2: bestPrice(sel2?.lay),
       suspended1: sel1 ? isSuspended(sel1) : false,
+      suspendedX: selX ? isSuspended(selX) : false,
       suspended2: sel2 ? isSuspended(sel2) : false,
     }
   })
@@ -62,6 +65,10 @@ export default function Home() {
     }
     if (activeTab === 'Greyhound Racing') {
       return <RacingTable racingData={greyhoundRacingData} />
+    }
+
+    if (activeEtid && events && events.length > 0) {
+      return <BetTable matches={mapEventsToMatches(events, activeEtid)} />
     }
 
     switch (activeTab) {

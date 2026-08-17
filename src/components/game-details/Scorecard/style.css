@@ -2,14 +2,32 @@
 .gdv2-scorecard {
   display: flex;
   flex-direction: row;
-  background-color: #fff;
-  padding: 6px 8px;
+  padding: 5px;
+  background-image: url('https://versionobj.ecoassetsservice.com/v105/static/front/img/scorecard-bg.png');
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  z-index: 1;
   gap: 8px;
   font-size: 13px;
   border-bottom: 1px solid #c7c8ca;
 }
 
-.gdv2-score-left { flex: 1; }
+.gdv2-scorecard::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.55);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.gdv2-score-left {
+  flex: 1;
+}
 
 .gdv2-score-team-row {
   display: flex;
@@ -35,7 +53,7 @@
 
 .gdv2-score-crr {
   font-size: 11px;
-  color: #555;
+  color: #eee;
   min-width: 70px;
   text-align: right;
 }
@@ -75,6 +93,15 @@
 .gdv2-ball.gdv2-ball-wicket { background-color: #dc3545; }
 
 @media (max-width: 767px) {
-  .gdv2-scorecard { flex-direction: column; }
-  .gdv2-score-right { align-items: flex-start; text-align: left; margin-top: 4px; }
+  .gdv2-scorecard {
+    margin: 0;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .gdv2-score-right {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 4px;
+  }
 }
