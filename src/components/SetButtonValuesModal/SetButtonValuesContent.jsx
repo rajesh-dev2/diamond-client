@@ -1,29 +1,20 @@
-import React, { useState } from 'react'
-
-const initialGameButtons = [
-  { btxt: '1k', bval: '1000', bid: '127068869' },
-  { btxt: '2k', bval: '2000', bid: '127068870' },
-  { btxt: '5k', bval: '5000', bid: '127068871' },
-  { btxt: '10k', bval: '10000', bid: '127068872' },
-  { btxt: '20k', bval: '20000', bid: '127068873' },
-  { btxt: '25k', bval: '25000', bid: '127068874' },
-  { btxt: '50k', bval: '50000', bid: '127068875' },
-  { btxt: '75k', bval: '75000', bid: '127068876' }
-]
-
-const initialCasinoButtons = [
-  { btxt: '25', bval: '25', bid: '94784767' },
-  { btxt: '50', bval: '50', bid: '94784768' },
-  { btxt: '100', bval: '100', bid: '94784769' },
-  { btxt: '200', bval: '200', bid: '94784770' },
-  { btxt: '500', bval: '500', bid: '94784771' },
-  { btxt: '1000', bval: '1000', bid: '94784772' }
-]
+import React, { useState, useEffect } from 'react'
+import { message } from 'antd'
+import { useGetButtonSettingsQuery, useUpdateButtonSettingsMutation } from '../../store/api/authApi'
+import { DEFAULT_GAME_BUTTONS, DEFAULT_CASINO_BUTTONS } from './defaultButtonValues'
 
 export default function SetButtonValuesContent({ onUpdate }) {
   const [activeTab, setActiveTab] = useState(1) // 1: Game Buttons, 2: Casino Buttons
-  const [gameButtons, setGameButtons] = useState(initialGameButtons)
-  const [casinoButtons, setCasinoButtons] = useState(initialCasinoButtons)
+  const { data: settings } = useGetButtonSettingsQuery()
+  const [updateButtonSettings, { isLoading: isSaving }] = useUpdateButtonSettingsMutation()
+
+  const [gameButtons, setGameButtons] = useState(DEFAULT_GAME_BUTTONS)
+  const [casinoButtons, setCasinoButtons] = useState(DEFAULT_CASINO_BUTTONS)
+
+  useEffect(() => {
+    if (settings?.gameButtons?.length) setGameButtons(settings.gameButtons)
+    if (settings?.casinoButtons?.length) setCasinoButtons(settings.casinoButtons)
+  }, [settings])
 
   const handleGameChange = (index, field, value) => {
     const updated = [...gameButtons]
@@ -37,9 +28,18 @@ export default function SetButtonValuesContent({ onUpdate }) {
     setCasinoButtons(updated)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (onUpdate) onUpdate({ gameButtons, casinoButtons })
+    try {
+      await updateButtonSettings({
+        gameButtons: gameButtons.map((btn) => ({ label: btn.label, value: Number(btn.value) })),
+        casinoButtons: casinoButtons.map((btn) => ({ label: btn.label, value: Number(btn.value) })),
+      }).unwrap()
+      message.success('Button values updated')
+      if (onUpdate) onUpdate()
+    } catch (err) {
+      message.error(err?.data?.message || 'Failed to update button values')
+    }
   }
 
   return (
@@ -108,38 +108,32 @@ export default function SetButtonValuesContent({ onUpdate }) {
               </div>
 
               {gameButtons.map((btn, idx) => (
-                <div className="row row10" key={btn.bid || idx}>
+                <div className="row row10" key={idx}>
                   <div className="mb-3 col-6 position-relative">
                     <input
-                      name={`buttons[${idx}].btxt`}
+                      name={`buttons[${idx}].label`}
                       type="text"
                       className="form-control"
-                      value={btn.btxt}
-                      onChange={(e) => handleGameChange(idx, 'btxt', e.target.value)}
+                      value={btn.label}
+                      onChange={(e) => handleGameChange(idx, 'label', e.target.value)}
                     />
                   </div>
                   <div className="mb-3 col-6 position-relative">
                     <input
-                      name={`buttons[${idx}].bval`}
+                      name={`buttons[${idx}].value`}
                       type="text"
                       className="form-control"
-                      value={btn.bval}
-                      onChange={(e) => handleGameChange(idx, 'bval', e.target.value)}
+                      value={btn.value}
+                      onChange={(e) => handleGameChange(idx, 'value', e.target.value)}
                     />
                   </div>
-                  <input
-                    name={`buttons[${idx}].bid`}
-                    type="hidden"
-                    className="form-control"
-                    value={btn.bid}
-                  />
                 </div>
               ))}
 
               <div className="row row10">
                 <div className="mb-3 col-md-6 col-12">
-                  <button type="submit" className="btn btn-primary btn-block w-100">
-                    Update
+                  <button type="submit" className="btn btn-primary btn-block w-100" disabled={isSaving}>
+                    {isSaving ? 'Updating…' : 'Update'}
                   </button>
                 </div>
               </div>
@@ -169,38 +163,32 @@ export default function SetButtonValuesContent({ onUpdate }) {
               </div>
 
               {casinoButtons.map((btn, idx) => (
-                <div className="row row10" key={btn.bid || idx}>
+                <div className="row row10" key={idx}>
                   <div className="mb-3 col-6 position-relative">
                     <input
-                      name={`buttons[${idx}].btxt`}
+                      name={`buttons[${idx}].label`}
                       type="text"
                       className="form-control"
-                      value={btn.btxt}
-                      onChange={(e) => handleCasinoChange(idx, 'btxt', e.target.value)}
+                      value={btn.label}
+                      onChange={(e) => handleCasinoChange(idx, 'label', e.target.value)}
                     />
                   </div>
                   <div className="mb-3 col-6 position-relative">
                     <input
-                      name={`buttons[${idx}].bval`}
+                      name={`buttons[${idx}].value`}
                       type="text"
                       className="form-control"
-                      value={btn.bval}
-                      onChange={(e) => handleCasinoChange(idx, 'bval', e.target.value)}
+                      value={btn.value}
+                      onChange={(e) => handleCasinoChange(idx, 'value', e.target.value)}
                     />
                   </div>
-                  <input
-                    name={`buttons[${idx}].bid`}
-                    type="hidden"
-                    className="form-control"
-                    value={btn.bid}
-                  />
                 </div>
               ))}
 
               <div className="row row10">
                 <div className="mb-3 col-md-6 col-12">
-                  <button type="submit" className="btn btn-primary btn-block w-100">
-                    Update
+                  <button type="submit" className="btn btn-primary btn-block w-100" disabled={isSaving}>
+                    {isSaving ? 'Updating…' : 'Update'}
                   </button>
                 </div>
               </div>

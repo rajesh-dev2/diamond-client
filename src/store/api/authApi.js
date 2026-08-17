@@ -20,7 +20,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  tagTypes: ['Bets'],
+  tagTypes: ['Bets', 'ButtonSettings'],
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -76,6 +76,31 @@ export const authApi = createApi({
       transformResponse: (response) => response.book,
       providesTags: ['Bets'],
     }),
+    getCurrentBets: builder.query({
+      query: ({ type = 'sports', otype = 'all', search = '', limit = 10, page = 1 } = {}) => {
+        const params = new URLSearchParams({ type, otype, limit, page })
+        if (search) params.set('search', search)
+        return `/user/reports/current-bets?${params.toString()}`
+      },
+      transformResponse: (response) => ({
+        rows: response.data || [],
+        total: response.total ?? response.count ?? (response.data?.length || 0),
+      }),
+      providesTags: ['Bets'],
+    }),
+    getButtonSettings: builder.query({
+      query: () => '/user/settings/buttons',
+      transformResponse: (response) => response.data || response,
+      providesTags: ['ButtonSettings'],
+    }),
+    updateButtonSettings: builder.mutation({
+      query: (settings) => ({
+        url: '/user/settings/buttons',
+        method: 'PUT',
+        body: settings,
+      }),
+      invalidatesTags: ['ButtonSettings'],
+    }),
   }),
 })
 
@@ -90,4 +115,7 @@ export const {
   useGetBookmakerBookQuery,
   useGetFancyPlQuery,
   useGetFancyBookQuery,
+  useGetCurrentBetsQuery,
+  useGetButtonSettingsQuery,
+  useUpdateButtonSettingsMutation,
 } = authApi
