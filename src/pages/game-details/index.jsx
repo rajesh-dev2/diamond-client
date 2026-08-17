@@ -3,9 +3,9 @@
  * Integrated with real-time Socket.IO odds, RTK Query endpoints,
  * event metadata, matched bets, and bet placement mutations.
  */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { Toast, ToastContainer } from 'react-bootstrap'
+import { message } from 'antd'
 
 // ── Components (from shared modular components) ───────────────────
 import GameHeader    from '../../components/game-details/GameHeader'
@@ -44,7 +44,7 @@ export default function GameDetails() {
   // ── Bet modal state ───────────────────────────────────────────
   const [showBetModal, setShowBetModal] = useState(false)
   const [betModalData, setBetModalData] = useState(null)
-  const [betFeedback, setBetFeedback]   = useState(null)
+  const sidebarRef = useRef(null)
 
   // ── Live Socket.IO Odds Stream ────────────────────────────────
   const { marketData, isConnected } = useMatchOddsSocket({
@@ -98,6 +98,8 @@ export default function GameDetails() {
     setBetModalData({ runnerName, odds: oddsVal, type: type || 'back', runnersList, betMeta })
     if (window.innerWidth < 1200) {
       setShowBetModal(true)
+    } else {
+      sidebarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 
@@ -125,18 +127,19 @@ export default function GameDetails() {
         const section = findSectionByFancyId(activeMarkets, fancyId)
         const liveOdds = section && oddsByName(section)[otype === 'lay' ? 'lay1' : 'back1']
         if (!liveOdds?.odds) {
-          setBetFeedback({ type: 'error', message: 'Odds changed, please try again' })
+          message.error('Odds changed, please try again')
           return
         }
         await placeBet({ fancyId, otype, stake, odds: liveOdds.odds, size: liveOdds.size }).unwrap()
       } else if (betModalData?.betMeta?.marketId) {
         await placeBet({ marketId: betModalData.betMeta.marketId, sid: betModalData.betMeta.sid, otype, stake }).unwrap()
       }
-    } catch {
-      // Server error handling
+    } catch (err) {
+      message.error(err?.data?.message || 'Failed to place bet')
+      return
     }
 
-    setBetFeedback({ type: 'success', message: `Bet placed on ${runnerName} @ ${newBet.odds}` })
+    message.success(`Bet placed on ${runnerName} @ ${newBet.odds}`)
     setBetModalData(null)
     setShowBetModal(false)
   }
@@ -181,20 +184,22 @@ export default function GameDetails() {
         </div>
 
         {/* Desktop Sidebar (Place Bet slip + My Bets) */}
-        <RightSidebar
-          betData={betModalData}
-          odds={sidebarOdds}
-          amount={sidebarAmount}
-          profit={sidebarProfit}
-          isPlacing={isPlacingBet}
-          onOddsChange={handleSidebarOddsChange}
-          onAmountChange={setSidebarAmount}
-          onAddStake={handleSidebarAddStake}
-          onClear={() => setSidebarAmount('')}
-          onReset={() => { setBetModalData(null); setShowBetModal(false) }}
-          onSubmit={handleSidebarSubmit}
-          bets={bets}
-        />
+        <div ref={sidebarRef}>
+          <RightSidebar
+            betData={betModalData}
+            odds={sidebarOdds}
+            amount={sidebarAmount}
+            profit={sidebarProfit}
+            isPlacing={isPlacingBet}
+            onOddsChange={handleSidebarOddsChange}
+            onAmountChange={setSidebarAmount}
+            onAddStake={handleSidebarAddStake}
+            onClear={() => setSidebarAmount('')}
+            onReset={() => { setBetModalData(null); setShowBetModal(false) }}
+            onSubmit={handleSidebarSubmit}
+            bets={bets}
+          />
+        </div>
       </div>
 
       {/* Mobile Place Bet Modal */}
@@ -204,24 +209,6 @@ export default function GameDetails() {
         betData={betModalData}
         onPlaceBet={handlePlaceBet}
       />
-
-      {/* Toast Notifications */}
-      <ToastContainer position="top-end" className="p-3" style={{ position: 'fixed', zIndex: 2000 }}>
-        <Toast
-          show={Boolean(betFeedback)}
-          onClose={() => setBetFeedback(null)}
-          bg={betFeedback?.type === 'success' ? 'success' : 'danger'}
-          delay={3000}
-          autohide
-        >
-          <Toast.Header closeButton>
-            <strong className="me-auto">
-              {betFeedback?.type === 'success' ? 'Bet Placed' : 'Bet Failed'}
-            </strong>
-          </Toast.Header>
-          <Toast.Body className="text-white">{betFeedback?.message}</Toast.Body>
-        </Toast>
-      </ToastContainer>
     </div>
   )
 }

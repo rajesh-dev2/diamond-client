@@ -50,41 +50,50 @@
   }
 }
 
-/* ── Modal overrides (Bootstrap layered, so no !important needed) ── */
-.gdv2-page .place-bet-modal-top {
+/* react-bootstrap portals the Modal to document.body, outside .gdv2-page —
+   scope overrides to the dialog's own class instead of a page ancestor. */
+.place-bet-modal-top {
   max-width: 480px;
+  width: 92vw;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.gdv2-page .modal-header {
+.place-bet-modal-top .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #000;
   color: #fff;
   padding: 8px 14px;
   border-bottom: none;
 }
 
-.gdv2-page .modal-content {
+.place-bet-modal-top .modal-content {
   border-radius: 0;
   background-color: transparent;
 }
 
-.gdv2-page .modal-header .modal-title {
+.place-bet-modal-top .modal-header .modal-title {
   color: #fff;
   font-weight: 700;
   font-size: 16px;
   margin: 0;
 }
 
-.gdv2-page .modal-header .btn-close {
+.place-bet-modal-top .modal-header .btn-close {
   filter: invert(1) grayscale(100%) brightness(200%);
   opacity: 0.9;
 }
 
-.gdv2-page .modal-body {
+.place-bet-modal-top .modal-body {
   background-color: #fff;
   padding: 12px;
+}
+
+.place-bet-backdrop.show {
+  opacity: 0.6;
 }
 
 /* ── Suspended Overlay (RunnerRow & FancyMarket) ────────── */

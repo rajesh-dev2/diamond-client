@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
+import { message } from 'antd'
 import { setCredentials } from '../../store/authSlice'
 import { useLoginMutation } from '../../store/api/authApi'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +12,7 @@ export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isAuthenticated } = useSelector((state) => state.auth)
-  const [login, { isLoading, error }] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -22,17 +23,11 @@ export default function Login() {
     }
   }, [isAuthenticated, navigate])
 
-  const [formError, setFormError] = useState(null)
-
-  const errorMessage =
-    formError || (error ? error.data?.message || 'Invalid Username or Password' : null)
-
   const handleLogin = async (e) => {
     e.preventDefault()
-    setFormError(null)
 
     if (!username || !password) {
-      setFormError('Please enter username and password')
+      message.error('Please enter username and password')
       return
     }
 
@@ -40,8 +35,8 @@ export default function Login() {
       const result = await login({ username, password }).unwrap()
       dispatch(setCredentials({ token: result.token, user: result.user }))
       navigate('/home', { replace: true })
-    } catch {
-      // errorMessage below derives from the mutation's `error` state
+    } catch (err) {
+      message.error(err?.data?.message || 'Invalid Username or Password')
     }
   }
 
@@ -57,12 +52,6 @@ export default function Login() {
           <h4 className="text-[19px] font-bold text-[#212529] mb-5 flex items-center justify-center gap-1.5 text-center">
             Login <FontAwesomeIcon icon={faHandPointDown} />
           </h4>
-
-          {errorMessage && (
-            <div className="bg-red-100 text-red-700 text-xs p-2 mb-3 rounded text-center font-medium">
-              {errorMessage}
-            </div>
-          )}
 
           <form onSubmit={handleLogin}>
             <div className="mb-4 flex relative">
