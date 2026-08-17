@@ -2,7 +2,6 @@ import './style.css'
 import MarketTitle from '../MarketTitle'
 import MarketHeader from '../MarketHeader'
 import OddBox from '../OddBox'
-import MinMaxLabel from '../MinMaxLabel'
 import MarketRemark from '../MarketRemark'
 import { oddsByName, isSuspended, formatOdd, formatVol, formatMinMax } from '../utils'
 
@@ -15,11 +14,11 @@ export default function NumberMarket({ market, onOddClick, pl = {} }) {
       <MarketTitle title={market.mname} />
       <MarketHeader layout="number" minMaxLabel={maxLabel} />
 
-      <div className="gdv2-market-body" data-title={market.status}>
+      <div className="gdv2-market-body">
         {sections.map((section) => {
-          const odds      = oddsByName(section)
-          const suspended = isSuspended(section)
-          const runnerPl  = pl[section.fancyId]
+          const odds       = oddsByName(section)
+          const suspended  = isSuspended(section)
+          const runnerPl   = pl[section.fancyId]
 
           return (
             <div

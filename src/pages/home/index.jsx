@@ -27,6 +27,15 @@ function isSuspended(selection) {
   return status !== '' && status !== 'ACTIVE'
 }
 
+function getSuspendedStatus(selection, fallback = 'SUSPENDED') {
+  if (!selection) return fallback
+  const raw = selection.gstatus || selection.status
+  if (raw && typeof raw === 'string' && raw.trim() !== '' && raw.trim().toUpperCase() !== 'ACTIVE') {
+    return raw.trim().toUpperCase()
+  }
+  return fallback
+}
+
 function mapEventsToMatches(events, etid) {
   return (events || []).map((event) => {
     const [sel1, sel2, selX] = event.matchOdds || []
@@ -45,8 +54,11 @@ function mapEventsToMatches(events, etid) {
       back2: bestPrice(sel2?.back),
       lay2: bestPrice(sel2?.lay),
       suspended1: sel1 ? isSuspended(sel1) : false,
+      status1: sel1 ? getSuspendedStatus(sel1) : 'SUSPENDED',
       suspendedX: selX ? isSuspended(selX) : false,
+      statusX: selX ? getSuspendedStatus(selX) : 'SUSPENDED',
       suspended2: sel2 ? isSuspended(sel2) : false,
+      status2: sel2 ? getSuspendedStatus(sel2) : 'SUSPENDED',
     }
   })
 }

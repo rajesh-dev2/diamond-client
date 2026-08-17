@@ -3,7 +3,7 @@ import './style.css'
 import MarketTitle from '../MarketTitle'
 import OddBox from '../OddBox'
 import MinMaxLabel from '../MinMaxLabel'
-import { oddsByName, isSuspended, formatOdd, formatVol } from '../utils'
+import { oddsByName, isSuspended, getSuspendedStatus, formatOdd, formatVol } from '../utils'
 
 export default function OddEvenMarket({ market, onOddClick, pl = {} }) {
   const sections = market.section.slice().sort((a, b) => a.sno - b.sno)
@@ -15,10 +15,11 @@ export default function OddEvenMarket({ market, onOddClick, pl = {} }) {
       <div className="gdv2-market-body" data-title={market.status}>
         <div className="gdv2-fancy-grid">
           {sections.map((section) => {
-            const odds      = oddsByName(section)
-            const suspended = isSuspended(section)
-            const runnerPl  = pl[section.fancyId]
-            const secondOdd = odds.lay1 || odds.back2
+            const odds       = oddsByName(section)
+            const suspended  = isSuspended(section)
+            const statusText = getSuspendedStatus(section, market.status || 'SUSPENDED')
+            const runnerPl   = pl[section.fancyId]
+            const secondOdd  = odds.lay1 || odds.back2
 
             return (
               <Fragment key={section.sid}>
@@ -37,7 +38,7 @@ export default function OddEvenMarket({ market, onOddClick, pl = {} }) {
                       </div>
 
                       {/* gdv2-fancy-right — suspended overlay covers this wrapper */}
-                      <div className="gdv2-fancy-right">
+                      <div className="gdv2-fancy-right" data-title={suspended ? statusText : undefined}>
                         <div className="gdv2-fancy-odds">
                           <OddBox
                             odd={formatOdd(odds.back1)}

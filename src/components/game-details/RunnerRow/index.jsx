@@ -1,10 +1,16 @@
 import './style.css'
 
-export default function RunnerRow({ name, book = null, suspended = false, status = 'SUSPENDED', children }) {
+export default function RunnerRow({
+  name,
+  book = null,
+  suspended = false,
+  status = 'SUSPENDED',
+  children,
+}) {
   return (
     <div
       className={`gdv2-runner-row${suspended ? ' gdv2-suspended' : ''}`}
-      data-title={suspended ? status : 'ACTIVE'}
+      data-title={suspended ? status : undefined}
     >
       <div className="gdv2-runner-detail">
         <span className="gdv2-runner-name">{name}</span>
@@ -14,7 +20,12 @@ export default function RunnerRow({ name, book = null, suspended = false, status
           </span>
         )}
       </div>
-      <div className="gdv2-runner-odds">{children}</div>
+      <div
+        className="gdv2-runner-odds"
+        data-title={suspended ? status : undefined}
+      >
+        {children}
+      </div>
     </div>
   )
 }

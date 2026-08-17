@@ -31,8 +31,21 @@ export function oddsByName(section) {
  * top-level status. Blank gstatus is NOT suspended — it means tradable.
  */
 export function isSuspended(section) {
-  const status = (section.gstatus || '').toUpperCase()
+  if (!section) return false
+  const status = (section.gstatus || section.status || '').toUpperCase()
   return status !== '' && status !== 'ACTIVE'
+}
+
+/**
+ * Extract dynamic suspended label from a section or market (e.g. "SUSPENDED", "BALL RUNNING", "CLOSED").
+ */
+export function getSuspendedStatus(section, fallback = 'SUSPENDED') {
+  if (!section) return fallback
+  const raw = section.gstatus || section.status
+  if (raw && typeof raw === 'string' && raw.trim() !== '' && raw.trim().toUpperCase() !== 'ACTIVE') {
+    return raw.trim().toUpperCase()
+  }
+  return fallback
 }
 
 export function formatOdd(entry) {

@@ -34,7 +34,7 @@ export default function OddBox({ odd, volume, variant = 'back', onClick, disable
       {children ?? (
         <>
           <span className="gdv2-odd-price">{odd ?? '-'}</span>
-          {formattedVolume && <span className="gdv2-odd-volume">{formattedVolume}</span>}
+          {formattedVolume>0 && <span className="gdv2-odd-volume">{formattedVolume}</span>}
         </>
       )}
       {suspended && (

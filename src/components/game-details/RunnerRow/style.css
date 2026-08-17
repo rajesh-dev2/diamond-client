@@ -55,21 +55,18 @@
 }
 
 /* ── Suspended overlay via ::after ───────────────────────── */
-.gdv2-runner-row.gdv2-suspended {
+.gdv2-runner-row.gdv2-suspended .gdv2-runner-odds {
   position: relative;
 }
 
-.gdv2-runner-row.gdv2-suspended::after {
+.gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after {
   content: attr(data-title);
   position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 480px;
+  inset: 0;
   background-color: rgba(55, 54, 54, 0.84);
   color: #ff0000;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -77,6 +74,7 @@
   cursor: not-allowed;
   pointer-events: none;
   z-index: 2;
+  letter-spacing: 0.5px;
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
@@ -84,16 +82,10 @@
   .gdv2-runner-detail {
     font-size: 13px;
   }
-
-  .gdv2-runner-row.gdv2-suspended::after {
-    width: 330px;
-    font-size: 10px;
-  }
 }
 
 @media (max-width: 767px) {
-  .gdv2-runner-row.gdv2-suspended::after {
-    width: 120px;
+  .gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after {
     font-size: 12px;
   }
 }

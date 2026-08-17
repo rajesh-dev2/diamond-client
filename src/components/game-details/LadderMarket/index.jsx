@@ -9,6 +9,7 @@ import {
   COMPACT_LADDER_COLUMNS,
   oddsByName,
   isSuspended,
+  getSuspendedStatus,
   formatOdd,
   formatVol,
   bookBySid,
@@ -39,8 +40,9 @@ export default function LadderMarket({ market, onOddClick, bookType = 'match', c
 
       <div className="gdv2-market-body" data-title={market.status}>
         {market.section.map((section) => {
-          const odds      = oddsByName(section)
-          const suspended = isSuspended(section)
+          const odds       = oddsByName(section)
+          const suspended  = isSuspended(section)
+          const statusText = getSuspendedStatus(section, market.status || 'SUSPENDED')
           const runnerBook = book[String(section.sid)]
 
           return (
@@ -49,6 +51,7 @@ export default function LadderMarket({ market, onOddClick, bookType = 'match', c
               name={section.nat}
               book={runnerBook?.profit ?? null}
               suspended={suspended}
+              status={statusText}
             >
               {columns.map(({ key, cssClass, side, hideMobile }) => (
                 <OddBox

@@ -108,7 +108,7 @@
 
 /* ── Suspended overlay on gdv2-fancy-right ──────────────────────────── */
 .gdv2-fancy-suspended .gdv2-fancy-right::after {
-  content: "SUSPENDED";
+  content: attr(data-title);
   position: absolute;
   inset: 0;
   /* covers exactly the wrapper */

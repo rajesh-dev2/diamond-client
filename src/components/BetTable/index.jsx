@@ -63,7 +63,7 @@ export default function BetTable({ matches = [] }) {
 
               {isAllSuspended ? (
                 <>
-                  <div className="bet-nation-odd suspended-box">
+                  <div className="bet-nation-odd suspended-box" data-title={row.status1 || 'SUSPENDED'}>
                     <div className="back odd-box">
                       <span className="bet-odd"><b>{row.back1 || '-'}</b></span>
                     </div>
@@ -71,7 +71,7 @@ export default function BetTable({ matches = [] }) {
                       <span className="bet-odd"><b>{row.lay1 || '-'}</b></span>
                     </div>
                   </div>
-                  <div className="bet-nation-odd suspended-box">
+                  <div className="bet-nation-odd suspended-box" data-title={row.statusX || 'SUSPENDED'}>
                     <div className="back odd-box">
                       <span className="bet-odd"><b>{row.backX || '-'}</b></span>
                     </div>
@@ -79,7 +79,7 @@ export default function BetTable({ matches = [] }) {
                       <span className="bet-odd"><b>{row.layX || '-'}</b></span>
                     </div>
                   </div>
-                  <div className="bet-nation-odd suspended-box">
+                  <div className="bet-nation-odd suspended-box" data-title={row.status2 || 'SUSPENDED'}>
                     <div className="back odd-box">
                       <span className="bet-odd"><b>{row.back2 || '-'}</b></span>
                     </div>
@@ -92,7 +92,7 @@ export default function BetTable({ matches = [] }) {
                 <>
                   {/* Column 1 */}
                   {row.suspended1 ? (
-                    <div className="bet-nation-odd suspended-box">
+                    <div className="bet-nation-odd suspended-box" data-title={row.status1 || 'SUSPENDED'}>
                       <div className="back odd-box">
                         <span className="bet-odd"><b>{row.back1 || '-'}</b></span>
                       </div>
@@ -119,7 +119,7 @@ export default function BetTable({ matches = [] }) {
 
                   {/* Column X */}
                   {row.suspendedX ? (
-                    <div className="bet-nation-odd suspended-box">
+                    <div className="bet-nation-odd suspended-box" data-title={row.statusX || 'SUSPENDED'}>
                       <div className="back odd-box">
                         <span className="bet-odd"><b>{row.backX || '-'}</b></span>
                       </div>
@@ -140,7 +140,7 @@ export default function BetTable({ matches = [] }) {
 
                   {/* Column 2 */}
                   {row.suspended2 ? (
-                    <div className="bet-nation-odd suspended-box">
+                    <div className="bet-nation-odd suspended-box" data-title={row.status2 || 'SUSPENDED'}>
                       <div className="back odd-box">
                         <span className="bet-odd"><b>{row.back2 || '-'}</b></span>
                       </div>

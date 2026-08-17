@@ -5,7 +5,7 @@ import MarketHeader from '../MarketHeader'
 import OddBox from '../OddBox'
 import MinMaxLabel from '../MinMaxLabel'
 import MarketRemark from '../MarketRemark'
-import { oddsByName, isSuspended, formatOdd, formatVol } from '../utils'
+import { oddsByName, isSuspended, getSuspendedStatus, formatOdd, formatVol } from '../utils'
 
 export default function FancyMarket({ market, onOddClick, pl = {} }) {
   const sections = market.section.slice().sort((a, b) => a.sno - b.sno)
@@ -35,9 +35,10 @@ export default function FancyMarket({ market, onOddClick, pl = {} }) {
       <div className="gdv2-market-body" data-title={market.status}>
         <div className={`gdv2-fancy-grid${fullCls}`}>
           {sections.map((section) => {
-            const odds      = oddsByName(section)
-            const suspended = isSuspended(section)
-            const runnerPl  = pl[section.fancyId]
+            const odds       = oddsByName(section)
+            const suspended  = isSuspended(section)
+            const statusText = getSuspendedStatus(section, market.status || 'SUSPENDED')
+            const runnerPl   = pl[section.fancyId]
 
             return (
               <Fragment key={section.sid}>
@@ -57,9 +58,9 @@ export default function FancyMarket({ market, onOddClick, pl = {} }) {
 
                       {/*
                         gdv2-fancy-right — the suspended overlay covers THIS wrapper,
-                        so it always covers exactly the odds + minmax regardless of width.
+                        displaying the dynamic API statusText (SUSPENDED, BALL RUNNING, etc.).
                       */}
-                      <div className="gdv2-fancy-right">
+                      <div className="gdv2-fancy-right" data-title={suspended ? statusText : undefined}>
                         <div className="gdv2-fancy-odds">
                           {hasLay && (
                             <OddBox
