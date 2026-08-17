@@ -64,11 +64,13 @@
 .gdv2-fancy-detail {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: start;
+  align-items: flex-start;
   padding: 0 4px;
   flex: 1;
   min-width: 0;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .gdv2-fancy-detail-clickable {
@@ -97,6 +99,7 @@
   align-items: center;
   flex-shrink: 0;
   position: relative;
+  border: none;
   /* ::after is anchored to this */
 }
 
@@ -110,26 +113,6 @@
   align-items: center;
 }
 
-/* ── Suspended overlay on gdv2-fancy-right ──────────────────────────── */
-.gdv2-fancy-suspended .gdv2-fancy-right::after {
-  content: attr(data-title);
-  position: absolute;
-  inset: 0;
-  /* covers exactly the wrapper */
-  background-color: rgba(55, 54, 54, 0.84);
-  color: #ff0000;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: not-allowed;
-  pointer-events: none;
-  z-index: 2;
-  letter-spacing: 0.5px;
-}
-
 /* ── Responsive ──────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
 
@@ -140,9 +123,5 @@
 
   .gdv2-fancy-second-header {
     display: none !important;
-  }
-
-  .gdv2-fancy-suspended .gdv2-fancy-right::after {
-    font-size: 12px;
   }
 }
