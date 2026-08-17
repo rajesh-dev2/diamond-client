@@ -4,6 +4,7 @@
 @import "react-datepicker/dist/react-datepicker.css";
 
 @layer components {
+
   /* Common Container for all user report pages */
   .report-page,
   .current-bets,
@@ -30,7 +31,10 @@
   .casino-results .card-header,
   .live-casino-bets .card-header,
   .change-password-page .card-header {
-    @apply bg-[#296F91]! text-white px-3.5 py-2 border-b-0;
+    background-color: #296F91 !important;
+    color: #ffffff !important;
+    padding: 0.875rem 0.5rem;
+    border-bottom: 0 !important;
   }
 
   .report-page .card-title,
@@ -39,7 +43,11 @@
   .casino-results .card-title,
   .live-casino-bets .card-title,
   .change-password-page .card-title {
-    @apply text-white! text-[20px]! font-normal m-0! leading-snug;
+    color: #ffffff !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+    line-height: 1.375;
   }
 
   .report-page .card-body,
@@ -48,7 +56,9 @@
   .casino-results .card-body,
   .live-casino-bets .card-body,
   .change-password-page .card-body {
-    @apply p-[6px]! bg-white overflow-visible;
+    padding: 6px !important;
+    background-color: #ffffff !important;
+    overflow: visible;
   }
 
   /* Datepicker wrapper & input container */
@@ -62,7 +72,17 @@
   }
 
   .custom-datepicker .form-control {
-    @apply h-[36px] text-[13px] border border-[#dee2e6] rounded-none! bg-white text-[#333333] pr-8 pl-3 w-full cursor-pointer transition-colors focus:shadow-none! focus:border-[#dee2e6]!;
+    height: 36px;
+    font-size: 13px;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0 !important;
+    background-color: #ffffff;
+    color: #333333;
+    padding-right: 2rem;
+    padding-left: 0.75rem;
+    width: 100%;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out;
   }
 
   .custom-datepicker i {
@@ -81,7 +101,15 @@
   .live-casino-bets .form-control,
   .live-casino-bets .form-select,
   .change-password-page .form-control {
-    @apply h-[36px] text-[13px] border border-[#dee2e6]! rounded-none! text-[#333333] bg-white w-full px-3;
+    height: 36px;
+    font-size: 13px;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0 !important;
+    color: #333333;
+    background-color: #ffffff;
+    width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
   .report-page .form-control:focus,
@@ -95,7 +123,8 @@
   .live-casino-bets .form-control:focus,
   .live-casino-bets .form-select:focus,
   .change-password-page .form-control:focus {
-    @apply border-[#1c6889] outline-none;
+    border-color: #1c6889 !important;
+    outline: none !important;
     box-shadow: none !important;
   }
 
@@ -105,9 +134,17 @@
   .casino-results .btn-primary,
   .live-casino-bets .btn-primary,
   .change-password-page .btn-primary {
-    @apply bg-black! border-black! text-white font-bold text-sm h-[36px] rounded-none! w-full transition-colors cursor-pointer;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    height: 36px;
+    border-radius: 0 !important;
+    width: 100%;
+    cursor: pointer;
   }
-  
+
   .report-page .table-responsive,
   .current-bets .table-responsive,
   .activity-log .table-responsive,
@@ -121,7 +158,11 @@
   .activity-log table.table,
   .casino-results table.table,
   .live-casino-bets table.table {
-    @apply w-full mb-0 border-collapse bg-[#f7f7f7]! border border-[#dedede];
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+    background-color: #f7f7f7 !important;
+    border: 1px solid #dedede;
   }
 
   .report-page table.table-bordered th,
@@ -142,34 +183,45 @@
   .activity-log table thead th,
   .casino-results table thead th,
   .live-casino-bets table thead th {
-    @apply md:bg-[#f7f7f7]! bg-[#296F91]! md:text-[#333333]! text-white! md:text-base! text-[12px] font-bold! border-b-2 border-[#dedede] text-nowrap;
+    background-color: #296F91 !important;
+    color: #ffffff !important;
+    font-size: 12px;
+    font-weight: 700 !important;
+    border-bottom: 2px solid #dedede;
+    white-space: nowrap;
   }
 
   /* Specific column widths */
   .report-date {
     @apply w-[190px];
   }
+
   .report-sr {
     @apply w-[70px];
   }
+
   .report-amount {
     @apply w-[100px];
   }
+
   .report-type {
     @apply w-[100px];
   }
+
   .game-name {
     @apply w-[180px];
   }
+
   .round-id-col {
     @apply w-[200px];
   }
+
   .report-action {
     @apply w-[60px];
   }
 
   .input-group {
-    @apply items-center!;
+    align-items: center !important;
   }
 }
 
@@ -216,6 +268,7 @@
 }
 
 @media only screen and (max-width: 1199px) {
+
   .report-page .table thead th,
   .current-bets .table thead th,
   .activity-log .table thead th,

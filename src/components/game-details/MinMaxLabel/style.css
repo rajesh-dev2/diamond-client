@@ -1,0 +1,37 @@
+/* MinMaxLabel */
+.gdv2-minmax {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  flex-shrink: 0;
+  font-weight: 700;
+  color: #097c93;
+  font-size: 11px;
+  width: 68px;
+  min-width: 68px;
+  max-width: 68px;
+  margin-left: 6px;
+  margin-right: 8px;
+  line-height: 1.25;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .gdv2-minmax {
+    width: 55px;
+    min-width: 55px;
+    max-width: 55px;
+    margin-left: 4px;
+    margin-right: 6px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 767px) {
+  .gdv2-minmax {
+    display: none;
+  }
+}

@@ -1,0 +1,116 @@
+/* OddBox — single clickable odds cell */
+
+.gdv2-odd-box {
+  position: relative;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  flex-shrink: 0;
+  width: 80px;
+  min-height: 34px;
+  border-left: 1px solid #c7c8ca;
+  transition: filter 0.15s ease;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.gdv2-odd-box.gdv2-odd-disabled,
+.gdv2-odd-box.gdv2-odd-suspended {
+  cursor: not-allowed;
+}
+
+.gdv2-odd-lock-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(55, 54, 54, 0.84);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gdv2-lock-icon {
+  width: 14px;
+  height: 14px;
+  fill: #ffffff;
+  display: block;
+}
+
+/* Colour variants */
+.gdv2-odd-box.gdv2-back {
+  background-color: #72bbef;
+}
+
+.gdv2-odd-box.gdv2-back1 {
+  background-color: #b9dbf7;
+}
+
+.gdv2-odd-box.gdv2-back2 {
+  background-color: #d2e8f9;
+}
+
+.gdv2-odd-box.gdv2-lay {
+  background-color: #faa9ba;
+}
+
+.gdv2-odd-box.gdv2-lay1 {
+  background-color: #fcd4e1;
+}
+
+.gdv2-odd-box.gdv2-lay2 {
+  background-color: #fde3eb;
+}
+
+/* Empty placeholder cell */
+.gdv2-odd-box.gdv2-odd-empty {
+  background-color: transparent;
+  cursor: default;
+  border: none;
+}
+
+.gdv2-odd-price {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.gdv2-odd-volume {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1.15;
+  color: #333;
+}
+
+/* ── Compact desktop (1200–1399) ─────────────────────────── */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .gdv2-odd-box {
+    width: 55px;
+  }
+
+  .gdv2-odd-price {
+    font-size: 14px;
+  }
+}
+
+/* ── Mobile (< 768) ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  .gdv2-odd-box {
+    width: 60px;
+    min-width: 60px;
+  }
+
+  .gdv2-odd-price {
+    font-size: 14px;
+  }
+
+  .gdv2-odd-volume {
+    font-size: 10px;
+  }
+}

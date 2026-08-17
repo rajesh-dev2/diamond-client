@@ -1,0 +1,30 @@
+/* MarketSection layout — bookmaker pair + number pair */
+
+/* Bookmaker 1 + 2 side by side */
+.gdv2-bm-pair {
+  display: flex;
+  width: 100%;
+}
+
+.gdv2-bm-pair .gdv2-bm-main { width: 70%; }
+.gdv2-bm-pair .gdv2-bm-compact { width: 30%; }
+
+/* Compact bookmaker: detail takes remaining space */
+.gdv2-bm-compact .gdv2-runner-detail,
+.gdv2-bm-compact .gdv2-header-nation {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  padding-right: 4px;
+}
+
+.gdv2-bm-compact .gdv2-runner-odds,
+.gdv2-bm-compact .gdv2-header-odds {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 767px) {
+  .gdv2-bm-pair { flex-direction: column; }
+  .gdv2-bm-pair .gdv2-bm-main,
+  .gdv2-bm-pair .gdv2-bm-compact { width: 100%; }
+}

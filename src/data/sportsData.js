@@ -829,3 +829,203 @@ export const greyhoundRacingData = {
     ]
   }
 }
+
+/**
+ * Generates rich, realistic demo market data for Game Details page when live socket is disconnected/empty.
+ */
+export function getDemoMarketsForEvent(eventTitle = 'Central Delhi Kings v New Delhi Tigers') {
+  let team1 = 'Team 1'
+  let team2 = 'Team 2'
+
+  if (eventTitle && eventTitle.includes(' v ')) {
+    const parts = eventTitle.split(' v ')
+    team1 = parts[0].trim()
+    team2 = parts[1].trim()
+  } else if (eventTitle && eventTitle.includes(' - ')) {
+    const parts = eventTitle.split(' - ')
+    team1 = parts[0].trim()
+    team2 = parts[1].trim()
+  } else if (eventTitle && eventTitle.includes(' VS ')) {
+    const parts = eventTitle.split(' VS ')
+    team1 = parts[0].trim()
+    team2 = parts[1].trim()
+  } else if (eventTitle) {
+    team1 = eventTitle
+    team2 = 'Opponent'
+  }
+
+  return [
+    {
+      marketId: 'demo-match-odds',
+      gtype: 'match',
+      mname: 'MATCH_ODDS',
+      min: '100',
+      max: '500000',
+      sno: 1,
+      status: 'ACTIVE',
+      section: [
+        {
+          sid: 101,
+          nat: team1,
+          gstatus: 'ACTIVE',
+          odds: [
+            { oname: 'back3', odds: 1.84, size: '42.5K' },
+            { oname: 'back2', odds: 1.85, size: '120K' },
+            { oname: 'back1', odds: 1.86, size: '350K' },
+            { oname: 'lay1', odds: 1.87, size: '180K' },
+            { oname: 'lay2', odds: 1.88, size: '95K' },
+            { oname: 'lay3', odds: 1.89, size: '30K' }
+          ]
+        },
+        {
+          sid: 102,
+          nat: team2,
+          gstatus: 'ACTIVE',
+          odds: [
+            { oname: 'back3', odds: 2.14, size: '35K' },
+            { oname: 'back2', odds: 2.15, size: '88K' },
+            { oname: 'back1', odds: 2.16, size: '290K' },
+            { oname: 'lay1', odds: 2.18, size: '140K' },
+            { oname: 'lay2', odds: 2.20, size: '60K' },
+            { oname: 'lay3', odds: 2.22, size: '22K' }
+          ]
+        }
+      ]
+    },
+    {
+      marketId: 'demo-bookmaker-1',
+      gtype: 'match1',
+      mname: 'Bookmaker',
+      min: '100',
+      max: '200000',
+      sno: 2,
+      status: 'ACTIVE',
+      section: [
+        {
+          sid: 201,
+          nat: team1,
+          gstatus: 'ACTIVE',
+          odds: [
+            { oname: 'back3', odds: 84, size: '10K' },
+            { oname: 'back2', odds: 85, size: '25K' },
+            { oname: 'back1', odds: 86, size: '80K' },
+            { oname: 'lay1', odds: 87, size: '65K' },
+            { oname: 'lay2', odds: 88, size: '20K' },
+            { oname: 'lay3', odds: 89, size: '8K' }
+          ]
+        },
+        {
+          sid: 202,
+          nat: team2,
+          gstatus: 'ACTIVE',
+          odds: [
+            { oname: 'back3', odds: 114, size: '12K' },
+            { oname: 'back2', odds: 115, size: '30K' },
+            { oname: 'back1', odds: 116, size: '95K' },
+            { oname: 'lay1', odds: 117, size: '50K' },
+            { oname: 'lay2', odds: 118, size: '18K' },
+            { oname: 'lay3', odds: 119, size: '5K' }
+          ]
+        }
+      ]
+    },
+
+    // ── NORMAL Fancy ─────────────────────────────────────────────────
+    {
+      marketId: 'demo-fancy-normal',
+      gtype: 'fancy',
+      mname: 'Normal',
+      min: null, max: null, sno: 4, status: 'ACTIVE',
+      section: [
+        { sid: 401, fancyId: 'f401', nat: '10 over runs SL(SL vs IND)adv',                 sno: 1,  gstatus: 'SUSPENDED', min: '100', max: '5L',  odds: [{ oname: 'lay1', odds: null, size: null }, { oname: 'back1', odds: null, size: null }] },
+        { sid: 402, fancyId: 'f402', nat: '9 over run SL',                                  sno: 2,  gstatus: 'ACTIVE',    min: '100', max: '3L',  odds: [{ oname: 'lay1', odds: 33,   size: 100  }, { oname: 'back1', odds: 34,   size: 100  }] },
+        { sid: 403, fancyId: 'f403', nat: '1st Innings run SL(SL vs IND)adv',               sno: 3,  gstatus: 'ACTIVE',    min: '100', max: '50K', odds: [{ oname: 'lay1', odds: 250,  size: 100  }, { oname: 'back1', odds: 254,  size: 100  }] },
+        { sid: 404, fancyId: 'f404', nat: '1st Innings run bhav SL',                        sno: 4,  gstatus: 'SUSPENDED', min: '100', max: '1L',  odds: [{ oname: 'lay1', odds: null, size: null }, { oname: 'back1', odds: null, size: null }] },
+        { sid: 405, fancyId: 'f405', nat: 'Fall of 3rd wkt SL',                             sno: 5,  gstatus: 'SUSPENDED', min: '100', max: '2L',  odds: [{ oname: 'lay1', odds: null, size: null }, { oname: 'back1', odds: null, size: null }] },
+        { sid: 406, fancyId: 'f406', nat: 'Fall of 3rd wkt run bhav SL',                   sno: 6,  gstatus: 'SUSPENDED', min: '100', max: '2L',  odds: [{ oname: 'lay1', odds: null, size: null }, { oname: 'back1', odds: null, size: null }] },
+        { sid: 407, fancyId: 'f407', nat: 'Lahiru Udara 1st Inn runs(SL vs IND)adv',       sno: 7,  gstatus: 'ACTIVE',    min: '100', max: '2L',  odds: [{ oname: 'lay1', odds: 40,   size: 110  }, { oname: 'back1', odds: 40,   size: 90   }] },
+        { sid: 408, fancyId: 'f408', nat: 'Lahiru Udara run bhav',                          sno: 8,  gstatus: 'SUSPENDED', min: '100', max: '1L',  odds: [{ oname: 'lay1', odds: null, size: null }, { oname: 'back1', odds: null, size: null }], rem: '*72nd Nehru Trophy Boat Race 2026 Adv Bets Started In Our Exchange*' },
+        { sid: 409, fancyId: 'f409', nat: 'K Mendis run',                                   sno: 9,  gstatus: 'ACTIVE',    min: '100', max: '2L',  odds: [{ oname: 'lay1', odds: 24,   size: 110  }, { oname: 'back1', odds: 24,   size: 90   }] },
+        { sid: 410, fancyId: 'f410', nat: 'K Mendis runbhav',                               sno: 10, gstatus: 'SUSPENDED', min: '100', max: '1L',  odds: [{ oname: 'lay1', odds: null, size: null }, { oname: 'back1', odds: null, size: null }] },
+        { sid: 411, fancyId: 'f411', nat: '3rd wkt pship boundaries SL',                   sno: 11, gstatus: 'ACTIVE',    min: '100', max: '25K', odds: [{ oname: 'lay1', odds: 3,    size: 100  }, { oname: 'back1', odds: 4,    size: 100  }] },
+        { sid: 412, fancyId: 'f412', nat: 'Lahiru Udara 1st Inn Boundaries(SL vs IND)adv', sno: 12, gstatus: 'SUSPENDED', min: '100', max: '25K', odds: [{ oname: 'lay1', odds: null, size: null }, { oname: 'back1', odds: null, size: null }] },
+        { sid: 413, fancyId: 'f413', nat: 'K Mendis boundaries',                            sno: 13, gstatus: 'ACTIVE',    min: '100', max: '25K', odds: [{ oname: 'lay1', odds: 3,    size: 100  }, { oname: 'back1', odds: 4,    size: 100  }] },
+      ],
+    },
+
+    // ── OVER BY OVER ──────────────────────────────────────────────────
+    {
+      marketId: 'demo-fancy-obo',
+      gtype: 'fancy',
+      mname: 'Over By Over',
+      min: null, max: null, sno: 5, status: 'ACTIVE',
+      section: [
+        { sid: 501, fancyId: 'f501', nat: 'Only 10 over run SL', sno: 1, gstatus: 'ACTIVE', min: '100', max: '1L', odds: [{ oname: 'lay1', odds: 3, size: 115 }, { oname: 'back1', odds: 3, size: 85 }] },
+      ],
+    },
+
+    // ── ODD EVEN ──────────────────────────────────────────────────────
+    {
+      marketId: 'demo-oddeven',
+      gtype: 'fancy',
+      mname: 'oddeven',
+      min: null, max: null, sno: 6, status: 'ACTIVE',
+      section: [
+        { sid: 601, fancyId: 'f601', nat: '1st inn 20 over run odd even SL(SL vs IND)adv', sno: 1, gstatus: 'ACTIVE', min: '100', max: '2L', odds: [{ oname: 'back1', odds: 1.96, size: 2000000 }, { oname: 'lay1', odds: 1.96, size: 2000000 }] },
+        { sid: 602, fancyId: 'f602', nat: '1st inn 30 over run odd even SL(SL vs IND)adv', sno: 2, gstatus: 'ACTIVE', min: '100', max: '2L', odds: [{ oname: 'back1', odds: 1.96, size: 2000000 }, { oname: 'lay1', odds: 1.96, size: 2000000 }] },
+      ],
+    },
+
+    // ── METER ─────────────────────────────────────────────────────────
+    {
+      marketId: 'demo-meter',
+      gtype: 'fancy',
+      mname: 'meter',
+      min: null, max: null, sno: 7, status: 'ACTIVE',
+      section: [
+        { sid: 701, fancyId: 'f701', nat: 'Fall of 3rd wkt meter SL',  sno: 1, gstatus: 'ACTIVE', min: '10', max: '3K', odds: [{ oname: 'lay1', odds: 68, size: 100 }, { oname: 'back1', odds: 71, size: 100 }] },
+        { sid: 702, fancyId: 'f702', nat: 'Lahiru Udara meter adv',     sno: 2, gstatus: 'ACTIVE', min: '10', max: '3K', odds: [{ oname: 'lay1', odds: 52, size: 100 }, { oname: 'back1', odds: 55, size: 100 }] },
+        { sid: 703, fancyId: 'f703', nat: 'K Mendis meter',             sno: 3, gstatus: 'ACTIVE', min: '10', max: '3K', odds: [{ oname: 'lay1', odds: 35, size: 100 }, { oname: 'back1', odds: 38, size: 100 }] },
+      ],
+    },
+
+    // ── NUMBER 1 — 2ND INN 10 OVER (suspended / locked) ─────────────
+    {
+      marketId: 'demo-number-1',
+      gtype: 'fancy',
+      mname: '2ND INN 10 OVER SL VS IND',
+      min: '100', max: '2L', sno: 8, status: 'ACTIVE',
+      section: [0,1,2,3,4,5,6,7,8,9].map((n) => ({
+        sid: 800 + n, fancyId: `f8${String(n).padStart(2,'0')}`,
+        nat: `${n} Number`, sno: n + 1, gstatus: 'SUSPENDED', min: '100', max: '2L',
+        odds: [{ oname: 'back1', odds: 9.5, size: 100 }],
+      })),
+    },
+
+    // ── NUMBER 2 — 2ND INN 20 OVER (active 9.5/100) ─────────────────
+    {
+      marketId: 'demo-number-2',
+      gtype: 'fancy',
+      mname: '2ND INN 20 OVER SL VS IND',
+      min: '100', max: '2L', sno: 9, status: 'ACTIVE',
+      section: [0,1,2,3,4,5,6,7,8,9].map((n) => ({
+        sid: 900 + n, fancyId: `f9${String(n).padStart(2,'0')}`,
+        nat: `${n} Number`, sno: n + 1, gstatus: 'ACTIVE', min: '100', max: '2L',
+        odds: [{ oname: 'back1', odds: 9.5, size: 100 }],
+      })),
+    },
+
+    // ── NUMBER 3 — 2ND INN 30 OVER (active 9.5/100) ─────────────────
+    {
+      marketId: 'demo-number-3',
+      gtype: 'fancy',
+      mname: '2ND INN 30 OVER SL VS IND',
+      min: '100', max: '2L', sno: 10, status: 'ACTIVE',
+      section: [0,1,2,3,4,5,6,7,8,9].map((n) => ({
+        sid: 1000 + n, fancyId: `fa${String(n).padStart(2,'0')}`,
+        nat: `${n} Number`, sno: n + 1, gstatus: 'ACTIVE', min: '100', max: '2L',
+        odds: [{ oname: 'back1', odds: 9.5, size: 100 }],
+      })),
+    },
+  ]
+}

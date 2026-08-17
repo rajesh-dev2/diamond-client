@@ -1,0 +1,60 @@
+/* NumberMarket — Lambi / 0-9 */
+
+.gdv2-market-number {
+  background-color: #fff;
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+/* Number market: header nation takes remaining flex space */
+.gdv2-market-number .gdv2-header-nation {
+  flex: 1;
+  width: auto;
+}
+
+/* Each row */
+.gdv2-number-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 4px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #c7c8ca;
+  min-height: 34px;
+}
+
+/* Runner name area */
+.gdv2-number-detail {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
+  min-width: 0;
+}
+
+.gdv2-number-name {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+/* Pair grid — two number markets side by side */
+.gdv2-number-pair-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.gdv2-number-pair-grid .gdv2-market-number {
+  width: 50%;
+  padding-left: 2px;
+  padding-right: 2px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .gdv2-number-pair-grid .gdv2-market-number {
+    width: 100%;
+  }
+}

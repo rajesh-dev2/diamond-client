@@ -1,0 +1,16 @@
+/* MarketRemark */
+.gdv2-remark-row {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+.gdv2-remark-text {
+  color: #1c5d7c;
+  font-weight: 400;
+  font-size: 11px;
+  margin: 0;
+  width: 100%;
+}

@@ -1,0 +1,38 @@
+/* SuspendedBox — dark box with centered lock icon SVG */
+
+.gdv2-suspended-box {
+  width: 80px;
+  min-height: 34px;
+  background-color: rgba(55, 54, 54, 0.84);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  user-select: none;
+  border-left: 1px solid #c7c8ca;
+  flex-shrink: 0;
+}
+
+.gdv2-lock-icon {
+  width: 14px;
+  height: 14px;
+  fill: #ffffff;
+  display: block;
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .gdv2-suspended-box {
+    width: 55px;
+  }
+}
+
+@media (max-width: 767px) {
+  .gdv2-suspended-box {
+    width: 60px;
+    min-height: 32px;
+  }
+  .gdv2-lock-icon {
+    width: 12px;
+    height: 12px;
+  }
+}

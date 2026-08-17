@@ -39,8 +39,3 @@ export default function AppRoutes() {
     </Routes>
   )
 }
-
-
-
-
-

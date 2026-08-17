@@ -64,10 +64,6 @@ export default function Home() {
       return <RacingTable racingData={greyhoundRacingData} />
     }
 
-    if (activeEtid && events) {
-      return <BetTable matches={mapEventsToMatches(events, activeEtid)} />
-    }
-
     switch (activeTab) {
       case 'Football':
         return <BetTable matches={footballMatches} />

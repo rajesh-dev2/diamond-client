@@ -1,0 +1,74 @@
+/* MarketHeader — column label row above odds */
+
+.gdv2-market-header {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  justify-content: space-between;
+  color: #222;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+.gdv2-header-nation {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  font-size: 14px;
+}
+
+.gdv2-header-minmax {
+  font-size: 12px;
+  color: #097c93;
+  font-weight: 700;
+}
+
+.gdv2-header-odds {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.gdv2-fancy-minmax-spacer {
+  width: 68px;
+  min-width: 68px;
+  max-width: 68px;
+  margin-left: 6px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Header odd-box is shorter */
+.gdv2-market-header .gdv2-odd-box {
+  min-height: 28px;
+}
+
+.gdv2-market-header .gdv2-odd-box b {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .gdv2-header-nation {
+    font-size: 13px;
+  }
+
+  .gdv2-fancy-minmax-spacer {
+    width: 55px;
+    min-width: 55px;
+    max-width: 55px;
+    margin-left: 4px;
+    margin-right: 6px;
+  }
+}
+
+@media (max-width: 767px) {
+  .gdv2-fancy-minmax-spacer {
+    display: none;
+  }
+}

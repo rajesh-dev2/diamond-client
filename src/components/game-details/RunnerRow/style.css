@@ -1,0 +1,99 @@
+/* RunnerRow — one runner: name + PL book + odds cells */
+
+.gdv2-runner-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 4px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #c7c8ca;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+/* Runner name + PL area */
+.gdv2-runner-detail {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  font-size: 14px;
+}
+
+.gdv2-runner-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gdv2-runner-book {
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.gdv2-runner-book.gdv2-book-pos {
+  color: #008800;
+}
+
+.gdv2-runner-book.gdv2-book-neg {
+  color: #dc3545;
+}
+
+/* Odds cells wrapper */
+.gdv2-runner-odds {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Suspended overlay via ::after ───────────────────────── */
+.gdv2-runner-row.gdv2-suspended {
+  position: relative;
+}
+
+.gdv2-runner-row.gdv2-suspended::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 480px;
+  background-color: rgba(55, 54, 54, 0.84);
+  color: #ff0000;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .gdv2-runner-detail {
+    font-size: 13px;
+  }
+
+  .gdv2-runner-row.gdv2-suspended::after {
+    width: 330px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .gdv2-runner-row.gdv2-suspended::after {
+    width: 120px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,80 @@
+/* Scorecard */
+.gdv2-scorecard {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  padding: 6px 8px;
+  gap: 8px;
+  font-size: 13px;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+.gdv2-score-left { flex: 1; }
+
+.gdv2-score-team-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gdv2-score-team-row + .gdv2-score-team-row {
+  margin-top: 4px;
+}
+
+.gdv2-score-team-abbr {
+  font-weight: 700;
+  font-size: 13px;
+  min-width: 35px;
+}
+
+.gdv2-score-runs {
+  flex: 1;
+  text-align: right;
+  font-weight: 600;
+}
+
+.gdv2-score-crr {
+  font-size: 11px;
+  color: #555;
+  min-width: 70px;
+  text-align: right;
+}
+
+.gdv2-score-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.gdv2-score-status {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.gdv2-score-balls {
+  display: flex;
+  gap: 4px;
+}
+
+.gdv2-ball {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 2px;
+  background-color: #296F91;
+  color: #fff;
+}
+
+.gdv2-ball.gdv2-ball-four   { background-color: #28a745; }
+.gdv2-ball.gdv2-ball-six    { background-color: #6f42c1; }
+.gdv2-ball.gdv2-ball-wicket { background-color: #dc3545; }
+
+@media (max-width: 767px) {
+  .gdv2-scorecard { flex-direction: column; }
+  .gdv2-score-right { align-items: flex-start; text-align: left; margin-top: 4px; }
+}

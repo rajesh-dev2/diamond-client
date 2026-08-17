@@ -1,0 +1,144 @@
+/* FancyMarket — Normal, meter, Over By Over */
+
+.gdv2-market-fancy {
+  background-color: #fff;
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+/* Dual-column header on desktop */
+.gdv2-fancy-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.gdv2-fancy-header-row.gdv2-full-width {
+  display: block;
+}
+
+/* Two-column grid for items */
+.gdv2-fancy-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.gdv2-fancy-grid.gdv2-full-width {
+  display: block;
+}
+
+.gdv2-fancy-col {
+  width: 50%;
+  padding-left: 2px;
+  padding-right: 2px;
+  box-sizing: border-box;
+}
+
+.gdv2-fancy-full-col {
+  width: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
+  box-sizing: border-box;
+}
+
+/* One fancy item */
+.gdv2-fancy-item {
+  background-color: #fff;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.gdv2-fancy-row {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  padding-right: 0;
+  background-color: #f2f2f2;
+  min-height: 34px;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+/* Runner name area */
+.gdv2-fancy-detail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.gdv2-fancy-name {
+  font-weight: 400;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: calc(100% - 50px);
+  line-height: normal;
+}
+
+/* ── gdv2-fancy-right ─────────────────────────────────────────────────
+   Wraps gdv2-fancy-odds + gdv2-minmax-wrap.
+   The suspended overlay covers THIS div via ::after — no fixed pixel
+   widths needed, it always matches the actual content.
+   ──────────────────────────────────────────────────────────────────── */
+.gdv2-fancy-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  /* ::after is anchored to this */
+}
+
+.gdv2-fancy-odds {
+  display: flex;
+  align-items: center;
+}
+
+.gdv2-minmax-wrap {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Suspended overlay on gdv2-fancy-right ──────────────────────────── */
+.gdv2-fancy-suspended .gdv2-fancy-right::after {
+  content: "SUSPENDED";
+  position: absolute;
+  inset: 0;
+  /* covers exactly the wrapper */
+  background-color: rgba(55, 54, 54, 0.84);
+  color: #ff0000;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  pointer-events: none;
+  z-index: 2;
+  letter-spacing: 0.5px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+
+  .gdv2-fancy-col,
+  .gdv2-fancy-full-col {
+    width: 100% !important;
+  }
+
+  .gdv2-fancy-second-header {
+    display: none !important;
+  }
+
+  .gdv2-fancy-suspended .gdv2-fancy-right::after {
+    font-size: 12px;
+  }
+}
