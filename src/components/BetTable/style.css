@@ -165,6 +165,22 @@
   .bet-odd {
     @apply font-bold;
   }
+
+  .bet-table-empty {
+    @apply flex flex-col items-center justify-center gap-2 py-10 px-4 text-center;
+  }
+
+  .bet-table-empty-icon {
+    @apply w-[72px] h-[72px] mb-1;
+  }
+
+  .bet-table-empty-title {
+    @apply text-[15px] font-bold text-[#444];
+  }
+
+  .bet-table-empty-subtitle {
+    @apply text-[12px] text-[#888];
+  }
   }
 }
 

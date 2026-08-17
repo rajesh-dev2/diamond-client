@@ -70,10 +70,20 @@ export default function PlaceBetSidebar({
               disabled={!amount || parseFloat(amount) <= 0 || isPlacing}
               onClick={onSubmit}
             >
-              {isPlacing ? 'Submitting…' : 'Submit'}
+              Submit
             </button>
           </div>
         </div>
+
+        {isPlacing && (
+          <div className="gdv2-bet-loading-overlay">
+            <span className="gdv2-spinner">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <span key={i} style={{ '--i': i }} />
+              ))}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   )

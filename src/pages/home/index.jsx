@@ -6,14 +6,7 @@ import BetTable from '../../components/BetTable'
 import RacingTable from '../../components/RacingTable'
 import CasinoList from '../../components/CasinoList'
 import { useGetSportsQuery, useGetEventsQuery } from '../../store/api/authApi'
-import {
-  cricketMatches,
-  footballMatches,
-  tennisMatches,
-  tableTennisMatches,
-  horseRacingData,
-  greyhoundRacingData,
-} from '../../data/sportsData'
+import { horseRacingData, greyhoundRacingData } from '../../data/sportsData'
 import './style.css'
 
 // Best price is tno 0 in each ladder (back: highest odds first, lay: lowest odds first).
@@ -24,13 +17,13 @@ function bestPrice(ladder) {
 // Blank gstatus means tradable — only an explicit non-"ACTIVE" value means suspended.
 function isSuspended(selection) {
   const status = (selection?.gstatus || '').toUpperCase()
-  return status !== '' && status !== 'ACTIVE'
+  return status !== '' && status !== 'ACTIVE' && status !== 'OPEN'
 }
 
 function getSuspendedStatus(selection, fallback = 'SUSPENDED') {
   if (!selection) return fallback
   const raw = selection.gstatus || selection.status
-  if (raw && typeof raw === 'string' && raw.trim() !== '' && raw.trim().toUpperCase() !== 'ACTIVE') {
+  if (raw && typeof raw === 'string' && raw.trim() !== '' && !['ACTIVE', 'OPEN'].includes(raw.trim().toUpperCase())) {
     return raw.trim().toUpperCase()
   }
   return fallback
@@ -79,21 +72,7 @@ export default function Home() {
       return <RacingTable racingData={greyhoundRacingData} />
     }
 
-    if (activeEtid && events && events.length > 0) {
-      return <BetTable matches={mapEventsToMatches(events, activeEtid)} />
-    }
-
-    switch (activeTab) {
-      case 'Football':
-        return <BetTable matches={footballMatches} />
-      case 'Tennis':
-        return <BetTable matches={tennisMatches} />
-      case 'Table Tennis':
-        return <BetTable matches={tableTennisMatches} />
-      case 'Cricket':
-      default:
-        return <BetTable matches={cricketMatches} />
-    }
+    return <BetTable matches={activeEtid ? mapEventsToMatches(events, activeEtid) : []} />
   }
 
   return (
