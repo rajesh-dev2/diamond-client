@@ -48,6 +48,7 @@ export default function PlaceBetModal({ show, onHide, betData, onPlaceBet }) {
       show={show}
       onHide={onHide}
       dialogClassName="place-bet-modal-top"
+      backdropClassName="place-bet-backdrop"
     >
         <div className="modal-header">
           <div className="modal-title h4">Place Bet</div>

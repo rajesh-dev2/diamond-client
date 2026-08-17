@@ -1,13 +1,15 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import './style.css'
 import MarketTitle from '../MarketTitle'
 import MarketHeader from '../MarketHeader'
 import OddBox from '../OddBox'
 import MinMaxLabel from '../MinMaxLabel'
 import MarketRemark from '../MarketRemark'
+import RunAmountModal from '../RunAmountModal'
 import { oddsByName, isSuspended, getSuspendedStatus, formatOdd, formatVol } from '../utils'
 
 export default function FancyMarket({ market, onOddClick, pl = {} }) {
+  const [runAmountFancyId, setRunAmountFancyId] = useState(null)
   const sections = market.section.slice().sort((a, b) => a.sno - b.sno)
   const hasLay   = sections.some((s) => oddsByName(s).lay1)
   const isFullWidth = (market.mname || '').toLowerCase().includes('over by over')
@@ -39,6 +41,7 @@ export default function FancyMarket({ market, onOddClick, pl = {} }) {
             const suspended  = isSuspended(section)
             const statusText = getSuspendedStatus(section, market.status || 'SUSPENDED')
             const runnerPl   = pl[section.fancyId]
+            const hasPl      = runnerPl?.pl !== 0 && runnerPl?.pl != null
 
             return (
               <Fragment key={section.sid}>
@@ -47,9 +50,12 @@ export default function FancyMarket({ market, onOddClick, pl = {} }) {
                     <div className="gdv2-fancy-row">
 
                       {/* Runner name + PL */}
-                      <div className="gdv2-fancy-detail">
+                      <div
+                        className={`gdv2-fancy-detail${hasPl ? ' gdv2-fancy-detail-clickable' : ''}`}
+                        onClick={hasPl ? () => setRunAmountFancyId(section.fancyId) : undefined}
+                      >
                         <span className="gdv2-fancy-name">{section.nat}</span>
-                        {runnerPl?.pl !== 0 && runnerPl?.pl != null && (
+                        {hasPl && (
                           <span className={`gdv2-runner-book ${runnerPl.pl < 0 ? 'gdv2-book-neg' : 'gdv2-book-pos'}`}>
                             {runnerPl.pl > 0 ? `+${runnerPl.pl}` : runnerPl.pl}
                           </span>
@@ -94,6 +100,12 @@ export default function FancyMarket({ market, onOddClick, pl = {} }) {
         </div>
       </div>
       <MarketRemark text={market.rem} />
+
+      <RunAmountModal
+        show={Boolean(runAmountFancyId)}
+        onHide={() => setRunAmountFancyId(null)}
+        fancyId={runAmountFancyId}
+      />
     </div>
   )
 }

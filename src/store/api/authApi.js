@@ -71,6 +71,11 @@ export const authApi = createApi({
       transformResponse: (response) => response.data,
       providesTags: ['Bets'],
     }),
+    getFancyBook: builder.query({
+      query: (fancyId) => `/user/bets/fancy/${fancyId}/book`,
+      transformResponse: (response) => response.book,
+      providesTags: ['Bets'],
+    }),
   }),
 })
 
@@ -84,4 +89,5 @@ export const {
   useGetMatchOddsBookQuery,
   useGetBookmakerBookQuery,
   useGetFancyPlQuery,
+  useGetFancyBookQuery,
 } = authApi

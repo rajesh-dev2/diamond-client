@@ -71,6 +71,10 @@
   min-width: 0;
 }
 
+.gdv2-fancy-detail-clickable {
+  cursor: pointer;
+}
+
 .gdv2-fancy-name {
   font-weight: 400;
   font-size: 13px;
