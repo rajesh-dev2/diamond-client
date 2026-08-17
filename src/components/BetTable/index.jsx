@@ -57,10 +57,6 @@ export default function BetTable({ matches = [] }) {
                 </div>
               </div>
 
-              <div className="bet-nation-odd md:hidden"><b>1</b></div>
-              <div className="bet-nation-odd md:hidden"><b>X</b></div>
-              <div className="bet-nation-odd md:hidden"><b>2</b></div>
-
               {isAllSuspended ? (
                 <>
                   <div className="bet-nation-odd suspended-box" data-title={row.status1 || 'SUSPENDED'}>

@@ -141,7 +141,7 @@ export default function Header({ onToggleSidebar }) {
 
         {/* Mobile Search Box */}
         <div className="header-search-mobile search-box-container">
-          <div className="header-search-box search-box">
+          <div className={`header-search-box search-box ${searchOpen ? 'is-open' : ''}`}>
             <input 
               type="search" 
               placeholder="Search here" 

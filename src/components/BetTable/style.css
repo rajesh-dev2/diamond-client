@@ -4,38 +4,37 @@
 
 @layer components {
   .bet-table {
-    @apply w-full border-t-0 bg-[#f7f7f7];
+    @apply w-full border-t-0 bg-[#f7f7f7] overflow-x-hidden;
   
 
   .bet-table-header {
-    @apply flex items-center border border-l-0 border-r-0 border-[#c7c8ca] px-2 py-[4px] text-[14px] font-bold text-black;
+    @apply flex items-center border border-l-0 border-r-0 border-[#c7c8ca] px-2 py-[4px] text-[14px] font-bold text-black w-full;
   }
 
- .bet-nation-name {
-    @apply w-[64%] text-[#222222] font-bold;
+  .bet-nation-name {
+    @apply w-[64%] text-[#222222] font-bold shrink-0;
   }
 
   .bet-table-header .bet-nation-odd {
-    @apply w-[12%] text-center text-[#222222] font-bold;
+    @apply w-[12%] text-center text-[#222222] font-bold shrink-0;
   }
 
   .bet-table-body {
-    @apply flex flex-col;
+    @apply flex flex-col w-full;
   }
 
   .bet-table-row {
-    @apply flex items-center border-b md:flex-nowrap flex-wrap border-[#c7c8ca] px-[5px] bg-[#f2f2f2] md:text-[14px] text-[12px] transition-colors;
+    @apply flex items-center border-b md:flex-nowrap flex-wrap border-[#c7c8ca] px-[5px] pr-0! bg-[#f2f2f2] md:text-[14px] text-[12px] transition-colors w-full;
   }
 
   .bet-table-row .bet-nation-name {
-    @apply flex items-center justify-between pr-3 min-w-0;
+    @apply flex items-center justify-between pr-3 min-w-0 w-[64%] shrink-0;
   }
 
   .bet-nation-game-name {
     @apply text-[#333]! font-normal no-underline! overflow-hidden text-ellipsis whitespace-nowrap inline-block;
     max-width: calc(100% - 210px);
   }
-
 
   .game-icons {
     @apply flex items-center shrink-0 w-[210px] justify-end;
@@ -75,7 +74,7 @@
 
   /* ===== Continuous Suspended Bar across all odds columns ===== */
   .suspended-full-bar {
-    @apply w-[316px] h-[25px] bg-[#384148] flex items-center justify-between shrink-0 rounded-[1px];
+    @apply w-[36%] h-[25px] bg-[#384148] flex items-center justify-between shrink-0 rounded-[1px];
   }
 
   .suspended-col {
@@ -84,7 +83,7 @@
 
   /* ===== Single Column Suspended Box ===== */
   .bet-nation-odd.suspended-box {
-    @apply relative w-[104px] h-[25px] flex items-center justify-center gap-[2px] shrink-0 cursor-not-allowed;
+    @apply relative w-[12%] h-[25px] flex items-center justify-center gap-[2px] shrink-0 cursor-not-allowed;
   }
 
   .suspended-box::before {
@@ -134,7 +133,7 @@
   }
 
   .odd-box {
-    @apply flex-1 h-[25px] flex items-center justify-center font-bold text-[14px] cursor-pointer rounded-[1px] transition-opacity relative;
+    @apply flex-1 h-[25px] flex items-center justify-center font-bold! text-[14px]! cursor-pointer rounded-[1px] transition-opacity relative min-w-0;
   }
 
   .back.odd-box {
@@ -163,8 +162,9 @@
   }
 
   .bet-odd {
-    @apply font-bold;
+    @apply font-bold overflow-hidden text-ellipsis whitespace-nowrap px-0.5;
   }
+
   }
 }
 
@@ -178,13 +178,22 @@
     border-bottom: 1px solid #c7c8ca;
   }
 
-
   .bet-nation-name {
-    width: 100%;
+    width: 100% !important;
   }
 
-  .bet-nation-odd {
-    width: 33.33%;
+  .bet-table-row .bet-nation-name {
+    width: 100% !important;
+  }
+
+  .bet-nation-odd,
+  .bet-table-row .bet-nation-odd,
+  .bet-nation-odd.suspended-box {
+    width: 33.33% !important;
+  }
+
+  .suspended-full-bar {
+    width: 100% !important;
   }
 
   .bet-nation-name .bet-nation-game-name {
@@ -208,21 +217,14 @@
     font-size: 10px;
   }
 
-
-
-
   .bet-nation-game-name span:first-child {
     font-weight: bold;
   }
-
-
 
   .bet-nation-game-name span:last-child {
     font-size: 12px;
   }
 }
-
-
 
 @media only screen and (max-width: 767px) {
   .bet-nation-game-name span {
@@ -231,6 +233,3 @@
     line-height: normal;
   }
 }
-
-
-

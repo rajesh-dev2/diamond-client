@@ -19,7 +19,7 @@ export default function MainLayout() {
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         {/* Center Main Content Area Outlet */}
-        <main className="center-main-container grow md:pl-1.25 pt-0 overflow-x-clip">
+        <main className="center-main-container grow md:pl-1.25 pt-0 overflow-x-clip min-w-0 max-w-full">
           <Outlet />
         </main>
 
