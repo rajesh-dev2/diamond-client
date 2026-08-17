@@ -40,185 +40,173 @@ export default function CurrentBets() {
   }
 
   return (
-    <div className="current-bets">
+    <div className="report-page current-bets">
       <div className="card">
         <div className="card-header">
           <h4 className="card-title">Current Bets</h4>
         </div>
         <div className="card-body">
-          <div className="report-form">
-            <form className="row row5" onSubmit={handleSubmit}>
-              <div className="col-lg-2 col-md-3">
-                <div className="mb-2 input-group position-relative">
-                  <select
-                    className="form-select"
-                    name="gtype"
-                    value={reportType}
-                    onChange={(e) => setReportType(e.target.value)}
-                  >
-                    <option value="" disabled>Select Report Type</option>
-                    <option value="1">Sports</option>
-                    <option value="2">Casino</option>
-                  </select>
-                </div>
-              </div>
-              <div className="col-lg-2 col-md-2 d-grid">
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
-              </div>
-            </form>
+          {/* Top Form Filter Row */}
+          <form className="report-filter-form" onSubmit={handleSubmit}>
+            <div style={{ width: '190px' }}>
+              <select
+                className="form-select"
+                name="gtype"
+                value={reportType}
+                onChange={(e) => setReportType(e.target.value)}
+              >
+                <option value="" disabled>Select Report Type</option>
+                <option value="1">Sports</option>
+                <option value="2">Casino</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" className="btn btn-primary btn-submit">Submit</button>
+            </div>
+          </form>
 
-            <div className="row row5 mt-2 justify-content-between align-items-center">
-              <div className="col-lg-2 col-5">
-                <div className="mb-2 input-group position-relative">
-                  <span className="me-2">Show</span>
-                  <select
-                    className="form-select"
-                    value={entriesCount}
-                    onChange={(e) => setEntriesCount(Number(e.target.value))}
-                  >
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                  </select>
-                  <span className="ms-2">Entries</span>
-                </div>
-              </div>
+          {/* Table Controls (Show, Radio Filter, Totals, Search) */}
+          <div className="report-controls-bar">
+            <div className="report-show-entries">
+              <span>Show</span>
+              <select
+                className="form-select"
+                value={entriesCount}
+                onChange={(e) => setEntriesCount(Number(e.target.value))}
+              >
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+              </select>
+              <span>Entries</span>
+            </div>
 
-              <div className="col-lg-4 col-md-6 col-7 text-center">
-                <div className="form-check form-check-inline">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="all"
-                    name="filter"
-                    value="all"
-                    checked={filter === 'all'}
-                    onChange={() => setFilter('all')}
-                  />
-                  <label className="form-check-label" htmlFor="all">All</label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="back"
-                    name="filter"
-                    value="back"
-                    checked={filter === 'back'}
-                    onChange={() => setFilter('back')}
-                  />
-                  <label className="form-check-label" htmlFor="back">Back</label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="lay"
-                    name="filter"
-                    value="lay"
-                    checked={filter === 'lay'}
-                    onChange={() => setFilter('lay')}
-                  />
-                  <label className="form-check-label" htmlFor="lay">Lay</label>
-                </div>
+            <div className="d-flex align-items-center gap-3">
+              <div className="form-check form-check-inline m-0">
+                <input
+                  type="radio"
+                  className="form-check-input me-1"
+                  id="all"
+                  name="filter"
+                  value="all"
+                  checked={filter === 'all'}
+                  onChange={() => setFilter('all')}
+                />
+                <label className="form-check-label" htmlFor="all">All</label>
               </div>
-
-              <div className="col-lg-3 col-md-6 text-left col-7">
-                <div>Total Bets: <span className="me-2">{total}</span> Total Amount: <span className="me-2">{totalAmount}</span></div>
+              <div className="form-check form-check-inline m-0">
+                <input
+                  type="radio"
+                  className="form-check-input me-1"
+                  id="back"
+                  name="filter"
+                  value="back"
+                  checked={filter === 'back'}
+                  onChange={() => setFilter('back')}
+                />
+                <label className="form-check-label" htmlFor="back">Back</label>
               </div>
-
-              <div className="col-lg-2 col-5">
-                <div className="mb-2 input-group position-relative">
-                  <span className="me-2">Search:</span>
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder={`${total} records...`}
-                    value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
-                  />
-                </div>
+              <div className="form-check form-check-inline m-0">
+                <input
+                  type="radio"
+                  className="form-check-input me-1"
+                  id="lay"
+                  name="filter"
+                  value="lay"
+                  checked={filter === 'lay'}
+                  onChange={() => setFilter('lay')}
+                />
+                <label className="form-check-label" htmlFor="lay">Lay</label>
               </div>
             </div>
 
-            <div className="mt-2 table-responsive">
-              <table role="table" className="table table-bordered table-striped">
-                <thead>
-                  <tr role="row">
-                    <th colSpan={1} role="columnheader">Event Name</th>
-                    <th colSpan={1} role="columnheader">Nation</th>
-                    <th colSpan={1} role="columnheader" className="report-amount text-end">User Rate</th>
-                    <th colSpan={1} role="columnheader" className="report-amount text-end">Amount</th>
-                    <th colSpan={1} role="columnheader" className="report-date">Place Date</th>
-                    <th colSpan={1} role="columnheader" className="report-action">
-                      <div className="text-end">
-                        <div className="form-check form-check-inline me-0">
-                          <input
-                            type="checkbox"
-                            className="form-check-input"
-                            title="Toggle All Current Page Rows Selected"
-                            style={{ cursor: 'pointer' }}
-                            checked={selectAll}
-                            onChange={(e) => setSelectAll(e.target.checked)}
-                          />
-                        </div>
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody role="rowgroup">
-                  {isFetching ? (
-                    <tr role="row">
-                      <td colSpan={6} className="text-center">Loading…</td>
-                    </tr>
-                  ) : rows.length > 0 ? (
-                    rows.map((row, index) => (
-                      <tr key={row.id || row._id || index} role="row">
-                        <td>{row.eventName}</td>
-                        <td>{row.nation}</td>
-                        <td className="report-amount text-end">{row.userRate}</td>
-                        <td className="report-amount text-end">{row.amount}</td>
-                        <td className="report-date">{row.placeDate}</td>
-                        <td className="report-action text-end">
-                          <input type="checkbox" className="form-check-input" checked={selectAll} onChange={() => {}} />
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr role="row">
-                      <td colSpan={6} className="text-center">No records found</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+            <div className="d-flex align-items-center gap-3">
+              <span>Total Bets: <b>{total}</b></span>
+              <span>Total Amount: <b>{totalAmount}</b></span>
             </div>
 
-            {totalPages > 1 && (
-              <div className="row row5 mt-2 justify-content-between align-items-center">
-                <div className="col-auto">Page {page} of {totalPages}</div>
-                <div className="col-auto d-flex gap-2">
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-secondary"
-                    disabled={page <= 1}
-                    onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-secondary"
-                    disabled={page >= totalPages}
-                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
+            <div className="report-search-box">
+              <span>Search:</span>
+              <input
+                type="search"
+                className="form-control"
+                placeholder={`${total} records...`}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+            </div>
           </div>
+
+          {/* Data Table */}
+          <div className="table-responsive">
+            <table role="table" className="table table-bordered">
+              <thead>
+                <tr role="row">
+                  <th colSpan={1} role="columnheader">Event Name</th>
+                  <th colSpan={1} role="columnheader">Nation</th>
+                  <th colSpan={1} role="columnheader" className="report-amount text-center">User Rate</th>
+                  <th colSpan={1} role="columnheader" className="report-amount text-center">Amount</th>
+                  <th colSpan={1} role="columnheader" className="report-date">Place Date</th>
+                  <th colSpan={1} role="columnheader" className="report-action text-center">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      title="Toggle All Current Page Rows Selected"
+                      style={{ cursor: 'pointer' }}
+                      checked={selectAll}
+                      onChange={(e) => setSelectAll(e.target.checked)}
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody role="rowgroup">
+                {isFetching ? (
+                  <tr role="row">
+                    <td colSpan={6} className="text-center">Loading…</td>
+                  </tr>
+                ) : rows.length > 0 ? (
+                  rows.map((row, index) => (
+                    <tr key={row.id || row._id || index} role="row">
+                      <td>{row.eventName}</td>
+                      <td>{row.nation}</td>
+                      <td className="report-amount text-center">{row.userRate}</td>
+                      <td className="report-amount text-center">{row.amount}</td>
+                      <td className="report-date">{row.placeDate}</td>
+                      <td className="report-action text-center">
+                        <input type="checkbox" className="form-check-input" checked={selectAll} onChange={() => {}} />
+                      </td>
+                    </tr>
+                  ))
+                ) : null}
+              </tbody>
+            </table>
+          </div>
+
+          {totalPages > 1 && (
+            <div className="d-flex justify-content-between align-items-center mt-2">
+              <div>Page {page} of {totalPages}</div>
+              <div className="d-flex gap-2">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-secondary"
+                  disabled={page <= 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-secondary"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

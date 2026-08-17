@@ -1,252 +1,307 @@
+@import "react-datepicker/dist/react-datepicker.css";
 @reference "./global.css";
 
-/* React Datepicker CSS Import */
-@import "react-datepicker/dist/react-datepicker.css";
-
-@layer components {
-
-  /* Common Container for all user report pages */
-  .report-page,
-  .current-bets,
-  .activity-log,
-  .casino-results,
-  .live-casino-bets,
-  .change-password-page {
-    @apply w-full bg-white text-[#333333] font-sans;
-  }
-
-  .report-page .card,
-  .current-bets .card,
-  .activity-log .card,
-  .casino-results .card,
-  .live-casino-bets .card,
-  .change-password-page .card {
-    @apply border border-[#b0c4de] rounded-none bg-white overflow-visible;
-    box-shadow: 0 0 5px #a4a4a4;
-  }
-
-  .report-page .card-header,
-  .current-bets .card-header,
-  .activity-log .card-header,
-  .casino-results .card-header,
-  .live-casino-bets .card-header,
-  .change-password-page .card-header {
-    background-color: #296F91 !important;
-    color: #ffffff !important;
-    padding: 0.875rem 0.5rem;
-    border-bottom: 0 !important;
-  }
-
-  .report-page .card-title,
-  .current-bets .card-title,
-  .activity-log .card-title,
-  .casino-results .card-title,
-  .live-casino-bets .card-title,
-  .change-password-page .card-title {
-    color: #ffffff !important;
-    font-size: 20px !important;
-    font-weight: 400 !important;
-    margin: 0 !important;
-    line-height: 1.375;
-  }
-
-  .report-page .card-body,
-  .current-bets .card-body,
-  .activity-log .card-body,
-  .casino-results .card-body,
-  .live-casino-bets .card-body,
-  .change-password-page .card-body {
-    padding: 6px !important;
-    background-color: #ffffff !important;
-    overflow: visible;
-  }
-
-  /* Datepicker wrapper & input container */
-  .react-datepicker-wrapper,
-  .react-datepicker__input-container {
-    @apply block w-full;
-  }
-
-  .custom-datepicker {
-    @apply relative flex items-center cursor-pointer w-full mb-2;
-  }
-
-  .custom-datepicker .form-control {
-    height: 36px;
-    font-size: 13px;
-    border: 1px solid #dee2e6 !important;
-    border-radius: 0 !important;
-    background-color: #ffffff;
-    color: #333333;
-    padding-right: 2rem;
-    padding-left: 0.75rem;
-    width: 100%;
-    cursor: pointer;
-    transition: color 0.15s ease-in-out;
-  }
-
-  .custom-datepicker i {
-    @apply absolute right-2.5 top-1/2 -translate-y-1/2 text-[#333333] text-sm pointer-events-none;
-  }
-
-  /* Form controls */
-  .report-page .form-control,
-  .report-page .form-select,
-  .current-bets .form-control,
-  .current-bets .form-select,
-  .activity-log .form-control,
-  .activity-log .form-select,
-  .casino-results .form-control,
-  .casino-results .form-select,
-  .live-casino-bets .form-control,
-  .live-casino-bets .form-select,
-  .change-password-page .form-control {
-    height: 36px;
-    font-size: 13px;
-    border: 1px solid #dee2e6 !important;
-    border-radius: 0 !important;
-    color: #333333;
-    background-color: #ffffff;
-    width: 100%;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-
-  .report-page .form-control:focus,
-  .report-page .form-select:focus,
-  .current-bets .form-control:focus,
-  .current-bets .form-select:focus,
-  .activity-log .form-control:focus,
-  .activity-log .form-select:focus,
-  .casino-results .form-control:focus,
-  .casino-results .form-select:focus,
-  .live-casino-bets .form-control:focus,
-  .live-casino-bets .form-select:focus,
-  .change-password-page .form-control:focus {
-    border-color: #1c6889 !important;
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  .report-page .btn-primary,
-  .current-bets .btn-primary,
-  .activity-log .btn-primary,
-  .casino-results .btn-primary,
-  .live-casino-bets .btn-primary,
-  .change-password-page .btn-primary {
-    background-color: #000000 !important;
-    border-color: #000000 !important;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 0.875rem;
-    height: 36px;
-    border-radius: 0 !important;
-    width: 100%;
-    cursor: pointer;
-  }
-
-  .report-page .table-responsive,
-  .current-bets .table-responsive,
-  .activity-log .table-responsive,
-  .casino-results .table-responsive,
-  .live-casino-bets .table-responsive {
-    @apply w-full overflow-x-auto min-h-[300px] mt-2;
-  }
-
-  .report-page table.table,
-  .current-bets table.table,
-  .activity-log table.table,
-  .casino-results table.table,
-  .live-casino-bets table.table {
-    width: 100%;
-    margin-bottom: 0;
-    border-collapse: collapse;
-    background-color: #f7f7f7 !important;
-    border: 1px solid #dedede;
-  }
-
-  .report-page table.table-bordered th,
-  .report-page table.table-bordered td,
-  .current-bets table.table-bordered th,
-  .current-bets table.table-bordered td,
-  .activity-log table.table-bordered th,
-  .activity-log table.table-bordered td,
-  .casino-results table.table-bordered th,
-  .casino-results table.table-bordered td,
-  .live-casino-bets table.table-bordered th,
-  .live-casino-bets table.table-bordered td {
-    @apply border border-[#dedede] px-2.5 py-2 text-[13px] align-middle;
-  }
-
-  .report-page table thead th,
-  .current-bets table thead th,
-  .activity-log table thead th,
-  .casino-results table thead th,
-  .live-casino-bets table thead th {
-    background-color: #296F91 !important;
-    color: #ffffff !important;
-    font-size: 12px;
-    font-weight: 700 !important;
-    border-bottom: 2px solid #dedede;
-    white-space: nowrap;
-  }
-
-  /* Specific column widths */
-  .report-date {
-    @apply w-[190px];
-  }
-
-  .report-sr {
-    @apply w-[70px];
-  }
-
-  .report-amount {
-    @apply w-[100px];
-  }
-
-  .report-type {
-    @apply w-[100px];
-  }
-
-  .game-name {
-    @apply w-[180px];
-  }
-
-  .round-id-col {
-    @apply w-[200px];
-  }
-
-  .report-action {
-    @apply w-[60px];
-  }
-
-  .input-group {
-    align-items: center !important;
-  }
+/* ===== Common Root for all Report Pages ===== */
+.report-page {
+  width: 100%;
+  background-color: #ffffff;
+  font-family: inherit;
+  color: #333333;
 }
 
-/* Global focus shadow removal */
-.report-page input:focus,
-.report-page select:focus,
-.report-page button:focus,
-.current-bets input:focus,
-.current-bets select:focus,
-.current-bets button:focus,
-.activity-log input:focus,
-.activity-log select:focus,
-.activity-log button:focus,
-.casino-results input:focus,
-.casino-results select:focus,
-.casino-results button:focus,
-.live-casino-bets input:focus,
-.live-casino-bets select:focus,
-.live-casino-bets button:focus,
-.change-password-page input:focus,
-.change-password-page button:focus,
-.form-control:focus,
-.form-select:focus {
-  box-shadow: none !important;
-  outline: none !important;
+/* Card Shell */
+.report-page .card {
+  border: 1px solid #b0c4de;
+  border-radius: 0;
+  background-color: #ffffff;
+  box-shadow: none;
+  overflow: visible;
+}
+
+/* Card Header matching reference #296F91 */
+.report-page .card-header {
+  background-color: #296F91;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-bottom: 0;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+}
+
+.report-page .card-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Card Body */
+.report-page .card-body {
+  padding: 10px 12px;
+  background-color: #ffffff;
+  overflow: visible;
+}
+
+/* Top Filter Row */
+.report-page .report-filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.report-page .report-filter-item {
+  min-width: 140px;
+}
+
+.report-page .report-filter-item-select {
+  min-width: 190px;
+}
+
+/* Form Controls & Datepickers */
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  display: block;
+  width: 100%;
+}
+
+.custom-datepicker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.custom-datepicker .form-control {
+  padding-right: 2rem;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+.custom-datepicker i {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #333333;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.report-page .form-control,
+.report-page .form-select {
+  height: 32px;
+  font-size: 13px;
+  border: 1px solid #ced4da;
+  border-radius: 0;
+  color: #333333;
+  background-color: #ffffff;
+  padding: 4px 8px;
+  box-shadow: none;
+  outline: none;
+}
+
+.report-page .form-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 4px;
+}
+
+.report-page .form-control:focus,
+.report-page .form-select:focus,
+.report-page .form-control:focus-visible,
+.report-page .form-select:focus-visible {
+  border-color: #296F91;
+  outline: 2px solid rgba(41, 111, 145, 0.25);
+  box-shadow: none;
+}
+
+/* Buttons */
+.report-page .btn {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Submit & Primary Buttons: font-weight 400, font-size 16px */
+.report-page .btn-submit,
+.report-page .btn-primary,
+.report-page button[type="submit"] {
+  background-color: #000000;
+  border: 1px solid #000000;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  height: 34px;
+  border-radius: 0;
+  padding: 0 24px;
+  min-width: 140px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.report-page .btn-submit:hover,
+.report-page .btn-primary:hover,
+.report-page button[type="submit"]:hover {
+  background-color: #222222;
+  border-color: #222222;
+  color: #ffffff;
+}
+
+.report-page .btn-submit:focus-visible,
+.report-page .btn-primary:focus-visible,
+.report-page button[type="submit"]:focus-visible {
+  outline: 2px solid #296F91;
+  outline-offset: 2px;
+}
+
+.report-page.change-password-page .btn-submit,
+.report-page.change-password-page .btn-primary,
+.report-page.change-password-page button[type="submit"] {
+  width: 100%;
+  height: 36px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Secondary / Pagination Buttons */
+.report-page .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: normal;
+  height: 28px;
+  min-width: auto;
+  padding: 2px 12px;
+  border-radius: 3px;
+}
+
+.report-page .btn-secondary:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+/* Table Controls Bar (Show entries, Filters, Totals, Search) */
+.report-page .report-controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #333333;
+}
+
+.report-page .report-show-entries {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.report-page .report-show-entries select {
+  width: 65px;
+  height: 28px;
+  padding: 2px 6px;
+  font-size: 13px;
+  border: 1px solid #ced4da;
+  border-radius: 0;
+}
+
+.report-page .report-search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.report-page .report-search-box input {
+  width: 140px;
+  height: 28px;
+  padding: 2px 8px;
+  font-size: 13px;
+  border: 1px solid #ced4da;
+  border-radius: 0;
+}
+
+/* Table Styles matching reference screenshots */
+.report-page .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  min-height: 280px;
+  margin-top: 6px;
+}
+
+.report-page table.table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+}
+
+.report-page table.table-bordered th,
+.report-page table.table-bordered td {
+  border: 1px solid #ced4da;
+  padding: 6px 10px;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+/* Light Grey Table Header matching IceBook9 reference */
+.report-page table thead th {
+  background-color: #f2f2f2;
+  color: #222222;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid #ced4da;
+  white-space: nowrap;
+  padding: 6px 10px;
+}
+
+/* Specific column widths */
+.report-page .report-date {
+  width: 180px;
+}
+
+.report-page .report-sr {
+  width: 70px;
+}
+
+.report-page .report-amount {
+  width: 100px;
+}
+
+.report-page .report-type {
+  width: 100px;
+}
+
+.report-page .game-name {
+  width: 180px;
+}
+
+.report-page .round-id-col {
+  width: 180px;
+}
+
+.report-page .report-action {
+  width: 50px;
 }
 
 /* React Datepicker Popup */
@@ -255,25 +310,14 @@
 }
 
 .react-datepicker {
-  font-family: inherit !important;
-  background-color: #ffffff !important;
-  border: 1px solid #d4d4d4 !important;
-  border-radius: 0px !important;
-  box-shadow: none !important;
-  display: inline-block !important;
-  width: 245px !important;
-  max-width: calc(100vw - 20px) !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-}
-
-@media only screen and (max-width: 1199px) {
-
-  .report-page .table thead th,
-  .current-bets .table thead th,
-  .activity-log .table thead th,
-  .casino-results .table thead th,
-  .live-casino-bets .table thead th {
-    background: #296F91 !important;
-  }
+  font-family: inherit;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 0px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  width: 245px;
+  max-width: calc(100vw - 20px);
+  box-sizing: border-box;
+  position: relative;
 }

@@ -20,7 +20,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  tagTypes: ['Bets', 'ButtonSettings'],
+  tagTypes: ['Bets', 'ButtonSettings', 'ActivityLogs'],
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -88,6 +88,47 @@ export const authApi = createApi({
       }),
       providesTags: ['Bets'],
     }),
+    getActivityLogs: builder.query({
+      query: (params = {}) => {
+        const searchParams = new URLSearchParams()
+        Object.entries(params).forEach(([key, val]) => {
+          if (val !== undefined && val !== null && val !== '') {
+            searchParams.append(key, val)
+          }
+        })
+        const qs = searchParams.toString()
+        return qs ? `/user/activity-logs?${qs}` : '/user/activity-logs'
+      },
+      transformResponse: (response) => {
+        if (Array.isArray(response)) {
+          return { rows: response, total: response.length }
+        }
+        if (Array.isArray(response?.data)) {
+          return {
+            rows: response.data,
+            total: response.total ?? response.count ?? response.data.length,
+          }
+        }
+        if (Array.isArray(response?.logs)) {
+          return {
+            rows: response.logs,
+            total: response.total ?? response.count ?? response.logs.length,
+          }
+        }
+        return {
+          rows: response?.data || response?.logs || [],
+          total: response?.total ?? response?.count ?? 0,
+        }
+      },
+      providesTags: ['ActivityLogs'],
+    }),
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: '/user/auth/change-password',
+        method: 'PUT',
+        body,
+      }),
+    }),
     getButtonSettings: builder.query({
       query: () => '/user/settings/buttons',
       transformResponse: (response) => response.data || response,
@@ -116,6 +157,8 @@ export const {
   useGetFancyPlQuery,
   useGetFancyBookQuery,
   useGetCurrentBetsQuery,
+  useGetActivityLogsQuery,
+  useChangePasswordMutation,
   useGetButtonSettingsQuery,
   useUpdateButtonSettingsMutation,
 } = authApi
