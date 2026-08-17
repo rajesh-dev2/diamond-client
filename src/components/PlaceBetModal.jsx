@@ -52,8 +52,11 @@ export default function PlaceBetModal({ show, onHide, betData, onPlaceBet }) {
     >
       <div className="modal-header">
         <div className="modal-title h4">Place Bet</div>
-        <button type="button" className="btn-close" aria-label="Close" onClick={onHide}></button>
+        <button type="button" className="btn-close-custom" aria-label="Close" onClick={onHide}>
+          ✕
+        </button>
       </div>
+
       <div className="modal-body p-0">
         <div className={`gdv2-bet-box gdv2-bet-${betType}`}>
           {/* Header labels */}

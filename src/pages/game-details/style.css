@@ -84,10 +84,28 @@
   margin: 0;
 }
 
-.place-bet-modal-top .modal-header .btn-close {
-  filter: invert(1) grayscale(100%) brightness(200%);
+.place-bet-modal-top .modal-header .btn-close,
+.place-bet-modal-top .modal-header .btn-close-custom {
+  color: #fff !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1 !important;
   opacity: 0.9;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
+
+.place-bet-modal-top .modal-header .btn-close:hover,
+.place-bet-modal-top .modal-header .btn-close-custom:hover {
+  opacity: 1;
+}
+
 
 .place-bet-modal-top .modal-body {
   background-color: transparent;
