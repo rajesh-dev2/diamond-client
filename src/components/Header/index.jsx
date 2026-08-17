@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../../store/authSlice'
@@ -17,6 +17,31 @@ export default function Header({ onToggleSidebar }) {
   const [searchOpen, setSearchOpen] = useState(false)
   const [setButtonModalOpen, setSetButtonModalOpen] = useState(false)
   const [rulesModalOpen, setRulesModalOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  const [showBalance, setShowBalance] = useState(() => {
+    const saved = localStorage.getItem('header_show_balance')
+    return saved !== null ? JSON.parse(saved) : true
+  })
+  const [showExposure, setShowExposure] = useState(() => {
+    const saved = localStorage.getItem('header_show_exposure')
+    return saved !== null ? JSON.parse(saved) : true
+  })
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false)
+      }
+    }
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [dropdownOpen])
 
   const handleLogout = () => {
     dispatch(logout())
@@ -25,6 +50,24 @@ export default function Header({ onToggleSidebar }) {
 
   const toggleSearch = () => {
     setSearchOpen((prev) => !prev)
+  }
+
+  const handleToggleBalance = (e) => {
+    e.stopPropagation()
+    setShowBalance((prev) => {
+      const next = !prev
+      localStorage.setItem('header_show_balance', JSON.stringify(next))
+      return next
+    })
+  }
+
+  const handleToggleExposure = (e) => {
+    e.stopPropagation()
+    setShowExposure((prev) => {
+      const next = !prev
+      localStorage.setItem('header_show_exposure', JSON.stringify(next))
+      return next
+    })
   }
 
   return (
@@ -74,18 +117,22 @@ export default function Header({ onToggleSidebar }) {
 
           {/* Balance & Exp */}
           <div className="header-balance-section user-balance">
-            <div className="header-balance-item">
-              <span className="header-balance-label">Balance:</span>
-              <b className="header-balance-value">{userInfo?.availableBalance ?? 0}</b>
-            </div>
-            <div className="header-balance-item">
-              <span className="header-balance-label">Exp:</span>
-              <b className="header-balance-value is-clickable">{userInfo?.exposure ?? 0}</b>
-            </div>
+            {showBalance && (
+              <div className="header-balance-item">
+                <span className="header-balance-label">Balance:</span>
+                <b className="header-balance-value">{userInfo?.availableBalance ?? 0}</b>
+              </div>
+            )}
+            {showExposure && (
+              <div className="header-balance-item">
+                <span className="header-balance-label">Exp:</span>
+                <b className="header-balance-value is-clickable">{userInfo?.exposure ?? 0}</b>
+              </div>
+            )}
           </div>
 
           {/* User Profile Dropdown Toggle & Menu */}
-          <div className="header-user-dropdown-wrapper">
+          <div className="header-user-dropdown-wrapper" ref={dropdownRef}>
             <a 
               className="header-user-toggle"
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -121,12 +168,38 @@ export default function Header({ onToggleSidebar }) {
                   <li className="header-dropdown-item">Change Password</li>
                 </Link>
                 <a 
-                  className="header-dropdown-link mobile-only" 
+                  className="header-dropdown-link" 
                   onClick={() => { setDropdownOpen(false); setRulesModalOpen(true); }}
                   style={{ cursor: 'pointer' }}
                 >
                   <li className="header-dropdown-item">Rules</li>
                 </a>
+                <li 
+                  className="header-dropdown-item header-dropdown-checkbox-item"
+                  onClick={handleToggleBalance}
+                >
+                  <span>Balance</span>
+                  <input 
+                    type="checkbox" 
+                    className="form-check-input header-menu-checkbox" 
+                    checked={showBalance} 
+                    onChange={handleToggleBalance}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </li>
+                <li 
+                  className="header-dropdown-item header-dropdown-checkbox-item"
+                  onClick={handleToggleExposure}
+                >
+                  <span>Exposure</span>
+                  <input 
+                    type="checkbox" 
+                    className="form-check-input header-menu-checkbox" 
+                    checked={showExposure} 
+                    onChange={handleToggleExposure}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </li>
                 <hr className="header-dropdown-divider" />
                 <li 
                   className="header-dropdown-item"
