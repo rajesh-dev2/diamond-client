@@ -4,7 +4,7 @@
   /* Modal Backdrop / Overlay */
   .modal-overlay {
     @apply fixed inset-0 z-[1050] flex justify-center items-start bg-black/60 pt-[42px] p-2 overflow-y-auto;
-  
+  }
 
   /* Modal Dialog Container */
   .modal-dialog {
@@ -122,7 +122,6 @@
 
   .modal-footer .btn-close-footer {
     @apply bg-[#bd2130] hover:bg-[#a71d2a] text-white font-sans text-[14px] font-medium py-1.5 px-4 rounded-none border border-[#b21f2d] cursor-pointer transition-colors leading-normal;
-  }
   }
 }
 
