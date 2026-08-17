@@ -48,7 +48,7 @@ export default function CurrentBets() {
         <div className="card-body">
           {/* Top Form Filter Row */}
           <form className="report-filter-form" onSubmit={handleSubmit}>
-            <div style={{ width: '190px' }}>
+            <div className="report-filter-item report-filter-select">
               <select
                 className="form-select"
                 name="gtype"
@@ -60,82 +60,86 @@ export default function CurrentBets() {
                 <option value="2">Casino</option>
               </select>
             </div>
-            <div>
+            <div className="report-filter-item report-filter-btn">
               <button type="submit" className="btn btn-primary btn-submit">Submit</button>
             </div>
           </form>
 
           {/* Table Controls (Show, Radio Filter, Totals, Search) */}
-          <div className="report-controls-bar">
-            <div className="report-show-entries">
-              <span>Show</span>
-              <select
-                className="form-select"
-                value={entriesCount}
-                onChange={(e) => setEntriesCount(Number(e.target.value))}
-              >
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30">30</option>
-                <option value="40">40</option>
-                <option value="50">50</option>
-              </select>
-              <span>Entries</span>
+          <div className="report-controls-bar current-bets-controls">
+            <div className="report-controls-top-row">
+              <div className="report-show-entries">
+                <span>Show</span>
+                <select
+                  className="form-select"
+                  value={entriesCount}
+                  onChange={(e) => setEntriesCount(Number(e.target.value))}
+                >
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                </select>
+                <span>Entries</span>
+              </div>
+
+              <div className="report-radio-filters">
+                <div className="form-check form-check-inline m-0">
+                  <input
+                    type="radio"
+                    className="form-check-input me-1"
+                    id="all"
+                    name="filter"
+                    value="all"
+                    checked={filter === 'all'}
+                    onChange={() => setFilter('all')}
+                  />
+                  <label className="form-check-label" htmlFor="all">All</label>
+                </div>
+                <div className="form-check form-check-inline m-0">
+                  <input
+                    type="radio"
+                    className="form-check-input me-1"
+                    id="back"
+                    name="filter"
+                    value="back"
+                    checked={filter === 'back'}
+                    onChange={() => setFilter('back')}
+                  />
+                  <label className="form-check-label" htmlFor="back">Back</label>
+                </div>
+                <div className="form-check form-check-inline m-0">
+                  <input
+                    type="radio"
+                    className="form-check-input me-1"
+                    id="lay"
+                    name="filter"
+                    value="lay"
+                    checked={filter === 'lay'}
+                    onChange={() => setFilter('lay')}
+                  />
+                  <label className="form-check-label" htmlFor="lay">Lay</label>
+                </div>
+              </div>
             </div>
 
-            <div className="d-flex align-items-center gap-3">
-              <div className="form-check form-check-inline m-0">
-                <input
-                  type="radio"
-                  className="form-check-input me-1"
-                  id="all"
-                  name="filter"
-                  value="all"
-                  checked={filter === 'all'}
-                  onChange={() => setFilter('all')}
-                />
-                <label className="form-check-label" htmlFor="all">All</label>
+            <div className="report-controls-bottom-row">
+              <div className="report-totals-info">
+                <span>Total Bets: <b>{total}</b></span>
+                <span>Total Amount: <b>{totalAmount}</b></span>
               </div>
-              <div className="form-check form-check-inline m-0">
-                <input
-                  type="radio"
-                  className="form-check-input me-1"
-                  id="back"
-                  name="filter"
-                  value="back"
-                  checked={filter === 'back'}
-                  onChange={() => setFilter('back')}
-                />
-                <label className="form-check-label" htmlFor="back">Back</label>
-              </div>
-              <div className="form-check form-check-inline m-0">
-                <input
-                  type="radio"
-                  className="form-check-input me-1"
-                  id="lay"
-                  name="filter"
-                  value="lay"
-                  checked={filter === 'lay'}
-                  onChange={() => setFilter('lay')}
-                />
-                <label className="form-check-label" htmlFor="lay">Lay</label>
-              </div>
-            </div>
 
-            <div className="d-flex align-items-center gap-3">
-              <span>Total Bets: <b>{total}</b></span>
-              <span>Total Amount: <b>{totalAmount}</b></span>
-            </div>
-
-            <div className="report-search-box">
-              <span>Search:</span>
-              <input
-                type="search"
-                className="form-control"
-                placeholder={`${total} records...`}
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
+              <div className="report-search-box">
+                <span>Search:</span>
+                <input
+                  type="search"
+                  className="form-control"
+                  placeholder={`${total} records...`}
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+              </div>
             </div>
           </div>
 
@@ -154,7 +158,6 @@ export default function CurrentBets() {
                       type="checkbox"
                       className="form-check-input"
                       title="Toggle All Current Page Rows Selected"
-                      style={{ cursor: 'pointer' }}
                       checked={selectAll}
                       onChange={(e) => setSelectAll(e.target.checked)}
                     />

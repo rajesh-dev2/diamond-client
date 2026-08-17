@@ -52,29 +52,31 @@ export default function AccountStatement() {
         <div className="card-body">
           {/* Filter Form Row matching reference */}
           <form className="report-filter-form" onSubmit={handleSubmit}>
-            <div style={{ width: '150px' }}>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                dateFormat="dd/MM/yyyy"
-                customInput={<CustomDateInput />}
-                popperContainer={({ children }) => createPortal(children, document.body)}
-                popperPlacement="bottom-start"
-              />
+            <div className="report-filter-dates-row">
+              <div className="report-filter-item report-filter-date">
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  customInput={<CustomDateInput />}
+                  popperContainer={({ children }) => createPortal(children, document.body)}
+                  popperPlacement="bottom-start"
+                />
+              </div>
+
+              <div className="report-filter-item report-filter-date">
+                <DatePicker
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  customInput={<CustomDateInput />}
+                  popperContainer={({ children }) => createPortal(children, document.body)}
+                  popperPlacement="bottom-start"
+                />
+              </div>
             </div>
 
-            <div style={{ width: '150px' }}>
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                dateFormat="dd/MM/yyyy"
-                customInput={<CustomDateInput />}
-                popperContainer={({ children }) => createPortal(children, document.body)}
-                popperPlacement="bottom-start"
-              />
-            </div>
-
-            <div style={{ width: '230px' }}>
+            <div className="report-filter-item report-filter-select">
               <select 
                 className="form-select" 
                 name="type"
@@ -89,7 +91,7 @@ export default function AccountStatement() {
               </select>
             </div>
 
-            <div>
+            <div className="report-filter-item report-filter-btn">
               <button type="submit" className="btn btn-primary btn-submit">Submit</button>
             </div>
           </form>

@@ -47,35 +47,37 @@ export default function CasinoResults() {
         <div className="card-body">
           {/* Filter Form Row */}
           <form className="report-filter-form" onSubmit={handleSubmit}>
-            <div style={{ width: '150px' }}>
-              <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                dateFormat="dd/MM/yyyy"
-                customInput={<CustomDateInput />}
-                popperContainer={({ children }) => createPortal(children, document.body)}
-                popperPlacement="bottom-start"
-              />
+            <div className="report-filter-dates-row">
+              <div className="report-filter-item report-filter-date">
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  customInput={<CustomDateInput />}
+                  popperContainer={({ children }) => createPortal(children, document.body)}
+                  popperPlacement="bottom-start"
+                />
+              </div>
+
+              <div className="report-filter-item report-filter-select">
+                <select 
+                  className="form-select" 
+                  name="type"
+                  value={casinoType}
+                  onChange={(e) => setCasinoType(e.target.value)}
+                >
+                  <option value="" disabled>Select Casino Type</option>
+                  <option value="1">Teenpatti</option>
+                  <option value="2">32 Cards</option>
+                  <option value="3">Baccarat</option>
+                  <option value="4">Poker</option>
+                  <option value="5">Lucky 7</option>
+                  <option value="6">Dragon Tiger</option>
+                </select>
+              </div>
             </div>
 
-            <div style={{ width: '200px' }}>
-              <select 
-                className="form-select" 
-                name="type"
-                value={casinoType}
-                onChange={(e) => setCasinoType(e.target.value)}
-              >
-                <option value="" disabled>Select Casino Type</option>
-                <option value="1">Teenpatti</option>
-                <option value="2">32 Cards</option>
-                <option value="3">Baccarat</option>
-                <option value="4">Poker</option>
-                <option value="5">Lucky 7</option>
-                <option value="6">Dragon Tiger</option>
-              </select>
-            </div>
-
-            <div>
+            <div className="report-filter-item report-filter-btn">
               <button type="submit" className="btn btn-primary btn-submit">Submit</button>
             </div>
           </form>

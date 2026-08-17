@@ -52,14 +52,38 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
+  width: 100%;
+}
+
+.report-page .report-filter-dates-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .report-page .report-filter-item {
-  min-width: 140px;
+  display: flex;
+  align-items: center;
+}
+
+.report-page .report-filter-date {
+  width: 150px;
+}
+
+.report-page .report-filter-select {
+  width: 230px;
+}
+
+.report-page .report-filter-select-half {
+  width: 150px;
 }
 
 .report-page .report-filter-item-select {
   min-width: 190px;
+}
+
+.report-page .report-filter-btn {
+  display: flex;
 }
 
 /* Form Controls & Datepickers */
@@ -82,6 +106,7 @@
   padding-right: 2rem;
   padding-left: 0.5rem;
   cursor: pointer;
+  width: 100%;
 }
 
 .custom-datepicker i {
@@ -96,7 +121,7 @@
 
 .report-page .form-control,
 .report-page .form-select {
-  height: 32px;
+  height: 34px;
   font-size: 13px;
   border: 1px solid #ced4da;
   border-radius: 0;
@@ -105,6 +130,19 @@
   padding: 4px 8px;
   box-shadow: none;
   outline: none;
+  width: 100%;
+}
+
+.report-page .form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  background-size: 12px 8px;
+  padding-right: 1.8rem;
+  cursor: pointer;
 }
 
 .report-page .form-label {
@@ -126,19 +164,19 @@
 /* Buttons */
 .report-page .btn {
   font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
 }
 
-/* Submit & Primary Buttons: font-weight 400, font-size 16px */
+/* Submit & Primary Buttons */
 .report-page .btn-submit,
 .report-page .btn-primary,
 .report-page button[type="submit"] {
   background-color: #000000;
   border: 1px solid #000000;
   color: #ffffff;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 15px;
   line-height: 1.2;
   height: 34px;
   border-radius: 0;
@@ -172,8 +210,8 @@
 .report-page.change-password-page button[type="submit"] {
   width: 100%;
   height: 36px;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 /* Secondary / Pagination Buttons */
@@ -205,6 +243,53 @@
   margin-bottom: 8px;
   font-size: 13px;
   color: #333333;
+  width: 100%;
+}
+
+.report-page .current-bets-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.report-page .report-controls-top-row,
+.report-page .report-controls-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.report-page .report-radio-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.report-page .report-totals-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #333333;
+  white-space: nowrap;
+}
+
+@media (min-width: 992px) {
+  .report-page .current-bets-controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .report-page .report-controls-top-row,
+  .report-page .report-controls-bottom-row {
+    width: auto;
+    gap: 16px;
+  }
 }
 
 .report-page .report-show-entries {
@@ -214,13 +299,22 @@
   white-space: nowrap;
 }
 
+.report-page .report-show-entries select.form-select,
 .report-page .report-show-entries select {
   width: 65px;
   height: 28px;
-  padding: 2px 6px;
+  padding: 2px 18px 2px 6px;
   font-size: 13px;
   border: 1px solid #ced4da;
   border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.35rem center;
+  background-size: 10px 7px;
+  cursor: pointer;
 }
 
 .report-page .report-search-box {
@@ -232,7 +326,7 @@
 }
 
 .report-page .report-search-box input {
-  width: 140px;
+  width: 130px;
   height: 28px;
   padding: 2px 8px;
   font-size: 13px;
@@ -280,6 +374,11 @@
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.report-page table thead th .form-check-input {
+  border-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 .report-page .form-check-input[type="radio"],
@@ -348,7 +447,7 @@
   vertical-align: middle;
 }
 
-/* Light Grey Table Header matching IceBook9 reference */
+/* Desktop Table Header matching IceBook9 reference */
 .report-page table thead th {
   background-color: #f2f2f2;
   color: #222222;
@@ -404,4 +503,136 @@
   max-width: calc(100vw - 20px);
   box-sizing: border-box;
   position: relative;
+}
+
+/* ===== Mobile Responsive Layout (< 768px) ===== */
+@media (max-width: 767px) {
+  .report-page .card-body {
+    padding: 8px 10px;
+  }
+
+  .report-page .report-filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .report-page .report-filter-dates-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .report-page .report-filter-dates-row .report-filter-date,
+  .report-page .report-filter-dates-row .report-filter-item,
+  .report-page .report-filter-form > .report-filter-date {
+    flex: 1 1 0%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .report-page .report-filter-select,
+  .report-page .report-filter-select-half,
+  .report-page .report-filter-item-select {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .report-page .report-filter-select .form-select,
+  .report-page .report-filter-select-half .form-select {
+    width: 100%;
+  }
+
+  .report-page .report-filter-btn {
+    width: 100%;
+  }
+
+  .report-page .report-filter-btn .btn-submit,
+  .report-page .report-filter-btn button[type="submit"] {
+    width: 100%;
+    min-width: 100%;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .report-page .report-controls-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .report-page .report-controls-top-row,
+  .report-page .report-controls-bottom-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .report-page .report-show-entries {
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  .report-page .report-show-entries select.form-select,
+  .report-page .report-show-entries select {
+    width: 58px;
+    height: 28px;
+    font-size: 12px;
+    padding: 2px 14px 2px 4px;
+  }
+
+  .report-page .report-radio-filters {
+    gap: 8px;
+  }
+
+  .report-page .report-radio-filters .form-check-inline {
+    margin-right: 4px;
+    gap: 3px;
+  }
+
+  .report-page .report-radio-filters .form-check-label {
+    font-size: 13px;
+  }
+
+  .report-page .report-totals-info {
+    gap: 8px;
+    font-size: 12.5px;
+  }
+
+  .report-page .report-search-box {
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  .report-page .report-search-box input {
+    width: 110px;
+    height: 28px;
+    font-size: 12px;
+    padding: 2px 6px;
+  }
+
+  /* Mobile-only Table Header: Teal #296F91 with white text */
+  .report-page table thead th {
+    background-color: #296F91;
+    color: #ffffff;
+    border: 1px solid #3c82a5;
+    padding: 5px 8px;
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+
+  .report-page table.table-bordered td {
+    padding: 5px 8px;
+    font-size: 12.5px;
+  }
 }
