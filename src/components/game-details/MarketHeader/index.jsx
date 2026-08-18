@@ -51,7 +51,7 @@ export default function MarketHeader({
         ) : layout === 'compact' ? (
           <>
             <OddBox variant="back" odd={null} volume={null}><b>Back</b></OddBox>
-            <OddBox variant="lay" odd={null} volume={null}><b>Lay</b></OddBox>
+            {hasLay && <OddBox variant="lay" odd={null} volume={null}><b>Lay</b></OddBox>}
           </>
         ) : layout === 'fancy' ? (
           <>

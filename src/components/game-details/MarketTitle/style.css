@@ -4,20 +4,63 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 8px;
-  background-color: #4883A0;
+  padding: 4px 10px;
+  background-color: #296F8E;
   color: #fff;
+  min-height: 28px;
+}
+
+/* Left side: title + inline rules */
+.gdv2-market-title-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
 }
 
 .gdv2-market-title-text {
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #fff;
   display: inline-block;
   overflow: hidden;
-
   text-overflow: ellipsis;
   white-space: nowrap;
   line-height: normal;
+  text-transform: uppercase;
+}
+
+.gdv2-market-rules-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff !important;
+  text-decoration: underline !important;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: normal;
+  transition: opacity 0.15s ease;
+}
+
+.gdv2-market-rules-link:hover {
+  opacity: 0.85;
+}
+
+/* Right side: Round ID / Cashout / Custom */
+.gdv2-market-title-right {
+  margin-left: auto;
+  padding-left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.gdv2-market-round-id {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
 }
 
 .gdv2-cashout-btn {
@@ -43,7 +86,18 @@
 
 @media (max-width: 767px) {
   .gdv2-market-title {
+    padding: 3px 8px;
+  }
+
+  .gdv2-market-title-text {
     font-size: 13px;
-    padding: 3px 6px;
+  }
+
+  .gdv2-market-rules-link {
+    font-size: 11px;
+  }
+
+  .gdv2-market-round-id {
+    font-size: 11px;
   }
 }

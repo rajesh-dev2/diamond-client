@@ -1,0 +1,466 @@
+/* ═══════════════════════════════════════════════════════════════
+   Worli 3 / Matka Market Stylesheet
+   Faithfully styled according to standard Matka Market casino layout
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-page-container.worli.matka {
+  width: 100%;
+}
+
+/* ── Matka Venue Schedule Tabs Strip ────────────────────────── */
+.matka-tabs {
+  padding: 3px 2px;
+  overflow-x: auto;
+}
+
+.matka-tabs .nav-pills {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.matka-tabs .nav-item {
+  flex: 0 0 auto;
+}
+
+.matka-tabs .nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: #374151;
+  border-radius: 0;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.matka-tabs .nav-link span {
+  font-size: 14px;
+}
+
+.matka-tabs .nav-link.active {
+  background: #125e7b;
+}
+
+.matka-tabs .remaining-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #f8c038;
+  font-size: 11px;
+  font-weight: 700;
+  margin: 1px 0;
+}
+
+.matka-tabs .remaining-time img {
+  width: 15px;
+  height: auto;
+  object-fit: contain;
+  display: inline-block;
+}
+
+.matka-tabs .remaining-time span {
+  font-size: 12px;
+}
+
+.matka-tabs .game-time span {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* ── Video Stream Section ───────────────────────────────────── */
+.casino-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.video-box-container,
+.casino-video-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.casino-video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.w3-audio-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.w3-audio-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.05);
+}
+
+.w3-video-overlay-box {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(240, 225, 180, 0.85);
+  border: 1px solid #cca96a;
+  border-radius: 4px;
+  padding: 3px 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.w3-overlay-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #4a3818;
+}
+
+.w3-overlay-name {
+  font-size: 13px;
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+.w3-table-score-overlay {
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(245, 184, 46, 0.6);
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.w3-score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.w3-score-label {
+  color: #f5b82e;
+}
+
+.w3-score-val {
+  color: #fff;
+}
+
+.w3-score-card {
+  width: 32px;
+  height: 42px;
+  background: #a31922;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ── 1-Click Coin Amount Bar ────────────────────────────────── */
+.matka .matka-coins,
+.matka-coins {
+  width: 100%;
+  background: #00000024;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  gap: 12px;
+}
+
+.casino-detail .casino-table {
+  margin-top: 4px;
+}
+
+.matka-coin-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #222;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+}
+
+.matka-coin-title .btn-danger {
+  background: #bd1828;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 0;
+  height: 31px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.matka-total-coin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 16px;
+  color: #333;
+}
+
+.matka-other-coins {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ── Casino Chip Styles (DevTools Matched with SVG icon) ─────── */
+:root {
+  --g-ttf: cubic-bezier(0.4, 0, 0.2, 1);
+  --g-black-rgb: 0, 0, 0;
+}
+
+.casino-coin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.bet-chip-holder {
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  cursor: pointer;
+  position: relative;
+}
+
+.matka .matka-coins .matka-coin-title span {
+  font-weight: bold;
+  font-size: 12px;
+  background: #0000001a;
+  padding: 4.5px 9px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.matka .matka-coins .matka-other-coins .casino-coin.selected .bet-chip-holder {
+  box-shadow: 0 0 10px #1fb512;
+  border-radius: 50%;
+  transition: all ease-in-out 0.8s;
+  transform: scale(1.05);
+}
+
+
+.bet-chip {
+  position: relative;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0.1328125311rem 0.2656250623rem 0 rgba(var(--g-black-rgb, 0, 0, 0), 0.8);
+  transition: transform 180ms var(--g-ttf, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+
+.bet-chip:active {
+  transform: scale(0.95);
+}
+
+.bet-chip:before {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.bet-chip-front {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--g-chip-inner-color);
+  background-image: url("https://versionobj.ecoassetsservice.com/v105/static/front/img/roulette/icon.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center bottom, center;
+  background-size: 100% auto, cover;
+  border-radius: 50%;
+  transition: transform 360ms var(--g-ttf, cubic-bezier(0.4, 0, 0.2, 1)), border-radius 360ms var(--g-ttf, cubic-bezier(0.4, 0, 0.2, 1));
+  z-index: 1;
+}
+
+.bet-chip-top:before,
+.bet-chip-top:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bet-chip-top:before {
+  width: 64%;
+  height: 64%;
+  margin: auto;
+  background-color: var(--g-chip-inner-color);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.bet-chip-amount {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.bet-chip-amount-in {
+  width: 100%;
+  height: 100%;
+}
+
+.bet-chip-amount-label {
+  font-family: 'Roboto', 'Arial Black', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  fill: #fff;
+}
+
+
+
+/* ── Last Result Section ────────────────────────────────────── */
+.casino-last-result-title {
+  background: #296F8E;
+  color: #fff;
+  padding: 4px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+.casino-last-result-title a {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.casino-last-results.matka-result {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  overflow-x: auto;
+  background: #f7f7f7;
+}
+
+.result.result-b {
+  background: #c5c6c8;
+  border: none;
+  border-radius: 4px;
+  color: #222;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.result.result-b:hover {
+  background: #b0b2b5;
+}
+
+.result.result-b.active {
+  background: #555;
+  color: #fff;
+}
+
+/* ── Suspended Overlay Styles ───────────────────────────────── */
+.suspended-box {
+  position: relative;
+}
+
+.worli.matka .suspended-box::before {
+  z-index: 2;
+}
+
+.suspended-box::before {
+  background-image: url(/img/icons/lock.svg);
+  background-size: 17px 17px;
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  pointer-events: none;
+}
+
+.suspended-box::after {
+  content: "";
+  background-color: rgba(55, 54, 54, 0.84);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  cursor: not-allowed;
+  z-index: 1;
+}

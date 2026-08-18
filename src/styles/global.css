@@ -8,6 +8,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'CasinoNumFont';
+  src: url('../assets/fonts/casino3dmarquee-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   --font-sans: 'Roboto Condensed', sans-serif;
   --font-weight-thin: 100;

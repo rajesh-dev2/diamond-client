@@ -1,0 +1,17 @@
+/* ═══════════════════════════════════════════════════════════
+   CasinoLayout Styles
+   Inherits game-details layout grid (gdv2-page, gdv2-layout, gdv2-main, gdv2-right-sidebar)
+   and PlaceBetModal dialog styles.
+   ═══════════════════════════════════════════════════════════ */
+
+@import '../../pages/game-details/style.css';
+@import '../game-details/MobileTabs/style.css';
+
+.csn-mobile-bets-wrap {
+  background: #fff;
+  padding: 4px;
+}
+
+.gdv2-page.casino-page {
+  background-color: white;
+}
