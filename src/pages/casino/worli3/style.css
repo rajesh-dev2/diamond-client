@@ -242,6 +242,13 @@
   color: white;
 }
 
+.matka-coins-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
 .matka-total-coin {
   display: flex;
   align-items: center;
@@ -471,7 +478,6 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  min-width: 110px;
   list-style: none;
   background: #f7f7f7;
   flex-shrink: 0;
@@ -626,6 +632,7 @@
   display: flex;
   width: 100%;
   height: auto;
+  flex-wrap: wrap;
 }
 
 .worli-full .worli-odd-box.back {
@@ -653,11 +660,13 @@
 /* ── Jodi 10x10 Grid ─────────────────────────────────────────── */
 .jodi .worli-box-row {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   height: auto;
 }
 
 .jodi .worli-odd-box.back {
+  flex: 1 1 0;
   height: 70px;
   min-width: 0;
   background: #70bbf5;
@@ -666,6 +675,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .jodi .worli-odd {
@@ -898,4 +908,363 @@
   display: inline-block;
   text-align: center;
   user-select: none;
+}
+
+
+/* Responsonsive Layout */
+
+@media only screen and (max-width: 767px) {
+
+  /* ── Matka Venue Schedule Tabs ── */
+  .matka-tabs {
+    padding: 2px;
+  }
+
+  .matka-tabs .nav-link {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+
+  .matka-tabs .nav-link span {
+    font-size: 11px;
+  }
+
+  .matka-tabs .remaining-time {
+    font-size: 10px;
+    gap: 2px;
+  }
+
+  .matka-tabs .remaining-time img {
+    width: 12px;
+  }
+
+  .matka-tabs .remaining-time span {
+    font-size: 10px;
+  }
+
+  .matka-tabs .game-time span {
+    font-size: 9px;
+  }
+
+  /* ── 1-Click Coin Bar ── */
+  .matka .matka-coins,
+  .matka-coins {
+    padding: 4px 6px;
+    gap: 6px;
+  }
+
+  .bet-chip-holder {
+    height: 35px;
+    width: 35px;
+    flex: 0 0 35px;
+  }
+
+  .bet-chip-amount-label {
+    font-size: 26px;
+  }
+
+  .matka-coin-title {
+    flex-direction: row-reverse;
+    font-size: 10px;
+    gap: 4px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .matka .matka-coins .matka-coin-title span {
+    font-size: 9.5px;
+    padding: 2px 4px;
+  }
+
+  .matka-coin-title .btn-danger {
+    height: 24px;
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+
+  .matka-coins-group {
+    gap: 6px;
+  }
+
+  .matka-total-coin {
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  .matka-other-coins {
+    gap: 4px;
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+
+  /* ── Market Tabs Sidebar & Content ── */
+  .worli-market-tabs-wrapper {
+    min-height: 300px;
+  }
+
+  .worli-market-tabs-wrapper .nav-link {
+    height: 25px;
+    font-size: 12px;
+    padding: 0 2px;
+  }
+
+  .worli-box-title {
+    font-size: 13px;
+    min-height: 20px;
+    padding: 2px 0;
+  }
+
+  .worli-box-title b {
+    font-size: 12px !important;
+  }
+
+  .worli-odd {
+    font-size: 20px;
+  }
+
+  /* ── Standard Grid Row Heights ── */
+  .worli-left .worli-odd-box.back,
+  .worli-full .worli-odd-box.back {
+    height: 40px;
+  }
+
+  .worli-right .worli-odd-box.back {
+    min-height: 40px;
+  }
+
+  /* ── Jodi Grid Mobile (5 columns with flex-wrap) ── */
+  .jodi .worli-box-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .jodi .worli-odd-box.back {
+    flex: 0 0 20%;
+    width: 20%;
+    max-width: 20%;
+    height: 40px;
+    background: #70bbf5;
+    border: 1px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .jodi .worli-odd {
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  /* ── Single Tab ── */
+  .single .worli-right .worli-odd-box.back {
+    height: 40px;
+  }
+
+  .single .worli-right .worli-odd {
+    font-size: 20px;
+  }
+
+  .single .worli-right .d-block {
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  /* ── Trio Tab ── */
+  .trio .worli-box-row,
+  .trio .worli-odd-box.back.full-row-box {
+    height: 40px !important;
+  }
+
+  /* ── ABR Tab ── */
+  .abr .worli-left .worli-box-row,
+  .abr .worli-right .worli-box-row,
+  .abr .worli-right .worli-odd-box.back {
+    height: 40px;
+  }
+
+  .abr .worli-odd {
+    font-size: 18px;
+  }
+
+  /* ── Pana Tab (5 columns per row with wrap) ── */
+  .pana .worlibox {
+    padding: 4px 4px 8px;
+  }
+
+  .pana-sub-nav .nav-link {
+    height: 24px;
+    font-size: 11px;
+    padding: 0 8px;
+  }
+
+  .pana-sub-nav .nav-link b {
+    font-size: 11px;
+  }
+
+  .pana-tab-content h4 {
+    font-size: 13px;
+    margin: 6px 0 4px;
+  }
+
+  .pana-columns-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 8px;
+    row-gap: 12px;
+  }
+
+  .worli-odd-box-col {
+    flex: 0 0 calc((100% - 16px) / 5);
+    width: calc((100% - 16px) / 5);
+    max-width: calc((100% - 16px) / 5);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .worli-odd-box-col .header-digit {
+    height: 36px;
+    font-size: 20px;
+    width: 80%;
+  }
+
+  .worli-sub-odd-box-container {
+    padding: 20px 2px 4px 2px;
+    margin-top: -16px;
+    gap: 2px;
+    border: 1px solid #70bbf5;
+    background: transparent;
+  }
+
+  .worli-sub-odd-box.back {
+    height: 30px;
+  }
+
+  .worli-sub-odd-box .worli-odd {
+    font-size: 19px;
+  }
+
+  .tp-pana-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 4px;
+    row-gap: 6px;
+    height: auto;
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+
+  .tp-pana-row .worli-odd-box.back {
+    flex: 0 0 calc((100% - 16px) / 5);
+    width: calc((100% - 16px) / 5);
+    max-width: calc((100% - 16px) / 5);
+    height: 36px;
+  }
+
+  .tp-pana-row .worli-odd {
+    font-size: 24px;
+  }
+
+  /* ── Last Result Section ── */
+  .casino-last-result-title {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .casino-last-result-title a {
+    font-size: 11px;
+  }
+
+  .matka-result.casino-last-results {
+    padding-bottom: 6px;
+    gap: 4px;
+  }
+
+  .matka-result.casino-last-results .result {
+    min-width: 55px;
+    font-size: 11px;
+    padding: 2px 4px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
+  .worli-market-tabs-wrapper .nav-link {
+    font-size: 11px;
+    height: 23px;
+  }
+
+  .bet-chip-holder {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .jodi .worli-odd-box.back {
+    flex: 0 0 20%;
+    width: 20%;
+    max-width: 20%;
+    height: 38px;
+  }
+
+  .jodi .worli-odd {
+    font-size: 22px;
+  }
+
+  .worli-left .worli-odd-box.back,
+  .worli-full .worli-odd-box.back,
+  .worli-right .worli-odd-box.back,
+  .single .worli-right .worli-odd-box.back,
+  .abr .worli-left .worli-box-row,
+  .abr .worli-right .worli-box-row,
+  .abr .worli-right .worli-odd-box.back {
+    height: 36px;
+  }
+
+  .worli-odd {
+    font-size: 18px;
+  }
+
+  .pana-columns-row {
+    gap: 3px;
+    row-gap: 10px;
+  }
+
+  .worli-odd-box-col {
+    flex: 0 0 calc((100% - 12px) / 5);
+    width: calc((100% - 12px) / 5);
+    max-width: calc((100% - 12px) / 5);
+  }
+
+  .worli-odd-box-col .header-digit {
+    height: 34px;
+    font-size: 20px;
+  }
+
+  .worli-sub-odd-box.back {
+    height: 28px;
+  }
+
+  .worli-sub-odd-box .worli-odd {
+    font-size: 19px;
+  }
+
+  .tp-pana-row .worli-odd-box.back {
+    flex: 0 0 calc((100% - 12px) / 5);
+    width: calc((100% - 12px) / 5);
+    max-width: calc((100% - 12px) / 5);
+    height: 34px;
+  }
+
+  .tp-pana-row .worli-odd {
+    font-size: 24px;
+  }
 }

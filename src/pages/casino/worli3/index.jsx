@@ -173,59 +173,62 @@ export default function Worli3() {
                     </button>
                   </div>
 
-                  {/* Total Coin Accumulator */}
-                  <div className="matka-total-coin">
-                    <div className="casino-coin">
-                      <div className="bet-chip-holder" style={{ '--g-chip-inner-color': '#502b63' }}>
-                        <div className="bet-chip">
-                          <div className="bet-chip-front" />
-                          <div className="bet-chip-top" />
-                          <div className="bet-chip-amount">
-                            <svg className="bet-chip-amount-in" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 108 108">
-                              <text className="bet-chip-amount-label" x="50%" y="53.5%" dominantBaseline="middle" textAnchor="middle" fill="#fff" fontSize="32" fontWeight="700">
-                                {coinAmount}
-                              </text>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>=</div>
-                  </div>
-
-                  {/* Chip Multipliers */}
-                  <div className="matka-other-coins">
-                    {[
-                      { val: 25, label: '25' },
-                      { val: 50, label: '50' },
-                      { val: 100, label: '100' },
-                      { val: 200, label: '200' },
-                      { val: 500, label: '500' },
-                      { val: 1000, label: '1K' },
-                    ].map((chip, idx) => (
-                      <div key={chip.label} className="d-flex align-items-center gap-1">
-                        {idx > 0 && <div>+</div>}
-                        <div
-                          className={`casino-coin${selectedCoin === chip.val ? ' selected' : ''}`}
-                          onClick={() => handleAddCoin(chip.val)}
-                          style={{ cursor: 'pointer' }}
-                        >
-                          <div className="bet-chip-holder" style={{ '--g-chip-inner-color': '#1f6179' }}>
-                            <div className="bet-chip">
-                              <div className="bet-chip-front" />
-                              <div className="bet-chip-top" />
-                              <div className="bet-chip-amount">
-                                <svg className="bet-chip-amount-in" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 108 108">
-                                  <text className="bet-chip-amount-label" x="50%" y="53.5%" dominantBaseline="middle" textAnchor="middle" fill="#fff" fontSize="32" fontWeight="700">
-                                    {chip.label}
-                                  </text>
-                                </svg>
-                              </div>
+                  {/* Coins Selection Group (Total Accumulator + Chip Multipliers) */}
+                  <div className="matka-coins-group">
+                    {/* Total Coin Accumulator */}
+                    <div className="matka-total-coin">
+                      <div className="casino-coin">
+                        <div className="bet-chip-holder" style={{ '--g-chip-inner-color': '#502b63' }}>
+                          <div className="bet-chip">
+                            <div className="bet-chip-front" />
+                            <div className="bet-chip-top" />
+                            <div className="bet-chip-amount">
+                              <svg className="bet-chip-amount-in" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 108 108">
+                                <text className="bet-chip-amount-label" x="50%" y="53.5%" dominantBaseline="middle" textAnchor="middle" fill="#fff" fontSize="32" fontWeight="700">
+                                  {coinAmount}
+                                </text>
+                              </svg>
                             </div>
                           </div>
                         </div>
                       </div>
-                    ))}
+                      <div>=</div>
+                    </div>
+
+                    {/* Chip Multipliers */}
+                    <div className="matka-other-coins">
+                      {[
+                        { val: 25, label: '25' },
+                        { val: 50, label: '50' },
+                        { val: 100, label: '100' },
+                        { val: 200, label: '200' },
+                        { val: 500, label: '500' },
+                        { val: 1000, label: '1K' },
+                      ].map((chip, idx) => (
+                        <div key={chip.label} className="d-flex align-items-center gap-1">
+                          {idx > 0 && <div>+</div>}
+                          <div
+                            className={`casino-coin${selectedCoin === chip.val ? ' selected' : ''}`}
+                            onClick={() => handleAddCoin(chip.val)}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            <div className="bet-chip-holder" style={{ '--g-chip-inner-color': '#1f6179' }}>
+                              <div className="bet-chip">
+                                <div className="bet-chip-front" />
+                                <div className="bet-chip-top" />
+                                <div className="bet-chip-amount">
+                                  <svg className="bet-chip-amount-in" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 108 108">
+                                    <text className="bet-chip-amount-label" x="50%" y="53.5%" dominantBaseline="middle" textAnchor="middle" fill="#fff" fontSize="32" fontWeight="700">
+                                      {chip.label}
+                                    </text>
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
