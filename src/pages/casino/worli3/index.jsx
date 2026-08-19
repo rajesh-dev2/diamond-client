@@ -104,16 +104,6 @@ export default function Worli3() {
 
         return (
           <div className="casino-page-container worli matka">
-            {/* Header: Rules link */}
-            <div className="casino-header">
-              <span className="casino-name">
-                Matka Market
-                <Link to="/casino-results/worli3" className="ms-1">
-                  <small>Rules</small>
-                </Link>
-              </span>
-            </div>
-
             {/* Schedule Strip (14 Game Venues) */}
             <div className="matka-tabs">
               <ul className="nav nav-pills">
