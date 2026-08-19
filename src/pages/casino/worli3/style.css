@@ -508,7 +508,6 @@
 .worli-market-tabs-wrapper .nav-link.active {
   background: #296F91;
   color: #ffffff;
-  border-bottom: 1px solid #7d848c;
 }
 
 /* ── Tab Content Right Area ──────────────────────────────────── */
@@ -626,7 +625,7 @@
 .worli-full .worli-box-row {
   display: flex;
   width: 100%;
-  height: 60px;
+  height: auto;
 }
 
 .worli-full .worli-odd-box.back {
@@ -659,7 +658,6 @@
 }
 
 .jodi .worli-odd-box.back {
-  flex: 1 1 0;
   height: 70px;
   min-width: 0;
   background: #70bbf5;
@@ -702,8 +700,16 @@
 
 /* ── Pana Tab (Sub Nav & Multi-Column Layout) ───────────────── */
 .pana .worlibox {
-  padding: 2px 4px 6px;
+  padding: 4px 6px 12px;
   background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.pana .worli-full {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .pana-sub-nav.nav.nav-pills {
@@ -712,9 +718,8 @@
   width: 100%;
   background: transparent;
   border: none;
-  margin: 0 0 4px 0;
+  margin: 0 0 6px 0;
   padding: 0;
-  gap: 2px;
 }
 
 .pana-sub-nav .nav-item {
@@ -727,13 +732,12 @@
   align-items: center;
   justify-content: center;
   width: auto;
-  height: 25px;
-  padding: 0 10px;
+  height: 27px;
+  padding: 0 14px;
   background: #d4d6d8;
   color: #1a1e24;
-  font-size: 12px;
-  font-weight: 700;
-  border: 1px solid #9aa0a6;
+  font-size: 16px;
+  font-weight: 700 !important;
   border-radius: 0;
   cursor: pointer;
   white-space: nowrap;
@@ -743,24 +747,34 @@
   background: #c5c8cb;
   color: #000000;
   font-weight: 800;
-  border: 1px solid #7d848c;
+}
+
+.pana-tab-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pana-tab-content .tab-pane {
+  display: block !important;
+  width: 100%;
 }
 
 .pana-tab-content h4 {
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 700;
   color: #000000;
-  margin: 6px 0 4px;
+  margin: 8px 0 6px;
   border-bottom: 2px solid #000000;
   width: fit-content;
-  padding-bottom: 1px;
+  padding-bottom: 2px;
   text-transform: uppercase;
 }
 
 .pana-columns-row {
   display: flex;
   width: 100%;
-  gap: 4px;
+  gap: 8px;
   align-items: flex-start;
 }
 
@@ -773,30 +787,41 @@
 }
 
 .worli-odd-box-col .header-digit {
-  height: 32px;
+  height: 40px;
   background: #70bbf5;
   border: 1px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 20px;
   font-family: 'CasinoNumFont', sans-serif !important;
-  color: #1e3a4d;
+  color: #333;
+  margin: 0 auto;
   line-height: 1;
   user-select: none;
+  width: 70%;
+  position: relative;
+  z-index: 1;
 }
 
 .worli-sub-odd-box-container {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
   border: 1px solid #70bbf5;
   background: #ffffff;
-  padding: 2px 1px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -20px;
+  padding: 20px 6px 6px 6px;
+  z-index: 0;
+  background: #ffffff0f;
 }
 
 .worli-sub-odd-box.back {
-  height: 24px;
+  height: 30px;
   background: #70bbf5;
   border: 1px solid #ffffff;
   display: flex;
@@ -809,19 +834,21 @@
   font-size: 19px;
   line-height: 1;
   letter-spacing: 0.3px;
+  color: #333;
 }
 
 .tp-pana-row {
   display: flex;
   width: 100%;
   gap: 4px;
-  height: 38px;
-  margin-top: 4px;
+  height: 40px;
+  margin-top: 6px;
+  margin-bottom: 8px;
 }
 
 .tp-pana-row .worli-odd-box.back {
   flex: 1 1 0;
-  height: 38px;
+  height: 40px;
   background: #70bbf5;
   border: 1px solid #ffffff;
   display: flex;
@@ -832,6 +859,7 @@
 
 .tp-pana-row .worli-odd {
   font-size: 24px;
+  color: #333;
 }
 
 /* ── ABR Tab Details ─────────────────────────────────────────── */
