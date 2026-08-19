@@ -38,12 +38,49 @@ const SCHEDULE_TABS = [
 /* ── Result venues ────────────────────────────────────────────── */
 const VENUES = ['Diamond', 'World', 'Taj', 'Lords', 'Riga', 'Asia', 'Gulf']
 
+// ── Worli Datasets ──────────────────────────────────────────────
+const DIGIT_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+
+const JODI_GRID = Array.from({ length: 10 }, (_, row) =>
+  Array.from({ length: 10 }, (_, col) => `${row}-${col}`)
+)
+
+const SP_PANA_DATA = {
+  '1': ['128', '137', '146', '236', '245', '290', '380', '470', '489', '560', '579', '678'],
+  '2': ['129', '138', '147', '156', '237', '246', '345', '390', '480', '570', '589', '679'],
+  '3': ['120', '139', '148', '157', '238', '247', '256', '346', '490', '580', '670', '689'],
+  '4': ['130', '149', '158', '167', '239', '248', '257', '347', '356', '590', '680', '789'],
+  '5': ['140', '159', '168', '230', '249', '258', '267', '348', '357', '456', '690', '780'],
+  '6': ['123', '150', '169', '178', '240', '259', '268', '349', '358', '367', '457', '790'],
+  '7': ['124', '160', '179', '250', '269', '278', '340', '359', '368', '458', '467', '890'],
+  '8': ['125', '134', '170', '189', '260', '279', '350', '369', '378', '459', '468', '567'],
+  '9': ['126', '135', '180', '234', '270', '289', '360', '379', '450', '469', '478', '568'],
+  '0': ['127', '136', '145', '190', '235', '280', '370', '389', '460', '479', '569', '578'],
+}
+
+const DP_PANA_DATA = {
+  '1': ['100', '119', '155', '227', '335', '344', '399', '588', '669'],
+  '2': ['110', '200', '228', '255', '336', '499', '660', '688', '778'],
+  '3': ['166', '229', '300', '337', '355', '445', '599', '779', '788'],
+  '4': ['112', '220', '266', '338', '400', '446', '455', '699', '770'],
+  '5': ['113', '122', '177', '339', '366', '447', '500', '799', '889'],
+  '6': ['114', '277', '330', '448', '466', '556', '600', '880', '899'],
+  '7': ['115', '133', '188', '223', '377', '449', '557', '566', '700'],
+  '8': ['116', '224', '233', '288', '440', '477', '558', '800', '990'],
+  '9': ['117', '144', '199', '225', '388', '559', '577', '667', '900'],
+  '0': ['118', '226', '244', '299', '334', '488', '550', '668', '677'],
+}
+
+const TP_PANA_LIST = ['777', '444', '111', '888', '555', '222', '999', '666', '333', '000']
+
 export default function Worli3() {
   const [selectedSchedule, setSelectedSchedule] = useState('asia-open')
   const [activeVenue, setActiveVenue]           = useState('Diamond')
   const [coinAmount, setCoinAmount]             = useState(0)
   const [isMuted, setIsMuted]                   = useState(true)
   const [selectedCoin, setSelectedCoin]         = useState(null)
+  const [activeWorliTab, setActiveWorliTab]     = useState('sp')
+  const [activePanaSubTab, setActivePanaSubTab] = useState('sppana')
 
   const handleAddCoin = (val) => {
     setCoinAmount((prev) => prev + val)
@@ -189,6 +226,698 @@ export default function Worli3() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                {/* ── Worli Market Tabs (Vertical Sidebar + Tab Content) ── */}
+                <div className="worli-market-tabs-wrapper">
+                  {/* Vertical Tab Nav */}
+                  <div className="nav nav-pills" role="tablist">
+                    {[
+                      { key: 'jodi',     label: 'Jodi'      },
+                      { key: 'single',   label: 'Single'    },
+                      { key: 'pana',     label: 'Pana'      },
+                      { key: 'sp',       label: 'SP'        },
+                      { key: 'dp',       label: 'DP'        },
+                      { key: 'trio',     label: 'Trio'      },
+                      { key: 'cycle',    label: 'Cycle'     },
+                      { key: 'motor',    label: 'Motor SP'  },
+                      { key: 'chart56',  label: '56 Charts' },
+                      { key: 'chart64',  label: '64 Charts' },
+                      { key: 'abr',      label: 'ABR'       },
+                      { key: 'commonsp', label: 'Common SP' },
+                      { key: 'commondp', label: 'Common DP' },
+                      { key: 'colordp',  label: 'Color DP'  },
+                    ].map((t) => (
+                      <div key={t.key} className="nav-item">
+                        <a
+                          role="tab"
+                          data-rr-ui-event-key={t.key}
+                          id={`worli-tabs-tab-${t.key}`}
+                          aria-controls={`worli-tabs-tabpane-${t.key}`}
+                          aria-selected={activeWorliTab === t.key}
+                          tabIndex={activeWorliTab === t.key ? 0 : -1}
+                          className={`nav-link${activeWorliTab === t.key ? ' active' : ''}`}
+                          href={`#${t.key}`}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setActiveWorliTab(t.key)
+                          }}
+                        >
+                          {t.label}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tab Content */}
+                  <div className="casino-box tab-content w-100 tab-content">
+
+                    {/* 1. ── JODI Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-jodi"
+                      aria-labelledby="worli-tabs-tab-jodi"
+                      className={`fade jodi tab-pane${activeWorliTab === 'jodi' ? ' active show' : ''}`}
+                    >
+                      <div className="casino-table-full-box">
+                        <div className="worlibox">
+                          <div className="worli-full">
+                            <div className="worli-box-title"><b>90</b></div>
+                            {JODI_GRID.map((rowArr, rIdx) => (
+                              <div key={rIdx} className="worli-box-row">
+                                {rowArr.map((num) => (
+                                  <div
+                                    key={num}
+                                    className="worli-odd-box back"
+                                    onClick={() => handleBet(`Jodi-${num}`, 90)}
+                                  >
+                                    <span className="worli-odd">{num}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 2. ── SINGLE Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-single"
+                      aria-labelledby="worli-tabs-tab-single"
+                      className={`fade single tab-pane${activeWorliTab === 'single' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-left">
+                          <div className="worli-box-title"><b>9.5</b></div>
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Single-${n}`, 9.5)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Single-${n}`, 9.5)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="worli-right">
+                          <div className="worli-box-title"><b>9.5</b></div>
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('Line 1', 9.5)}
+                            >
+                              <span className="worli-odd">Line 1</span>
+                              <span className="d-block">1|2|3|4|5</span>
+                            </div>
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('ODD', 9.5)}
+                            >
+                              <span className="worli-odd">ODD</span>
+                              <span className="d-block">1|3|5|7|9</span>
+                            </div>
+                          </div>
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('Line 2', 9.5)}
+                            >
+                              <span className="worli-odd">Line 2</span>
+                              <span className="d-block">6|7|8|9|0</span>
+                            </div>
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('EVEN', 9.5)}
+                            >
+                              <span className="worli-odd">EVEN</span>
+                              <span className="d-block">2|4|6|8|0</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 3. ── PANA Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-pana"
+                      aria-labelledby="worli-tabs-tab-pana"
+                      className={`fade pana tab-pane${activeWorliTab === 'pana' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-full">
+                          <ul className="nav nav-pills pana-sub-nav">
+                            <li className="nav-item">
+                              <button
+                                className={`nav-link${activePanaSubTab === 'sppana' ? ' active' : ''}`}
+                                onClick={() => setActivePanaSubTab('sppana')}
+                              >
+                                SP PANA(<b>140</b>)
+                              </button>
+                            </li>
+                            <li className="nav-item">
+                              <button
+                                className={`nav-link${activePanaSubTab === 'dppana' ? ' active' : ''}`}
+                                onClick={() => setActivePanaSubTab('dppana')}
+                              >
+                                DP PANA &amp; TRIO(<b>250 &amp; 700</b>)
+                              </button>
+                            </li>
+                          </ul>
+
+                          <div className="tab-content pana-tab-content">
+                            {/* SP PANA SUB-TAB */}
+                            {activePanaSubTab === 'sppana' && (
+                              <div className="tab-pane active" id="sppana">
+                                <div className="worli-box-row pana-columns-row">
+                                  {DIGIT_KEYS.map((digit) => (
+                                    <div key={digit} className="worli-odd-box-col">
+                                      <span className="worli-odd back header-digit">{digit}</span>
+                                      <div className="worli-sub-odd-box-container">
+                                        {(SP_PANA_DATA[digit] || []).map((pNum) => (
+                                          <div
+                                            key={pNum}
+                                            className="worli-sub-odd-box back"
+                                            onClick={() => handleBet(`SP Pana ${pNum}`, 140)}
+                                          >
+                                            <span className="worli-odd">{pNum}</span>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* DP PANA & TRIO SUB-TAB */}
+                            {activePanaSubTab === 'dppana' && (
+                              <div className="tab-pane active" id="dppana">
+                                <h4>DP PANA</h4>
+                                <div className="worli-box-row pana-columns-row">
+                                  {DIGIT_KEYS.map((digit) => (
+                                    <div key={digit} className="worli-odd-box-col">
+                                      <span className="worli-odd back header-digit">{digit}</span>
+                                      <div className="worli-sub-odd-box-container">
+                                        {(DP_PANA_DATA[digit] || []).map((pNum) => (
+                                          <div
+                                            key={pNum}
+                                            className="worli-sub-odd-box back"
+                                            onClick={() => handleBet(`DP Pana ${pNum}`, 250)}
+                                          >
+                                            <span className="worli-odd">{pNum}</span>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+
+                                <h4 className="mt-3">TP PANA</h4>
+                                <div className="worli-box-row tp-pana-row">
+                                  {TP_PANA_LIST.map((tpNum) => (
+                                    <div
+                                      key={tpNum}
+                                      className="worli-odd-box back"
+                                      onClick={() => handleBet(`TP Pana ${tpNum}`, 700)}
+                                    >
+                                      <span className="worli-odd">{tpNum}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 4. ── SP Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-sp"
+                      aria-labelledby="worli-tabs-tab-sp"
+                      className={`fade sp tab-pane${activeWorliTab === 'sp' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-box-title"><b>140</b></div>
+                        <div className="worli-left">
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`SP-${n}`, 140)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`SP-${n}`, 140)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="worli-right">
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('SP ALL', 140)}
+                            >
+                              <span className="worli-odd">SP ALL</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 5. ── DP Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-dp"
+                      aria-labelledby="worli-tabs-tab-dp"
+                      className={`fade dp tab-pane${activeWorliTab === 'dp' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-box-title"><b>250</b></div>
+                        <div className="worli-left">
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`DP-${n}`, 250)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`DP-${n}`, 250)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="worli-right">
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('DP ALL', 250)}
+                            >
+                              <span className="worli-odd">DP ALL</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 6. ── TRIO Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-trio"
+                      aria-labelledby="worli-tabs-tab-trio"
+                      className={`fade trio tab-pane${activeWorliTab === 'trio' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-full">
+                          <div className="worli-box-title"><b>700</b></div>
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back full-row-box"
+                              onClick={() => handleBet('ALL TRIO', 700)}
+                            >
+                              <span className="worli-odd">ALL TRIO</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 7. ── CYCLE Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-cycle"
+                      aria-labelledby="worli-tabs-tab-cycle"
+                      className={`fade cycle tab-pane${activeWorliTab === 'cycle' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-full">
+                          <div className="worli-box-title"><b>&nbsp;</b></div>
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Cycle-${n}`, 9.5)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Cycle-${n}`, 9.5)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 8. ── MOTOR SP Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-motor"
+                      aria-labelledby="worli-tabs-tab-motor"
+                      className={`fade motorsp tab-pane${activeWorliTab === 'motor' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-full">
+                          <div className="worli-box-title"><b>&nbsp;</b></div>
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Motor-${n}`, 140)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Motor-${n}`, 140)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 9. ── 56 CHARTS Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-chart56"
+                      aria-labelledby="worli-tabs-tab-chart56"
+                      className={`fade chart56 tab-pane${activeWorliTab === 'chart56' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-box-title"><b>&nbsp;</b></div>
+                        <div className="worli-left">
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Chart56-${n}`, 56)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Chart56-${n}`, 56)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="worli-right">
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('56 ALL', 56)}
+                            >
+                              <span className="worli-odd">56 ALL</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 10. ── 64 CHARTS Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-chart64"
+                      aria-labelledby="worli-tabs-tab-chart64"
+                      className={`fade chart64 tab-pane${activeWorliTab === 'chart64' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-box-title"><b>&nbsp;</b></div>
+                        <div className="worli-left">
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Chart64-${n}`, 64)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`Chart64-${n}`, 64)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="worli-right">
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('64 ALL', 64)}
+                            >
+                              <span className="worli-odd">64 ALL</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 11. ── ABR Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-abr"
+                      aria-labelledby="worli-tabs-tab-abr"
+                      className={`fade abr tab-pane${activeWorliTab === 'abr' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-box-title"><b>&nbsp;</b></div>
+                        <div className="worli-left">
+                          <div className="worli-box-row">
+                            {['A', 'B', 'R'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`ABR-${n}`, 9.5)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['AB', 'AR', 'BR'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`ABR-${n}`, 90)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="worli-right">
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('ABR', 700)}
+                            >
+                              <span className="worli-odd">ABR</span>
+                            </div>
+                          </div>
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('ABR CUT', 700)}
+                            >
+                              <span className="worli-odd">ABR CUT</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 12. ── COMMON SP Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-commonsp"
+                      aria-labelledby="worli-tabs-tab-commonsp"
+                      className={`fade commonsp tab-pane${activeWorliTab === 'commonsp' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-full">
+                          <div className="worli-box-title"><b>&nbsp;</b></div>
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`CommonSP-${n}`, 140)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`CommonSP-${n}`, 140)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 13. ── COMMON DP Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-commondp"
+                      aria-labelledby="worli-tabs-tab-commondp"
+                      className={`fade commondp tab-pane${activeWorliTab === 'commondp' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-full">
+                          <div className="worli-box-title"><b>&nbsp;</b></div>
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`CommonDP-${n}`, 250)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`CommonDP-${n}`, 250)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 14. ── COLOR DP Tab Pane ── */}
+                    <div
+                      role="tabpanel"
+                      id="worli-tabs-tabpane-colordp"
+                      aria-labelledby="worli-tabs-tab-colordp"
+                      className={`fade colordp tab-pane${activeWorliTab === 'colordp' ? ' active show' : ''}`}
+                    >
+                      <div className="worlibox">
+                        <div className="worli-box-title"><b>&nbsp;</b></div>
+                        <div className="worli-left">
+                          <div className="worli-box-row">
+                            {['1', '2', '3', '4', '5'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`ColorDP-${n}`, 250)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="worli-box-row">
+                            {['6', '7', '8', '9', '0'].map((n) => (
+                              <div
+                                key={n}
+                                className="worli-odd-box back"
+                                onClick={() => handleBet(`ColorDP-${n}`, 250)}
+                              >
+                                <span className="worli-odd">{n}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="worli-right">
+                          <div className="worli-box-row">
+                            <div
+                              className="worli-odd-box back"
+                              onClick={() => handleBet('COLOR DP ALL', 250)}
+                            >
+                              <span className="worli-odd">COLOR DP ALL</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 

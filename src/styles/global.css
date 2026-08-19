@@ -71,6 +71,22 @@ a {
   text-decoration: none !important;
 }
 
+.casino-last-results .result {
+  background: #355e3b;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
 /* Global Blink Utility Classes */
 @keyframes blinkAnimation {
 
