@@ -12,9 +12,9 @@
  */
 
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import CasinoLayout from '../../../components/CasinoLayout'
 import FlipClock from '../../../components/FlipClock'
+import CasinoLastResults from '../../../components/CasinoLastResults'
 import './style.css'
 
 /* ── Schedule Venue Strip Data ───────────────────────────────── */
@@ -915,11 +915,10 @@ export default function Worli3() {
                 </div>
 
                 {/* ── Last Result Section ─────────────────────── */}
-                <div className="casino-last-result-title">
-                  <span>Last Result</span>
-                  <span><Link to="/casino-results/worli3">View All</Link></span>
-                </div>
-                <div className="casino-last-results matka-result">
+                <CasinoLastResults
+                  viewAllLink="/casino-results/worli3"
+                  resultsClassName="matka-result"
+                >
                   {VENUES.map((venue) => (
                     <span
                       key={venue}
@@ -930,7 +929,7 @@ export default function Worli3() {
                       {venue}
                     </span>
                   ))}
-                </div>
+                </CasinoLastResults>
               </div>
             </div>
           </div>

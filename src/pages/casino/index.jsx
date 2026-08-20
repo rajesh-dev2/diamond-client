@@ -12,12 +12,17 @@ import NotFound from '../not-found'
 // ── Registered casino pages ──────────────────────────────────────
 import Goal2 from './goal2'
 import Worli3 from './worli3'
+import Teen62 from './teen62'
 
 const CASINO_MAP = {
   goal2: Goal2,
   worli3: Worli3,
   worli: Worli3,
   matka: Worli3,
+  teen62: Teen62,
+  teenpatti1day: Teen62,
+  'teenpatti-1day': Teen62,
+  teen: Teen62,
 }
 
 export default function CasinoPage() {

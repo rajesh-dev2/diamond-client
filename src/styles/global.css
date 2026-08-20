@@ -87,6 +87,19 @@ a {
   cursor: pointer;
 }
 
+.video-box-container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  .video-box-container {
+    max-width: calc(100% - 220px);
+    margin-left: auto;
+  }
+}
+
 /* Global Blink Utility Classes */
 @keyframes blinkAnimation {
 

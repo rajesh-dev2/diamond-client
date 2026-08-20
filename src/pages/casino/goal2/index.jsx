@@ -5,10 +5,10 @@
  * Encapsulated inside CasinoLayout (`gdv2-page`, `gdv2-layout`, `gdv2-main`, `gdv2-right-sidebar`, and `PlaceBetModal`).
  */
 
-import { Link } from 'react-router-dom'
 import FlipClock from '../../../components/FlipClock'
 import CasinoMarket from '../../../components/CasinoMarket'
 import NumberMarket from '../../../components/game-details/NumberMarket'
+import CasinoLastResults from '../../../components/CasinoLastResults'
 import CasinoLayout from '../../../components/CasinoLayout'
 import './style.css'
 
@@ -160,17 +160,10 @@ export default function Goal2() {
           />
 
           {/* Last Results */}
-          <div className="g2-last-results-wrap">
-            <div className="g2-last-results-title">
-              <span>Last Result</span>
-              <Link to="/casino-results">View All</Link>
-            </div>
-            <div className="g2-last-results">
-              {LAST_RESULTS.map((r, i) => (
-                <span key={i} className="g2-result-badge">{r}</span>
-              ))}
-            </div>
-          </div>
+          <CasinoLastResults
+            results={LAST_RESULTS}
+            viewAllLink="/casino-results"
+          />
         </>
       )}
     </CasinoLayout>
