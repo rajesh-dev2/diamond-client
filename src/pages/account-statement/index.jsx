@@ -19,6 +19,12 @@ const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
 
 CustomDateInput.displayName = 'CustomDateInput'
 
+const getAmountClass = (value) => {
+  const num = typeof value === 'number' ? value : parseFloat(String(value ?? '').replace(/,/g, ''))
+  if (Number.isNaN(num) || num === 0) return ''
+  return num > 0 ? 'text-success' : 'text-danger'
+}
+
 const formatDateParam = (date) => {
   if (!date) return ''
   if (typeof date === 'string') return date
@@ -182,9 +188,9 @@ export default function AccountStatement() {
                     <tr key={row.id || row._id || index} role="row">
                       <td className="report-date">{row.date || row.createdAt || '-'}</td>
                       <td className="report-sr text-end">{row.srNo ?? index + 1 + (page - 1) * entriesCount}</td>
-                      <td className="report-amount text-end">{row.credit || '-'}</td>
-                      <td className="report-amount text-end">{row.debit || '-'}</td>
-                      <td className="report-amount text-end">{row.pts ?? '-'}</td>
+                      <td className={`report-amount text-end ${getAmountClass(row.credit)}`}>{row.credit || '-'}</td>
+                      <td className={`report-amount text-end ${getAmountClass(row.debit)}`}>{row.debit || '-'}</td>
+                      <td className={`report-amount text-end ${getAmountClass(row.pts)}`}>{row.pts ?? '-'}</td>
                       <td>{row.remark || '-'}</td>
                     </tr>
                   ))
