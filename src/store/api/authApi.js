@@ -20,7 +20,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  tagTypes: ['Bets', 'ButtonSettings', 'ActivityLogs'],
+  tagTypes: ['Bets', 'ButtonSettings', 'ActivityLogs', 'AccountStatement'],
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -122,6 +122,18 @@ export const authApi = createApi({
       },
       providesTags: ['ActivityLogs'],
     }),
+    getAccountStatement: builder.query({
+      query: ({ type, from, to, search = '', limit = 10, page = 1 } = {}) => {
+        const params = new URLSearchParams({ type, from, to, limit, page })
+        if (search) params.set('search', search)
+        return `/user/reports/account-statement?${params.toString()}`
+      },
+      transformResponse: (response) => ({
+        rows: response.data || [],
+        total: response.total ?? response.count ?? (response.data?.length || 0),
+      }),
+      providesTags: ['AccountStatement'],
+    }),
     changePassword: builder.mutation({
       query: (body) => ({
         url: '/user/auth/change-password',
@@ -158,6 +170,7 @@ export const {
   useGetFancyBookQuery,
   useGetCurrentBetsQuery,
   useGetActivityLogsQuery,
+  useGetAccountStatementQuery,
   useChangePasswordMutation,
   useGetButtonSettingsQuery,
   useUpdateButtonSettingsMutation,

@@ -1,16 +1,17 @@
-import { useState, forwardRef } from 'react'
+import { useState, useEffect, forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
 import { createPortal } from 'react-dom'
+import { useGetAccountStatementQuery } from '../../store/api/authApi'
 import './style.css'
 
 // Custom input component matching HTML structure
 const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
   <div className="custom-datepicker" onClick={onClick} ref={ref}>
-    <input 
-      type="text" 
-      className="form-control" 
-      value={value} 
-      readOnly 
+    <input
+      type="text"
+      className="form-control"
+      value={value}
+      readOnly
     />
     <i className="far fa-calendar"></i>
   </div>
@@ -18,30 +19,63 @@ const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
 
 CustomDateInput.displayName = 'CustomDateInput'
 
+const formatDateParam = (date) => {
+  if (!date) return ''
+  if (typeof date === 'string') return date
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+
 export default function AccountStatement() {
   const [startDate, setStartDate] = useState(new Date(2026, 7, 10)) // 10/08/2026
   const [endDate, setEndDate] = useState(new Date(2026, 7, 17))   // 17/08/2026
-  const [reportType, setReportType] = useState('1')
+  const [reportType, setReportType] = useState('sport')
   const [entriesCount, setEntriesCount] = useState(10)
+  const [searchInput, setSearchInput] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
-  const [statementData] = useState([])
+  const [page, setPage] = useState(1)
+
+  // Filters actually submitted
+  const [activeFilters, setActiveFilters] = useState({
+    startDate: new Date(2026, 7, 10),
+    endDate: new Date(2026, 7, 17),
+    reportType: 'sport',
+  })
+
+  // Debounce free-text search
+  useEffect(() => {
+    const timer = setTimeout(() => setSearchQuery(searchInput), 400)
+    return () => clearTimeout(timer)
+  }, [searchInput])
+
+  // Reset to page 1 on filter or search changes
+  useEffect(() => {
+    setPage(1)
+  }, [activeFilters, entriesCount, searchQuery])
+
+  const { data, isFetching } = useGetAccountStatementQuery({
+    type: activeFilters.reportType,
+    from: formatDateParam(activeFilters.startDate),
+    to: formatDateParam(activeFilters.endDate),
+    limit: entriesCount,
+    page,
+    search: searchQuery,
+  })
+
+  const rows = Array.isArray(data?.rows) ? data.rows : Array.isArray(data) ? data : []
+  const total = data?.total ?? rows.length
+  const totalPages = Math.max(1, Math.ceil(total / entriesCount))
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setActiveFilters({
+      startDate,
+      endDate,
+      reportType,
+    })
   }
-
-  const filteredData = statementData.filter((item) => {
-    if (!searchQuery) return true
-    const q = searchQuery.toLowerCase()
-    return (
-      item.date?.toLowerCase().includes(q) ||
-      item.srNo?.toString().includes(q) ||
-      item.remark?.toLowerCase().includes(q) ||
-      item.credit?.toString().includes(q) ||
-      item.debit?.toString().includes(q) ||
-      item.pts?.toString().includes(q)
-    )
-  })
 
   return (
     <div className="report-page">
@@ -75,17 +109,16 @@ export default function AccountStatement() {
             </div>
 
             <div style={{ width: '230px' }}>
-              <select 
-                className="form-select" 
+              <select
+                className="form-select"
                 name="type"
                 value={reportType}
                 onChange={(e) => setReportType(e.target.value)}
               >
-                <option value="" disabled>Select Report Type</option>
-                <option value="1">Deposite/Withdraw Reports</option>
-                <option value="2">Sport Report</option>
-                <option value="3">Casino Reports</option>
-                <option value="4">Third-Party Casino Reports</option>
+                <option value="deposit-withdraw">Deposite/Withdraw Reports</option>
+                <option value="sport">Sport Report</option>
+                <option value="casino">Casino Reports</option>
+                <option value="third-party-casino">Third-Party Casino Reports</option>
               </select>
             </div>
 
@@ -98,7 +131,7 @@ export default function AccountStatement() {
           <div className="report-controls-bar">
             <div className="report-show-entries">
               <span>Show</span>
-              <select 
+              <select
                 className="form-select"
                 value={entriesCount}
                 onChange={(e) => setEntriesCount(Number(e.target.value))}
@@ -114,12 +147,12 @@ export default function AccountStatement() {
 
             <div className="report-search-box">
               <span>Search:</span>
-              <input 
-                type="search" 
-                className="form-control" 
-                placeholder="0 records..." 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+              <input
+                type="search"
+                className="form-control"
+                placeholder={`${total} records...`}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
             </div>
           </div>
@@ -138,21 +171,49 @@ export default function AccountStatement() {
                 </tr>
               </thead>
               <tbody role="rowgroup">
-                {filteredData.length > 0 ? (
-                  filteredData.slice(0, entriesCount).map((row, index) => (
-                    <tr key={index} role="row">
-                      <td className="report-date">{row.date}</td>
-                      <td className="report-sr text-end">{row.srNo}</td>
+                {isFetching ? (
+                  <tr role="row">
+                    <td colSpan={6} className="text-center">Loading…</td>
+                  </tr>
+                ) : rows.length > 0 ? (
+                  rows.map((row, index) => (
+                    <tr key={row.id || row._id || index} role="row">
+                      <td className="report-date">{row.date || row.createdAt || '-'}</td>
+                      <td className="report-sr text-end">{row.srNo ?? index + 1 + (page - 1) * entriesCount}</td>
                       <td className="report-amount text-end">{row.credit || '-'}</td>
                       <td className="report-amount text-end">{row.debit || '-'}</td>
-                      <td className="report-amount text-end">{row.pts}</td>
-                      <td>{row.remark}</td>
+                      <td className="report-amount text-end">{row.pts ?? '-'}</td>
+                      <td>{row.remark || '-'}</td>
                     </tr>
                   ))
                 ) : null}
               </tbody>
             </table>
           </div>
+
+          {totalPages > 1 && (
+            <div className="d-flex justify-content-between align-items-center mt-2">
+              <div>Page {page} of {totalPages}</div>
+              <div className="d-flex gap-2">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-secondary"
+                  disabled={page <= 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-secondary"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
