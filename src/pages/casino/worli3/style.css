@@ -1,0 +1,1286 @@
+/* ═══════════════════════════════════════════════════════════════
+   Worli 3 / Matka Market Stylesheet
+   Faithfully styled according to standard Matka Market casino layout
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-page-container.worli.matka {
+  width: 100%;
+}
+
+/* ── Matka Venue Schedule Tabs Strip ────────────────────────── */
+.matka-tabs {
+  padding: 3px 2px;
+  overflow-x: auto;
+}
+
+.matka-tabs .nav-pills {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.matka-tabs .nav-item {
+  flex: 0 0 auto;
+}
+
+.matka-tabs .nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: #374151;
+  border-radius: 0;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.matka-tabs .nav-link span {
+  font-size: 14px;
+}
+
+.matka-tabs .nav-link.active {
+  background: #125e7b;
+}
+
+.matka-tabs .remaining-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #f8c038;
+  font-size: 11px;
+  font-weight: 700;
+  margin: 1px 0;
+}
+
+.matka-tabs .remaining-time img {
+  width: 15px;
+  height: auto;
+  object-fit: contain;
+  display: inline-block;
+}
+
+.matka-tabs .remaining-time span {
+  font-size: 12px;
+}
+
+.matka-tabs .game-time span {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* ── Video Stream Section ───────────────────────────────────── */
+.casino-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.video-box-container,
+.casino-video-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.casino-video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.w3-audio-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.w3-audio-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.05);
+}
+
+.w3-video-overlay-box {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(240, 225, 180, 0.85);
+  border: 1px solid #cca96a;
+  border-radius: 4px;
+  padding: 3px 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.w3-overlay-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #4a3818;
+}
+
+.w3-overlay-name {
+  font-size: 13px;
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+.w3-table-score-overlay {
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(245, 184, 46, 0.6);
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.w3-score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.w3-score-label {
+  color: #f5b82e;
+}
+
+.w3-score-val {
+  color: #fff;
+}
+
+.w3-score-card {
+  width: 32px;
+  height: 42px;
+  background: #a31922;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ── 1-Click Coin Amount Bar ────────────────────────────────── */
+.matka .matka-coins,
+.matka-coins {
+  width: 100%;
+  background: #00000024;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  gap: 12px;
+}
+
+.casino-detail .casino-table {
+  margin-top: 4px;
+}
+
+.matka-coin-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #222;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+}
+
+.matka-coin-title .btn-danger {
+  background: #bd1828;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 0;
+  height: 31px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.matka-coins-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.matka-total-coin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 16px;
+  color: #333;
+}
+
+.matka-other-coins {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ── Casino Chip Styles (DevTools Matched with SVG icon) ─────── */
+:root {
+  --g-ttf: cubic-bezier(0.4, 0, 0.2, 1);
+  --g-black-rgb: 0, 0, 0;
+}
+
+.casino-coin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.bet-chip-holder {
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  cursor: pointer;
+  position: relative;
+}
+
+.matka .matka-coins .matka-coin-title span {
+  font-weight: bold;
+  font-size: 12px;
+  background: #0000001a;
+  padding: 4.5px 9px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.matka .matka-coins .matka-other-coins .casino-coin.selected .bet-chip-holder {
+  box-shadow: 0 0 10px #1fb512;
+  border-radius: 50%;
+  transition: all ease-in-out 0.8s;
+  transform: scale(1.05);
+}
+
+
+.bet-chip {
+  position: relative;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0.1328125311rem 0.2656250623rem 0 rgba(var(--g-black-rgb, 0, 0, 0), 0.8);
+  transition: transform 180ms var(--g-ttf, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+
+.bet-chip:active {
+  transform: scale(0.95);
+}
+
+.bet-chip:before {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.bet-chip-front {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--g-chip-inner-color);
+  background-image: url("https://versionobj.ecoassetsservice.com/v105/static/front/img/roulette/icon.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center bottom, center;
+  background-size: 100% auto, cover;
+  border-radius: 50%;
+  transition: transform 360ms var(--g-ttf, cubic-bezier(0.4, 0, 0.2, 1)), border-radius 360ms var(--g-ttf, cubic-bezier(0.4, 0, 0.2, 1));
+  z-index: 1;
+}
+
+.bet-chip-top:before,
+.bet-chip-top:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bet-chip-top:before {
+  width: 64%;
+  height: 64%;
+  margin: auto;
+  background-color: var(--g-chip-inner-color);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.bet-chip-amount {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.bet-chip-amount-in {
+  width: 100%;
+  height: 100%;
+}
+
+.bet-chip-amount-label {
+  font-family: 'Roboto', 'Arial Black', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  fill: #fff;
+}
+
+
+
+/* ── Last Result Section ────────────────────────────────────── */
+.casino-last-result-title {
+  background: #296F8E;
+  color: #fff;
+  padding: 4px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+.casino-last-result-title a {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.casino-last-results.matka-result {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  background: white;
+  justify-content: flex-end;
+  margin-top: 4px;
+  padding-bottom: 10px;
+}
+
+.matka-result.casino-last-results .result,
+.casino-last-results.matka-result .result {
+  padding: 0 4px;
+  width: auto;
+  border-radius: 4px;
+  min-width: 70px;
+  height: 26px;
+  color: #222;
+  background-color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.matka-result.casino-last-results .result.active,
+.casino-last-results.matka-result .result.active,
+.matka-result.casino-last-results .result:hover,
+.casino-last-results.matka-result .result:hover {
+  background-color: #296F8E;
+  color: #ffffff;
+}
+
+/* ── Suspended Overlay Styles ───────────────────────────────── */
+.suspended-box {
+  position: relative;
+}
+
+.worli.matka .suspended-box::before {
+  z-index: 2;
+}
+
+.suspended-box::before {
+  background-image: url(/img/icons/lock.svg);
+  background-size: 17px 17px;
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  pointer-events: none;
+}
+
+.suspended-box::after {
+  content: "";
+  background-color: rgba(55, 54, 54, 0.84);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  cursor: not-allowed;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Worli Market Tabs (Vertical Sidebar + Main Tab Content)
+   ═══════════════════════════════════════════════════════════════ */
+
+.worli-market-tabs-wrapper {
+  display: flex;
+  width: 100%;
+  background: #ffffff;
+  min-height: 380px;
+}
+
+/* ── Vertical Left Tab Navigation ────────────────────────────── */
+.worli-market-tabs-wrapper .nav.nav-pills {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #f7f7f7;
+  flex-shrink: 0;
+}
+
+.worli-market-tabs-wrapper .nav-item {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.worli-market-tabs-wrapper .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 27px;
+  padding: 0 4px;
+  background: #d4d6d8;
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #296F91;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.worli-market-tabs-wrapper .nav-link.active {
+  background: #296F91;
+  color: #ffffff;
+}
+
+/* ── Tab Content Right Area ──────────────────────────────────── */
+.worli-market-tabs-wrapper .casino-box.tab-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: #ffffff;
+  padding: 0;
+  display: flex;
+  margin-left: 3px;
+  flex-direction: column;
+}
+
+.worli-market-tabs-wrapper .tab-pane {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.worli-market-tabs-wrapper .tab-pane.active.show,
+.worli-market-tabs-wrapper .tab-pane.active {
+  display: block;
+}
+
+/* ── Worlibox Layout ─────────────────────────────────────────── */
+.worlibox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0;
+  background: #ffffff;
+}
+
+.casino-table-full-box {
+  width: 100%;
+}
+
+.worli-full {
+  width: 100%;
+}
+
+/* ── Odds Title (e.g. "90", "9.5", "140", "250", "700") ─────── */
+.worli-box-title {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  padding: 3px 0 4px;
+  background: #ffffff;
+  line-height: 1.2;
+  min-height: 24px;
+  box-sizing: border-box;
+}
+
+.worli-box-title b {
+  font-size: 16px;
+  color: #333 !important;
+  font-weight: 700;
+}
+
+/* ── Left Grid (5 columns or custom) ────────────────────────── */
+.worli-left {
+  width: 58.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.worli-left .worli-box-row {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+
+.worli-left .worli-odd-box.back {
+  flex: 1 1 0;
+  height: 70px;
+  background: #70bbf5;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: filter 0.1s ease;
+}
+
+/* ── Right Box / Section ─────────────────────────────────────── */
+.worli-right {
+  width: 41.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.worli-right .worli-box-row {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.worli-right .worli-odd-box.back {
+  flex: 1 1 100%;
+  height: 100%;
+  background: #70bbf5;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: filter 0.1s ease;
+}
+
+/* ── Full Width Grid Rows (Cycle, Motor, Trio, Common SP, etc.) ─ */
+.worli-full .worli-box-row {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+}
+
+.worli-full .worli-odd-box.back {
+  flex: 1 1 0;
+  height: 70px;
+  background: #70bbf5;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: filter 0.1s ease;
+}
+
+.trio .worli-box-row {
+  height: 70px;
+}
+
+.trio .worli-odd-box.back.full-row-box {
+  height: 70px !important;
+  flex: 1 1 100% !important;
+}
+
+/* ── Jodi 10x10 Grid ─────────────────────────────────────────── */
+.jodi .worli-box-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+}
+
+.jodi .worli-odd-box.back {
+  flex: 1 1 0;
+  height: 70px;
+  min-width: 0;
+  background: #70bbf5;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.jodi .worli-odd {
+  font-size: 28px;
+  letter-spacing: 0;
+}
+
+/* ── Single Tab Details ──────────────────────────────────────── */
+.single .worli-right .worli-box-row {
+  height: auto;
+}
+
+.single .worli-right .worli-odd-box.back {
+  height: 70px;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.single .worli-right .worli-odd {
+  font-size: 30px;
+}
+
+.single .worli-right .d-block {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  font-family: sans-serif;
+  line-height: 1;
+  margin-top: 6px;
+}
+
+/* ── Pana Tab (Sub Nav & Multi-Column Layout) ───────────────── */
+.pana .worlibox {
+  padding: 4px 6px 12px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.pana .worli-full {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pana-sub-nav.nav.nav-pills {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: transparent;
+  border: none;
+  margin: 0 0 6px 0;
+  padding: 0;
+}
+
+.pana-sub-nav .nav-item {
+  width: auto;
+  margin: 0;
+}
+
+.pana-sub-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 27px;
+  padding: 0 14px;
+  background: #d4d6d8;
+  color: #1a1e24;
+  font-size: 16px;
+  font-weight: 700 !important;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pana-sub-nav .nav-link.active {
+  background: #c5c8cb;
+  color: #000000;
+  font-weight: 800;
+}
+
+.pana-tab-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pana-tab-content .tab-pane {
+  display: block !important;
+  width: 100%;
+}
+
+.pana-tab-content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin: 8px 0 6px;
+  border-bottom: 2px solid #000000;
+  width: fit-content;
+  padding-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.pana-columns-row {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.worli-odd-box-col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.worli-odd-box-col .header-digit {
+  height: 40px;
+  background: #70bbf5;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-family: 'CasinoNumFont', sans-serif !important;
+  color: #333;
+  margin: 0 auto;
+  line-height: 1;
+  user-select: none;
+  width: 70%;
+  position: relative;
+  z-index: 1;
+}
+
+.worli-sub-odd-box-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid #70bbf5;
+  background: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -20px;
+  padding: 20px 6px 6px 6px;
+  z-index: 0;
+  background: #ffffff0f;
+}
+
+.worli-sub-odd-box.back {
+  height: 30px;
+  background: #70bbf5;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.worli-sub-odd-box .worli-odd {
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+  color: #333;
+}
+
+.tp-pana-row {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  height: 40px;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+
+.tp-pana-row .worli-odd-box.back {
+  flex: 1 1 0;
+  height: 40px;
+  background: #70bbf5;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tp-pana-row .worli-odd {
+  font-size: 24px;
+  color: #333;
+}
+
+/* ── ABR Tab Details ─────────────────────────────────────────── */
+.abr .worli-left {
+  width: 50%;
+}
+
+.abr .worli-right {
+  width: 50%;
+}
+
+.abr .worli-left .worli-box-row {
+  height: 60px;
+}
+
+.abr .worli-right .worli-box-row {
+  height: 60px;
+}
+
+.abr .worli-right .worli-odd-box.back {
+  height: 70px;
+}
+
+.abr .worli-odd {
+  font-size: 30px;
+}
+
+/* ── Odd Typography (CasinoNumFont) ─────────────────────────── */
+.worli-odd {
+  font-family: 'CasinoNumFont', sans-serif !important;
+  font-size: 30px;
+  font-weight: normal;
+  color: #333;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+}
+
+
+/* Responsonsive Layout */
+
+@media only screen and (max-width: 767px) {
+
+  /* ── Matka Venue Schedule Tabs ── */
+  .matka-tabs {
+    padding: 2px;
+  }
+
+  .matka-tabs .nav-link {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+
+  .matka-tabs .nav-link span {
+    font-size: 11px;
+  }
+
+  .matka-tabs .remaining-time {
+    font-size: 10px;
+    gap: 2px;
+  }
+
+  .matka-tabs .remaining-time img {
+    width: 12px;
+  }
+
+  .matka-tabs .remaining-time span {
+    font-size: 10px;
+  }
+
+  .matka-tabs .game-time span {
+    font-size: 9px;
+  }
+
+  /* ── 1-Click Coin Bar ── */
+  .matka .matka-coins,
+  .matka-coins {
+    padding: 4px 6px;
+    gap: 6px;
+  }
+
+  .bet-chip-holder {
+    height: 35px;
+    width: 35px;
+    flex: 0 0 35px;
+  }
+
+  .bet-chip-amount-label {
+    font-size: 26px;
+  }
+
+  .matka-coin-title {
+    flex-direction: row-reverse;
+    font-size: 10px;
+    gap: 4px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .matka .matka-coins .matka-coin-title span {
+    font-size: 9.5px;
+    padding: 2px 4px;
+  }
+
+  .matka-coin-title .btn-danger {
+    height: 24px;
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+
+  .matka-coins-group {
+    gap: 6px;
+  }
+
+  .matka-total-coin {
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  .matka-other-coins {
+    gap: 4px;
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+
+  /* ── Market Tabs Sidebar & Content ── */
+  .worli-market-tabs-wrapper {
+    min-height: 300px;
+  }
+
+  .worli-market-tabs-wrapper .nav-link {
+    height: 25px;
+    font-size: 12px;
+    padding: 0 2px;
+  }
+
+  .worli-box-title {
+    font-size: 13px;
+    min-height: 20px;
+    padding: 2px 0;
+  }
+
+  .worli-box-title b {
+    font-size: 12px !important;
+  }
+
+  .worli-odd {
+    font-size: 20px;
+  }
+
+  /* ── Standard Grid Row Heights ── */
+  .worli-left .worli-odd-box.back,
+  .worli-full .worli-odd-box.back {
+    height: 40px;
+  }
+
+  .worli-right .worli-odd-box.back {
+    min-height: 40px;
+  }
+
+  /* ── Jodi Grid Mobile (5 columns with flex-wrap) ── */
+  .jodi .worli-box-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .jodi .worli-odd-box.back {
+    flex: 0 0 20%;
+    width: 20%;
+    max-width: 20%;
+    height: 40px;
+    background: #70bbf5;
+    border: 1px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .jodi .worli-odd {
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  /* ── Single Tab ── */
+  .single .worli-right .worli-odd-box.back {
+    height: 40px;
+  }
+
+  .single .worli-right .worli-odd {
+    font-size: 20px;
+  }
+
+  .single .worli-right .d-block {
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  /* ── Trio Tab ── */
+  .trio .worli-box-row,
+  .trio .worli-odd-box.back.full-row-box {
+    height: 40px !important;
+  }
+
+  /* ── ABR Tab ── */
+  .abr .worli-left .worli-box-row,
+  .abr .worli-right .worli-box-row,
+  .abr .worli-right .worli-odd-box.back {
+    height: 40px;
+  }
+
+  .abr .worli-odd {
+    font-size: 18px;
+  }
+
+  /* ── Pana Tab (5 columns per row with wrap) ── */
+  .pana .worlibox {
+    padding: 4px 4px 8px;
+  }
+
+  .pana-sub-nav .nav-link {
+    height: 24px;
+    font-size: 11px;
+    padding: 0 8px;
+  }
+
+  .pana-sub-nav .nav-link b {
+    font-size: 11px;
+  }
+
+  .pana-tab-content h4 {
+    font-size: 13px;
+    margin: 6px 0 4px;
+  }
+
+  .pana-columns-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 8px;
+    row-gap: 12px;
+  }
+
+  .worli-odd-box-col {
+    flex: 0 0 calc((100% - 16px) / 5);
+    width: calc((100% - 16px) / 5);
+    max-width: calc((100% - 16px) / 5);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .worli-odd-box-col .header-digit {
+    height: 36px;
+    font-size: 20px;
+    width: 80%;
+  }
+
+  .worli-sub-odd-box-container {
+    padding: 20px 2px 4px 2px;
+    margin-top: -16px;
+    gap: 2px;
+    border: 1px solid #70bbf5;
+    background: transparent;
+  }
+
+  .worli-sub-odd-box.back {
+    height: 30px;
+  }
+
+  .worli-sub-odd-box .worli-odd {
+    font-size: 19px;
+  }
+
+  .tp-pana-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 4px;
+    row-gap: 6px;
+    height: auto;
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+
+  .tp-pana-row .worli-odd-box.back {
+    flex: 0 0 calc((100% - 16px) / 5);
+    width: calc((100% - 16px) / 5);
+    max-width: calc((100% - 16px) / 5);
+    height: 36px;
+  }
+
+  .tp-pana-row .worli-odd {
+    font-size: 24px;
+  }
+
+  /* ── Last Result Section ── */
+  .casino-last-result-title {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .casino-last-result-title a {
+    font-size: 11px;
+  }
+
+  .matka-result.casino-last-results {
+    padding-bottom: 6px;
+    gap: 4px;
+  }
+
+  .matka-result.casino-last-results .result {
+    min-width: 55px;
+    font-size: 11px;
+    padding: 2px 4px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
+  .worli-market-tabs-wrapper .nav-link {
+    font-size: 11px;
+    height: 23px;
+  }
+
+  .bet-chip-holder {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .jodi .worli-odd-box.back {
+    flex: 0 0 20%;
+    width: 20%;
+    max-width: 20%;
+    height: 38px;
+  }
+
+  .jodi .worli-odd {
+    font-size: 22px;
+  }
+
+  .worli-left .worli-odd-box.back,
+  .worli-full .worli-odd-box.back,
+  .worli-right .worli-odd-box.back,
+  .single .worli-right .worli-odd-box.back,
+  .abr .worli-left .worli-box-row,
+  .abr .worli-right .worli-box-row,
+  .abr .worli-right .worli-odd-box.back {
+    height: 36px;
+  }
+
+  .worli-odd {
+    font-size: 18px;
+  }
+
+  .pana-columns-row {
+    gap: 3px;
+    row-gap: 10px;
+  }
+
+  .worli-odd-box-col {
+    flex: 0 0 calc((100% - 12px) / 5);
+    width: calc((100% - 12px) / 5);
+    max-width: calc((100% - 12px) / 5);
+  }
+
+  .worli-odd-box-col .header-digit {
+    height: 34px;
+    font-size: 20px;
+  }
+
+  .worli-sub-odd-box.back {
+    height: 28px;
+  }
+
+  .worli-sub-odd-box .worli-odd {
+    font-size: 19px;
+  }
+
+  .tp-pana-row .worli-odd-box.back {
+    flex: 0 0 calc((100% - 12px) / 5);
+    width: calc((100% - 12px) / 5);
+    max-width: calc((100% - 12px) / 5);
+    height: 34px;
+  }
+
+  .tp-pana-row .worli-odd {
+    font-size: 24px;
+  }
+}

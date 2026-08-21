@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════════════════
+   CasinoLastResults Base Styles
+   ═══════════════════════════════════════════════════ */
+
+.casino-last-result-wrapper {
+  margin-top: 4px;
+}
+
+.casino-last-result-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #125e7b;
+  color: #ffffff;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 4px 4px 0 0;
+}
+
+.casino-last-result-title span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.casino-last-result-title a {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.casino-last-result-title a:hover {
+  opacity: 0.85;
+}
+
+.casino-last-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: #ffffff;
+  padding: 6px 10px;
+  border-radius: 0 0 4px 4px;
+  align-items: center;
+}
+
+.casino-last-results .result.result-a {
+  background: #1b84ff;
+}
+
+.casino-last-results .result.result-b {
+  background: #e45b5b;
+}
+
+.casino-last-results .result.result-r {
+  background: #1a6a8a;
+}
+
+/* Matka Result Variant */
+.casino-last-results.matka-result {
+  gap: 5px;
+  overflow-x: auto;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
+.matka-result.casino-last-results .result,
+.casino-last-results.matka-result .result {
+  padding: 0 4px;
+  width: auto;
+  border-radius: 4px;
+  min-width: 70px;
+  height: 26px;
+  color: #222;
+  background-color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.matka-result.casino-last-results .result.active,
+.casino-last-results.matka-result .result.active,
+.matka-result.casino-last-results .result:hover,
+.casino-last-results.matka-result .result:hover {
+  background-color: #296F8E;
+  color: #ffffff;
+}

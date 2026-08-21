@@ -1,0 +1,100 @@
+/* ═══════════════════════════════════════════════════════════
+   CasinoMarket — reusable casino betting market component.
+   Reuses game-details: MarketTitle, MarketHeader, OddBox, MinMaxLabel.
+   Only the row / grid layout is defined here.
+   ═══════════════════════════════════════════════════════════ */
+
+.csn-market {
+  background: #fff;
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+/* Body wrapper for status overlay (suspended / ball running) */
+.csn-market-body {
+  position: relative;
+}
+
+/* ── Standard runner row ──────────────────────────────────── */
+.csn-runner-row {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  background: #f2f2f2;
+  border-bottom: 1px solid #c7c8ca;
+  padding: 0 0 0 4px;
+}
+
+.csn-runner-row:last-child { border-bottom: none; }
+
+/* Runner name */
+.csn-runner-detail {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 8px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.csn-runner-name {
+  font-size: 13px;
+  font-weight: 400;
+  color: #222;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: normal;
+  cursor: pointer;
+}
+
+/* Odds group — wraps OddBox(es) */
+.csn-odds-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Combination (2-column) grid ────────────────────────── */
+.csn-combo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.csn-combo-col {
+  width: 50%;
+  padding-left: 2px;
+  padding-right: 2px;
+  box-sizing: border-box;
+}
+
+/* ── Suspended overlay (matches gdv2 style) ─────────────── */
+.csn-runner-row.csn-suspended .csn-odds-group {
+  position: relative;
+}
+
+.csn-runner-row.csn-suspended .csn-odds-group::after {
+  content: attr(data-status);
+  position: absolute;
+  inset: 0;
+  background: rgba(55, 54, 54, 0.84);
+  color: #ff0000;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .csn-combo-col { width: 100%; }
+}

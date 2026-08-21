@@ -128,8 +128,22 @@
       @apply px-4 first:pt-0 last:pt-0 py-[4px] pb-0 text-black transition-colors cursor-pointer font-normal! hover:underline hover:text-[#666];
     }
 
+    .header-dropdown-item.header-dropdown-checkbox-item {
+      @apply flex items-center justify-between cursor-pointer select-none;
+    }
+
+    .header-dropdown-item.header-dropdown-checkbox-item:hover {
+      text-decoration: none !important;
+    }
+
+    .header-dropdown-checkbox-item .header-menu-checkbox {
+      @apply cursor-pointer m-0 flex-shrink-0;
+      width: 14px !important;
+      height: 14px !important;
+    }
+
     .header-dropdown-divider {
-      @apply mb-[0.5rem]! border-t border-black/15! opacity-100!;
+      @apply my-[0.35rem]! border-t border-black/15! opacity-100!;
     }
 
     .header-search-mobile {

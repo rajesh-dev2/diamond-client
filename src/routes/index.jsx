@@ -13,6 +13,7 @@ import ChangePassword from '../pages/change-password'
 import ResponsibleGaming from '../pages/responsible-gaming'
 import Terms from '../pages/terms'
 import NotFound from '../pages/not-found'
+import CasinoPage from '../pages/casino'
 
 export default function AppRoutes() {
   return (
@@ -32,6 +33,7 @@ export default function AppRoutes() {
           <Route path="/casino-results" element={<CasinoResults />} />
           <Route path="/live-casino-bets" element={<LiveCasinoBets />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/casino/:gameId" element={<CasinoPage />} />
         </Route>
       </Route>
 
