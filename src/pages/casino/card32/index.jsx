@@ -18,6 +18,7 @@ import FlipClock from '../../../components/FlipClock'
 import CommonModal from '../../../components/Modal'
 import CasinoLastResults from '../../../components/CasinoLastResults'
 import CasinoVideoCards from '../../../components/CasinoVideoCards'
+import CasinoDualTable from '../../../components/CasinoDualTable'
 import './style.css'
 
 /* ── Market Odds Data (Matching Screenshot & Reference) ───────── */
@@ -241,79 +242,13 @@ export default function Card32() {
             {/* ── Casino Detail Section ── */}
             <div className="casino-detail">
               <div className="casino-table">
-                <div className="casino-table-box">
-                  {/* Left Column Box (Player 8, Player 9) */}
-                  <div className="casino-table-left-box">
-                    <div className="casino-table-header">
-                      <div className="casino-nation-detail" />
-                      <div className="casino-odds-box back">Back</div>
-                      <div className="casino-odds-box lay">Lay</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {leftRunners.map((runner) => {
-                        const isBackSuspended = runner.suspendedBack || !runner.back || Number(runner.back) === 0
-                        const isLaySuspended = runner.suspendedLay || !runner.lay || Number(runner.lay) === 0
-
-                        return (
-                          <div className="casino-table-row" key={runner.id}>
-                            <div className="casino-nation-detail">
-                              <div className="casino-nation-name">{runner.name}</div>
-                            </div>
-                            <div
-                              className={`casino-odds-box back ${isBackSuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(runner.name, runner.back, 'back', isBackSuspended)}
-                            >
-                              <span className="casino-odds">{runner.back || '0'}</span>
-                            </div>
-                            <div
-                              className={`casino-odds-box lay ${isLaySuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(runner.name, runner.lay, 'lay', isLaySuspended)}
-                            >
-                              <span className="casino-odds">{runner.lay || '0'}</span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="casino-table-box-divider" />
-
-                  {/* Right Column Box (Player 10, Player 11) */}
-                  <div className="casino-table-right-box">
-                    <div className="casino-table-header d-none d-md-flex">
-                      <div className="casino-nation-detail" />
-                      <div className="casino-odds-box back">Back</div>
-                      <div className="casino-odds-box lay">Lay</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {rightRunners.map((runner) => {
-                        const isBackSuspended = runner.suspendedBack || !runner.back || Number(runner.back) === 0
-                        const isLaySuspended = runner.suspendedLay || !runner.lay || Number(runner.lay) === 0
-
-                        return (
-                          <div className="casino-table-row" key={runner.id}>
-                            <div className="casino-nation-detail">
-                              <div className="casino-nation-name">{runner.name}</div>
-                            </div>
-                            <div
-                              className={`casino-odds-box back ${isBackSuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(runner.name, runner.back, 'back', isBackSuspended)}
-                            >
-                              <span className="casino-odds">{runner.back || '0'}</span>
-                            </div>
-                            <div
-                              className={`casino-odds-box lay ${isLaySuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(runner.name, runner.lay, 'lay', isLaySuspended)}
-                            >
-                              <span className="casino-odds">{runner.lay || '0'}</span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
+                <CasinoDualTable
+                  leftTitle=""
+                  rightTitle=""
+                  leftRunners={leftRunners}
+                  rightRunners={rightRunners}
+                  onBetClick={handleBetClick}
+                />
               </div>
 
               {/* ── Last Result Section ── */}

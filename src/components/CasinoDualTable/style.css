@@ -1,0 +1,199 @@
+/* ═══════════════════════════════════════════════════
+   CasinoDualTable Component Styles
+   Shared Dual-Box Table (Left & Right Player/Runner UI)
+   ═══════════════════════════════════════════════════ */
+
+.casino-table-box {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  gap: 4px;
+  overflow: hidden;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .casino-table-box {
+    flex-direction: row;
+  }
+}
+
+.casino-table-left-box,
+.casino-table-right-box {
+  flex: 1;
+  min-width: 0;
+  background-color: #f7f7f7;
+  border: 1px solid #c7c8ca;
+}
+
+.casino-table-header {
+  display: flex;
+  align-items: stretch;
+}
+
+.casino-table-header,
+.casino-table-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid #c7c8ca;
+  background: #ffffff;
+}
+
+.casino-table-row:last-child {
+  border: 0;
+}
+
+.casino-table-header .casino-nation-detail {
+  font-weight: 700;
+  font-size: 16px;
+  min-height: unset;
+  padding: 0 5px;
+}
+
+.casino-nation-detail {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.casino-nation-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+.casino-table-body .casino-nation-detail {
+  min-height: 46px;
+}
+
+.casino-table-header .casino-odds-box {
+  cursor: default;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 2px;
+  border-left: 1px solid #c7c8ca;
+}
+
+.casino-table-header .casino-odds-box.back {
+  background: #72bbef;
+  color: #111827;
+}
+
+.casino-table-header .casino-odds-box.lay {
+  background: #faa9ba;
+  color: #111827;
+}
+
+.casino-odds-box {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  box-sizing: border-box;
+  border-left: 1px solid #c7c8ca;
+}
+
+.casino-odds-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 40%;
+}
+
+.casino-odds-box-wrapper .casino-odds-box {
+  width: 100%;
+}
+
+.casino-odds-box.back {
+  background: #72bbef;
+  color: #0b2545;
+}
+
+.casino-odds-box.back:hover:not(.suspended-box) {
+  background: #5baae6;
+}
+
+.casino-odds-box.back:active:not(.suspended-box) {
+  background: #469cd8;
+  transform: scale(0.98);
+}
+
+.casino-odds-box.lay {
+  background: #faa9ba;
+  color: #0b2545;
+}
+
+.casino-odds-box.lay:hover:not(.suspended-box) {
+  background: #f392a6;
+}
+
+.casino-odds-box.lay:active:not(.suspended-box) {
+  background: #eb7a91;
+  transform: scale(0.98);
+}
+
+.casino-odds {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ── Suspended Overlay Styles ────────────────────────────────── */
+.suspended-box {
+  position: relative;
+  cursor: not-allowed !important;
+}
+
+.suspended-box .casino-odds-box {
+  pointer-events: none;
+}
+
+.suspended-box::before {
+  background-image: url(/img/icons/lock.svg);
+  background-size: 17px 17px;
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.suspended-box::after {
+  content: attr(data-title);
+  background-color: rgba(55, 54, 54, 0.84);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  cursor: not-allowed;
+  z-index: 1;
+}
+
+.suspended-box:hover {
+  transform: none;
+}

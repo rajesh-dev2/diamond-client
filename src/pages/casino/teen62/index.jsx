@@ -19,6 +19,7 @@ import RulesModal from '../../../components/RulesModal'
 import CommonModal from '../../../components/Modal'
 import CasinoLastResults from '../../../components/CasinoLastResults'
 import CasinoVideoCards from '../../../components/CasinoVideoCards'
+import CasinoDualTable from '../../../components/CasinoDualTable'
 import './style.css'
 
 const INITIAL_MARKET = {
@@ -142,6 +143,50 @@ export default function Teenpatti1Day() {
           onOddClick({ name: runnerName, [type]: odds }, type)
         }
 
+        const playerARunners = [
+          {
+            id: 'pa_main',
+            name: 'Main',
+            betName: 'Player A Main',
+            back: market.playerA.main.back,
+            lay: market.playerA.main.lay,
+            suspended: market.playerA.main.suspended,
+            suspendedLay: market.playerA.main.suspendedLay,
+            suspendedWrapper: market.playerA.main.suspended || market.playerA.main.suspendedLay,
+          },
+          {
+            id: 'pa_consecutive',
+            name: 'Consecutive',
+            betName: 'Player A Consecutive',
+            back: market.playerA.consecutive.back,
+            lay: market.playerA.consecutive.lay,
+            suspended: market.playerA.consecutive.suspended,
+            suspendedWrapper: market.playerA.consecutive.suspended,
+          },
+        ]
+
+        const playerBRunners = [
+          {
+            id: 'pb_main',
+            name: 'Main',
+            betName: 'Player B Main',
+            back: market.playerB.main.back,
+            lay: market.playerB.main.lay,
+            suspended: market.playerB.main.suspended,
+            suspendedLay: market.playerB.main.suspendedLay,
+            suspendedWrapper: market.playerB.main.suspended || market.playerB.main.suspendedLay,
+          },
+          {
+            id: 'pb_consecutive',
+            name: 'Consecutive',
+            betName: 'Player B Consecutive',
+            back: market.playerB.consecutive.back,
+            lay: market.playerB.consecutive.lay,
+            suspended: market.playerB.consecutive.suspended,
+            suspendedWrapper: market.playerB.consecutive.suspended,
+          },
+        ]
+
         return (
           <div className="casino-page-container teenpatti1day">
             {/* ── Video Stream Section ── */}
@@ -171,113 +216,13 @@ export default function Teenpatti1Day() {
             <div className="casino-detail">
               <div className="casino-table">
                 {/* ── Player A & Player B Box ── */}
-                <div className="casino-table-box">
-                  {/* Left Box: Player A */}
-                  <div className="casino-table-left-box">
-                    <div className="casino-table-header">
-                      <div className="casino-nation-detail">Player A</div>
-                      <div className="casino-odds-box back">Back</div>
-                      <div className="casino-odds-box lay">Lay</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {/* Player A Main */}
-                      <div className="casino-table-row">
-                        <div className="casino-nation-detail">
-                          <div className="casino-nation-name">Main</div>
-                        </div>
-                        <div className={`casino-odds-box-wrapper ${market.playerA.main.suspended || market.playerA.main.suspendedLay ? 'suspended-box' : ''}`}>
-                          <div 
-                            className="casino-odds-box back"
-                            onClick={() => handleBetClick('Player A Main', market.playerA.main.back, 'back', false)}
-                          >
-                            <span className="casino-odds">{market.playerA.main.back}</span>
-                          </div>
-                          <div 
-                            className="casino-odds-box lay"
-                            onClick={() => handleBetClick('Player A Main', market.playerA.main.lay, 'lay', market.playerA.main.suspendedLay)}
-                          >
-                            <span className="casino-odds">{market.playerA.main.lay || '-'}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Player A Consecutive */}
-                      <div className="casino-table-row">
-                        <div className="casino-nation-detail">
-                          <div className="casino-nation-name">Consecutive</div>
-                        </div>
-                        <div className={`casino-odds-box-wrapper ${market.playerA.consecutive.suspended ? 'suspended-box' : ''}`}>
-                          <div 
-                            className="casino-odds-box back"
-                            onClick={() => handleBetClick('Player A Consecutive', market.playerA.consecutive.back, 'back', false)}
-                          >
-                            <span className="casino-odds">{market.playerA.consecutive.back}</span>
-                          </div>
-                          <div 
-                            className="casino-odds-box lay"
-                            onClick={() => handleBetClick('Player A Consecutive', market.playerA.consecutive.lay, 'lay', false)}
-                          >
-                            <span className="casino-odds">{market.playerA.consecutive.lay}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="casino-table-box-divider" />
-
-                  {/* Right Box: Player B */}
-                  <div className="casino-table-right-box">
-                    <div className="casino-table-header">
-                      <div className="casino-nation-detail">Player B</div>
-                      <div className="casino-odds-box back">Back</div>
-                      <div className="casino-odds-box lay">Lay</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {/* Player B Main */}
-                      <div className="casino-table-row">
-                        <div className="casino-nation-detail">
-                          <div className="casino-nation-name">Main</div>
-                        </div>
-                        <div className={`casino-odds-box-wrapper ${market.playerB.main.suspended || market.playerB.main.suspendedLay ? 'suspended-box' : ''}`}>
-                          <div 
-                            className="casino-odds-box back"
-                            onClick={() => handleBetClick('Player B Main', market.playerB.main.back, 'back', false)}
-                          >
-                            <span className="casino-odds">{market.playerB.main.back}</span>
-                          </div>
-                          <div 
-                            className="casino-odds-box lay"
-                            onClick={() => handleBetClick('Player B Main', market.playerB.main.lay, 'lay', market.playerB.main.suspendedLay)}
-                          >
-                            <span className="casino-odds">{market.playerB.main.lay || '-'}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Player B Consecutive */}
-                      <div className="casino-table-row">
-                        <div className="casino-nation-detail">
-                          <div className="casino-nation-name">Consecutive</div>
-                        </div>
-                        <div className={`casino-odds-box-wrapper ${market.playerB.consecutive.suspended ? 'suspended-box' : ''}`}>
-                          <div 
-                            className="casino-odds-box back"
-                            onClick={() => handleBetClick('Player B Consecutive', market.playerB.consecutive.back, 'back', false)}
-                          >
-                            <span className="casino-odds">{market.playerB.consecutive.back}</span>
-                          </div>
-                          <div 
-                            className="casino-odds-box lay"
-                            onClick={() => handleBetClick('Player B Consecutive', market.playerB.consecutive.lay, 'lay', false)}
-                          >
-                            <span className="casino-odds">{market.playerB.consecutive.lay}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <CasinoDualTable
+                  leftTitle="Player A"
+                  rightTitle="Player B"
+                  leftRunners={playerARunners}
+                  rightRunners={playerBRunners}
+                  onBetClick={handleBetClick}
+                />
 
                 {/* ── Full Width Table (Card 1 to Card 6 Odd / Even) ── */}
                 <div className="casino-table-full-box teenpatti1day-other-odds mt-3">
