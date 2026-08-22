@@ -21,32 +21,50 @@
 import './style.css'
 
 function TableColumn({
-  title,
+  title = '',
   headerBack = 'Back',
   headerLay = 'Lay',
+  headerBackType = 'back',
+  headerLayType = 'lay',
   runners = [],
   onBetClick,
   columnClass = '',
 }) {
-  const handleBet = (runnerName, odds, type, isSuspended) => {
+  const handleBet = (runner, type, odds, isSuspended) => {
     if (isSuspended || !odds || Number(odds) <= 0) return
     if (onBetClick) {
-      onBetClick(runnerName, odds, type, isSuspended)
+      const runnerName = type === 'lay'
+        ? (runner.betNameLay || runner.layName || runner.betName || runner.name)
+        : (runner.betNameBack || runner.backName || runner.betName || runner.name)
+      const betType = type === 'lay' && runner.layBetType ? runner.layBetType : type
+      onBetClick(runnerName, odds, betType, isSuspended)
     }
   }
+
+  const hasLay = Boolean(headerLay)
 
   return (
     <div className={columnClass}>
       <div className="casino-table-header">
         <div className="casino-nation-detail">{title}</div>
-        {headerBack && <div className="casino-odds-box back">{headerBack}</div>}
-        {headerLay && <div className="casino-odds-box lay">{headerLay}</div>}
+        <div className="casino-table-header-odds">
+          {headerBack && (
+            <div className={`casino-odds-box ${headerBackType}`}>
+              {headerBack}
+            </div>
+          )}
+          {hasLay && (
+            <div className={`casino-odds-box ${headerLayType}`}>
+              {headerLay}
+            </div>
+          )}
+        </div>
       </div>
       <div className="casino-table-body">
         {runners.map((runner) => {
           const isBackSuspended = runner.suspended || runner.suspendedBack || !runner.back || Number(runner.back) === 0
-          const isLaySuspended = runner.suspended || runner.suspendedLay || !runner.lay || Number(runner.lay) === 0
-          const isWrapperSuspended = runner.suspended || (isBackSuspended && isLaySuspended && runner.suspendedWrapper)
+          const isLaySuspended = hasLay && (runner.suspended || runner.suspendedLay || !runner.lay || Number(runner.lay) === 0)
+          const isWrapperSuspended = runner.suspended || (!hasLay ? isBackSuspended : (isBackSuspended && isLaySuspended && (runner.suspendedWrapper ?? true)))
 
           return (
             <div className="casino-table-row" key={runner.id || runner.name}>
@@ -59,15 +77,15 @@ function TableColumn({
               >
                 <div
                   className={`casino-odds-box back ${!isWrapperSuspended && isBackSuspended ? 'suspended-box' : ''}`}
-                  onClick={() => handleBet(runner.betName || runner.name, runner.back, 'back', isBackSuspended)}
+                  onClick={() => handleBet(runner, 'back', runner.back, isBackSuspended)}
                   data-title={runner.dataTitle || ''}
                 >
                   <span className="casino-odds">{runner.back || '0'}</span>
                 </div>
-                {headerLay && (
+                {hasLay && (
                   <div
-                    className={`casino-odds-box lay ${!isWrapperSuspended && isLaySuspended ? 'suspended-box' : ''}`}
-                    onClick={() => handleBet(runner.betName || runner.name, runner.lay, 'lay', isLaySuspended)}
+                    className={`casino-odds-box ${headerLayType === 'back' ? 'back' : 'lay'} ${!isWrapperSuspended && isLaySuspended ? 'suspended-box' : ''}`}
+                    onClick={() => handleBet(runner, 'lay', runner.lay, isLaySuspended)}
                     data-title={runner.dataTitle || ''}
                   >
                     <span className="casino-odds">{runner.lay || '-'}</span>
@@ -89,6 +107,10 @@ export default function CasinoDualTable({
   leftHeaderLay = 'Lay',
   rightHeaderBack = 'Back',
   rightHeaderLay = 'Lay',
+  leftHeaderBackType = 'back',
+  leftHeaderLayType = 'lay',
+  rightHeaderBackType = 'back',
+  rightHeaderLayType = 'lay',
   leftRunners,
   rightRunners,
   onBetClick,
@@ -109,6 +131,8 @@ export default function CasinoDualTable({
         title={leftTitle}
         headerBack={leftHeaderBack}
         headerLay={leftHeaderLay}
+        headerBackType={leftHeaderBackType}
+        headerLayType={leftHeaderLayType}
         runners={leftRunners || []}
         onBetClick={onBetClick}
         columnClass="casino-table-left-box"
@@ -117,6 +141,8 @@ export default function CasinoDualTable({
         title={rightTitle}
         headerBack={rightHeaderBack}
         headerLay={rightHeaderLay}
+        headerBackType={rightHeaderBackType}
+        headerLayType={rightHeaderLayType}
         runners={rightRunners || []}
         onBetClick={onBetClick}
         columnClass="casino-table-right-box"

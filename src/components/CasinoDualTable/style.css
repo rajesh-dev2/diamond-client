@@ -6,7 +6,6 @@
 .casino-table-box {
   display: flex;
   flex-direction: column;
-  border-radius: 4px;
   gap: 4px;
   overflow: hidden;
   width: 100%;
@@ -15,6 +14,7 @@
 @media (min-width: 768px) {
   .casino-table-box {
     flex-direction: row;
+    align-items: stretch;
   }
 }
 
@@ -24,38 +24,84 @@
   min-width: 0;
   background-color: #f7f7f7;
   border: 1px solid #c7c8ca;
+  display: flex;
+  flex-direction: column;
 }
 
 .casino-table-header {
   display: flex;
   align-items: stretch;
-}
-
-.casino-table-header,
-.casino-table-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   border-bottom: 1px solid #c7c8ca;
-  background: #ffffff;
-}
-
-.casino-table-row:last-child {
-  border: 0;
 }
 
 .casino-table-header .casino-nation-detail {
+  width: 60%;
+  flex: 0 0 60%;
   font-weight: 700;
   font-size: 16px;
   min-height: unset;
-  padding: 0 5px;
+  padding: 0 10px;
+  color: #333;
+}
+
+.casino-table-header-odds {
+  width: 40%;
+  flex: 0 0 40%;
+  display: flex;
+  align-items: stretch;
+}
+
+.casino-table-header-odds .casino-odds-box {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  cursor: default;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 4px 2px;
+  border-left: 1px solid #c7c8ca;
+}
+
+.casino-table-header .casino-odds-box.back {
+  background: #72bbef;
+  color: #111827;
+}
+
+.casino-table-header .casino-odds-box.lay {
+  background: #faa9ba;
+  color: #111827;
+}
+
+.casino-table-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.casino-table-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  border-bottom: 1px solid #c7c8ca;
+  flex: 1;
+  min-height: 44px;
+  transition: background 0.12s ease;
+}
+
+.casino-table-row:last-child {
+  border-bottom: 0;
+}
+
+.casino-table-row:hover {
+  background: #fdfdfd;
 }
 
 .casino-nation-detail {
   width: 60%;
+  flex: 0 0 60%;
   display: flex;
   align-items: center;
-  padding: 0 5px;
+  padding: 0 10px;
   font-size: 16px;
   font-weight: 700;
   color: #333;
@@ -72,30 +118,21 @@
   color: #333;
 }
 
-.casino-table-body .casino-nation-detail {
-  min-height: 46px;
+.casino-odds-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 40%;
+  flex: 0 0 40%;
 }
 
-.casino-table-header .casino-odds-box {
-  cursor: default;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 2px;
-  border-left: 1px solid #c7c8ca;
-}
-
-.casino-table-header .casino-odds-box.back {
-  background: #72bbef;
-  color: #111827;
-}
-
-.casino-table-header .casino-odds-box.lay {
-  background: #faa9ba;
-  color: #111827;
+.casino-odds-box-wrapper .casino-odds-box {
+  flex: 1;
+  width: auto;
+  min-width: 0;
 }
 
 .casino-odds-box {
-  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,17 +145,7 @@
   user-select: none;
   box-sizing: border-box;
   border-left: 1px solid #c7c8ca;
-}
-
-.casino-odds-box-wrapper {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  width: 40%;
-}
-
-.casino-odds-box-wrapper .casino-odds-box {
-  width: 100%;
+  padding: 4px;
 }
 
 .casino-odds-box.back {

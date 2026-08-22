@@ -23,6 +23,7 @@ import FlipClock from '../../../components/FlipClock'
 import CommonModal from '../../../components/Modal'
 import CasinoLastResults from '../../../components/CasinoLastResults'
 import CasinoVideoCards from '../../../components/CasinoVideoCards'
+import CasinoDualTable from '../../../components/CasinoDualTable'
 import './style.css'
 
 /* ── Main Market Odds Data ────────────────────────────────────── */
@@ -35,15 +36,15 @@ const MAIN_PLAYERS = [
 
 /* ── Color Combinations Market ────────────────────────────────── */
 const COLOR_MARKET = [
-  { id: 'c_3b', name: 'Any 3 Card Black',  back: 0, lay: 0, suspended: true },
-  { id: 'c_3r', name: 'Any 3 Card Red',    back: 0, lay: 0, suspended: true },
-  { id: 'c_2b2r', name: 'Two Black Two Red', back: 0, lay: 0, suspended: true },
+  { id: 'c_3b', name: 'Any 3 Card Black',  back: 3.25, lay: 3.45, suspended: false },
+  { id: 'c_3r', name: 'Any 3 Card Red',    back: 3.25, lay: 3.45, suspended: false },
+  { id: 'c_2b2r', name: 'Two Black Two Red', back: 2.44, lay: 2.54, suspended: false },
 ]
 
 /* ── Totals Market ────────────────────────────────────────────── */
 const TOTAL_MARKET = [
-  { id: 'tot_8_9',   name: '8 & 9 Total',   back: 0, suspended: true },
-  { id: 'tot_10_11', name: '10 & 11 Total', back: 0, suspended: true },
+  { id: 'tot_8_9',   name: '8 & 9 Total',   back: 1.97, suspended: false },
+  { id: 'tot_10_11', name: '10 & 11 Total', back: 1.97, suspended: false },
 ]
 
 /* ── Digits 1 to 0 Market ─────────────────────────────────────── */
@@ -199,6 +200,18 @@ export default function Card32B() {
   const [numberMarket] = useState(NUMBER_MARKET)
   const [videoPlayers] = useState(INITIAL_VIDEO_PLAYERS)
 
+  const oddEvenRunners = mainPlayers.map((p) => ({
+    id: `oe-${p.id}`,
+    name: p.name,
+    back: p.odd,
+    lay: p.even,
+    betNameBack: `${p.name} Odd`,
+    betNameLay: `${p.name} Even`,
+    layBetType: 'back',
+    suspendedBack: p.suspended || !p.odd || Number(p.odd) === 0,
+    suspendedLay: p.suspended || !p.even || Number(p.even) === 0,
+  }))
+
   return (
     <CasinoLayout
       title="32 CARDS B"
@@ -271,148 +284,26 @@ export default function Card32B() {
 
             {/* ── Casino Detail Section ── */}
             <div className="casino-detail">
-              {/* ── 1. Main Players & Odd / Even Table ── */}
               <div className="casino-table">
-                <div className="casino-table-box">
-                  {/* Left Column: Player 8, 9, 10, 11 (Back / Lay) */}
-                  <div className="casino-table-left-box">
-                    <div className="casino-table-header">
-                      <div className="casino-nation-detail" />
-                      <div className="casino-odds-box back">Back</div>
-                      <div className="casino-odds-box lay">Lay</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {mainPlayers.map((runner) => {
-                        const isBackSuspended = !runner.back || Number(runner.back) === 0
-                        const isLaySuspended = !runner.lay || Number(runner.lay) === 0
+                {/* ── 1. Main Players & Odd / Even Table ── */}
+                <CasinoDualTable
+                  leftRunners={mainPlayers}
+                  rightRunners={oddEvenRunners}
+                  rightHeaderBack="Odd"
+                  rightHeaderLay="Even"
+                  rightHeaderLayType="back"
+                  onBetClick={handleBetClick}
+                />
 
-                        return (
-                          <div className="casino-table-row" key={`main-${runner.id}`}>
-                            <div className="casino-nation-detail">
-                              <div className="casino-nation-name">{runner.name}</div>
-                            </div>
-                            <div
-                              className={`casino-odds-box back ${isBackSuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(runner.name, runner.back, 'back', isBackSuspended)}
-                            >
-                              <span className="casino-odds">{runner.back || '0'}</span>
-                            </div>
-                            <div
-                              className={`casino-odds-box lay ${isLaySuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(runner.name, runner.lay, 'lay', isLaySuspended)}
-                            >
-                              <span className="casino-odds">{runner.lay || '0'}</span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="casino-table-box-divider" />
-
-                  {/* Right Column: Player 8, 9, 10, 11 (Odd / Even) */}
-                  <div className="casino-table-right-box">
-                    <div className="casino-table-header">
-                      <div className="casino-nation-detail" />
-                      <div className="casino-odds-box back">Odd</div>
-                      <div className="casino-odds-box back">Even</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {mainPlayers.map((runner) => {
-                        const isOddSuspended = !runner.odd || Number(runner.odd) === 0
-                        const isEvenSuspended = !runner.even || Number(runner.even) === 0
-
-                        return (
-                          <div className="casino-table-row" key={`oddeven-${runner.id}`}>
-                            <div className="casino-nation-detail">
-                              <div className="casino-nation-name">{runner.name}</div>
-                            </div>
-                            <div
-                              className={`casino-odds-box back ${isOddSuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(`${runner.name} Odd`, runner.odd, 'back', isOddSuspended)}
-                            >
-                              <span className="casino-odds">{runner.odd || '0'}</span>
-                            </div>
-                            <div
-                              className={`casino-odds-box back ${isEvenSuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(`${runner.name} Even`, runner.even, 'back', isEvenSuspended)}
-                            >
-                              <span className="casino-odds">{runner.even || '0'}</span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
-
-                {/* ── 2. Color Combinations & Totals Table ── */}
-                <div className="casino-table-box mt-3">
-                  {/* Left Column: Any 3 Card Black / Red, Two Black Two Red */}
-                  <div className="casino-table-left-box">
-                    <div className="casino-table-header">
-                      <div className="casino-nation-detail" />
-                      <div className="casino-odds-box back">Back</div>
-                      <div className="casino-odds-box lay">Lay</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {colorMarket.map((item) => {
-                        const isBackSuspended = item.suspended || !item.back || Number(item.back) === 0
-                        const isLaySuspended = item.suspended || !item.lay || Number(item.lay) === 0
-
-                        return (
-                          <div className="casino-table-row" key={item.id}>
-                            <div className="casino-nation-detail">
-                              <div className="casino-nation-name">{item.name}</div>
-                            </div>
-                            <div
-                              className={`casino-odds-box back ${isBackSuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(item.name, item.back, 'back', isBackSuspended)}
-                            >
-                              <span className="casino-odds">{item.back || '0'}</span>
-                            </div>
-                            <div
-                              className={`casino-odds-box lay ${isLaySuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(item.name, item.lay, 'lay', isLaySuspended)}
-                            >
-                              <span className="casino-odds">{item.lay || '0'}</span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="casino-table-box-divider" />
-
-                  {/* Right Column: 8 & 9 Total, 10 & 11 Total */}
-                  <div className="casino-table-right-box cards32total">
-                    <div className="casino-table-header">
-                      <div className="casino-nation-detail" />
-                      <div className="casino-odds-box back">Back</div>
-                    </div>
-                    <div className="casino-table-body">
-                      {totalMarket.map((item) => {
-                        const isSuspended = item.suspended || !item.back || Number(item.back) === 0
-
-                        return (
-                          <div className="casino-table-row" key={item.id}>
-                            <div className="casino-nation-detail">
-                              <div className="casino-nation-name">{item.name}</div>
-                            </div>
-                            <div
-                              className={`casino-odds-box back ${isSuspended ? 'suspended-box' : ''}`}
-                              onClick={() => handleBetClick(item.name, item.back, 'back', isSuspended)}
-                            >
-                              <span className="casino-odds">{item.back || '0'}</span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
+                {/* ── 2. Color Combinations & Totals Table (SS2 / SS3 Layout) ── */}
+                <CasinoDualTable
+                  className="mt-3"
+                  leftRunners={colorMarket}
+                  rightRunners={totalMarket}
+                  rightHeaderBack="Back"
+                  rightHeaderLay={null}
+                  onBetClick={handleBetClick}
+                />
 
                 {/* ── 3. Digits 1 to 0 Prediction Full Width Table ── */}
                 <div className="casino-table-full-box mt-3 card32numbers">
