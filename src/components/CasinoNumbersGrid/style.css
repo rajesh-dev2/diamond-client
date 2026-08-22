@@ -5,9 +5,6 @@
 
 .casino-numbers-box {
   width: 100%;
-  background: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   border: 1px solid #c7c8ca;
   padding: 0;
   overflow: hidden;
@@ -20,9 +17,7 @@
   font-weight: 700;
   color: #333;
   padding: 5px 0 6px;
-  background: #ffffff;
   line-height: 1.2;
-  border-bottom: 1px solid #c7c8ca;
   box-sizing: border-box;
 }
 
@@ -37,25 +32,22 @@
   grid-template-columns: repeat(var(--grid-cols, 5), 1fr);
   gap: 0;
   width: 100%;
-  background: #6eb7ec;
 }
 
 .casino-numbers-cell {
   position: relative;
-  width: 100%;
-  min-width: 0;
-  height: 52px;
-  min-height: 48px;
   border-radius: 0;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: #6eb7ec;
+  background: #72bbef;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   cursor: pointer;
+  border-bottom: 1px solid #c7c8ca;
+  border-left: 1px solid #c7c8ca;
   transition: filter 0.12s ease, background 0.12s ease;
   user-select: none;
+  min-height: 46px;
 }
 
 .casino-numbers-cell:hover:not(.suspended-box) {
@@ -68,15 +60,12 @@
 
 .casino-numbers-digit {
   font-family: "Times New Roman", Times, Georgia, serif;
-  font-size: 28px;
-  font-weight: 800;
-  color: #1e293b;
-  line-height: 1;
+  font-size: 48px;
+  font-weight: 700;
 }
 
 /* ── Suspended State for CasinoNumbersGrid ── */
 .casino-numbers-cell.suspended-box {
-  background: #373a40 !important;
   cursor: not-allowed !important;
   pointer-events: none;
 }
@@ -94,7 +83,7 @@
   background-repeat: no-repeat;
   content: "";
   position: absolute;
-  top: 0;
+  top: -12px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -111,4 +100,3 @@
   cursor: not-allowed;
   z-index: 1;
 }
-
