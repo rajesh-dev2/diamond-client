@@ -24,6 +24,7 @@ import CommonModal from '../../../components/Modal'
 import CasinoLastResults from '../../../components/CasinoLastResults'
 import CasinoVideoCards from '../../../components/CasinoVideoCards'
 import CasinoDualTable from '../../../components/CasinoDualTable'
+import CasinoNumbersGrid from '../../../components/CasinoNumbersGrid'
 import './style.css'
 
 /* ── Main Market Odds Data ────────────────────────────────────── */
@@ -49,16 +50,16 @@ const TOTAL_MARKET = [
 
 /* ── Digits 1 to 0 Market ─────────────────────────────────────── */
 const NUMBER_MARKET = [
-  { id: 'n1', num: '1', odds: 0, suspended: true },
-  { id: 'n2', num: '2', odds: 0, suspended: true },
-  { id: 'n3', num: '3', odds: 0, suspended: true },
-  { id: 'n4', num: '4', odds: 0, suspended: true },
-  { id: 'n5', num: '5', odds: 0, suspended: true },
-  { id: 'n6', num: '6', odds: 0, suspended: true },
-  { id: 'n7', num: '7', odds: 0, suspended: true },
-  { id: 'n8', num: '8', odds: 0, suspended: true },
-  { id: 'n9', num: '9', odds: 0, suspended: true },
-  { id: 'n0', num: '0', odds: 0, suspended: true },
+  { id: 'n1', num: '1', odds: 9.5, suspended: false },
+  { id: 'n2', num: '2', odds: 9.5, suspended: false },
+  { id: 'n3', num: '3', odds: 9.5, suspended: false },
+  { id: 'n4', num: '4', odds: 9.5, suspended: false },
+  { id: 'n5', num: '5', odds: 9.5, suspended: false },
+  { id: 'n6', num: '6', odds: 9.5, suspended: false },
+  { id: 'n7', num: '7', odds: 9.5, suspended: false },
+  { id: 'n8', num: '8', odds: 9.5, suspended: false },
+  { id: 'n9', num: '9', odds: 9.5, suspended: false },
+  { id: 'n0', num: '0', odds: 9.5, suspended: false },
 ]
 
 /* ── Live Overlay Cards Data (Player 8, 9, 10, 11) ────────────── */
@@ -306,24 +307,12 @@ export default function Card32B() {
                 />
 
                 {/* ── 3. Digits 1 to 0 Prediction Full Width Table ── */}
-                <div className="casino-table-full-box mt-3 card32numbers">
-                  <h4 className="w-100 text-center mb-2"><b>0</b></h4>
-                  <div className="card32numbers-container">
-                    {numberMarket.map((item) => {
-                      const isSuspended = item.suspended || !item.odds || Number(item.odds) === 0
-
-                      return (
-                        <div
-                          key={item.id}
-                          className={`casino-odds-box back ${isSuspended ? 'suspended-box' : ''}`}
-                          onClick={() => handleBetClick(`Number ${item.num}`, item.num, 'back', isSuspended)}
-                        >
-                          <span className="casino-odds">{item.num}</span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
+                <CasinoNumbersGrid
+                  className="mt-3"
+                  title="9.5"
+                  items={numberMarket}
+                  onBetClick={handleBetClick}
+                />
               </div>
 
               {/* ── Last Result Section ── */}
