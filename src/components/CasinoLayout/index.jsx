@@ -50,7 +50,18 @@ export default function CasinoLayout({
   const [sidebarAmount, setSidebarAmount] = useState('')
   const [isPlacingBet, setIsPlacingBet] = useState(false)
   const [myBets, setMyBets]             = useState(initialBets)
+  const [isDesktop, setIsDesktop]       = useState(
+    typeof window !== 'undefined' ? window.innerWidth >= 1200 : true
+  )
   const sidebarRef                      = useRef(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1200)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   // Sync odds when a new selection is tapped
   useEffect(() => {
@@ -130,8 +141,6 @@ export default function CasinoLayout({
       setIsPlacingBet(false)
     }
   }
-
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1200
 
   // Render child content (supporting both function child or standard elements)
   const renderedContent = typeof children === 'function'

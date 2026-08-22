@@ -383,63 +383,6 @@
   fill: #fff;
 }
 
-
-
-/* ── Last Result Section ────────────────────────────────────── */
-.casino-last-result-title {
-  background: #296F8E;
-  color: #fff;
-  padding: 4px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  font-weight: 800;
-  margin-top: 4px;
-}
-
-.casino-last-result-title a {
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.casino-last-results.matka-result {
-  display: flex;
-  gap: 5px;
-  overflow-x: auto;
-  background: white;
-  justify-content: flex-end;
-  margin-top: 4px;
-  padding-bottom: 10px;
-}
-
-.matka-result.casino-last-results .result,
-.casino-last-results.matka-result .result {
-  padding: 0 4px;
-  width: auto;
-  border-radius: 4px;
-  min-width: 70px;
-  height: 26px;
-  color: #222;
-  background-color: #ccc;
-  font-size: 12px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.matka-result.casino-last-results .result.active,
-.casino-last-results.matka-result .result.active,
-.matka-result.casino-last-results .result:hover,
-.casino-last-results.matka-result .result:hover {
-  background-color: #296F8E;
-  color: #ffffff;
-}
-
 /* ── Suspended Overlay Styles ───────────────────────────────── */
 .suspended-box {
   position: relative;
@@ -1187,27 +1130,6 @@
 
   .tp-pana-row .worli-odd {
     font-size: 24px;
-  }
-
-  /* ── Last Result Section ── */
-  .casino-last-result-title {
-    font-size: 12px;
-    padding: 3px 8px;
-  }
-
-  .casino-last-result-title a {
-    font-size: 11px;
-  }
-
-  .matka-result.casino-last-results {
-    padding-bottom: 6px;
-    gap: 4px;
-  }
-
-  .matka-result.casino-last-results .result {
-    min-width: 55px;
-    font-size: 11px;
-    padding: 2px 4px;
   }
 }
 

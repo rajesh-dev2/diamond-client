@@ -87,6 +87,14 @@ a {
   cursor: pointer;
 }
 
+
+@media only screen and (max-width: 1199px) {
+  .casino-last-results .result {
+    width: 25px;
+    height: 25px;
+  }
+}
+
 .video-box-container {
   width: 100%;
   max-width: 100%;

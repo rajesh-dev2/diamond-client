@@ -5,7 +5,7 @@
 
 .casino-page-container.teenpatti1day {
   width: 100%;
-  background: #f4f6f9;
+  background: white;
   user-select: none;
 }
 
@@ -72,7 +72,7 @@
 
 /* ── Casino Detail Section ───────────────────────────────────── */
 .casino-page-container.teenpatti1day .casino-detail {
-  padding: 8px 6px;
+  margin: 8px 0;
 }
 
 /* ── Tables Container ────────────────────────────────────────── */
@@ -83,10 +83,8 @@
 .casino-page-container.teenpatti1day .casino-table-box {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
   border-radius: 4px;
   gap: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
@@ -100,25 +98,35 @@
 .casino-page-container.teenpatti1day .casino-table-right-box {
   flex: 1;
   min-width: 0;
+  background-color: #f7f7f7;
+  border: 1px solid #c7c8ca;
 }
 
 /* ── Table Header (Player A / Player B) ──────────────────────── */
 .casino-page-container.teenpatti1day .casino-table-header {
   display: flex;
   align-items: stretch;
-  background: #f1f5f9;
-  border-bottom: 1px solid #dbe2ea;
-  min-height: 36px;
+  background-color: #f7f7f7;
+}
+
+.casino-table-header .casino-nation-detail {
+  font-weight: bold;
+  min-height: unset;
+}
+
+.casino-page-container.teenpatti1day .casino-table-header .casino-nation-detail {
+  padding: 0;
+  padding: 0 5px;
 }
 
 .casino-page-container.teenpatti1day .casino-nation-detail {
-  flex: 1;
+  width: 60%;
   display: flex;
   align-items: center;
-  padding: 8px 12px;
-  font-size: 14px;
-  font-weight: 800;
-  color: #1e293b;
+  padding: 0 5px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
   min-width: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -126,45 +134,31 @@
   box-sizing: border-box;
 }
 
-.casino-page-container.teenpatti1day .casino-table-header .casino-nation-detail {
-  color: #1e293b;
-  font-weight: 800;
-  font-size: 14px;
-  background: #f1f5f9;
-}
-
 .casino-page-container.teenpatti1day .casino-odds-box {
-  width: 72px;
-  min-width: 72px;
+  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.15s ease;
   user-select: none;
-  padding: 4px 2px;
   box-sizing: border-box;
+  border-left: 1px solid #c7c8ca;
 }
 
-@media (min-width: 768px) {
-  .casino-page-container.teenpatti1day .casino-odds-box {
-    width: 82px;
-    min-width: 82px;
-    font-size: 14px;
-  }
+.casino-table-body .casino-nation-detail {
+  min-height: 46px;
 }
 
-.casino-page-container.teenpatti1day .casino-table-header .casino-odds-box {
-  cursor: default;
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: none;
-  border-left: 1px solid #dbe2ea;
+.casino-table-header .casino-nation-detail .casino-odds-box {
+  font-weight: 700;
+  font-size: 16px;
 }
+
 
 .casino-page-container.teenpatti1day .casino-table-header .casino-odds-box.back {
   background: #72bbef;
@@ -176,28 +170,27 @@
   color: #1e293b;
 }
 
+.casino-page-container.teenpatti1day .casino-table-header .casino-odds-box {
+  font-size: 16px;
+  padding: 2px;
+}
+
+.casino-table-header,
+.casino-table-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+.casino-table-row:last-child {
+  border: 0;
+}
+
 /* ── Table Body Rows ─────────────────────────────────────────── */
 .casino-page-container.teenpatti1day .casino-table-body {
   display: flex;
   flex-direction: column;
-}
-
-.casino-page-container.teenpatti1day .casino-table-row {
-  display: flex;
-  align-items: stretch;
-  border-top: 1px solid #dbe2ea;
-  min-height: 42px;
-  transition: background 0.12s ease;
-}
-
-.casino-page-container.teenpatti1day .casino-table-row:hover {
-  background: #f8fafc;
-}
-
-.casino-page-container.teenpatti1day .casino-nation-name {
-  font-size: 14px;
-  font-weight: 800;
-  color: #1e293b;
 }
 
 /* Odds Wrapper & Values */
@@ -205,6 +198,11 @@
   position: relative;
   display: flex;
   align-items: stretch;
+  width: 40%;
+}
+
+.casino-page-container.teenpatti1day .casino-odds-box-wrapper .casino-odds-box {
+  width: 100%;
 }
 
 .casino-page-container.teenpatti1day .casino-odds-box.back {
@@ -280,107 +278,18 @@
   transform: none;
 }
 
-.casino-page-container.teenpatti1day .casino-odds {
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-@media (min-width: 768px) {
-  .casino-page-container.teenpatti1day .casino-odds {
-    font-size: 14px;
-  }
-}
-
 /* ── Full Width Table (Card 1 to 6 Odd/Even - Matched to SS 2) ─────────────────── */
 .casino-page-container.teenpatti1day .casino-table-full-box.teenpatti1day-other-odds {
-  background: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  border: 1px solid #dbe2ea;
-  overflow: hidden;
   margin-top: 10px;
+  border: 1px solid #c7c8ca;
 }
 
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-table-header {
-  display: flex;
-  align-items: stretch;
-  background: #f1f5f9;
-  border-bottom: 1px solid #dbe2ea;
-  min-height: 36px;
+.teenpatti1day .teenpatti1day-other-odds .casino-nation-detail {
+  width: 22%;
 }
 
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-table-header .casino-nation-detail {
-  background: #f1f5f9;
-  border-right: 1px solid #dbe2ea;
-  box-sizing: border-box;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-table-header .casino-odds-box {
-  flex: 1 1 0 !important;
-  min-width: 0 !important;
-  width: auto !important;
-  background: transparent;
-  color: #1e293b;
-  font-size: 13px;
-  font-weight: 800;
-  border-left: 1px solid #dbe2ea;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 2px;
-  box-sizing: border-box;
-  text-transform: none;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-table-header .casino-odds-box:first-of-type {
-  border-left: none;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-table-row {
-  display: flex;
-  align-items: stretch;
-  border-top: 1px solid #dbe2ea;
-  min-height: 42px;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-table-row:first-of-type {
-  border-top: none;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-nation-detail {
-  padding: 8px 14px;
-  display: flex;
-  align-items: center;
-  background: #f8fafc;
-  border-right: 1px solid #dbe2ea;
-  box-sizing: border-box;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-nation-name {
-  font-size: 14px;
-  font-weight: 800;
-  color: #1e293b;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-odds-box {
-  flex: 1 1 0 !important;
-  min-width: 0 !important;
-  width: auto !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-left: 1px solid #dbe2ea;
-  padding: 4px 2px;
-  cursor: pointer;
-  user-select: none;
-  min-height: 42px;
-  box-sizing: border-box;
-}
-
-.casino-page-container.teenpatti1day .casino-table-full-box .casino-odds-box:first-of-type {
-  border-left: none;
+.teenpatti1day .teenpatti1day-other-odds .casino-odds-box {
+  width: 13%;
 }
 
 /* Active card cell */
@@ -393,100 +302,4 @@
   font-size: 15px;
   font-weight: 800;
   color: #0b2545;
-}
-
-
-
-/* ── Last Result Section (Matched to Screenshot) ─────────────── */
-.casino-page-container.teenpatti1day .casino-last-result-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #457e9b;
-  color: #ffffff;
-  padding: 6px 12px;
-  font-size: 14px;
-  font-weight: 700;
-  border-radius: 4px 4px 0 0;
-  margin-top: 10px;
-}
-
-.casino-page-container.teenpatti1day .casino-last-result-title span {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.casino-page-container.teenpatti1day .casino-last-result-title a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
-}
-
-.casino-page-container.teenpatti1day .casino-last-result-title a:hover {
-  text-decoration: underline;
-}
-
-.casino-page-container.teenpatti1day .casino-last-results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 6px;
-  background: #ffffff;
-  padding: 8px 10px;
-  border-radius: 0 0 4px 4px;
-  border: 1px solid #dbe2ea;
-  border-top: none;
-  align-items: center;
-}
-
-.casino-page-container.teenpatti1day .result.result-a {
-  color: #ff453a !important;
-  background: #2d5a3f !important;
-  border: none !important;
-}
-
-.casino-page-container.teenpatti1day .result.result-b {
-  color: #ffff00 !important;
-  background: #2d5a3f !important;
-  border: none !important;
-}
-
-.casino-page-container.teenpatti1day .result.result-t {
-  color: #ffffff !important;
-  background: #2d5a3f !important;
-  border: none !important;
-}
-
-/* ── Result Modal Popup ──────────────────────────────────────── */
-.teen62-result-modal {
-  padding: 12px;
-}
-
-.teen62-result-round-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e2e8f0;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.teen62-result-winner {
-  padding: 2px 8px;
-  border-radius: 4px;
-  color: #fff;
-  font-weight: 800;
-}
-
-.teen62-result-winner.winner-a {
-  background: #2563eb;
-}
-
-.teen62-result-winner.winner-b {
-  background: #d97706;
 }

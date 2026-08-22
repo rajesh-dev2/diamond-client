@@ -1,0 +1,422 @@
+/* ═══════════════════════════════════════════════════════════════
+   32 Cards B (card32eu / cards32b) Stylesheet
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-page-container.cards32b {
+  width: 100%;
+  background: #f4f6f9;
+  user-select: none;
+}
+
+/* ── Video Stream Section ───────────────────────────────────── */
+.casino-page-container.cards32b .casino-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.casino-page-container.cards32b .video-box-container,
+.casino-page-container.cards32b .casino-video-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.casino-page-container.cards32b .casino-video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Sound control button overlay */
+.casino-page-container.cards32b .sound-toggle-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.casino-page-container.cards32b .sound-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.08);
+}
+/* ── Video Cards Flip Animation (Top Left) ──────────────────── */
+.casino-page-container.cards32b .flip-card-container {
+  display: inline-flex;
+}
+
+.casino-page-container.cards32b .flip-card {
+  background-color: transparent;
+  width: 36px;
+  height: 48px;
+  perspective: 1000px;
+}
+
+.casino-page-container.cards32b .flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+}
+
+.casino-page-container.cards32b .flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.casino-page-container.cards32b .flip-card-front,
+.casino-page-container.cards32b .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.casino-page-container.cards32b .flip-card-front img,
+.casino-page-container.cards32b .flip-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.casino-page-container.cards32b .playing-card-back-pattern {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  border: 2px solid #ffffff;
+}
+
+.casino-page-container.cards32b .playing-card-face {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2px 3px;
+  box-sizing: border-box;
+  font-weight: 800;
+}
+
+.casino-page-container.cards32b .playing-card-face.red {
+  color: #dc2626;
+}
+
+.casino-page-container.cards32b .playing-card-face.black {
+  color: #0f172a;
+}
+
+.casino-page-container.cards32b .playing-card-face .card-corner {
+  display: flex;
+  align-items: center;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.casino-page-container.cards32b .playing-card-face .card-center {
+  font-size: 14px;
+  text-align: center;
+  line-height: 1;
+}
+
+/* ── Flip Clock Timer (Bottom Right) ────────────────────────── */
+.casino-page-container.cards32b .casino-video .clock {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 8;
+}
+
+/* ── Casino Detail Section ───────────────────────────────────── */
+.casino-page-container.cards32b .casino-detail {
+  padding: 8px 6px;
+}
+
+/* ── Tables Container ────────────────────────────────────────── */
+.casino-page-container.cards32b .casino-table {
+  width: 100%;
+}
+
+.casino-page-container.cards32b .casino-table-box {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #dbe2ea;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .casino-page-container.cards32b .casino-table-box {
+    flex-direction: row;
+  }
+}
+
+.casino-page-container.cards32b .casino-table-left-box,
+.casino-page-container.cards32b .casino-table-right-box {
+  flex: 1;
+  min-width: 0;
+}
+
+.casino-page-container.cards32b .casino-table-box-divider {
+  width: 100%;
+  height: 1px;
+  background: #dbe2ea;
+}
+
+@media (min-width: 768px) {
+  .casino-page-container.cards32b .casino-table-box-divider {
+    width: 1px;
+    height: auto;
+    align-self: stretch;
+    background: #dbe2ea;
+  }
+}
+
+/* ── Table Header (Back / Lay / Odd / Even) ──────────────────── */
+.casino-page-container.cards32b .casino-table-header {
+  display: flex;
+  align-items: stretch;
+  background: #f1f5f9;
+  border-bottom: 1px solid #dbe2ea;
+  min-height: 38px;
+}
+
+.casino-page-container.cards32b .casino-nation-detail {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #1e293b;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.casino-page-container.cards32b .casino-table-header .casino-nation-detail {
+  background: #f1f5f9;
+}
+
+.casino-page-container.cards32b .casino-odds-box {
+  width: 72px;
+  min-width: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  padding: 6px 4px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .casino-page-container.cards32b .casino-odds-box {
+    width: 86px;
+    min-width: 86px;
+    font-size: 15px;
+  }
+}
+
+.casino-page-container.cards32b .casino-table-header .casino-odds-box {
+  cursor: default;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: none;
+  border-left: 1px solid #dbe2ea;
+}
+
+.casino-page-container.cards32b .casino-table-header .casino-odds-box.back {
+  background: #72bbef;
+  color: #0b2545;
+}
+
+.casino-page-container.cards32b .casino-table-header .casino-odds-box.lay {
+  background: #faa9ba;
+  color: #4a0d17;
+}
+
+/* ── Table Body Rows ─────────────────────────────────────────── */
+.casino-page-container.cards32b .casino-table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.casino-page-container.cards32b .casino-table-row {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid #dbe2ea;
+  min-height: 44px;
+  transition: background 0.12s ease;
+}
+
+.casino-page-container.cards32b .casino-table-row:first-of-type {
+  border-top: none;
+}
+
+.casino-page-container.cards32b .casino-table-row:hover {
+  background: #f8fafc;
+}
+
+.casino-page-container.cards32b .casino-nation-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.casino-page-container.cards32b .casino-odds-box.back {
+  background: #72bbef;
+  color: #0b2545;
+  border-left: 1px solid #dbe2ea;
+}
+
+.casino-page-container.cards32b .casino-odds-box.back:hover:not(.suspended-box) {
+  background: #5baae6;
+}
+
+.casino-page-container.cards32b .casino-odds-box.back:active:not(.suspended-box) {
+  background: #469cd8;
+  transform: scale(0.98);
+}
+
+.casino-page-container.cards32b .casino-odds-box.lay {
+  background: #faa9ba;
+  color: #4a0d17;
+  border-left: 1px solid #dbe2ea;
+}
+
+.casino-page-container.cards32b .casino-odds-box.lay:hover:not(.suspended-box) {
+  background: #f392a6;
+}
+
+.casino-page-container.cards32b .casino-odds-box.lay:active:not(.suspended-box) {
+  background: #eb7a91;
+  transform: scale(0.98);
+}
+
+/* ── Suspended Overlay Styles ────────────────────────────────── */
+.casino-page-container.cards32b .suspended-box {
+  position: relative;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.casino-page-container.cards32b .suspended-box::before {
+  background-image: url(/img/icons/lock.svg);
+  background-size: 17px 17px;
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.casino-page-container.cards32b .suspended-box::after {
+  content: "";
+  background-color: rgba(55, 54, 54, 0.84);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  cursor: not-allowed;
+  z-index: 1;
+}
+
+.casino-page-container.cards32b .casino-odds {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* ── Middle Box Total specific (cards32total) ────────────────── */
+.casino-page-container.cards32b .cards32total .casino-odds-box {
+  width: 144px;
+  min-width: 144px;
+}
+
+@media (min-width: 768px) {
+  .casino-page-container.cards32b .cards32total .casino-odds-box {
+    width: 172px;
+    min-width: 172px;
+  }
+}
+
+/* ── Full Width Numbers Box (card32numbers) ───────────────────── */
+.casino-page-container.cards32b .casino-table-full-box.card32numbers {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #dbe2ea;
+  padding: 10px 8px;
+  overflow: hidden;
+}
+
+.casino-page-container.cards32b .casino-table-full-box.card32numbers h4 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+}
+
+.casino-page-container.cards32b .card32numbers-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .casino-page-container.cards32b .card32numbers-container {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+}
+
+.casino-page-container.cards32b .card32numbers-container .casino-odds-box {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  border-radius: 3px;
+  border: 1px solid #dbe2ea;
+}

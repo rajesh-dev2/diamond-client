@@ -31,9 +31,25 @@ export default function AppRoutes() {
           <Route path="/current-bet" element={<CurrentBets />} />
           <Route path="/activity-log" element={<ActivityLog />} />
           <Route path="/casino-results" element={<CasinoResults />} />
+          <Route path="/casino-results/:gameId" element={<CasinoResults />} />
           <Route path="/live-casino-bets" element={<LiveCasinoBets />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/casino/:gameId" element={<CasinoPage />} />
+          <Route path="/card32" element={<Navigate to="/casino/card32" replace />} />
+          <Route path="/card32eu" element={<Navigate to="/casino/card32eu" replace />} />
+          <Route path="/cards32" element={<Navigate to="/casino/card32" replace />} />
+          <Route path="/cards32a" element={<Navigate to="/casino/card32" replace />} />
+          <Route path="/cards32b" element={<Navigate to="/casino/card32eu" replace />} />
+          <Route path="/lucky7" element={<Navigate to="/casino/lucky7" replace />} />
+          <Route path="/lucky7eu" element={<Navigate to="/casino/lucky7eu" replace />} />
+          <Route path="/lucky7eu2" element={<Navigate to="/casino/lucky7eu2" replace />} />
+          <Route path="/casino-list/*" element={<Home />} />
+          <Route path="/live-casino-list/*" element={<Home />} />
+          <Route path="/sports-book/*" element={<Home />} />
+          <Route path="/all-sports/*" element={<Home />} />
+          <Route path="/slot-list" element={<Home />} />
+          <Route path="/fantasy-list" element={<Home />} />
+          <Route path="/aviator-list" element={<Home />} />
         </Route>
       </Route>
 

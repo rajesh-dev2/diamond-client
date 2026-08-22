@@ -1,64 +1,59 @@
 /* ═══════════════════════════════════════════════════
-   CasinoLastResults Base Styles
+   CasinoLastResults — Reusable Shared Component Styles
    ═══════════════════════════════════════════════════ */
 
 .casino-last-result-wrapper {
-  margin-top: 4px;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .casino-last-result-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #125e7b;
+  background: #296F91D9;
   color: #ffffff;
-  padding: 5px 10px;
-  font-size: 13px;
-  font-weight: 700;
-  border-radius: 4px 4px 0 0;
-}
-
-.casino-last-result-title span {
-  font-size: 13px;
-  font-weight: 700;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .casino-last-result-title a {
   color: #ffffff;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: underline;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
   transition: opacity 0.15s ease;
 }
 
 .casino-last-result-title a:hover {
-  opacity: 0.85;
+  text-decoration: underline;
+  opacity: 0.9;
 }
 
 .casino-last-results {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  background: #ffffff;
-  padding: 6px 10px;
-  border-radius: 0 0 4px 4px;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 4px;
   align-items: center;
 }
 
-.casino-last-results .result.result-a {
-  background: #1b84ff;
+.result.result-a {
+  color: #ff4500;
 }
 
-.casino-last-results .result.result-b {
-  background: #e45b5b;
+.result.result-b {
+  color: #ffff33;
 }
 
-.casino-last-results .result.result-r {
-  background: #1a6a8a;
+.result.result-c {
+  color: #33c6ff;
 }
 
-/* Matka Result Variant */
+/* ── Matka Result Variant ── */
 .casino-last-results.matka-result {
   gap: 5px;
   overflow-x: auto;
@@ -68,21 +63,11 @@
 
 .matka-result.casino-last-results .result,
 .casino-last-results.matka-result .result {
-  padding: 0 4px;
+  padding: 0 8px;
   width: auto;
   border-radius: 4px;
   min-width: 70px;
-  height: 26px;
-  color: #222;
+  height: 28px;
+  color: #222222;
   background-color: #ccc;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.matka-result.casino-last-results .result.active,
-.casino-last-results.matka-result .result.active,
-.matka-result.casino-last-results .result:hover,
-.casino-last-results.matka-result .result:hover {
-  background-color: #296F8E;
-  color: #ffffff;
 }

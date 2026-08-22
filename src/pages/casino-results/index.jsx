@@ -1,4 +1,5 @@
 import { useState, forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import { createPortal } from 'react-dom'
 import './style.css'
@@ -18,9 +19,22 @@ const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
 
 CustomDateInput.displayName = 'CustomDateInput'
 
+const GAME_TYPE_MAP = {
+  card32: '2',
+  card32eu: '2',
+  cards32: '2',
+  teen62: '1',
+  teen: '1',
+  baccarat: '3',
+  poker: '4',
+  lucky7: '5',
+  dt20: '6',
+}
+
 export default function CasinoResults() {
+  const { gameId } = useParams()
   const [selectedDate, setSelectedDate] = useState(new Date(2026, 7, 17)) // 17/08/2026
-  const [casinoType, setCasinoType] = useState('')
+  const [casinoType, setCasinoType] = useState(gameId && GAME_TYPE_MAP[gameId] ? GAME_TYPE_MAP[gameId] : '')
   const [entriesCount, setEntriesCount] = useState(10)
   const [searchQuery, setSearchQuery] = useState('')
   const [resultsData] = useState([])
