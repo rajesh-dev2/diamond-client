@@ -82,11 +82,13 @@
 }
 
 .teenpatti1day .teenpatti1day-other-odds .casino-nation-detail {
-  width: 22%;
+  width: 22% !important;
+
 }
 
 .teenpatti1day .teenpatti1day-other-odds .casino-odds-box {
-  width: 13%;
+  width: 13% !important;
+  white-space: nowrap;
 }
 
 /* Active card cell */

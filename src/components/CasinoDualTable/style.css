@@ -36,7 +36,6 @@
 
 .casino-table-header .casino-nation-detail {
   width: 60%;
-  flex: 0 0 60%;
   font-weight: 700;
   font-size: 16px;
   min-height: unset;
@@ -98,7 +97,6 @@
 
 .casino-nation-detail {
   width: 60%;
-  flex: 0 0 60%;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -223,4 +221,28 @@
 
 .suspended-box:hover {
   transform: none;
+}
+
+
+
+@media (max-width: 768px) {
+  .casino-table-header .casino-nation-detail {
+    font-size: 14px;
+  }
+
+  .casino-table-header-odds .casino-odds-box {
+    font-size: 14px;
+  }
+
+  .casino-table-row .casino-nation-name {
+    font-size: 14px;
+  }
+
+  .casino-odds {
+    font-size: 14px;
+  }
+
+  .teenpatti1day .teenpatti1day-other-odds .casino-odds-box {
+    font-size: 14px;
+  }
 }
