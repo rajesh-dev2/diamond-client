@@ -51,20 +51,46 @@
   animation: gdv2-blink 1s infinite;
 }
 
-.gdv2-matka-link div { text-decoration: underline; color: #ff3b30; }
-.gdv2-matka-link i   { color: #000; font-size: 16px; animation: none; }
+.gdv2-matka-link div {
+  text-decoration: underline;
+  color: #ff3b30;
+}
+
+.gdv2-matka-link i {
+  color: #000;
+  font-size: 16px;
+  animation: none;
+}
 
 @keyframes gdv2-blink {
-  0%, 100% { color: #ff3b30; }
-  50%       { color: transparent; }
+
+  0%,
+  100% {
+    color: #ff3b30;
+  }
+
+  50% {
+    color: transparent;
+  }
 }
 
 /* ── Place Bet ───────────────────────────────────────────── */
-.gdv2-place-bet-container { background-color: #fff; }
+.gdv2-place-bet-container {
+  background-color: #fff;
+}
 
-.gdv2-bet-box { position: relative; background-color: #fff; }
-.gdv2-bet-back { background-color: #7CB5EC; }
-.gdv2-bet-lay  { background-color: #faa9ba; }
+.gdv2-bet-box {
+  position: relative;
+  background-color: #fff;
+}
+
+.gdv2-bet-back {
+  background-color: #7CB5EC;
+}
+
+.gdv2-bet-lay {
+  background-color: #faa9ba;
+}
 
 .gdv2-bet-header {
   display: flex;
@@ -76,10 +102,26 @@
   background-color: #CECFD2;
 }
 
-.gdv2-bet-header .gdv2-bet-for     { width: calc(100% - 246px); display: flex; align-items: center; line-height: normal; }
-.gdv2-bet-header .gdv2-bet-odds-label  { width: 76px; }
-.gdv2-bet-header .gdv2-bet-stake-label { width: 80px; margin-left: 10px; }
-.gdv2-bet-header .gdv2-bet-profit-label { width: 80px; text-align: right; }
+.gdv2-bet-header .gdv2-bet-for {
+  width: calc(100% - 246px);
+  display: flex;
+  align-items: center;
+  line-height: normal;
+}
+
+.gdv2-bet-header .gdv2-bet-odds-label {
+  width: 76px;
+}
+
+.gdv2-bet-header .gdv2-bet-stake-label {
+  width: 80px;
+  margin-left: 10px;
+}
+
+.gdv2-bet-header .gdv2-bet-profit-label {
+  width: 80px;
+  text-align: right;
+}
 
 .gdv2-bet-body {
   display: flex;
@@ -97,9 +139,24 @@
   line-height: normal;
 }
 
-.gdv2-bet-body .gdv2-bet-odds-input  { width: 76px; }
-.gdv2-bet-body .gdv2-bet-stake-input { width: 80px; margin-left: 10px; display: flex; align-items: center; }
-.gdv2-bet-body .gdv2-bet-profit      { width: 80px; text-align: right; font-weight: 700; font-size: 13px; color: #000; }
+.gdv2-bet-body .gdv2-bet-odds-input {
+  width: 76px;
+}
+
+.gdv2-bet-body .gdv2-bet-stake-input {
+  width: 80px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.gdv2-bet-body .gdv2-bet-profit {
+  width: 80px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 13px;
+  color: #000;
+}
 
 /* Odds spinner group */
 .gdv2-odds-group {
@@ -146,10 +203,23 @@
   border-radius: 0;
 }
 
-.gdv2-odds-spinner button:hover { background-color: #dedede; }
-.gdv2-odds-spinner button i     { font-size: 10px; color: #000; }
-.gdv2-odds-spinner button:first-child { border-top-right-radius: 2px; }
-.gdv2-odds-spinner button:last-child  { border-bottom-right-radius: 2px; border-top: 0; }
+.gdv2-odds-spinner button:hover {
+  background-color: #dedede;
+}
+
+.gdv2-odds-spinner button i {
+  font-size: 10px;
+  color: #000;
+}
+
+.gdv2-odds-spinner button:first-child {
+  border-top-right-radius: 2px;
+}
+
+.gdv2-odds-spinner button:last-child {
+  border-bottom-right-radius: 2px;
+  border-top: 0;
+}
 
 /* Stake input */
 .gdv2-stake-field {
@@ -209,8 +279,13 @@
 }
 
 @keyframes gdv2-spinner-fade {
-  0%   { opacity: 1; }
-  100% { opacity: 0.15; }
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.15;
+  }
 }
 
 .gdv2-btn-stake {
@@ -230,7 +305,9 @@
   border: none;
 }
 
-.gdv2-btn-stake:hover { background-color: #bebfb2; }
+.gdv2-btn-stake:hover {
+  background-color: #bebfb2;
+}
 
 .gdv2-btn-clear {
   font-weight: 600;
@@ -297,9 +374,14 @@
 }
 
 /* ── My Bets Table ───────────────────────────────────────── */
-.gdv2-mybets-container { margin-top: 2px; }
+.gdv2-mybets-container {
+  margin-top: 2px;
+}
 
-.gdv2-mybets-table-wrap { width: 100%; overflow-x: auto; }
+.gdv2-mybets-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
 
 .gdv2-mybets-table {
   width: 100%;
@@ -307,7 +389,9 @@
   border-collapse: collapse;
 }
 
-.gdv2-mybets-table thead { background-color: #CECFD2; }
+.gdv2-mybets-table thead {
+  background-color: #F7F7F7;
+}
 
 .gdv2-mybets-table th {
   color: #000;
@@ -315,11 +399,18 @@
   font-size: 13px;
   padding: 5px 10px;
   text-align: left;
-  border-bottom: 1px solid #b2b6ba;
+  border-bottom: 1px solid #c7c8ca;
 }
 
-.gdv2-mybets-table .gdv2-bet-row-back td { background-color: #72bbef; color: #111; }
-.gdv2-mybets-table .gdv2-bet-row-lay  td { background-color: #faa9ba; color: #111; }
+.gdv2-mybets-table .gdv2-bet-row-back td {
+  background-color: #72bbef;
+  color: #111;
+}
+
+.gdv2-mybets-table .gdv2-bet-row-lay td {
+  background-color: #faa9ba;
+  color: #111;
+}
 
 .gdv2-mybets-table td {
   padding: 4px 10px;
@@ -329,5 +420,7 @@
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 1199px) {
-  .gdv2-right-sidebar { display: none; }
+  .gdv2-right-sidebar {
+    display: none;
+  }
 }
