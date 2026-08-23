@@ -1,24 +1,3 @@
-/**
- * Reusable Lucky 7 Casino Component (lucky7, lucky7eu, lucky7eu2)
- * ─────────────────────────────────────────────────────────────
- * Powers:
- *   • Lucky 7 - A (lucky7)
- *   • Lucky 7 - B (lucky7eu)
- *   • Lucky 7 - C (lucky7eu2)
- *
- * Faithfully styled according to standard casino layout reference & screenshots:
- *   • Video Stream + Sound Toggle + Top-Left Dealt Card Overlay
- *   • Countdown FlipClock (seconds timer)
- *   • Betting Tables:
- *       1. Main Market: Low Card (A to 6), Center Card 7, High Card (8 to K)
- *       2. Side Market: Even, Odd, Red Suits (♥ ♦), Black Suits (♠ ♣)
- *       3. 3-Card Groups: (A-2-3), (4-5-6), (8-9-10), (J-Q-K) with mini cards & yellow borders
- *       4. 13 Single Cards: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K
- *   • Last Results Badges (H / L / T) + Round Detail Modal
- *   • Rules Modal
- *   • CasinoLayout Integration (PlaceBetSidebar, MyBetsSidebar, MobileTabs, PlaceBetModal)
- */
-
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import CasinoLayout from '../../../components/CasinoLayout'
@@ -28,38 +7,19 @@ import CasinoLastResults from '../../../components/CasinoLastResults'
 import CasinoVideoCards from '../../../components/CasinoVideoCards'
 import './style.css'
 
-/* ── Mini Card Component with Yellow Border ───────────────────── */
-export function MiniCard({ rank, suits = ['♠', '♥', '♦', '♣'] }) {
-  return (
-    <div className="lucky7-mini-card">
-      <div className="mini-rank">{rank}</div>
-      <div className="mini-suits">
-        {suits.map((suit, sIdx) => {
-          const isRed = suit === '♥' || suit === '♦'
-          return (
-            <span key={sIdx} className={isRed ? 'suit-red' : 'suit-black'}>
-              {suit}
-            </span>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
 /* ── Default Variant Configurations ──────────────────────────── */
 const VARIANT_CONFIGS = {
   lucky7: {
     title: 'LUCKY 7 - A',
     code: 'lucky7',
     streamUrl: '/newmediaplayer/lucky7/4a4fdf0e-91d9-4d5e-a8fe-ab1ac5af3a81?ip=103.198.173.38',
-    defaultRoundId: '106260822160750',
+    defaultRoundId: '106260823124933',
   },
   lucky7eu: {
     title: 'LUCKY 7 - B',
     code: 'lucky7eu',
-    streamUrl: '/newmediaplayer/lucky7eu/d091e266-408f-450c-ab2d-971a496f04bd?ip=103.198.173.38',
-    defaultRoundId: '107260822160752',
+    streamUrl: '/newmediaplayer/lucky7eu/bf99dcdf-8d04-44c6-bdd4-bf99c95ccea5?ip=103.198.173.38',
+    defaultRoundId: '107260823124532',
   },
   lucky7eu2: {
     title: 'LUCKY 7 - C',
@@ -75,8 +35,8 @@ const DEFAULT_MARKET = {
   highCard: { name: 'High Card (8-K)', odds: '2',    suspended: false },
   even:     { name: 'Even',            odds: '2.1',  suspended: false },
   odd:      { name: 'Odd',             odds: '1.79', suspended: false },
-  redSuit:  { name: 'Red Suits (♥ ♦)', odds: '1.95', suspended: false },
-  blackSuit:{ name: 'Black Suits (♠ ♣)', odds: '1.95', suspended: false },
+  redSuit:  { name: 'Red Suits',       odds: '1.95', suspended: false },
+  blackSuit:{ name: 'Black Suits',     odds: '1.95', suspended: false },
   groups: [
     { id: 'g1', name: 'A-2-3 Group',   odds: '4', cards: ['A', '2', '3'], suspended: false },
     { id: 'g2', name: '4-5-6 Group',   odds: '4', cards: ['4', '5', '6'], suspended: false },
@@ -100,18 +60,18 @@ const DEFAULT_MARKET = {
   ],
 }
 
-/* ── Last 10 Results ─────────────────────────────────────────── */
+/* ── Last 10 Results (L, H, H, L, H, H, H, L, H, H) ───────────── */
 const LAST_RESULTS = [
-  { id: 1,  winner: 'H', card: '10♠', result: 'High', roundId: '107260822160751' },
-  { id: 2,  winner: 'H', card: 'K♥',  result: 'High', roundId: '107260822160750' },
-  { id: 3,  winner: 'H', card: '8♦',  result: 'High', roundId: '107260822160749' },
-  { id: 4,  winner: 'H', card: 'J♣',  result: 'High', roundId: '107260822160748' },
-  { id: 5,  winner: 'H', card: '9♠',  result: 'High', roundId: '107260822160747' },
-  { id: 6,  winner: 'H', card: 'Q♦',  result: 'High', roundId: '107260822160746' },
-  { id: 7,  winner: 'L', card: '4♥',  result: 'Low',  roundId: '107260822160745' },
-  { id: 8,  winner: 'L', card: '2♣',  result: 'Low',  roundId: '107260822160744' },
-  { id: 9,  winner: 'H', card: '9♥',  result: 'High', roundId: '107260822160743' },
-  { id: 10, winner: 'L', card: '5♠',  result: 'Low',  roundId: '107260822160742' },
+  { id: 1,  winner: 'L', card: '4♥',  result: 'Low',  roundId: '106260823124932' },
+  { id: 2,  winner: 'H', card: '10♠', result: 'High', roundId: '106260823124931' },
+  { id: 3,  winner: 'H', card: '8♦',  result: 'High', roundId: '106260823124930' },
+  { id: 4,  winner: 'L', card: '2♣',  result: 'Low',  roundId: '106260823124929' },
+  { id: 5,  winner: 'H', card: 'K♥',  result: 'High', roundId: '106260823124928' },
+  { id: 6,  winner: 'H', card: '9♠',  result: 'High', roundId: '106260823124927' },
+  { id: 7,  winner: 'H', card: 'Q♦',  result: 'High', roundId: '106260823124926' },
+  { id: 8,  winner: 'L', card: '5♠',  result: 'Low',  roundId: '106260823124925' },
+  { id: 9,  winner: 'H', card: 'J♣',  result: 'High', roundId: '106260823124924' },
+  { id: 10, winner: 'H', card: '9♥',  result: 'High', roundId: '106260823124923' },
 ]
 
 export default function Lucky7({ variant = 'lucky7eu' }) {
@@ -124,7 +84,6 @@ export default function Lucky7({ variant = 'lucky7eu' }) {
   const [isMuted, setIsMuted] = useState(true)
   const [roundId] = useState(config.defaultRoundId)
   const [market] = useState(DEFAULT_MARKET)
-  const [dealtCard] = useState({ rank: '7', suit: '♠', flipped: false })
 
   return (
     <CasinoLayout
@@ -140,7 +99,7 @@ export default function Lucky7({ variant = 'lucky7eu' }) {
         }
 
         return (
-          <div className="casino-page-container lucky7-page">
+          <div className="casino-page-container lucky7a">
             {/* ── Video Stream Section ── */}
             <div className="casino-video">
               {/* Sound Toggle */}
@@ -175,148 +134,238 @@ export default function Lucky7({ variant = 'lucky7eu' }) {
                 </div>
               </div>
 
-              {/* Dealt Card Overlay (Top-Left) */}
-              <CasinoVideoCards className="lucky7-dealt-card-overlay">
-                <div className="lucky7-single-card-box card-back">
-                  {dealtCard.flipped ? (
-                    <div style={{ fontWeight: 900, color: '#0f172a' }}>{dealtCard.rank}</div>
-                  ) : null}
+              {/* Reusable Video Player Cards Overlay (Top-Left) */}
+              <CasinoVideoCards>
+                <div>
+                  <div className="flip-card-container">
+                    <div className="flip-card">
+                      <div className="flip-card-inner">
+                        <div className="flip-card-front">
+                          <img
+                            src="https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/1.jpg"
+                            onError={(e) => {
+                              e.currentTarget.src = '/img/game-card.png'
+                            }}
+                            alt="Card Back"
+                          />
+                        </div>
+                        <div className="flip-card-back">
+                          <img
+                            src="/img/game-card.png"
+                            alt="Card Front"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </CasinoVideoCards>
 
               {/* Countdown FlipClock Timer (Bottom-Right) */}
-              <div className="clock">
+              <div className="clock flip-clock-wrapper">
                 <FlipClock seconds={20} />
               </div>
             </div>
 
             {/* ── Casino Detail Section ── */}
             <div className="casino-detail">
-              {/* ── Row 1: Low Card, Center 7, High Card ── */}
-              <div className="lucky7-row-main">
-                {/* Low Card */}
-                <div
-                  className={`lucky7-bet-box ${market.lowCard.suspended ? 'suspended-box' : ''}`}
-                  onClick={() => handleBetClick('Low Card', market.lowCard.odds, 'back', market.lowCard.suspended)}
-                >
-                  <div className="lucky7-odds-top">{market.lowCard.suspended ? '0' : market.lowCard.odds}</div>
-                  <div className="lucky7-btn-main">Low Card</div>
-                </div>
+              <div className="casino-table">
+                {/* ── Row 1: Low Card, Center 7, High Card ── */}
+                <div className="casino-table-full-box">
+                  {/* Low Card */}
+                  <div
+                    className="lucky7low"
+                    onClick={() => handleBetClick('Low Card', market.lowCard.odds, 'back', market.lowCard.suspended)}
+                  >
+                    <div className="casino-odds text-center">
+                      {market.lowCard.suspended ? '0' : market.lowCard.odds}
+                    </div>
+                    <div className={`casino-odds-box back casino-odds-box-theme ${market.lowCard.suspended ? 'suspended-box' : ''}`}>
+                      <span className="casino-odds">Low Card</span>
+                    </div>
+                    <div className="casino-nation-book text-center"></div>
+                  </div>
 
-                {/* Center 7 Card Indicator */}
-                <div className="lucky7-center-card-badge">
-                  <div className="card-num">7</div>
-                  <div className="card-suits">
-                    <span className="suit-black">♠</span>
-                    <span className="suit-red">♥</span>
-                    <span className="suit-black">♣</span>
-                    <span className="suit-red">♦</span>
+                  {/* Center 7 Card Image */}
+                  <div className="lucky7">
+                    <img src="/img/game-card.png" alt="7" />
+                  </div>
+
+                  {/* High Card */}
+                  <div
+                    className="lucky7high"
+                    onClick={() => handleBetClick('High Card', market.highCard.odds, 'back', market.highCard.suspended)}
+                  >
+                    <div className="casino-odds text-center">
+                      {market.highCard.suspended ? '0' : market.highCard.odds}
+                    </div>
+                    <div className={`casino-odds-box back casino-odds-box-theme ${market.highCard.suspended ? 'suspended-box' : ''}`}>
+                      <span className="casino-odds">High Card</span>
+                    </div>
+                    <div className="casino-nation-book text-center"></div>
                   </div>
                 </div>
 
-                {/* High Card */}
-                <div
-                  className={`lucky7-bet-box ${market.highCard.suspended ? 'suspended-box' : ''}`}
-                  onClick={() => handleBetClick('High Card', market.highCard.odds, 'back', market.highCard.suspended)}
-                >
-                  <div className="lucky7-odds-top">{market.highCard.suspended ? '0' : market.highCard.odds}</div>
-                  <div className="lucky7-btn-main">High Card</div>
-                </div>
-              </div>
+                {/* ── Row 2: Even/Odd & Red/Black Suits ── */}
+                <div className="casino-table-box mt-3">
+                  <div className="casino-table-left-box">
+                    <div
+                      className="lucky7odds"
+                      onClick={() => handleBetClick('Even', market.even.odds, 'back', market.even.suspended)}
+                    >
+                      <div className="casino-odds text-center">
+                        {market.even.suspended ? '0' : market.even.odds}
+                      </div>
+                      <div className={`casino-odds-box back casino-odds-box-theme ${market.even.suspended ? 'suspended-box' : ''}`}>
+                        <span className="casino-odds">Even</span>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
+                    </div>
 
-              {/* ── Row 2: Even / Odd & Red / Black Suits ── */}
-              <div className="lucky7-row-side">
-                {/* Even / Odd */}
-                <div className="lucky7-side-group">
-                  <div
-                    className={`lucky7-bet-box ${market.even.suspended ? 'suspended-box' : ''}`}
-                    onClick={() => handleBetClick('Even', market.even.odds, 'back', market.even.suspended)}
-                  >
-                    <div className="lucky7-odds-top">{market.even.suspended ? '0' : market.even.odds}</div>
-                    <div className="lucky7-btn-main">Even</div>
-                  </div>
-                  <div
-                    className={`lucky7-bet-box ${market.odd.suspended ? 'suspended-box' : ''}`}
-                    onClick={() => handleBetClick('Odd', market.odd.odds, 'back', market.odd.suspended)}
-                  >
-                    <div className="lucky7-odds-top">{market.odd.suspended ? '0' : market.odd.odds}</div>
-                    <div className="lucky7-btn-main">Odd</div>
-                  </div>
-                </div>
-
-                {/* Red / Black Suits */}
-                <div className="lucky7-side-group">
-                  <div
-                    className={`lucky7-bet-box ${market.redSuit.suspended ? 'suspended-box' : ''}`}
-                    onClick={() => handleBetClick('Red Suits', market.redSuit.odds, 'back', market.redSuit.suspended)}
-                  >
-                    <div className="lucky7-odds-top">{market.redSuit.suspended ? '0' : market.redSuit.odds}</div>
-                    <div className="lucky7-btn-main lucky7-suits-btn">
-                      <span className="suit-red">♥</span>
-                      <span className="suit-red">♦</span>
+                    <div
+                      className="lucky7odds"
+                      onClick={() => handleBetClick('Odd', market.odd.odds, 'back', market.odd.suspended)}
+                    >
+                      <div className="casino-odds text-center">
+                        {market.odd.suspended ? '0' : market.odd.odds}
+                      </div>
+                      <div className={`casino-odds-box back casino-odds-box-theme ${market.odd.suspended ? 'suspended-box' : ''}`}>
+                        <span className="casino-odds">Odd</span>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
                     </div>
                   </div>
-                  <div
-                    className={`lucky7-bet-box ${market.blackSuit.suspended ? 'suspended-box' : ''}`}
-                    onClick={() => handleBetClick('Black Suits', market.blackSuit.odds, 'back', market.blackSuit.suspended)}
-                  >
-                    <div className="lucky7-odds-top">{market.blackSuit.suspended ? '0' : market.blackSuit.odds}</div>
-                    <div className="lucky7-btn-main lucky7-suits-btn">
-                      <span className="suit-black">♠</span>
-                      <span className="suit-black">♣</span>
+
+                  <div className="casino-table-right-box">
+                    <div
+                      className="lucky7odds"
+                      onClick={() => handleBetClick('Red Suits', market.redSuit.odds, 'back', market.redSuit.suspended)}
+                    >
+                      <div className="casino-odds text-center">
+                        {market.redSuit.suspended ? '0' : market.redSuit.odds}
+                      </div>
+                      <div className={`casino-odds-box back casino-odds-box-theme ${market.redSuit.suspended ? 'suspended-box' : ''}`}>
+                        <span className="casino-odds">
+                          <span className="card-icon ms-1"><span className="card-red">♥</span></span>
+                          <span className="card-icon ms-1"><span className="card-red">♦</span></span>
+                        </span>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
+                    </div>
+
+                    <div
+                      className="lucky7odds"
+                      onClick={() => handleBetClick('Black Suits', market.blackSuit.odds, 'back', market.blackSuit.suspended)}
+                    >
+                      <div className="casino-odds text-center">
+                        {market.blackSuit.suspended ? '0' : market.blackSuit.odds}
+                      </div>
+                      <div className={`casino-odds-box back casino-odds-box-theme ${market.blackSuit.suspended ? 'suspended-box' : ''}`}>
+                        <span className="casino-odds">
+                          <span className="card-icon ms-1"><span className="card-black">♠</span></span>
+                          <span className="card-icon ms-1"><span className="card-black">♣</span></span>
+                        </span>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* ── Row 3: 3-Card Groups (A-2-3, 4-5-6, 8-9-10, J-Q-K) ── */}
-              <div className="lucky7-row-groups">
-                {market.groups.map((grp) => (
-                  <div
-                    key={grp.id}
-                    className={`lucky7-bet-box ${grp.suspended ? 'suspended-box' : ''}`}
-                    onClick={() => handleBetClick(grp.name, grp.odds, 'back', grp.suspended)}
-                  >
-                    <div className="lucky7-odds-top">{grp.suspended ? '0' : grp.odds}</div>
-                    <div className="lucky7-group-cards-btn">
-                      {grp.cards.map((cardRank, cIdx) => (
-                        <MiniCard key={cIdx} rank={cardRank} />
-                      ))}
+                {/* ── Row 3: 4 Card Groups (A-2-3, 4-5-6, 8-9-10, J-Q-K) ── */}
+                <div className="casino-table-box lucky7-groups-box mt-3">
+                  {market.groups.map((grp) => (
+                    <div
+                      key={grp.id}
+                      className="lucky7cards"
+                      onClick={() => handleBetClick(grp.name, grp.odds, 'back', grp.suspended)}
+                    >
+                      <div className="casino-odds w-100 text-center">
+                        {grp.suspended ? '0' : grp.odds}
+                      </div>
+                      <div className={`card-odd-box-container ${grp.suspended ? 'suspended-box' : ''}`}>
+                        {grp.cards.map((cardRank, cIdx) => (
+                          <div key={cIdx} className="card-odd-box">
+                            <div>
+                              <img
+                                src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/${cardRank}.png`}
+                                onError={(e) => {
+                                  e.currentTarget.src = '/img/game-card.png'
+                                }}
+                                alt={cardRank}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="casino-nation-book text-center w-100"></div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              {/* ── Row 4: 13 Single Cards Grid (A to K) ── */}
-              <div className="lucky7-row-singles">
-                {market.singles.map((single, sIdx) => (
-                  <div
-                    key={`single-${sIdx}`}
-                    className={`lucky7-single-card-item ${single.suspended ? 'suspended-box' : ''}`}
-                    onClick={() => handleBetClick(`Card ${single.rank}`, single.odds, 'back', single.suspended)}
-                  >
-                    <div className="lucky7-single-odds-top">{single.suspended ? '0' : single.odds}</div>
-                    <MiniCard rank={single.rank} />
+                {/* ── Row 4: 13 Single Cards (A to K) ── */}
+                <div className="casino-table-full-box lucky7acards mt-3">
+                  <div className="casino-odds w-100 text-center">12</div>
+                  <div className="lucky7acards-grid">
+                    {market.singles.map((single, sIdx) => (
+                      <div
+                        key={`single-${sIdx}`}
+                        className="card-odd-box"
+                        onClick={() => handleBetClick(`Card ${single.rank}`, single.odds, 'back', single.suspended)}
+                      >
+                        <div className={single.suspended ? 'suspended-box' : ''}>
+                          <img
+                            src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/${single.rank}.png`}
+                            onError={(e) => {
+                              e.currentTarget.src = '/img/game-card.png'
+                            }}
+                            alt={single.rank}
+                          />
+                        </div>
+                        <div className="casino-nation-book"></div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
 
-              {/* ── Row 5: Last Results ── */}
-              <CasinoLastResults
-                title="Last Result"
-                viewAllLink={`/casino-results/${activeKey}`}
-                results={LAST_RESULTS}
-                renderResult={(res, idx) => (
-                  <span
-                    key={res.id || idx}
-                    className="result result-b"
-                    onClick={() => setSelectedResult(res)}
-                    title={`Round: ${res.roundId} | Card: ${res.card} (${res.result})`}
-                  >
-                    {res.winner}
-                  </span>
-                )}
-              />
+                {/* ── Row 5: Reusable Casino Last Results Component ── */}
+                <CasinoLastResults
+                  title="Last Result"
+                  viewAllLink={`/casino-results/${activeKey}`}
+                  results={LAST_RESULTS}
+                  renderResult={(res, idx) => {
+                    let badgeClass = 'result'
+                    if (res.winner === 'H') badgeClass = 'result result-b'
+                    else if (res.winner === 'L') badgeClass = 'result result-a'
+
+                    return (
+                      <span
+                        key={res.id || idx}
+                        className={badgeClass}
+                        onClick={() => setSelectedResult(res)}
+                        title={`Round: ${res.roundId} | Card: ${res.card} (${res.result})`}
+                      >
+                        {res.winner}
+                      </span>
+                    )
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Hidden Table for Matched Bet Data Binding */}
+            <div className="d-none">
+              <div className="table-responsive">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Matched Bet</th>
+                      <th className="text-end">Odds</th>
+                      <th className="text-end">Stake</th>
+                    </tr>
+                  </thead>
+                  <tbody />
+                </table>
+              </div>
             </div>
 
             {/* ── Rules Modal ── */}
@@ -337,11 +386,11 @@ export default function Lucky7({ variant = 'lucky7eu' }) {
 
                   <h6 style={{ fontWeight: 800, color: '#0f172a', marginTop: '12px', marginBottom: '8px' }}>Betting Markets</h6>
                   <ul style={{ paddingLeft: '20px', marginBottom: '10px' }}>
-                    <li><strong>Low Card (A, 2, 3, 4, 5, 6):</strong> Pays 2.00 (or 50% if card is 7 depending on table rules)</li>
+                    <li><strong>Low Card (A, 2, 3, 4, 5, 6):</strong> Pays 2.00</li>
                     <li><strong>High Card (8, 9, 10, J, Q, K):</strong> Pays 2.00</li>
                     <li><strong>Exact 7:</strong> Pays 12.00</li>
-                    <li><strong>Even / Odd:</strong> Bet on whether the card’s numerical value is Even or Odd (Ace = 1, J=11, Q=12, K=13)</li>
-                    <li><strong>Color / Suits:</strong> Red (♥ ♦) or Black (♠ ♣)</li>
+                    <li><strong>Even / Odd:</strong> Bet on whether the card value is Even or Odd</li>
+                    <li><strong>Suits:</strong> Red (♥ ♦) or Black (♠ ♣)</li>
                     <li><strong>3-Card Groups:</strong> Bet on (A-2-3), (4-5-6), (8-9-10), or (J-Q-K) paying 4.00</li>
                     <li><strong>Individual Card Value:</strong> Exact card face prediction paying 12.00</li>
                   </ul>
