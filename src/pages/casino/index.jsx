@@ -11,6 +11,7 @@ import Teen62 from './teen62'
 import Card32 from './card32'
 import Card32B from './card32eu'
 import Lucky7 from './lucky7'
+import Lucky7B from './lucky7eu'
 
 const CASINO_MAP = {
   // ── Goal ──
@@ -65,10 +66,10 @@ const CASINO_MAP = {
 
   // ── Lucky 7 Variants ──
   lucky7: Lucky7,
-  lucky7eu: Lucky7,
+  lucky7eu: Lucky7B,
   lucky7eu2: Lucky7,
   lucky7a: Lucky7,
-  lucky7b: Lucky7,
+  lucky7b: Lucky7B,
   lucky7c: Lucky7,
   'lucky-7': Lucky7,
   lucky5: Lucky7,
@@ -87,7 +88,7 @@ export default function CasinoPage() {
     if (key.includes('32') || key.includes('card32')) {
       Page = key.includes('eu') || key.includes('b') ? Card32B : Card32
     } else if (key.includes('lucky') || key.includes('7')) {
-      Page = Lucky7
+      Page = (key.includes('eu') || key.includes('b')) ? Lucky7B : Lucky7
     } else if (key.includes('teen') || key.includes('poker') || key.includes('baccarat') || key.includes('dt') || key.includes('ab')) {
       Page = Teen62
     } else if (key.includes('worli') || key.includes('matka')) {
