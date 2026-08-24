@@ -383,6 +383,7 @@
   border: 0;
   justify-content: space-between;
   align-items: flex-start;
+  width: 100%;
 }
 
 .casino-page-container.lucky7a .lucky7acards .card-odd-box,
