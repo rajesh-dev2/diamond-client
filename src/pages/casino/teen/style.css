@@ -1,0 +1,103 @@
+/* ═══════════════════════════════════════════════════════════════
+   Teenpatti 1-day (teen) Stylesheet
+   Faithfully styled according to standard casino layout reference
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-page-container.teen-casino {
+  width: 100%;
+  background: white;
+  user-select: none;
+}
+
+/* ── Video Stream Section ───────────────────────────────────── */
+.casino-page-container.teen-casino .casino-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.casino-page-container.teen-casino .video-box-container,
+.casino-page-container.teen-casino .casino-video-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.casino-page-container.teen-casino .casino-video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.casino-page-container.teen-casino .casino-video-box .video-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0b1426 0%, #172439 50%, #0d1a2d 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.casino-page-container.teen-casino .casino-video-box .video-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 50% 35%, rgba(18, 94, 123, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(218, 165, 32, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.casino-page-container.teen-casino .casino-video-box .video-table-graphic {
+  width: 80%;
+  max-width: 480px;
+  height: 100px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-radius: 60px;
+  background: rgba(18, 94, 123, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 14px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(18, 94, 123, 0.3);
+}
+
+/* ── Casino Detail Section ───────────────────────────────────── */
+.casino-page-container.teen-casino .casino-detail {
+  margin: 8px 0;
+}
+
+/* ── Full Width Table (Card 1 to 6 Odd/Even) ─────────────────── */
+.casino-page-container.teen-casino .casino-table-full-box.teen-other-odds {
+  margin-top: 10px;
+  border: 1px solid #c7c8ca;
+}
+
+.teen-casino .teen-other-odds .casino-nation-detail {
+  width: 22% !important;
+}
+
+.teen-casino .teen-other-odds .casino-odds-box {
+  width: 13% !important;
+  white-space: nowrap;
+}
+
+/* Active card cell */
+.casino-page-container.teen-casino .casino-table-full-box .casino-odds-box.back:not(.suspended-box) {
+  background: #72bbef;
+  color: #0b2545;
+}
+
+.casino-page-container.teen-casino .casino-table-full-box .casino-odds-box.back:not(.suspended-box) .casino-odds {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0b2545;
+}

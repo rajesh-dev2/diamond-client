@@ -1,0 +1,260 @@
+/**
+ * Teenpatti 1-day (teen)
+ * ─────────────────────────────
+ * Live casino Teenpatti 1-day page matching reference HTML and styling:
+ *   • Video Stream + Video Cards Overlay (Player A & Player B 3-card hands)
+ *   • Countdown FlipClock (seconds timer)
+ *   • Casino Table:
+ *       - Player A (Main, Consecutive - Back & Lay)
+ *       - Player B (Main, Consecutive - Back & Lay)
+ *       - Card 1 to 6 Odd & Even markets
+ *   • Casino Last Results (A / B badges + Result dialog)
+ *   • Full integration with CasinoLayout (Sidebar bet slip, MobileTabs, PlaceBetModal, Rules modal)
+ */
+
+import { useState } from 'react'
+import CasinoLayout from '../../../components/CasinoLayout'
+import FlipClock from '../../../components/FlipClock'
+import RulesModal from '../../../components/RulesModal'
+import CommonModal from '../../../components/Modal'
+import CasinoLastResults from '../../../components/CasinoLastResults'
+import CasinoVideoCards from '../../../components/CasinoVideoCards'
+import CasinoDualTable from '../../../components/CasinoDualTable'
+import './style.css'
+
+const INITIAL_MARKET = {
+  playerA: {
+    name: 'Player A',
+    main: { back: 0, lay: 0, suspended: true },
+    consecutive: { back: 0, lay: 0, suspended: true },
+  },
+  playerB: {
+    name: 'Player B',
+    main: { back: 0, lay: 0, suspended: true },
+    consecutive: { back: 0, lay: 0, suspended: true },
+  },
+  cardOdds: [
+    { card: 'Card 1', odd: 0, even: 0, suspendedOdd: true, suspendedEven: true },
+    { card: 'Card 2', odd: 0, even: 0, suspendedOdd: true, suspendedEven: true },
+    { card: 'Card 3', odd: 0, even: 0, suspendedOdd: true, suspendedEven: true },
+    { card: 'Card 4', odd: 0, even: 0, suspendedOdd: true, suspendedEven: true },
+    { card: 'Card 5', odd: 0, even: 0, suspendedOdd: true, suspendedEven: true },
+    { card: 'Card 6', odd: 1.78, even: 2.2, suspendedOdd: true, suspendedEven: true },
+  ],
+}
+
+/* ── Live Cards Data (Player A: 8♣, 6♥, 4♠ | Player B: 3♥, A♣, 7♠) ── */
+const INITIAL_CARDS_A = [
+  { rank: '8', suit: '♣', color: 'black', img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/8C.png', flipped: true },
+  { rank: '6', suit: '♥', color: 'red',   img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/6H.png', flipped: true },
+  { rank: '4', suit: '♠', color: 'black', img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/4S.png', flipped: true },
+]
+
+const INITIAL_CARDS_B = [
+  { rank: '3', suit: '♥', color: 'red',   img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/3H.png', flipped: true },
+  { rank: 'A', suit: '♣', color: 'black', img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/1C.png', flipped: true },
+  { rank: '7', suit: '♠', color: 'black', img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/7S.png', flipped: true },
+]
+
+/* ── Last 10 Results (B, A, B, B, A, B, A, A, A, B) ───────── */
+const LAST_RESULTS = [
+  { id: 1, winner: 'B', roundId: '195260820124236', scoreA: 'Pair', scoreB: 'Flush' },
+  { id: 2, winner: 'A', roundId: '195260820124235', scoreA: 'High Card', scoreB: 'Pair' },
+  { id: 3, winner: 'B', roundId: '195260820124234', scoreA: 'High Card', scoreB: 'Straight' },
+  { id: 4, winner: 'B', roundId: '195260820124233', scoreA: 'High Card', scoreB: 'Pair' },
+  { id: 5, winner: 'A', roundId: '195260820124232', scoreA: 'Pair', scoreB: 'Trio' },
+  { id: 6, winner: 'B', roundId: '195260820124231', scoreA: 'Flush', scoreB: 'Pair' },
+  { id: 7, winner: 'A', roundId: '195260820124230', scoreA: 'High Card', scoreB: 'Flush' },
+  { id: 8, winner: 'A', roundId: '195260820124229', scoreA: 'Straight', scoreB: 'Pair' },
+  { id: 9, winner: 'A', roundId: '195260820124228', scoreA: 'Pair', scoreB: 'High Card' },
+  { id: 10, winner: 'B', roundId: '195260820124227', scoreA: 'High Card', scoreB: 'Pair' },
+]
+
+export default function Teen() {
+  const [showRules, setShowRules] = useState(false)
+  const [selectedResult, setSelectedResult] = useState(null)
+  const [roundId] = useState('195260820124237')
+  const [cardsA] = useState(INITIAL_CARDS_A)
+  const [cardsB] = useState(INITIAL_CARDS_B)
+  const [market] = useState(INITIAL_MARKET)
+
+  return (
+    <CasinoLayout
+      title="TEENPATTI 1-DAY"
+      roundId={roundId}
+      rulesLink="#rules"
+      onRulesClick={() => setShowRules(true)}
+    >
+      {({ onOddClick }) => {
+        // Handler for placing a bet through odds box click
+        const handleBetClick = (runnerName, odds, type, isSuspended) => {
+          if (isSuspended || !odds || odds <= 0) return
+          onOddClick({ name: runnerName, [type]: odds }, type)
+        }
+
+        const playerARunners = [
+          {
+            id: 'pa_main',
+            name: 'Main',
+            betName: 'Player A Main',
+            back: market.playerA.main.back,
+            lay: market.playerA.main.lay,
+            suspended: market.playerA.main.suspended,
+            suspendedLay: market.playerA.main.suspendedLay,
+            suspendedWrapper: market.playerA.main.suspended || market.playerA.main.suspendedLay,
+          },
+          {
+            id: 'pa_consecutive',
+            name: 'Consecutive',
+            betName: 'Player A Consecutive',
+            back: market.playerA.consecutive.back,
+            lay: market.playerA.consecutive.lay,
+            suspended: market.playerA.consecutive.suspended,
+            suspendedWrapper: market.playerA.consecutive.suspended,
+          },
+        ]
+
+        const playerBRunners = [
+          {
+            id: 'pb_main',
+            name: 'Main',
+            betName: 'Player B Main',
+            back: market.playerB.main.back,
+            lay: market.playerB.main.lay,
+            suspended: market.playerB.main.suspended,
+            suspendedLay: market.playerB.main.suspendedLay,
+            suspendedWrapper: market.playerB.main.suspended || market.playerB.main.suspendedLay,
+          },
+          {
+            id: 'pb_consecutive',
+            name: 'Consecutive',
+            betName: 'Player B Consecutive',
+            back: market.playerB.consecutive.back,
+            lay: market.playerB.consecutive.lay,
+            suspended: market.playerB.consecutive.suspended,
+            suspendedWrapper: market.playerB.consecutive.suspended,
+          },
+        ]
+
+        return (
+          <div className="casino-page-container teen-casino">
+            {/* ── Video Stream Section ── */}
+            <div className="casino-video">
+              {/* ── Video Cards Overlay (Player A & Player B) ── */}
+              <CasinoVideoCards />
+
+              <div className="video-box-container">
+                <div className="casino-video-box">
+                  <iframe
+                    src="/newmediaplayer/teen/d0c59ba3-8958-4805-9479-2df56764a5cb?ip=103.198.173.38"
+                    title="Teenpatti 1-day Stream"
+                    frameBorder="0"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+
+              {/* ── Countdown Timer (Bottom Right) ── */}
+              <div className="clock">
+                <FlipClock seconds={21} />
+              </div>
+            </div>
+
+            {/* ── Casino Detail Section ── */}
+            <div className="casino-detail">
+              <div className="casino-table">
+                {/* ── Player A & Player B Box ── */}
+                <CasinoDualTable
+                  leftTitle="Player A"
+                  rightTitle="Player B"
+                  leftRunners={playerARunners}
+                  rightRunners={playerBRunners}
+                  onBetClick={handleBetClick}
+                />
+
+                {/* ── Full Width Table (Card 1 to Card 6 Odd / Even) ── */}
+                <div className="casino-table-full-box teen-other-odds mt-3">
+                  <div className="casino-table-header">
+                    <div className="casino-nation-detail" />
+                    {market.cardOdds.map((item, idx) => (
+                      <div key={`header-${idx}`} className="casino-odds-box">{item.card}</div>
+                    ))}
+                  </div>
+
+                  <div className="casino-table-body">
+                    {/* Odd Row */}
+                    <div className="casino-table-row">
+                      <div className="casino-nation-detail">
+                        <div className="casino-nation-name">Odd</div>
+                      </div>
+                      {market.cardOdds.map((item, idx) => (
+                        <div
+                          key={`odd-${idx}`}
+                          className={`casino-odds-box back ${item.suspendedOdd ? 'suspended-box' : ''}`}
+                          onClick={() => handleBetClick(`${item.card} Odd`, item.odd, 'back', item.suspendedOdd)}
+                        >
+                          <span className="casino-odds">{item.odd}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Even Row */}
+                    <div className="casino-table-row">
+                      <div className="casino-nation-detail">
+                        <div className="casino-nation-name">Even</div>
+                      </div>
+                      {market.cardOdds.map((item, idx) => (
+                        <div
+                          key={`even-${idx}`}
+                          className={`casino-odds-box back ${item.suspendedEven ? 'suspended-box' : ''}`}
+                          onClick={() => handleBetClick(`${item.card} Even`, item.even, 'back', item.suspendedEven)}
+                        >
+                          <span className="casino-odds">{item.even}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Last Results ── */}
+              <CasinoLastResults
+                results={LAST_RESULTS}
+                viewAllLink="/casino-results/teen"
+                onResultClick={(res) => setSelectedResult(res)}
+              />
+            </div>
+
+            {/* ── Rules Modal ── */}
+            <RulesModal show={showRules} onHide={() => setShowRules(false)} />
+
+            {/* ── Result Quick Detail Modal ── */}
+            {selectedResult && (
+              <CommonModal
+                show={Boolean(selectedResult)}
+                onClose={() => setSelectedResult(null)}
+                title="Round Result Details"
+                position="center"
+                showFooter={true}
+              >
+                <div className="teen-result-modal">
+                  <div className="teen-result-round-header">
+                    <span>Round ID: {selectedResult.roundId}</span>
+                    <span className={`teen-result-winner winner-${selectedResult.winner.toLowerCase()}`}>
+                      Winner: Player {selectedResult.winner}
+                    </span>
+                  </div>
+                  <div className="mt-3">
+                    <p className="mb-1"><strong>Player A Hand:</strong> {selectedResult.scoreA}</p>
+                    <p className="mb-0"><strong>Player B Hand:</strong> {selectedResult.scoreB}</p>
+                  </div>
+                </div>
+              </CommonModal>
+            )}
+          </div>
+        )
+      }}
+    </CasinoLayout>
+  )
+}
