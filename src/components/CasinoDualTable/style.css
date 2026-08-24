@@ -151,15 +151,6 @@
   color: #0b2545;
 }
 
-.casino-odds-box.back:hover:not(.suspended-box) {
-  background: #5baae6;
-}
-
-.casino-odds-box.back:active:not(.suspended-box) {
-  background: #469cd8;
-  transform: scale(0.98);
-}
-
 .casino-odds-box.lay {
   background: #faa9ba;
   color: #0b2545;

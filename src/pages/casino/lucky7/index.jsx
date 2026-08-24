@@ -188,7 +188,13 @@ export default function Lucky7({ variant = 'lucky7eu' }) {
 
                   {/* Center 7 Card Image */}
                   <div className="lucky7">
-                    <img src="/img/game-card.png" alt="7" />
+                    <img
+                      src="https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/7.png"
+                      onError={(e) => {
+                        e.currentTarget.src = '/img/game-card.png'
+                      }}
+                      alt="7"
+                    />
                   </div>
 
                   {/* High Card */}
@@ -207,7 +213,7 @@ export default function Lucky7({ variant = 'lucky7eu' }) {
                 </div>
 
                 {/* ── Row 2: Even/Odd & Red/Black Suits ── */}
-                <div className="casino-table-box mt-3">
+                <div className="lucky7-table-row2 casino-table-box mt-3">
                   <div className="casino-table-left-box">
                     <div
                       className="lucky7odds"
@@ -272,7 +278,7 @@ export default function Lucky7({ variant = 'lucky7eu' }) {
                 </div>
 
                 {/* ── Row 3: 4 Card Groups (A-2-3, 4-5-6, 8-9-10, J-Q-K) ── */}
-                <div className="casino-table-box lucky7-groups-box mt-3">
+                <div className="lucky7-groups-box mt-3">
                   {market.groups.map((grp) => (
                     <div
                       key={grp.id}

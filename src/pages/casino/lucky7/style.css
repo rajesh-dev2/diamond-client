@@ -6,6 +6,7 @@
 .casino-page-container.lucky7-page {
   width: 100%;
   user-select: none;
+  background-color: white;
 }
 
 /* ── Video Stream Section ───────────────────────────────────── */
@@ -161,11 +162,12 @@
 .casino-page-container.lucky7a .casino-table-full-box,
 .casino-page-container.lucky7-page .casino-table-full-box {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   padding: 4px;
   border: 0;
   justify-content: space-between;
   align-items: flex-start;
+  background-color: #f2f2f2;
 }
 
 .casino-page-container.lucky7a .lucky7low,
@@ -186,9 +188,7 @@
   justify-content: center;
   flex-shrink: 0;
   background: #ffffff;
-  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   margin-bottom: 2px;
 }
 
@@ -196,14 +196,14 @@
 .casino-page-container.lucky7-page .lucky7 img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
 /* ── Odds Top Text & Book Text ──────────────────────────────── */
 .casino-page-container.lucky7a .casino-odds,
 .casino-page-container.lucky7-page .casino-odds {
-  font-size: 18px;
+  font-size: clamp(14px, 2.2vw, 18px);
   font-weight: 700;
   color: #333;
 }
@@ -221,18 +221,18 @@
 .casino-page-container.lucky7a .casino-odds-box,
 .casino-page-container.lucky7-page .casino-odds-box {
   width: 100%;
-  min-height: 44px;
+  min-height: clamp(36px, 5.5vw, 46px);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: clamp(11px, 2vw, 14px);
   font-weight: 800;
   color: #ffffff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.15s ease;
-  padding: 8px;
+  padding: 6px 4px;
   box-sizing: border-box;
 }
 
@@ -244,20 +244,10 @@
   border: 0;
 }
 
-.casino-page-container.lucky7a .casino-odds-box:hover:not(.suspended-box),
-.casino-page-container.lucky7-page .casino-odds-box:hover:not(.suspended-box) {
-  filter: brightness(1.12);
-}
-
-.casino-page-container.lucky7a .casino-odds-box:active:not(.suspended-box),
-.casino-page-container.lucky7-page .casino-odds-box:active:not(.suspended-box) {
-  transform: scale(0.98);
-}
-
 .casino-page-container.lucky7a .casino-odds-box .casino-odds,
 .casino-page-container.lucky7-page .casino-odds-box .casino-odds {
   color: #ffffff !important;
-  font-size: 18px;
+  font-size: clamp(12px, 2vw, 18px);
   font-weight: bold;
   margin: 0;
   display: flex;
@@ -269,27 +259,25 @@
 .casino-page-container.lucky7a .casino-table-box,
 .casino-page-container.lucky7-page .casino-table-box {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-}
-
-@media (max-width: 767px) {
-
-  .casino-page-container.lucky7a .casino-table-box,
-  .casino-page-container.lucky7-page .casino-table-box {
-    flex-direction: column;
-    gap: 8px;
-  }
+  flex-wrap: nowrap;
+  flex-direction: row;
 }
 
 .casino-page-container.lucky7a .casino-table-left-box,
 .casino-page-container.lucky7a .casino-table-right-box,
 .casino-page-container.lucky7-page .casino-table-left-box,
 .casino-page-container.lucky7-page .casino-table-right-box {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  border: 0;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  border: 0;
+  flex-direction: row;
+  flex: none;
+  width: calc(50% - 2px)
 }
 
 .casino-page-container.lucky7a .lucky7odds,
@@ -298,6 +286,10 @@
   flex-direction: column;
   cursor: pointer;
   user-select: none;
+  min-width: 0;
+
+  width: calc(50% - 10px);
+  margin-right: 10px;
 }
 
 .casino-page-container.lucky7a .card-icon,
@@ -305,7 +297,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: clamp(16px, 3.2vw, 26px);
   line-height: 1;
 }
 
@@ -322,17 +314,12 @@
 /* ── Row 3: 4 Card Groups (A-2-3, 4-5-6, 8-9-10, J-Q-K) ─────── */
 .casino-page-container.lucky7a .lucky7-groups-box,
 .casino-page-container.lucky7-page .lucky7-groups-box {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 8px !important;
-}
-
-@media (max-width: 640px) {
-
-  .casino-page-container.lucky7a .lucky7-groups-box,
-  .casino-page-container.lucky7-page .lucky7-groups-box {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-right: 4px;
 }
 
 .casino-page-container.lucky7a .lucky7cards,
@@ -340,8 +327,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
   user-select: none;
+  background-color: #f2f2f2;
+  min-height: 130px;
+  height: auto;
+  padding: 6px 2px;
+  width: 24%;
+  box-sizing: border-box;
 }
 
 .casino-page-container.lucky7a .card-odd-box-container,
@@ -350,14 +344,9 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background: #ffffff;
-  border: 1px solid #dbe2ea;
-  border-radius: 4px;
-  padding: 6px 8px;
   width: 100%;
   box-sizing: border-box;
-  min-height: 54px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  min-height: 38px;
 }
 
 .casino-page-container.lucky7a .card-odd-box-container .card-odd-box,
@@ -369,11 +358,9 @@
 
 .casino-page-container.lucky7a .card-odd-box-container .card-odd-box img,
 .casino-page-container.lucky7-page .card-odd-box-container .card-odd-box img {
-  width: 26px;
-  height: 38px;
-  object-fit: cover;
-  border-radius: 2px;
-  border: 1px solid #facc15;
+  width: 100%;
+  height: clamp(45px, 5.5vw, 45px);
+  object-fit: contain;
   display: block;
 }
 
@@ -382,63 +369,40 @@
 .casino-page-container.lucky7-page .casino-table-full-box.lucky7acards {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border: 1px solid #dbe2ea;
-  border-radius: 4px;
-  padding: 8px 6px;
+  background: #f2f2f2;
   box-sizing: border-box;
+  padding: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .casino-page-container.lucky7a .lucky7acards-grid,
 .casino-page-container.lucky7-page .lucky7acards-grid {
-  display: grid;
-  grid-template-columns: repeat(13, 1fr);
-  gap: 4px;
-  width: 100%;
-}
-
-@media (max-width: 900px) {
-
-  .casino-page-container.lucky7a .lucky7acards-grid,
-  .casino-page-container.lucky7-page .lucky7acards-grid {
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-  }
-}
-
-@media (max-width: 500px) {
-
-  .casino-page-container.lucky7a .lucky7acards-grid,
-  .casino-page-container.lucky7-page .lucky7acards-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+  border: 0;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .casino-page-container.lucky7a .lucky7acards .card-odd-box,
 .casino-page-container.lucky7-page .lucky7acards .card-odd-box {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 4px;
+  margin-right: 4px;
   cursor: pointer;
-  padding: 2px 0;
-  transition: transform 0.15s ease;
-}
-
-.casino-page-container.lucky7a .lucky7acards .card-odd-box:hover:not(.suspended-box),
-.casino-page-container.lucky7-page .lucky7acards .card-odd-box:hover:not(.suspended-box) {
-  transform: translateY(-2px);
 }
 
 .casino-page-container.lucky7a .lucky7acards .card-odd-box img,
 .casino-page-container.lucky7-page .lucky7acards .card-odd-box img {
-  width: 28px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 2px;
-  border: 1px solid #facc15;
+  width: 100%;
+  max-width: 32px;
+  height: clamp(45px, 5vw, 45px);
+  object-fit: contain;
   display: block;
 }
 
@@ -552,4 +516,24 @@
   font-size: 13px;
   display: flex;
   justify-content: space-between;
+}
+
+
+
+/* responsive */
+@media (max-width: 768px) {
+
+  .casino-page-container.lucky7a .casino-table-left-box,
+  .casino-page-container.lucky7a .casino-table-right-box,
+  .casino-page-container.lucky7-page .casino-table-left-box,
+  .casino-page-container.lucky7-page .casino-table-right-box {
+    width: 49%;
+  }
+
+  .casino-page-container.lucky7a .lucky7cards,
+  .casino-page-container.lucky7-page .lucky7cards {
+    width: 49%;
+    margin-top: 10px;
+  }
+
 }
