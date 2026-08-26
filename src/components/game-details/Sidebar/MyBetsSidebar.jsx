@@ -1,7 +1,7 @@
-export default function MyBetsSidebar({ bets = [] }) {
+export default function MyBetsSidebar({ bets = [], showTitle = true }) {
   return (
     <div className="gdv2-sidebar-box gdv2-mybets-container">
-      <div className="gdv2-sidebar-title"><h4>My Bet</h4></div>
+      {showTitle && <div className="gdv2-sidebar-title"><h4>My Bet</h4></div>}
       <div className="gdv2-mybets-table-wrap">
         <table className="gdv2-mybets-table">
           <thead>

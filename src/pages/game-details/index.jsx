@@ -13,6 +13,7 @@ import MobileTabs   from '../../components/game-details/MobileTabs'
 import Scorecard    from '../../components/game-details/Scorecard'
 import MarketSection from '../../components/game-details/MarketSection'
 import RightSidebar  from '../../components/game-details/Sidebar/RightSidebar'
+import MyBetsSidebar from '../../components/game-details/Sidebar/MyBetsSidebar'
 import PlaceBetModal from '../../components/PlaceBetModal'
 
 // ── Utilities ──────────────────────────────────────────────────────
@@ -164,7 +165,7 @@ export default function GameDetails() {
             onTabChange={setActiveMobileTab}
             betCount={bets.length}
           />
-          <Scorecard />
+          {(activeMobileTab === 'odds' || isDesktop) && <Scorecard />}
 
           {(activeMobileTab === 'odds' || isDesktop) && (
             activeMarkets.length === 0 ? (
@@ -180,6 +181,10 @@ export default function GameDetails() {
                 fancyPl={fancyPlByFancyId}
               />
             )
+          )}
+
+          {!isDesktop && activeMobileTab === 'matchedBet' && (
+            <MyBetsSidebar bets={bets} showTitle={false} />
           )}
         </div>
 
