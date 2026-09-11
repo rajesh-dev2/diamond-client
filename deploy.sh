@@ -26,3 +26,6 @@ echo "▶ Restarting pm2 service ($PM2_APP) …"
 ssh -i "$KEY" "$HOST" "pm2 restart '$PM2_APP'"
 
 echo "✓ Deployed → $URL"
+
+
+# @wjx3@#j#JT7UCYt

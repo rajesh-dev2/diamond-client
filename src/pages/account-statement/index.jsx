@@ -34,9 +34,17 @@ const formatDateParam = (date) => {
   return `${y}-${m}-${d}`
 }
 
+const getDefaultEndDate = () => new Date()
+
+const getDefaultStartDate = () => {
+  const d = new Date()
+  d.setDate(d.getDate() - 7)
+  return d
+}
+
 export default function AccountStatement() {
-  const [startDate, setStartDate] = useState(new Date(2026, 7, 10)) // 10/08/2026
-  const [endDate, setEndDate] = useState(new Date(2026, 7, 17))   // 17/08/2026
+  const [startDate, setStartDate] = useState(getDefaultStartDate)
+  const [endDate, setEndDate] = useState(getDefaultEndDate)
   const [reportType, setReportType] = useState('sport')
   const [entriesCount, setEntriesCount] = useState(10)
   const [searchInput, setSearchInput] = useState('')
@@ -45,8 +53,8 @@ export default function AccountStatement() {
 
   // Filters actually submitted
   const [activeFilters, setActiveFilters] = useState({
-    startDate: new Date(2026, 7, 10),
-    endDate: new Date(2026, 7, 17),
+    startDate: getDefaultStartDate(),
+    endDate: getDefaultEndDate(),
     reportType: 'sport',
   })
 
