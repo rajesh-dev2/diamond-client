@@ -43,12 +43,12 @@ export default function Login() {
   return (
     <div className="min-h-screen w-screen flex flex-col justify-center items-center bg-gradient-to-b from-[#07131b] via-[#113645] to-[#184c5f] pb-[70px] relative font-sans">
       <div className="w-full max-w-[380px] px-[15px] flex flex-col items-center">
-        <div className="mb-6 text-center">
+        <div className="text-center">
           <Link to="/">
             <img src={logo} alt="IceBook Logo" className="max-w-[250px] h-auto block" />
           </Link>
         </div>
-        <div className="bg-white w-full p-6 rounded-md shadow-2xl mt-4">
+        <div className="bg-white w-full p-6 rounded-md shadow-2xl">
           <h4 className="text-[19px] font-bold text-[#212529] mb-5 flex items-center justify-center gap-1.5 text-center">
             Login <FontAwesomeIcon icon={faHandPointDown} />
           </h4>
