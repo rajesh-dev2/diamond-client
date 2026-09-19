@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import './style.css'
 import { useGetButtonSettingsQuery } from '../../../store/api/authApi'
 import { DEFAULT_GAME_BUTTONS } from '../../SetButtonValuesModal/defaultButtonValues'
+import SetButtonValuesModal from '../../SetButtonValuesModal'
 
 export default function PlaceBetSidebar({
   betData, odds, amount, profit, isPlacing,
@@ -8,6 +10,7 @@ export default function PlaceBetSidebar({
 }) {
   const { data: settings } = useGetButtonSettingsQuery()
   const stakeButtons = settings?.gameButtons?.length ? settings.gameButtons : DEFAULT_GAME_BUTTONS
+  const [editStakeOpen, setEditStakeOpen] = useState(false)
 
   if (!betData) return null
 
@@ -66,7 +69,7 @@ export default function PlaceBetSidebar({
 
         {/* Actions */}
         <div className="gdv2-bet-actions">
-          <div><button type="button" className="gdv2-btn-edit">Edit</button></div>
+          <div><button type="button" className="gdv2-btn-edit" onClick={() => setEditStakeOpen(true)}>Edit</button></div>
           <div>
             <button type="button" className="gdv2-btn-reset" onClick={onReset}>Reset</button>
             <button
@@ -90,6 +93,8 @@ export default function PlaceBetSidebar({
           </div>
         )}
       </div>
+
+      <SetButtonValuesModal show={editStakeOpen} onHide={() => setEditStakeOpen(false)} />
     </div>
   )
 }
