@@ -4,19 +4,19 @@
 
 .casino-cards-overlay-box {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 8px;
+  left: 8px;
   z-index: 15;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   user-select: none;
 }
 
 .cards-slider-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .cards-slider-group .group-title {
@@ -25,59 +25,148 @@
   color: #ffffff;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
   line-height: 1;
 }
 
 .slider-row-wrapper {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
-.slider-row-wrapper i {
-  color: #ffffff;
-  font-size: 14px;
-  cursor: pointer;
-  opacity: 0.85;
-  transition: opacity 0.15s ease;
-}
-
-.slider-row-wrapper i:hover {
-  opacity: 1;
-}
-
-.cards-track {
+/* Circular Arrow Buttons matching screenshot */
+.slider-arrow-btn {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
-  gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  max-width: 240px;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+  transition: all 0.15s ease;
+  user-select: none;
+  flex-shrink: 0;
+  outline: none;
 }
 
-.cards-track::-webkit-scrollbar {
-  display: none;
+.slider-arrow-btn i {
+  font-size: 10px;
+  color: #ffffff;
+  line-height: 1;
+  display: block;
 }
 
-/* ── Individual Playing Card Tile using only /img/game-card.png ─── */
+.slider-arrow-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  border-color: #fff;
+}
+
+/* ── Slick Slider Container & Track ──────────────────────────── */
+.cards-slider-container {
+  width: 114px;
+  max-width: 114px;
+  overflow: hidden;
+}
+
+.cards-slider-container .slick-slider {
+  user-select: none;
+  touch-action: pan-y;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+.cards-slider-container .slick-list {
+  overflow: hidden;
+  margin: 0 -2px;
+  padding: 0;
+  position: relative;
+  display: block;
+}
+
+.cards-slider-container .slick-track {
+  display: flex !important;
+  align-items: center;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.cards-slider-container .slick-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  float: none;
+  height: 100%;
+}
+
+.cards-slider-container .card-slide-item {
+  padding: 0 2px;
+  display: inline-block;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* ── Individual Playing Card Tile matching screenshot ───────────── */
 .playing-card-tile {
-  width: 32px;
-  height: 48px;
-  border-radius: 2px;
+  width: 34px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
   background: #ffffff;
+  border: 1.5px solid #ffff00;
+  border-radius: 2px;
+  box-sizing: border-box;
 }
 
 .playing-card-tile.is-joker {
   border: 2px solid #ffff00;
-  box-shadow: 0 0 8px rgba(255, 255, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 6px rgba(255, 255, 0, 0.8);
+}
+
+.playing-card-tile.text-red {
+  color: #dc2626;
+}
+
+.playing-card-tile.text-black {
+  color: #000000;
+}
+
+.playing-card-inner-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+}
+
+.playing-card-inner-face .card-rank {
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 1px;
+}
+
+.playing-card-inner-face .card-suit {
+  font-size: 17px;
+  line-height: 1;
+  margin-top: -1px;
 }
 
 .playing-card-tile .playing-card-img {

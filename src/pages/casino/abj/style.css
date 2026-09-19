@@ -204,7 +204,7 @@
 /* ── Casino Detail Section ───────────────────────────────────── */
 .casino-page-container.abj-page .casino-detail,
 .casino-page-container.abj .casino-detail {
-  padding: 8px 6px;
+  padding: 8px 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -219,14 +219,13 @@
 .casino-page-container.abj-page .casino-table-box,
 .casino-page-container.abj .casino-table-box {
   width: 100%;
-  border: 2px solid #000000;
+  border: none;
   display: flex;
   flex-direction: column;
-  background: #000000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  background: transparent;
   user-select: none;
   overflow: hidden;
-  border-radius: 2px;
+  gap: 0;
 }
 
 .casino-page-container.abj-page .andar-box,
@@ -235,7 +234,7 @@
   display: flex;
   align-items: stretch;
   min-height: 75px;
-  border-bottom: 2px solid #000000;
+  border-bottom: none;
 }
 
 .casino-page-container.abj-page .bahar-box,
@@ -248,39 +247,33 @@
 
 .casino-page-container.abj-page .ab-title,
 .casino-page-container.abj .ab-title {
-  width: 110px;
-  min-width: 90px;
-  max-width: 120px;
-  border-right: 2px solid #000000;
+  width: 10%;
+  text-align: center;
+  border-left: 1px solid #000;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
   justify-content: center;
-  font-size: 15px;
-  font-weight: 900;
-  color: #1e293b;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  font-weight: bold;
+  font-size: 16px;
+  color: #333333;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   cursor: pointer;
-  padding: 4px 8px;
-  text-align: center;
   user-select: none;
 }
 
 .casino-page-container.abj-page .ab-cards,
 .casino-page-container.abj .ab-cards {
-  flex: 1;
+  width: 90%;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 6px;
-  padding: 6px 10px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.casino-page-container.abj-page .ab-cards::-webkit-scrollbar,
-.casino-page-container.abj .ab-cards::-webkit-scrollbar {
-  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid #000;
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 /* ── 13 Card Tiles ───────────────────────────────────────────── */
@@ -292,6 +285,8 @@
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
+  margin-bottom: 4px;
+  margin-right: 4px;
 }
 
 .casino-page-container.abj-page .card-img-wrap,
@@ -300,20 +295,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 2px;
   overflow: hidden;
 }
 
 .casino-page-container.abj-page .card-odd-box img,
 .casino-page-container.abj .card-odd-box img {
   height: 65px;
-  width: 44px;
-  min-width: 44px;
+  width: auto;
   object-fit: fill;
   display: block;
-  border-radius: 2px;
-  border: 1.5px solid #ffff00;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .casino-page-container.abj-page .card-odd-box.suspended,
@@ -423,4 +413,33 @@
   font-size: 15px;
   font-weight: 800;
   color: #0f172a;
+}
+
+@media only screen and (max-width: 1199px) {
+  .ab-title {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .casino-page-container.abj-page .card-odd-box img,
+  .casino-page-container.abj .card-odd-box img,
+  .card-odd-box img {
+    height: 45px;
+    width: auto;
+  }
+
+  .casino-page-container.abj-page .andar-box,
+  .casino-page-container.abj .andar-box,
+  .casino-page-container.abj-page .bahar-box,
+  .casino-page-container.abj .bahar-box {
+    min-height: auto;
+  }
+
+  .casino-page-container.abj-page .ab-cards,
+  .casino-page-container.abj .ab-cards {
+    padding: 6px;
+    padding-bottom: 0;
+  }
 }

@@ -30,20 +30,21 @@ function LockIcon({ className = 'ab-lock-icon' }) {
 /* ── Live Overlay Stream Cards Data (Demonstrating Live Dealing) ── */
 const STREAM_DEALING_STATE = {
   jokerCard: {
-    rank: 'J',
+    rank: 'A',
     suit: '♣',
     color: 'black',
   },
   andarCards: [
-    { rank: '4', suit: '♣', color: 'black' },
-    { rank: 'J', suit: '♣', color: 'black' },
+    { rank: 'J', suit: '♠', color: 'black' },
+    { rank: '4', suit: '♠', color: 'black' },
   ],
   baharCards: [
-    { rank: '4', suit: '♦', color: 'red' },
-    { rank: '8', suit: '♣', color: 'black' },
-    { rank: 'J', suit: '♥', color: 'red' },
+    { rank: '2', suit: '♠', color: 'black' },
+    { rank: '2', suit: '♣', color: 'black' },
+    { rank: '7', suit: '♣', color: 'black' },
   ],
 }
+
 
 /* ── 13 Card Values Config (Andar & Bahar Deal State with Suspended Support) ── */
 const ANDAR_CARDS = [
