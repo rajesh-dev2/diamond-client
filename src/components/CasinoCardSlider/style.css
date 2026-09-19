@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   Casino Card Slider (Slick Slider matching DiamondExch)
+   Casino Card Slider (Pixel-matched to DiamondExch Andar Bahar)
    ═══════════════════════════════════════════════════════════════ */
 
 .casino-cards-overlay-box {
@@ -7,180 +7,88 @@
   top: 10px;
   left: 10px;
   z-index: 15;
-  background: rgba(0, 0, 0, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 6px;
-  padding: 8px 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
-  max-width: 320px;
+  user-select: none;
 }
 
-.cards-slider-row {
+.cards-slider-group {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.cards-slider-row .row-side-label {
+.cards-slider-group .group-title {
   font-size: 13px;
   font-weight: 900;
   color: #ffffff;
-  min-width: 14px;
-  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
   line-height: 1;
 }
 
-/* ── Slick Slider Container ─────────────────────────────────── */
-.cards-slider-row .slick-slider {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  user-select: none;
-  touch-action: pan-y;
-  -webkit-tap-highlight-color: transparent;
-  flex-grow: 1;
-  overflow: hidden;
-}
-
-.cards-slider-row .slick-list {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-.cards-slider-row .slick-track {
-  position: relative;
-  top: 0;
-  left: 0;
+.slider-row-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  gap: 6px;
 }
 
-.cards-slider-row .slick-track::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+.slider-row-wrapper i {
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
 }
 
-/* ── Individual Playing Card Tile ────────────────────────────── */
-.playing-card-tile {
-  width: 28px;
-  height: 40px;
-  background: #ffffff;
-  border-radius: 3px;
-  border: 1px solid #cbd5e1;
+.slider-row-wrapper i:hover {
+  opacity: 1;
+}
+
+.cards-track {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 240px;
+}
+
+.cards-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Individual Playing Card Tile using only /img/game-card.png ─── */
+.playing-card-tile {
+  width: 32px;
+  height: 48px;
+  border-radius: 2px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
-  line-height: 1;
   flex-shrink: 0;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #ffffff;
 }
 
-.playing-card-tile:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+.playing-card-tile.is-joker {
+  border: 2px solid #ffff00;
+  box-shadow: 0 0 8px rgba(255, 255, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .playing-card-tile .playing-card-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
   display: block;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.playing-card-tile .card-tile-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2px 2px 3px 2px;
-  background: rgba(255, 255, 255, 0.2);
-  z-index: 2;
-}
-
-.playing-card-tile.is-joker {
-  border: 2px solid #ef4444;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.9), 0 2px 4px rgba(0, 0, 0, 0.5);
-  animation: pulse-joker 2s infinite;
-  overflow: visible;
-}
-
-@keyframes pulse-joker {
-  0%, 100% {
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
-  }
-  50% {
-    box-shadow: 0 0 16px rgba(239, 68, 68, 1);
-  }
 }
 
 .playing-card-tile.empty-placeholder {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1.5px dashed rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px dashed rgba(255, 255, 255, 0.4);
   box-shadow: none;
-  overflow: hidden;
-}
-
-.playing-card-tile.red {
-  color: #dc2626;
-}
-
-.playing-card-tile.black {
-  color: #111827;
-}
-
-.playing-card-tile .card-rank-text {
-  font-size: 11px;
-  font-weight: 900;
-  line-height: 1;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
-}
-
-.playing-card-tile .card-suit-symbol {
-  font-size: 12px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.9));
-}
-
-.playing-card-tile .card-suit-symbol img {
-  width: 12px;
-  height: 12px;
-  object-fit: contain;
-}
-
-.playing-card-tile .joker-tag {
-  position: absolute;
-  top: -7px;
-  background: #ef4444;
-  color: #ffffff;
-  font-size: 7px;
-  font-weight: 800;
-  padding: 0 3px;
-  border-radius: 2px;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  z-index: 10;
 }

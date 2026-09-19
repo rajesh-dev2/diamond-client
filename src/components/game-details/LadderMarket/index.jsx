@@ -34,48 +34,50 @@ export default function LadderMarket({ market, onOddClick, bookType = 'match', c
   const columns     = compact ? COMPACT_LADDER_COLUMNS : LADDER_COLUMNS
 
   return (
-    <div className={`gdv2-market-ladder ${className}`.trim()}>
-      <MarketTitle title={market.mname} showCashout />
-      <MarketHeader layout={compact ? 'compact' : 'ladder'} minMaxLabel={maxLabel} />
+    <div>
+      <div className={`gdv2-market-ladder ${className}`.trim()}>
+        <MarketTitle title={market.mname} showCashout />
+        <MarketHeader layout={compact ? 'compact' : 'ladder'} minMaxLabel={maxLabel} />
 
-      <div className="gdv2-market-body" data-title={market.status}>
-        {market.section.map((section) => {
-          const odds       = oddsByName(section)
-          const suspended  = isSuspended(section)
-          const statusText = getSuspendedStatus(section, market.status || 'SUSPENDED')
-          const runnerBook = book[String(section.sid)]
+        <div className="gdv2-market-body" data-title={market.status}>
+          {market.section.map((section) => {
+            const odds       = oddsByName(section)
+            const suspended  = isSuspended(section)
+            const statusText = getSuspendedStatus(section, market.status || 'SUSPENDED')
+            const runnerBook = book[String(section.sid)]
 
-          return (
-            <RunnerRow
-              key={section.sid}
-              name={section.nat}
-              book={runnerBook?.profit ?? null}
-              suspended={suspended}
-              status={statusText}
-            >
-              {columns.map(({ key, cssClass, side, hideMobile }) => (
-                <OddBox
-                  key={key}
-                  odd={formatOdd(odds[key])}
-                  volume={formatVol(odds[key])}
-                  variant={cssClass}
-                  className={hideMobile ? 'gdv2-hide-mobile' : ''}
-                  disabled={suspended}
-                  onClick={() => onOddClick(
-                    section.nat,
-                    formatOdd(odds[key]),
-                    side,
-                    runnerNames,
-                    { marketId: market.marketId, sid: String(section.sid) }
-                  )}
-                />
-              ))}
-            </RunnerRow>
-          )
-        })}
+            return (
+              <RunnerRow
+                key={section.sid}
+                name={section.nat}
+                book={runnerBook?.profit ?? null}
+                suspended={suspended}
+                status={statusText}
+              >
+                {columns.map(({ key, cssClass, side, hideMobile }) => (
+                  <OddBox
+                    key={key}
+                    odd={formatOdd(odds[key])}
+                    volume={formatVol(odds[key])}
+                    variant={cssClass}
+                    className={hideMobile ? 'gdv2-hide-mobile' : ''}
+                    disabled={suspended}
+                    onClick={() => onOddClick(
+                      section.nat,
+                      formatOdd(odds[key]),
+                      side,
+                      runnerNames,
+                      { marketId: market.marketId, sid: String(section.sid) }
+                    )}
+                  />
+                ))}
+              </RunnerRow>
+            )
+          })}
+        </div>
+
+        <MarketRemark text={market.rem} />
       </div>
-
-      <MarketRemark text={market.rem} />
     </div>
   )
 }

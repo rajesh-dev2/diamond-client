@@ -65,7 +65,7 @@ export function formatVol(entry) {
 export function isLadderMarket(market) {
   if (market.gtype === 'match') return true
   const name = (market.mname || '').toLowerCase()
-  return name.startsWith('bookmaker') || name.includes('tied match')
+  return name.startsWith('bookmaker') || name.includes('bookmaker') || name.includes('tied match') || name.includes('tied')
 }
 
 /** Look up a section across all markets by its fancyId */

@@ -20,11 +20,11 @@
 }
 
 .gdv2-market-title-text {
-  font-weight: 800;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 15px;
   color: #fff;
   display: inline-block;
-  overflow: hidden;
+  overflow: hidden;  
   text-overflow: ellipsis;
   white-space: nowrap;
   line-height: normal;
@@ -65,14 +65,13 @@
 
 .gdv2-cashout-btn {
   color: #fff;
-  font-weight: 700;
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 3px;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 4px 8px;
   cursor: pointer;
   border: none;
-  background-color: #28a745;
-  opacity: 0.9;
+  background-color: #198754;
+  opacity: 0.6;
 }
 
 .gdv2-cashout-btn:hover {

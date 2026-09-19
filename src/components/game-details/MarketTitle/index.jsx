@@ -50,7 +50,7 @@ export default function MarketTitle({
           )}
           {children}
           {showCashout && (
-            <button type="button" className="gdv2-cashout-btn" disabled>Cashout</button>
+            <button type="button" className="gdv2-cashout-btn btn-sm" disabled>Cashout</button>
           )}
         </div>
       )}

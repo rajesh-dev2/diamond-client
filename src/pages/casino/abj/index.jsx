@@ -27,30 +27,56 @@ function LockIcon({ className = 'ab-lock-icon' }) {
   )
 }
 
-/* ── Live Overlay Stream Cards Data ───────────────────────────── */
+/* ── Live Overlay Stream Cards Data (Demonstrating Live Dealing) ── */
 const STREAM_DEALING_STATE = {
   jokerCard: {
-    rank: '9',
-    suit: '♥',
-    color: 'red',
-    img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/9H.png',
+    rank: 'J',
+    suit: '♣',
+    color: 'black',
   },
   andarCards: [
-    { rank: '6', suit: '♠', color: 'black', img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/6S.png' },
-    { rank: '5', suit: '♥', color: 'red',   img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/5H.png' },
-    { rank: 'K', suit: '♠', color: 'black', img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/KS.png' },
-    { rank: '10', suit: '♦', color: 'red',  img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/10D.png' },
+    { rank: '4', suit: '♣', color: 'black' },
+    { rank: 'J', suit: '♣', color: 'black' },
   ],
   baharCards: [
-    { rank: '7', suit: '♦', color: 'red',   img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/7D.png' },
-    { rank: '8', suit: '♣', color: 'black', img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/8C.png' },
-    { rank: '2', suit: '♦', color: 'red',   img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/2D.png' },
-    { rank: '4', suit: '♦', color: 'red',   img: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/4D.png' },
+    { rank: '4', suit: '♦', color: 'red' },
+    { rank: '8', suit: '♣', color: 'black' },
+    { rank: 'J', suit: '♥', color: 'red' },
   ],
 }
 
-/* ── 13 Card Values Config (A - K) ────────────────────────────── */
-const CARD_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+/* ── 13 Card Values Config (Andar & Bahar Deal State with Suspended Support) ── */
+const ANDAR_CARDS = [
+  { id: 1,  rank: 'A',  img: '0.jpg',  suspended: false },
+  { id: 2,  rank: '2',  img: '0.jpg',  suspended: false },
+  { id: 3,  rank: '3',  img: '3.jpg',  suspended: true },
+  { id: 4,  rank: '4',  img: '0.jpg',  suspended: false },
+  { id: 5,  rank: '5',  img: '5.jpg',  suspended: true },
+  { id: 6,  rank: '6',  img: '0.jpg',  suspended: false },
+  { id: 7,  rank: '7',  img: '0.jpg',  suspended: false },
+  { id: 8,  rank: '8',  img: '0.jpg',  suspended: false },
+  { id: 9,  rank: '9',  img: '0.jpg',  suspended: false },
+  { id: 10, rank: '10', img: '0.jpg',  suspended: false },
+  { id: 11, rank: 'J',  img: '0.jpg',  suspended: false },
+  { id: 12, rank: 'Q',  img: '0.jpg',  suspended: false },
+  { id: 13, rank: 'K',  img: '0.jpg',  suspended: false },
+]
+
+const BAHAR_CARDS = [
+  { id: 1,  rank: 'A',  img: '21.jpg', suspended: true },
+  { id: 2,  rank: '2',  img: '22.jpg', suspended: true },
+  { id: 3,  rank: '3',  img: '0.jpg',  suspended: false },
+  { id: 4,  rank: '4',  img: '0.jpg',  suspended: false },
+  { id: 5,  rank: '5',  img: '0.jpg',  suspended: false },
+  { id: 6,  rank: '6',  img: '0.jpg',  suspended: false },
+  { id: 7,  rank: '7',  img: '0.jpg',  suspended: false },
+  { id: 8,  rank: '8',  img: '0.jpg',  suspended: false },
+  { id: 9,  rank: '9',  img: '0.jpg',  suspended: false },
+  { id: 10, rank: '10', img: '0.jpg',  suspended: false },
+  { id: 11, rank: 'J',  img: '0.jpg',  suspended: false },
+  { id: 12, rank: 'Q',  img: '32.jpg', suspended: true },
+  { id: 13, rank: 'K',  img: '0.jpg',  suspended: false },
+]
 
 /* ── Last 10 Results (B, B, A, B, A, B, A, A, A, B) ───────────── */
 const LAST_RESULTS = [
@@ -136,126 +162,87 @@ export default function Abj() {
 
             {/* ── Casino Detail Section ── */}
             <div className="casino-detail">
-              {/* ═══════════════════════════════════════════════════════════════
-                 Betting Tables Section
-                 ═══════════════════════════════════════════════════════════════ */}
-              <div className="ab-markets-container">
-                {/* ── Row 1: Main Table (A vs B with 3 Yellow Border Boxes) ── */}
-                <div className="ab-main-row">
-                  {/* Side A Group */}
-                  <div className="ab-group-wrapper">
-                    <span className="ab-side-label">A</span>
-                    <div className="ab-yellow-boxes-strip cols-3">
-                      <div className="ab-yellow-box" onClick={() => handleBet('Andar SA', '1.98')}>
-                        <span className="ab-box-title">SA</span>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-yellow-box" onClick={() => handleBet('Andar 1st Bet', '2.00')}>
-                        <span className="ab-box-title">1st Bet</span>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-yellow-box" onClick={() => handleBet('Andar 2nd Bet', '2.00')}>
-                        <span className="ab-box-title">2nd Bet</span>
-                        <LockIcon />
-                      </div>
+              {/* ── Casino Table (Andar Bahar 13-Card Board Table) ── */}
+              <div className="casino-table">
+                <div className="casino-table-box">
+                  {/* ANDAR Box */}
+                  <div className="andar-box">
+                    <div
+                      className="ab-title"
+                      onClick={() => handleBet('Andar (A)', '1.98')}
+                    >
+                      ANDAR
                     </div>
-                    <span className="ab-side-label">A</span>
-                  </div>
-
-                  {/* Side B Group */}
-                  <div className="ab-group-wrapper">
-                    <span className="ab-side-label">B</span>
-                    <div className="ab-yellow-boxes-strip cols-3">
-                      <div className="ab-yellow-box" onClick={() => handleBet('Bahar SB', '1.98')}>
-                        <span className="ab-box-title">SB</span>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-yellow-box" onClick={() => handleBet('Bahar 1st Bet', '2.00')}>
-                        <span className="ab-box-title">1st Bet</span>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-yellow-box" onClick={() => handleBet('Bahar 2nd Bet', '2.00')}>
-                        <span className="ab-box-title">2nd Bet</span>
-                        <LockIcon />
-                      </div>
-                    </div>
-                    <span className="ab-side-label">B</span>
-                  </div>
-                </div>
-
-                {/* ── Row 2: Dual Box Container (ODD/EVEN + 4 SUITS) ── */}
-                <div className="ab-dual-row">
-                  {/* Left Card: ODD / EVEN */}
-                  <div className="ab-dual-card">
-                    <div className="ab-dual-header cols-2">
-                      <div className="ab-header-cell">ODD</div>
-                      <div className="ab-header-cell">EVEN</div>
-                    </div>
-                    <div className="ab-dual-content cols-2">
-                      <div className="ab-dark-btn" onClick={() => handleBet('ODD', '1.80')}>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-dark-btn" onClick={() => handleBet('EVEN', '2.10')}>
-                        <LockIcon />
-                      </div>
+                    <div className="ab-cards">
+                      {ANDAR_CARDS.map((card, idx) => (
+                        <div
+                          key={`andar-${card.id || idx}`}
+                          className={`card-odd-box ${card.suspended ? 'suspended' : ''}`.trim()}
+                          onClick={() => !card.suspended && handleBet(`Andar Card ${card.rank || idx + 1}`, '12.00')}
+                          title={`Andar Card ${card.rank || idx + 1}`}
+                        >
+                          <div className="card-img-wrap">
+                            <img
+                              src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/andar-bahar-cards/${card.img}`}
+                              alt={`Andar ${card.rank || idx + 1}`}
+                              onError={(e) => {
+                                e.currentTarget.src = '/img/game-card.png'
+                              }}
+                            />
+                            {card.suspended && (
+                              <div className="suspended-box">
+                                <LockIcon className="ab-lock-icon" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="casino-nation-book"></div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Right Card: 4 Suits (♠, ♣, ♥, ♦) */}
-                  <div className="ab-dual-card">
-                    <div className="ab-dual-header cols-4">
-                      <div className="ab-header-cell black text-base">
-                        <img src="/icons/spade.png" alt="Spade" className="w-[18px] h-[18px] object-contain inline-block" />
-                      </div>
-                      <div className="ab-header-cell black text-base">♣</div>
-                      <div className="ab-header-cell red text-base">
-                        <img src="/icons/heart.png" alt="Heart" className="w-[18px] h-[18px] object-contain inline-block" />
-                      </div>
-                      <div className="ab-header-cell red text-base">♦</div>
+                  {/* BAHAR Box */}
+                  <div className="bahar-box">
+                    <div
+                      className="ab-title"
+                      onClick={() => handleBet('Bahar (B)', '1.98')}
+                    >
+                      BAHAR
                     </div>
-                    <div className="ab-dual-content cols-4">
-                      <div className="ab-dark-btn" onClick={() => handleBet('Spade (Opening Card)', '3.80')}>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-dark-btn" onClick={() => handleBet('Club (Opening Card)', '3.80')}>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-dark-btn" onClick={() => handleBet('Heart (Opening Card)', '3.80')}>
-                        <LockIcon />
-                      </div>
-                      <div className="ab-dark-btn" onClick={() => handleBet('Diamond (Opening Card)', '3.80')}>
-                        <LockIcon />
-                      </div>
+                    <div className="ab-cards">
+                      {BAHAR_CARDS.map((card, idx) => (
+                        <div
+                          key={`bahar-${card.id || idx}`}
+                          className={`card-odd-box ${card.suspended ? 'suspended' : ''}`.trim()}
+                          onClick={() => !card.suspended && handleBet(`Bahar Card ${card.rank || idx + 1}`, '12.00')}
+                          title={`Bahar Card ${card.rank || idx + 1}`}
+                        >
+                          <div className="card-img-wrap">
+                            <img
+                              src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/andar-bahar-cards/${card.img}`}
+                              alt={`Bahar ${card.rank || idx + 1}`}
+                              onError={(e) => {
+                                e.currentTarget.src = '/img/game-card.png'
+                              }}
+                            />
+                            {card.suspended && (
+                              <div className="suspended-box">
+                                <LockIcon className="ab-lock-icon" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="casino-nation-book"></div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
 
-                {/* ── Row 3: 13 Card Tokens Grid (A through K) ── */}
-                <div className="ab-cards-row-card">
-                  <div className="ab-cards-grid-13">
-                    {CARD_RANKS.map((rank) => (
-                      <div
-                        key={rank}
-                        className="ab-card-token"
-                        onClick={() => handleBet(`Card ${rank}`, '12.00')}
-                      >
-                        <span className="token-rank">{rank}</span>
-                        <div className="token-lock">
-                          <LockIcon className="w-3.5 h-3.5 fill-white" />
-                        </div>
-                        <div className="token-suits-row">
-                          <span className="s-black flex items-center justify-center">
-                            <img src="/icons/spade.png" alt="♠" className="w-[10px] h-[10px] object-contain inline-block" />
-                          </span>
-                          <span className="s-red flex items-center justify-center">
-                            <img src="/icons/heart.png" alt="♥" className="w-[10px] h-[10px] object-contain inline-block" />
-                          </span>
-                          <span className="s-black">♣</span>
-                          <span className="s-red">♦</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                {/* ── Casino Remark Marquee ── */}
+                <div className="casino-remark mt-1">
+                  <marquee scrollamount="3">
+                    Payout : Bahar 1st Card 25% and All Other Andar-Bahar Cards 100%.
+                  </marquee>
                 </div>
               </div>
 

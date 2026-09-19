@@ -14,28 +14,31 @@ function getFancySubType(market) {
 }
 
 export default function MarketSection({ matchOddsMarket, bookmakerMarkets, otherMarkets, onOddClick, fancyPl }) {
-  // ── Bookmaker layout ─────────────────────────────────────────────
-  const bm2 = bookmakerMarkets.find((m) => (m.mname || '').toLowerCase().includes('bookmaker 2'))
+  // ── Bookmaker / Tied Match paired layout ─────────────────────────
+  const compactMarket = bookmakerMarkets.find((m) => {
+    const name = (m.mname || '').toLowerCase()
+    return name.includes('tied match') || name.includes('tied') || name.includes('bookmaker 2') || name.includes('bm 2')
+  })
 
   let bookmakerContent = null
   if (bookmakerMarkets.length > 0) {
-    if (!bm2) {
+    if (!compactMarket || bookmakerMarkets.length === 1) {
       bookmakerContent = bookmakerMarkets.map((m) => (
         <LadderMarket key={m.marketId} market={m} onOddClick={onOddClick} bookType="bookmaker" />
       ))
     } else {
-      const bm1 = bookmakerMarkets.find((m) => m !== bm2) || bookmakerMarkets[0]
-      const rest = bookmakerMarkets.filter((m) => m !== bm1 && m !== bm2)
+      const mainMarket = bookmakerMarkets.find((m) => m !== compactMarket) || bookmakerMarkets[0]
+      const rest = bookmakerMarkets.filter((m) => m !== mainMarket && m !== compactMarket)
       bookmakerContent = (
         <>
           <div className="gdv2-bm-pair">
-            {bm1 && (
+            {mainMarket && (
               <div className="gdv2-bm-main">
-                <LadderMarket market={bm1} onOddClick={onOddClick} bookType="bookmaker" />
+                <LadderMarket market={mainMarket} onOddClick={onOddClick} bookType="bookmaker" />
               </div>
             )}
             <div className="gdv2-bm-compact">
-              <LadderMarket market={bm2} onOddClick={onOddClick} bookType="bookmaker" compact />
+              <LadderMarket market={compactMarket} onOddClick={onOddClick} bookType="bookmaker" compact />
             </div>
           </div>
           {rest.map((m) => (

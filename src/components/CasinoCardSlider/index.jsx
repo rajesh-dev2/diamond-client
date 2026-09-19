@@ -1,17 +1,15 @@
 /**
  * CasinoCardSlider
  * ────────────────
- * Horizontal card dealing slider mimicking the Slick Slider dealing matrix from DiamondExch.
- * Renders Row A and Row B with Joker card indicator and dealt card sequence.
+ * Horizontal card dealing slider mimicking DiamondExch Andar Bahar stream overlay:
+ *   • ANDAR row with default navigation icons and dealt cards using /img/game-card.png
+ *   • BAHAR row with default navigation icons and dealt cards using /img/game-card.png
  */
 
 import { useRef, useEffect } from 'react'
 import './style.css'
 
 export function PlayingCardTile({
-  rank = 'A',
-  suit = '♠',
-  color = 'black',
   isJoker = false,
   isEmpty = false,
   onClick,
@@ -20,32 +18,30 @@ export function PlayingCardTile({
     return <div className="playing-card-tile empty-placeholder" />
   }
 
-  const isRed = color === 'red' || suit === '♥' || suit === '♦' || suit === 'H' || suit === 'D'
-  const isHeart = suit === '♥' || suit === 'H'
-  const isSpade = suit === '♠' || suit === 'S'
-
   return (
     <div
-      className={`playing-card-tile ${isRed ? 'red' : 'black'} ${isJoker ? 'is-joker' : ''}`.trim()}
+      className={`playing-card-tile ${isJoker ? 'is-joker' : ''}`.trim()}
       onClick={onClick}
-      title={isJoker ? `Opening Joker: ${rank}${suit}` : `Card: ${rank}${suit}`}
     >
-      {isJoker && <span className="joker-tag">Joker</span>}
-      <img src="/img/game-card.png" alt="Card" className="playing-card-img" />
+      <img
+        src="/img/game-card.png"
+        alt="Game Card"
+        className="playing-card-img"
+      />
     </div>
   )
 }
 
 export default function CasinoCardSlider({
   jokerCard,
-  andarCards = [],
-  baharCards = [],
+  andarCards = [1, 2],
+  baharCards = [1, 2, 3],
   className = '',
 }) {
   const andarTrackRef = useRef(null)
   const baharTrackRef = useRef(null)
 
-  // Auto-scroll track to the right whenever a new card is dealt
+  // Auto-scroll tracks to the right whenever cards change
   useEffect(() => {
     if (andarTrackRef.current) {
       andarTrackRef.current.scrollLeft = andarTrackRef.current.scrollWidth
@@ -58,58 +54,62 @@ export default function CasinoCardSlider({
     }
   }, [baharCards.length])
 
+  const handleScrollLeft = (ref) => {
+    if (ref.current) {
+      ref.current.scrollBy({ left: -60, behavior: 'smooth' })
+    }
+  }
+
+  const handleScrollRight = (ref) => {
+    if (ref.current) {
+      ref.current.scrollBy({ left: 60, behavior: 'smooth' })
+    }
+  }
+
   return (
     <div className={`casino-cards-overlay-box ${className}`.trim()}>
-      {/* ── Row A (Andar) ── */}
-      <div className="cards-slider-row">
-        <span className="row-side-label">A</span>
-        <div className="slick-slider slick-initialized">
-          <div className="slick-list">
-            <div className="slick-track" ref={andarTrackRef}>
-              {/* Opening Joker Card (Pinned first in Row A) */}
-              {jokerCard && (
-                <PlayingCardTile
-                  rank={jokerCard.rank}
-                  suit={jokerCard.suit}
-                  color={jokerCard.color}
-                  isJoker={true}
-                />
-              )}
+      {/* ── Row 1: ANDAR ── */}
+      <div className="cards-slider-group">
+        <div className="group-title">ANDAR</div>
+        <div className="slider-row-wrapper">
+          <i
+            className="fa fa-chevron-left"
+            onClick={() => handleScrollLeft(andarTrackRef)}
+          />
+          <div className="cards-track" ref={andarTrackRef}>
+            {/* Opening Joker Card */}
+            <PlayingCardTile isJoker={true} />
 
-              {/* Andar Dealt Cards */}
-              {andarCards.map((card, idx) => (
-                <PlayingCardTile
-                  key={`andar-${idx}`}
-                  rank={card.rank}
-                  suit={card.suit}
-                  color={card.color}
-                />
-              ))}
-            </div>
+            {/* Andar Dealt Cards */}
+            {(andarCards || []).map((_, idx) => (
+              <PlayingCardTile key={`andar-${idx}`} />
+            ))}
           </div>
+          <i
+            className="fa fa-chevron-right"
+            onClick={() => handleScrollRight(andarTrackRef)}
+          />
         </div>
       </div>
 
-      {/* ── Row B (Bahar) ── */}
-      <div className="cards-slider-row">
-        <span className="row-side-label">B</span>
-        <div className="slick-slider slick-initialized">
-          <div className="slick-list">
-            <div className="slick-track" ref={baharTrackRef}>
-              {/* Empty placeholder for alignment with the Joker card in Row A */}
-              {jokerCard && <PlayingCardTile isEmpty={true} />}
-
-              {/* Bahar Dealt Cards */}
-              {baharCards.map((card, idx) => (
-                <PlayingCardTile
-                  key={`bahar-${idx}`}
-                  rank={card.rank}
-                  suit={card.suit}
-                  color={card.color}
-                />
-              ))}
-            </div>
+      {/* ── Row 2: BAHAR ── */}
+      <div className="cards-slider-group">
+        <div className="group-title">BAHAR</div>
+        <div className="slider-row-wrapper">
+          <i
+            className="fa fa-chevron-left"
+            onClick={() => handleScrollLeft(baharTrackRef)}
+          />
+          <div className="cards-track" ref={baharTrackRef}>
+            {/* Bahar Dealt Cards */}
+            {(baharCards || []).map((_, idx) => (
+              <PlayingCardTile key={`bahar-${idx}`} />
+            ))}
           </div>
+          <i
+            className="fa fa-chevron-right"
+            onClick={() => handleScrollRight(baharTrackRef)}
+          />
         </div>
       </div>
     </div>

@@ -1,15 +1,34 @@
 /* MarketSection layout — bookmaker pair + number pair */
 
-/* Bookmaker 1 + 2 side by side */
+/* Bookmaker (70%) + Tied Match / Compact (30%) side by side */
 .gdv2-bm-pair {
   display: flex;
   width: 100%;
+  gap: 4px;
+  align-items: stretch;
 }
 
-.gdv2-bm-pair .gdv2-bm-main { width: 70%; }
-.gdv2-bm-pair .gdv2-bm-compact { width: 30%; }
+.gdv2-bm-pair .gdv2-bm-main {
+  flex: 0 0 70%;
+  flex-basis: 70%;
+  width: 70%;
+  min-width: 0;
+}
 
-/* Compact bookmaker: detail takes remaining space */
+.gdv2-bm-pair .gdv2-bm-compact {
+  flex: 0 0 30%;
+  flex-basis: 30%;
+  width: 30%;
+  min-width: 0;
+}
+
+.gdv2-bm-pair .gdv2-bm-main > div,
+.gdv2-bm-pair .gdv2-bm-compact > div {
+  height: 100%;
+  width: 100%;
+}
+
+/* Compact bookmaker / tied match: detail takes remaining space */
 .gdv2-bm-compact .gdv2-runner-detail,
 .gdv2-bm-compact .gdv2-header-nation {
   flex: 1;
@@ -24,7 +43,15 @@
 }
 
 @media (max-width: 767px) {
-  .gdv2-bm-pair { flex-direction: column; }
+  .gdv2-bm-pair {
+    flex-direction: column;
+    gap: 0;
+  }
+
   .gdv2-bm-pair .gdv2-bm-main,
-  .gdv2-bm-pair .gdv2-bm-compact { width: 100%; }
+  .gdv2-bm-pair .gdv2-bm-compact {
+    flex: 1 1 100%;
+    flex-basis: 100%;
+    width: 100%;
+  }
 }
