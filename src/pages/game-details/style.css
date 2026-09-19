@@ -127,16 +127,28 @@
   letter-spacing: 0.5px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+/* 6-box ladder markets: middle 2 columns (Back & Lay) show SUSPENDED overlay, side boxes show '-' */
+.gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after {
+  left: 33.333%;
+  right: 33.333%;
+  width: 33.333%;
+  background-color: #373636;
+}
 
+.gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-runner-row.gdv2-suspended .gdv2-odd-box {
+  background-color: #373636 !important;
+  color: #888;
+  border-left: 1px solid #4a4a4a;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after,
   .gdv2-fancy-suspended .gdv2-fancy-right::after {
     font-size: 10px;
   }
 }
 
-@media (max-width: 767px) {
-
+@media only screen and (max-width: 767px) {
   .gdv2-runner-row.gdv2-suspended .gdv2-runner-odds::after,
   .gdv2-fancy-suspended .gdv2-fancy-right::after {
     font-size: 12px;

@@ -11,45 +11,66 @@
   flex-direction: column;
 }
 
-/* ── Ladder mobile: 6-box (12%) vs compact 2-box (20%) scale responsively ──────── */
-@media (max-width: 767px) {
+/* Desktop 6-box width */
+.gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-runner-detail,
+.gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-header-nation {
+  width: calc(100% - 480px);
+}
+
+/* ── Ladder mobile: 6-box (12%) vs compact 2-box (60px) scale responsively ──────── */
+@media only screen and (max-width: 767px) {
+  .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-runner-detail,
+  .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-header-nation {
+    width: calc(100% - 72%) !important;
+    flex: 0 0 calc(100% - 72%) !important;
+  }
+
   .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-box {
-    width: 12%;
+    width: 12% !important;
     min-width: 35px;
     min-height: 30px;
-    padding: 2px 0;
   }
 
-  .gdv2-market-ladder.gdv2-market-compact .gdv2-odd-box {
-    width: 20%;
-    min-width: 55px;
-    min-height: 30px;
-    padding: 2px 0;
-  }
-
-  .gdv2-market-ladder .gdv2-odd-price {
-    font-size: 15px;
-    line-height: 1.1;
-  }
-
-  .gdv2-market-ladder .gdv2-odd-volume {
-    font-size: 12px;
+  .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-price {
+    font-size: 13.5px;
     line-height: 1;
   }
 
+  .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-volume {
+    font-size: 8.5px;
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  /* 2-box compact market (Tied Match, etc.) */
+  .gdv2-market-ladder.gdv2-market-compact .gdv2-runner-detail,
+  .gdv2-market-ladder.gdv2-market-compact .gdv2-header-nation {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .gdv2-market-ladder.gdv2-market-compact .gdv2-odd-box {
+    width: 60px !important;
+    min-width: 55px;
+    min-height: 30px;
+  }
+
   .gdv2-market-ladder .gdv2-market-header .gdv2-odd-box b {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
-@media (max-width: 350px) {
+@media only screen and (max-width: 350px) {
   .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-box {
-    width: 12%;
+    width: 12% !important;
     min-width: 32px;
   }
 
   .gdv2-market-ladder.gdv2-market-compact .gdv2-odd-box {
-    width: 20%;
+    width: 50px !important;
     min-width: 45px;
   }
 
@@ -58,6 +79,6 @@
   }
 
   .gdv2-market-ladder .gdv2-odd-volume {
-    font-size: 9px;
+    font-size: 7.5px;
   }
 }

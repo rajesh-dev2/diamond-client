@@ -1,22 +1,21 @@
 /* OddBox — single clickable odds cell */
 
 .gdv2-odd-box {
+  width: 80px;
+  padding: 2px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-left: 1px solid #c7c8ca;
+  cursor: pointer;
+  min-height: 34px;
   position: relative;
   font-weight: 600;
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
   user-select: none;
   text-align: center;
   flex-shrink: 0;
-  width: 80px;
-  padding: 2px 0;
-  min-height: 34px;
-  border-left: 1px solid #c7c8ca;
-  transition: filter 0.15s ease;
   color: #333;
   box-sizing: border-box;
 }
@@ -45,29 +44,12 @@
 }
 
 /* Colour variants */
-.gdv2-odd-box.gdv2-back {
-  background-color: #72bbef;
-}
-
-.gdv2-odd-box.gdv2-back1 {
-  background-color: #b9dbf7;
-}
-
-.gdv2-odd-box.gdv2-back2 {
-  background-color: #d2e8f9;
-}
-
-.gdv2-odd-box.gdv2-lay {
-  background-color: #faa9ba;
-}
-
-.gdv2-odd-box.gdv2-lay1 {
-  background-color: #fcd4e1;
-}
-
-.gdv2-odd-box.gdv2-lay2 {
-  background-color: #fde3eb;
-}
+.gdv2-odd-box.gdv2-back  { background-color: #72bbef; }
+.gdv2-odd-box.gdv2-back1 { background-color: #b9dbf7; }
+.gdv2-odd-box.gdv2-back2 { background-color: #d2e8f9; }
+.gdv2-odd-box.gdv2-lay   { background-color: #faa9ba; }
+.gdv2-odd-box.gdv2-lay1  { background-color: #fcd4e1; }
+.gdv2-odd-box.gdv2-lay2  { background-color: #fde3eb; }
 
 /* Empty placeholder cell */
 .gdv2-odd-box.gdv2-odd-empty {
@@ -101,17 +83,14 @@
 }
 
 /* ── Mobile (< 768) ──────────────────────────────────────── */
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .gdv2-odd-box {
-    width: 20%;
+    width: 60px;
+    min-width: 55px;
     padding: 2px 0;
   }
 
   .gdv2-odd-price {
     font-size: 15px;
-  }
-
-  .gdv2-odd-volume {
-    font-size: 12px;
   }
 }
