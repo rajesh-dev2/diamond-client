@@ -51,9 +51,22 @@
 }
 
 .gdv2-market-header .gdv2-odd-box b {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: #333333;
+}
+
+.gdv2-market-header .gdv2-odd-box.gdv2-back {
+  background-color: #72bbef;
+}
+
+.gdv2-market-header .gdv2-odd-box.gdv2-lay {
+  background-color: #faa9ba;
+}
+
+.gdv2-market-header .gdv2-odd-box.gdv2-odd-empty {
+  background-color: transparent;
+  border: none;
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {

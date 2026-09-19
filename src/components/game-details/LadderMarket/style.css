@@ -19,6 +19,7 @@
 
 /* ── Ladder mobile: 6-box (12%) vs compact 2-box (60px) scale responsively ──────── */
 @media only screen and (max-width: 767px) {
+
   .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-runner-detail,
   .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-header-nation {
     width: calc(100% - 72%) !important;
@@ -27,7 +28,6 @@
 
   .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-box {
     width: 12% !important;
-    min-width: 35px;
     min-height: 30px;
   }
 
@@ -38,7 +38,7 @@
 
   .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-volume {
     font-size: 8.5px;
-    line-height: 1;
+    line-height: 1.5;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
