@@ -11,6 +11,10 @@
   flex-direction: column;
 }
 
+.gdv2-market-ladder .gdv2-odd-price {
+  font-size: 14px;
+}
+
 /* ── Ladder mobile: all 6 boxes scale responsively ──────── */
 @media (max-width: 767px) {
   .gdv2-market-ladder .gdv2-odd-box {
@@ -20,7 +24,7 @@
   }
 
   .gdv2-market-ladder .gdv2-odd-price {
-    font-size: 11px;
+    font-size: 14px;
     line-height: 1.1;
   }
 
