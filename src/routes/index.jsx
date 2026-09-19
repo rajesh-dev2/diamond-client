@@ -43,6 +43,10 @@ export default function AppRoutes() {
           <Route path="/lucky7" element={<Navigate to="/casino/lucky7" replace />} />
           <Route path="/lucky7eu" element={<Navigate to="/casino/lucky7eu" replace />} />
           <Route path="/lucky7eu2" element={<Navigate to="/casino/lucky7eu2" replace />} />
+          <Route path="/ab20" element={<Navigate to="/casino/ab20" replace />} />
+          <Route path="/abj" element={<Navigate to="/casino/abj" replace />} />
+          <Route path="/andar-bahar" element={<Navigate to="/casino/ab20" replace />} />
+          <Route path="/andar-bahar-2" element={<Navigate to="/casino/abj" replace />} />
           <Route path="/casino-list/*" element={<Home />} />
           <Route path="/live-casino-list/*" element={<Home />} />
           <Route path="/sports-book/*" element={<Home />} />

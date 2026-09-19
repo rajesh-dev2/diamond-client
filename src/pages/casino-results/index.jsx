@@ -29,6 +29,12 @@ const GAME_TYPE_MAP = {
   poker: '4',
   lucky7: '5',
   dt20: '6',
+  ab20: '7',
+  ab: '7',
+  'andar-bahar': '7',
+  abj: '8',
+  ab2: '8',
+  'andar-bahar-2': '8',
 }
 
 export default function CasinoResults() {
@@ -87,6 +93,8 @@ export default function CasinoResults() {
                   <option value="4">Poker</option>
                   <option value="5">Lucky 7</option>
                   <option value="6">Dragon Tiger</option>
+                  <option value="7">Andar Bahar</option>
+                  <option value="8">Andar Bahar 2</option>
                 </select>
               </div>
             </div>

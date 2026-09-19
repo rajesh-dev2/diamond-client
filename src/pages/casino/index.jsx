@@ -13,6 +13,8 @@ import Card32 from './card32'
 import Card32B from './card32eu'
 import Lucky7 from './lucky7'
 import Lucky7B from './lucky7eu'
+import Ab20 from './ab20'
+import Abj from './abj'
 
 const CASINO_MAP = {
   goal2: Goal2,
@@ -23,6 +25,12 @@ const CASINO_MAP = {
   card32eu: Card32B,
   lucky7: Lucky7,
   lucky7eu: Lucky7B,
+  ab20: Ab20,
+  ab: Ab20,
+  'andar-bahar': Ab20,
+  abj: Abj,
+  ab2: Abj,
+  'andar-bahar-2': Abj,
 }
 
 export default function CasinoPage() {

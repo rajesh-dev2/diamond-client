@@ -1,0 +1,552 @@
+/* ═══════════════════════════════════════════════════════════════
+   20-20 Andar Bahar (ab20) Stylesheet — Pixel-Matched to DiamondExch
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-page-container.ab20-page,
+.casino-page-container.ab20 {
+  width: 100%;
+  user-select: none;
+  background-color: #f1f5f9;
+}
+
+/* ── Video Stream Section ───────────────────────────────────── */
+.casino-page-container.ab20-page .casino-video,
+.casino-page-container.ab20 .casino-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  overflow: hidden;
+}
+
+.casino-page-container.ab20-page .video-box-container,
+.casino-page-container.ab20-page .casino-video-box,
+.casino-page-container.ab20 .video-box-container,
+.casino-page-container.ab20 .casino-video-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.casino-page-container.ab20-page .casino-video-box iframe,
+.casino-page-container.ab20 .casino-video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Fallback video placeholder when stream is simulated */
+.casino-page-container.ab20-page .video-placeholder,
+.casino-page-container.ab20 .video-placeholder {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #1b3a5b 0%, #08121e 70%, #03080d 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.casino-page-container.ab20-page .video-table-felt,
+.casino-page-container.ab20 .video-table-felt {
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  height: 65%;
+  background: radial-gradient(ellipse at center bottom, #0056b3 0%, #003366 60%, #001f3f 100%);
+  border-radius: 50% 50% 0 0;
+  border-top: 4px solid #38bdf8;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.casino-page-container.ab20-page .felt-badge,
+.casino-page-container.ab20 .felt-badge {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 4px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Sound control button overlay matching card32 standard */
+.casino-page-container.ab20-page .sound-toggle-btn,
+.casino-page-container.ab20 .sound-toggle-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.casino-page-container.ab20-page .sound-toggle-btn:hover,
+.casino-page-container.ab20 .sound-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.08);
+}
+
+/* ── Video Stream Cards Overlay (Top-Left Dealing Matrix) ─────── */
+.casino-page-container.ab20-page .ab-stream-overlay,
+.casino-page-container.ab20 .ab-stream-overlay {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 12;
+  background: rgba(0, 0, 0, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.casino-page-container.ab20-page .ab-stream-row,
+.casino-page-container.ab20 .ab-stream-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.casino-page-container.ab20-page .ab-row-badge,
+.casino-page-container.ab20 .ab-row-badge {
+  font-size: 12px;
+  font-weight: 900;
+  color: #ffffff;
+  width: 14px;
+  text-align: center;
+}
+
+.casino-page-container.ab20-page .ab-cards-strip,
+.casino-page-container.ab20 .ab-cards-strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.casino-page-container.ab20-page .stream-card-box,
+.casino-page-container.ab20 .stream-card-box {
+  width: 24px;
+  height: 34px;
+  background: #ffffff;
+  border-radius: 2px;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 11px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.casino-page-container.ab20-page .stream-card-box.joker-card,
+.casino-page-container.ab20 .stream-card-box.joker-card {
+  border: 2px solid #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+}
+
+.casino-page-container.ab20-page .stream-card-box.empty-slot,
+.casino-page-container.ab20 .stream-card-box.empty-slot {
+  width: 24px;
+  height: 34px;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  background: transparent;
+  box-shadow: none;
+}
+
+.casino-page-container.ab20-page .stream-card-box.red,
+.casino-page-container.ab20 .stream-card-box.red {
+  color: #dc2626;
+}
+
+.casino-page-container.ab20-page .stream-card-box.black,
+.casino-page-container.ab20 .stream-card-box.black {
+  color: #111827;
+}
+
+.casino-page-container.ab20-page .stream-card-suit,
+.casino-page-container.ab20 .stream-card-suit {
+  font-size: 10px;
+  margin-top: 1px;
+}
+
+/* ── FlipClock Container (Bottom-Right of Video) ─────────────── */
+.casino-page-container.ab20-page .casino-video .clock,
+.casino-page-container.ab20 .casino-video .clock {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 8;
+}
+
+/* ── Casino Detail Section ───────────────────────────────────── */
+.casino-page-container.ab20-page .casino-detail,
+.casino-page-container.ab20 .casino-detail {
+  padding: 8px 6px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Casino Betting Tables Container
+   ═══════════════════════════════════════════════════════════════ */
+.casino-page-container.ab20-page .ab-markets-container,
+.casino-page-container.ab20 .ab-markets-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── 1. Row 1: Main Table (A vs B with Yellow Border Boxes) ─── */
+.casino-page-container.ab20-page .ab-main-row,
+.casino-page-container.ab20 .ab-main-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #ffffff;
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 768px) {
+  .casino-page-container.ab20-page .ab-main-row,
+  .casino-page-container.ab20 .ab-main-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.casino-page-container.ab20-page .ab-group-wrapper,
+.casino-page-container.ab20 .ab-group-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.casino-page-container.ab20-page .ab-side-label,
+.casino-page-container.ab20 .ab-side-label {
+  font-size: 18px;
+  font-weight: 900;
+  color: #1e293b;
+  min-width: 18px;
+  text-align: center;
+}
+
+.casino-page-container.ab20-page .ab-yellow-boxes-strip,
+.casino-page-container.ab20 .ab-yellow-boxes-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.casino-page-container.ab20-page .ab-yellow-box,
+.casino-page-container.ab20 .ab-yellow-box {
+  background: #2b333f;
+  border: 2px solid #eab308;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 4px;
+  min-height: 52px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.casino-page-container.ab20-page .ab-yellow-box:hover,
+.casino-page-container.ab20 .ab-yellow-box:hover {
+  background: #384252;
+  border-color: #facc15;
+  transform: translateY(-1px);
+}
+
+.casino-page-container.ab20-page .ab-box-title,
+.casino-page-container.ab20 .ab-box-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #e2e8f0;
+  line-height: 1.1;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+.casino-page-container.ab20-page .ab-lock-icon,
+.casino-page-container.ab20 .ab-lock-icon {
+  width: 14px;
+  height: 14px;
+  fill: #ffffff;
+  opacity: 0.9;
+}
+
+/* ── 2. Row 2: Dual Box Container (ODD/EVEN + 4 SUITS) ───────── */
+.casino-page-container.ab20-page .ab-dual-row,
+.casino-page-container.ab20 .ab-dual-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .casino-page-container.ab20-page .ab-dual-row,
+  .casino-page-container.ab20 .ab-dual-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.casino-page-container.ab20-page .ab-dual-card,
+.casino-page-container.ab20 .ab-dual-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.casino-page-container.ab20-page .ab-dual-header,
+.casino-page-container.ab20 .ab-dual-header {
+  display: grid;
+  border-bottom: 1px solid #cbd5e1;
+  background: #f8fafc;
+}
+
+.casino-page-container.ab20-page .ab-dual-header.cols-2,
+.casino-page-container.ab20 .ab-dual-header.cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.casino-page-container.ab20-page .ab-dual-header.cols-4,
+.casino-page-container.ab20 .ab-dual-header.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.casino-page-container.ab20-page .ab-header-cell,
+.casino-page-container.ab20 .ab-header-cell {
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1e293b;
+  border-right: 1px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+}
+
+.casino-page-container.ab20-page .ab-header-cell:last-child,
+.casino-page-container.ab20 .ab-header-cell:last-child {
+  border-right: none;
+}
+
+.casino-page-container.ab20-page .ab-header-cell.red,
+.casino-page-container.ab20 .ab-header-cell.red {
+  color: #dc2626;
+}
+
+.casino-page-container.ab20-page .ab-header-cell.black,
+.casino-page-container.ab20 .ab-header-cell.black {
+  color: #111827;
+}
+
+.casino-page-container.ab20-page .ab-dual-content,
+.casino-page-container.ab20 .ab-dual-content {
+  display: grid;
+  padding: 6px 8px;
+  gap: 8px;
+  background: #ffffff;
+}
+
+.casino-page-container.ab20-page .ab-dual-content.cols-2,
+.casino-page-container.ab20 .ab-dual-content.cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.casino-page-container.ab20-page .ab-dual-content.cols-4,
+.casino-page-container.ab20 .ab-dual-content.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.casino-page-container.ab20-page .ab-dark-btn,
+.casino-page-container.ab20 .ab-dark-btn {
+  background: #374151;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  min-height: 42px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.casino-page-container.ab20-page .ab-dark-btn:hover,
+.casino-page-container.ab20 .ab-dark-btn:hover {
+  background: #4b5563;
+  transform: translateY(-1px);
+}
+
+/* ── 3. Row 3: 13 Card Values Grid (A through K) ─────────────── */
+.casino-page-container.ab20-page .ab-cards-row-card,
+.casino-page-container.ab20 .ab-cards-row-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.casino-page-container.ab20-page .ab-cards-grid-13,
+.casino-page-container.ab20 .ab-cards-grid-13 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.casino-page-container.ab20-page .ab-card-token,
+.casino-page-container.ab20 .ab-card-token {
+  width: 46px;
+  height: 66px;
+  background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+  border: 1px solid #4b5563;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.casino-page-container.ab20-page .ab-card-token:hover,
+.casino-page-container.ab20 .ab-card-token:hover {
+  background: linear-gradient(180deg, #4b5563 0%, #374151 100%);
+  border-color: #9ca3af;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.casino-page-container.ab20-page .token-rank,
+.casino-page-container.ab20 .token-rank {
+  font-size: 14px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.casino-page-container.ab20-page .token-lock,
+.casino-page-container.ab20 .token-lock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.casino-page-container.ab20-page .token-suits-row,
+.casino-page-container.ab20 .token-suits-row {
+  display: flex;
+  gap: 2px;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.casino-page-container.ab20-page .token-suits-row .s-red,
+.casino-page-container.ab20 .token-suits-row .s-red {
+  color: #ef4444;
+}
+
+.casino-page-container.ab20-page .token-suits-row .s-black,
+.casino-page-container.ab20 .token-suits-row .s-black {
+  color: #ffffff;
+}
+
+/* ── Result Quick Detail Modal ───────────────────────────────── */
+.ab20-result-modal {
+  padding: 12px;
+}
+
+.ab20-result-round-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ab20-result-winner {
+  padding: 3px 10px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 800;
+  background: #15803d;
+}
+
+.ab20-result-winner.winner-b {
+  background: #65a30d;
+}
+
+.ab20-result-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ab20-detail-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.ab20-detail-label {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.ab20-detail-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
