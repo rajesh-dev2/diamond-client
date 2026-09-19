@@ -25,13 +25,15 @@ const CASINO_MAP = {
   card32eu: Card32B,
   lucky7: Lucky7,
   lucky7eu: Lucky7B,
-  ab20: Ab20,
-  ab: Ab20,
-  'andar-bahar': Ab20,
-  abj: Abj,
-  ab2: Abj,
-  'andar-bahar-2': Abj,
+  ab20: Abj,
+  abj20: Abj,
+  ab: Abj,
+  'andar-bahar': Abj,
+  abj: Ab20,
+  ab2: Ab20,
+  'andar-bahar-2': Ab20,
 }
+
 
 export default function CasinoPage() {
   const { gameId } = useParams()
