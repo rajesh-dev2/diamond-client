@@ -11,25 +11,29 @@
   flex-direction: column;
 }
 
-.gdv2-market-ladder .gdv2-odd-price {
-  font-size: 14px;
-}
-
-/* ── Ladder mobile: all 6 boxes scale responsively ──────── */
+/* ── Ladder mobile: 6-box (12%) vs compact 2-box (20%) scale responsively ──────── */
 @media (max-width: 767px) {
-  .gdv2-market-ladder .gdv2-odd-box {
-    width: 40px;
-    min-width: 40px;
+  .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-box {
+    width: 12%;
+    min-width: 35px;
     min-height: 30px;
+    padding: 2px 0;
+  }
+
+  .gdv2-market-ladder.gdv2-market-compact .gdv2-odd-box {
+    width: 20%;
+    min-width: 55px;
+    min-height: 30px;
+    padding: 2px 0;
   }
 
   .gdv2-market-ladder .gdv2-odd-price {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.1;
   }
 
   .gdv2-market-ladder .gdv2-odd-volume {
-    font-size: 8.5px;
+    font-size: 12px;
     line-height: 1;
   }
 
@@ -38,17 +42,22 @@
   }
 }
 
-@media (max-width: 374px) {
-  .gdv2-market-ladder .gdv2-odd-box {
-    width: 36px;
-    min-width: 36px;
+@media (max-width: 350px) {
+  .gdv2-market-ladder:not(.gdv2-market-compact) .gdv2-odd-box {
+    width: 12%;
+    min-width: 32px;
+  }
+
+  .gdv2-market-ladder.gdv2-market-compact .gdv2-odd-box {
+    width: 20%;
+    min-width: 45px;
   }
 
   .gdv2-market-ladder .gdv2-odd-price {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .gdv2-market-ladder .gdv2-odd-volume {
-    font-size: 8px;
+    font-size: 9px;
   }
 }

@@ -7,7 +7,7 @@
   font-size: 12px;
   font-weight: 700;
   justify-content: space-between;
-  color: #222;
+  color: #333333;
   border-bottom: 1px solid #c7c8ca;
 }
 
@@ -17,7 +17,7 @@
   min-width: 0;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4px;
+  padding: 0 5px;
   font-size: 14px;
 }
 
@@ -25,6 +25,7 @@
   font-size: 12px;
   color: #097c93;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .gdv2-header-odds {
@@ -50,7 +51,7 @@
 }
 
 .gdv2-market-header .gdv2-odd-box b {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #333333;
 }
@@ -70,6 +71,16 @@
 }
 
 @media (max-width: 767px) {
+  .gdv2-header-nation {
+    font-size: 13px;
+    padding: 0 4px;
+  }
+
+  .gdv2-header-minmax {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
   .gdv2-fancy-minmax-spacer {
     display: none;
   }

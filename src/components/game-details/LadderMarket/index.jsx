@@ -35,7 +35,7 @@ export default function LadderMarket({ market, onOddClick, bookType = 'match', c
 
   return (
     <div>
-      <div className={`gdv2-market-ladder ${className}`.trim()}>
+      <div className={`gdv2-market-ladder ${compact ? 'gdv2-market-compact' : ''} ${className}`.trim()}>
         <MarketTitle title={market.mname} showCashout />
         <MarketHeader layout={compact ? 'compact' : 'ladder'} minMaxLabel={maxLabel} />
 
