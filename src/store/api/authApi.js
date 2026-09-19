@@ -43,6 +43,10 @@ export const authApi = createApi({
       query: (etid) => `/user/events?etid=${etid}`,
       transformResponse: (response) => response.data,
     }),
+    getLiveEvents: builder.query({
+      query: (etid) => `/user/events?etid=${etid}&isLive=true`,
+      transformResponse: (response) => response.data,
+    }),
     placeBet: builder.mutation({
       query: (bet) => ({
         url: '/user/bets',
@@ -75,6 +79,10 @@ export const authApi = createApi({
       query: (fancyId) => `/user/bets/fancy/${fancyId}/book`,
       transformResponse: (response) => response.book,
       providesTags: ['Bets'],
+    }),
+    getScorecard: builder.query({
+      query: (gmid) => `/cricket-scores/live?beventId=${gmid}`,
+      transformResponse: (response) => response,
     }),
     getCurrentBets: builder.query({
       query: ({ type = 'sports', otype = 'all', search = '', limit = 10, page = 1 } = {}) => {
@@ -162,12 +170,14 @@ export const {
   useGetUserInfoQuery,
   useGetSportsQuery,
   useGetEventsQuery,
+  useGetLiveEventsQuery,
   usePlaceBetMutation,
   useGetBetsQuery,
   useGetMatchOddsBookQuery,
   useGetBookmakerBookQuery,
   useGetFancyPlQuery,
   useGetFancyBookQuery,
+  useGetScorecardQuery,
   useGetCurrentBetsQuery,
   useGetActivityLogsQuery,
   useGetAccountStatementQuery,

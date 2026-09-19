@@ -139,3 +139,68 @@ export function formatMinMax(min, max) {
   const maxStr = max != null && max !== '' ? `Max: ${formatAmount(max)}` : ''
   return [minStr, maxStr].filter(Boolean).join('\u00a0\u00a0')
 }
+
+// \u2500\u2500 Scorecard \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+
+/** 3-letter abbreviation fallback when no explicit abbr is available */
+function teamAbbr(name) {
+  if (!name) return '\u2014'
+  return name.trim().slice(0, 3).toUpperCase()
+}
+
+/** Pick the latest non-null innings for a given team key (handles Tests: innings3/4 continue the same team) */
+function latestInningsForTeam(innings, teamKey) {
+  const order = [innings.innings4, innings.innings3, innings.innings2, innings.innings1]
+  return order.find((inn) => inn && inn.team === teamKey) || null
+}
+
+function buildTeamScore(teamKey, teamName, innings) {
+  const inn = latestInningsForTeam(innings, teamKey)
+  if (!inn) return { abbr: teamAbbr(teamName), name: teamName, runs: '', overs: '', crr: '' }
+  const runs = `${inn.runs}-${inn.wickets}`
+  const overs = inn.overs ? String(inn.overs) : ''
+  const crr = inn.overs > 0 ? `CRR ${(inn.runs / inn.overs).toFixed(2)}` : ''
+  return { abbr: teamAbbr(teamName), name: teamName, runs, overs, crr }
+}
+
+/** crickapi ball-feed event \u2192 Scorecard's { run, isFour, isSix, isWicket } \u2014 best-effort,
+ * feed field names vary by event `type`; falls back to showing the raw run value. */
+function mapBallEvent(ev) {
+  const type = ev?.type
+  const isWicket = type === 'w' || type === 'wk' || !!ev?.wicket
+  const runVal = ev?.r ?? ev?.run ?? ev?.runs ?? (isWicket ? 'W' : '0')
+  return {
+    run: String(runVal),
+    isFour: Number(runVal) === 4,
+    isSix: Number(runVal) === 6,
+    isWicket,
+  }
+}
+
+/**
+ * Transform the /api/cricket-scores/live response into the shape
+ * <Scorecard scoreData={...} /> expects. Returns null while data isn't
+ * mapped yet (goscorer has no match within +-15min of stime, or match
+ * hasn't started) so the caller can fall back to Scorecard's own mock.
+ */
+export function transformScorecard(apiResponse) {
+  if (!apiResponse?.teams || !apiResponse?.innings) return null
+  const { teams, innings, matchCompleted, result, score } = apiResponse
+
+  const team1 = buildTeamScore(teams.team1.key, teams.team1.name, innings)
+  const team2 = buildTeamScore(teams.team2.key, teams.team2.name, innings)
+
+  const balls = [...(apiResponse.v3 || []), ...(apiResponse.v1 || [])]
+    .filter((ev) => ev && ev.type !== 'wc')
+    .slice(0, 6)
+    .reverse()
+    .map(mapBallEvent)
+
+  return {
+    team1,
+    team2,
+    session: score?.format || '',
+    status: matchCompleted ? (result?.description || 'Match completed') : (score?.status || ''),
+    balls,
+  }
+}

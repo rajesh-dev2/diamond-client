@@ -1,20 +1,14 @@
 import './style.css'
 
 export default function Scorecard({ scoreData }) {
-  const data = scoreData || {
-    team1: { abbr: 'SL', runs: '32-2', overs: '8.2', crr: 'CRR 3.84' },
-    team2: { abbr: 'IND', runs: '462-10', overs: '116.4', crr: '' },
-    session: '3',
-    status: 'SL trail by 430 runs',
-    balls: [
-      { run: '0' },
-      { run: '0' },
-      { run: '0' },
-      { run: '1' },
-      { run: '0' },
-      { run: '0' },
-    ],
+  if (!scoreData) {
+    return (
+      <div className="gdv2-scorecard gdv2-scorecard-empty">
+        <span>Live score not available for this match</span>
+      </div>
+    )
   }
+  const data = scoreData
 
   return (
     <div className="gdv2-scorecard">

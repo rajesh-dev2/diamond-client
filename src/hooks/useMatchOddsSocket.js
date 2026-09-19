@@ -61,7 +61,7 @@ export function useMatchOddsSocket({
   }, [])
 
   const connect = useCallback(() => {
-    const { gmid: currentGmid, url: currentUrl, enabled: currentEnabled, token: currentToken } = paramsRef.current
+    const { url: currentUrl, enabled: currentEnabled, token: currentToken } = paramsRef.current
 
     if (!currentEnabled) return
 
@@ -80,9 +80,15 @@ export function useMatchOddsSocket({
       setIsConnected(true)
       setConnectionStatus('connected')
 
-      console.log('[Socket.IO] joining match room:', currentGmid)
-      socket.emit('join:match', currentGmid)
-      joinedGmidRef.current = currentGmid
+      // Read gmid fresh from the ref, not a value captured when connect()
+      // was first called — a Socket.IO auto-reconnect re-fires 'connect'
+      // on the same socket long after the user may have switched matches,
+      // and rejoining a stale gmid here would silently strand the client
+      // in the wrong room.
+      const gmidToJoin = paramsRef.current.gmid
+      console.log('[Socket.IO] joining match room:', gmidToJoin)
+      socket.emit('join:match', gmidToJoin)
+      joinedGmidRef.current = gmidToJoin
     })
 
     // Full snapshot every tick — replace, don't merge, so anything that

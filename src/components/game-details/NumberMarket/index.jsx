@@ -59,7 +59,7 @@ export default function NumberMarket({
       }))
 
   const hasMinMax = items.some((item) => item.min != null || item.max != null)
-  const isDual    = dualColumn !== undefined ? dualColumn : (items.length > 8)
+  const isDual    = dualColumn !== undefined ? dualColumn : false
 
   const handleItemClick = (item) => {
     if (item.suspended || !onOddClick) return
@@ -104,8 +104,8 @@ export default function NumberMarket({
                 {/* Runner Name & PL */}
                 <div className="gdv2-number-detail">
                   <span className="gdv2-number-name" title={item.name}>{item.name}</span>
-                  {item.pl !== 0 && item.pl != null && (
-                    <span className={`gdv2-runner-book ${item.pl < 0 ? 'gdv2-book-neg' : 'gdv2-book-pos'}`}>
+                  {item.pl != null && (
+                    <span className={`gdv2-runner-book ${item.pl > 0 ? 'gdv2-book-pos' : 'gdv2-book-neg'}`}>
                       {item.pl > 0 ? `+${item.pl}` : item.pl}
                     </span>
                   )}

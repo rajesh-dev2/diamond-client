@@ -36,6 +36,10 @@
 .gdv2-number-name {
   font-weight: 400;
   font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 /* Pair grid — two number markets side by side */

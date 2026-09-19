@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import './style.css'
 import MarketTitle from '../MarketTitle'
+import MarketHeader from '../MarketHeader'
 import OddBox from '../OddBox'
 import MinMaxLabel from '../MinMaxLabel'
 import { oddsByName, isSuspended, getSuspendedStatus, formatOdd, formatVol } from '../utils'
@@ -12,8 +13,17 @@ export default function OddEvenMarket({ market, onOddClick, pl = {} }) {
     <div className="gdv2-market-oddeven">
       <MarketTitle title={market.mname} />
 
+      <div className="gdv2-fancy-header-row gdv2-full-width">
+        <div className="gdv2-fancy-full-col">
+          <MarketHeader
+            columns={[{ label: 'Odd', variant: 'back' }, { label: 'Even', variant: 'back' }]}
+            showSpacer
+          />
+        </div>
+      </div>
+
       <div className="gdv2-market-body" data-title={market.status}>
-        <div className="gdv2-fancy-grid">
+        <div className="gdv2-fancy-grid gdv2-full-width">
           {sections.map((section) => {
             const odds       = oddsByName(section)
             const suspended  = isSuspended(section)
@@ -23,15 +33,15 @@ export default function OddEvenMarket({ market, onOddClick, pl = {} }) {
 
             return (
               <Fragment key={section.sid}>
-                <div className="gdv2-fancy-col">
+                <div className="gdv2-fancy-full-col">
                   <div className={`gdv2-fancy-item${suspended ? ' gdv2-fancy-suspended' : ''}`}>
                     <div className="gdv2-fancy-row">
 
                       {/* Runner name + PL */}
                       <div className="gdv2-fancy-detail">
                         <span className="gdv2-fancy-name">{section.nat}</span>
-                        {runnerPl?.pl !== 0 && runnerPl?.pl != null && (
-                          <span className={`gdv2-runner-book ${runnerPl.pl < 0 ? 'gdv2-book-neg' : 'gdv2-book-pos'}`}>
+                        {runnerPl?.pl != null && (
+                          <span className={`gdv2-runner-book ${runnerPl.pl > 0 ? 'gdv2-book-pos' : 'gdv2-book-neg'}`}>
                             {runnerPl.pl > 0 ? `+${runnerPl.pl}` : runnerPl.pl}
                           </span>
                         )}

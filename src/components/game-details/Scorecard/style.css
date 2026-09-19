@@ -92,6 +92,14 @@
 .gdv2-ball.gdv2-ball-six    { background-color: #6f42c1; }
 .gdv2-ball.gdv2-ball-wicket { background-color: #dc3545; }
 
+.gdv2-scorecard-empty {
+  justify-content: center;
+  align-items: center;
+  color: #ddd;
+  font-size: 12px;
+  padding: 12px 5px;
+}
+
 @media (max-width: 767px) {
   .gdv2-scorecard {
     margin: 0;

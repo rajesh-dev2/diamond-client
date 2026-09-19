@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './style.css'
 
-export default function BetTable({ matches = [] }) {
+export default function BetTable({ matches = [], onVirtualClick }) {
   if (matches.length === 0) {
     return (
       <div className="bet-table">
@@ -36,28 +36,48 @@ export default function BetTable({ matches = [] }) {
           return (
             <div className="bet-table-row" key={row.id}>
               <div className="bet-nation-name">
-                <Link className="bet-nation-game-name" to={row.link || '#'}>
-                  <span>{row.title}</span>
-                  {row.date && (
-                    <>
-                      <span className="d-none d-md-inline-block">&nbsp;/&nbsp;</span>
-                      <span>{row.date}</span>
-                    </>
-                  )}
-                </Link>
+                {row.isVirtual ? (
+                  <span
+                    className="bet-nation-game-name"
+                    role="button"
+                    onClick={() => onVirtualClick?.()}
+                  >
+                    <span>{row.title}</span>
+                    {row.date && (
+                      <>
+                        <span className="d-none d-md-inline-block">&nbsp;/&nbsp;</span>
+                        <span>{row.date}</span>
+                      </>
+                    )}
+                  </span>
+                ) : (
+                  <Link className="bet-nation-game-name" to={row.link || '#'}>
+                    <span>{row.title}</span>
+                    {row.date && (
+                      <>
+                        <span className="d-none d-md-inline-block">&nbsp;/&nbsp;</span>
+                        <span>{row.date}</span>
+                      </>
+                    )}
+                  </Link>
+                )}
 
                 <div className="game-icons">
                   <div className="game-icon">
                     {row.live && <span className="active"></span>}
                   </div>
                   <div className="game-icon">
-                    {row.icons?.includes('tv') && <i className="fas fa-tv icon-tv"></i>}
+                    {row.icons?.includes('tv') && <i className="icon icon-tv tv-icon"></i>}
                   </div>
                   <div className="game-icon">
-                    {row.icons?.includes('f') && <span className="badge-f">f</span>}
+                    {row.icons?.includes('f') && (
+                      <img src="https://allpanelexch9.game/static/front/img/ic_fancy.png" alt="fancy" className="badge-f-icon" />
+                    )}
                   </div>
                   <div className="game-icon">
-                    {row.icons?.includes('BM') && <span className="badge-bm">BM</span>}
+                    {row.icons?.includes('BM') && (
+                      <img src="https://allpanelexch9.game/static/front/img/ic_bm.png" alt="BM" className="badge-f-icon" />
+                    )}
                   </div>
                   <div className="game-icon">
                     {row.icons?.includes('e') && (

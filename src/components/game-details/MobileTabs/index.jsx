@@ -3,7 +3,7 @@ import './style.css'
 const DEFAULT_TABS = [
   { key: 'odds', label: 'Odds' },
   { key: 'matchedBet', label: null },
-  { key: 'tv', label: null, icon: 'fas fa-tv' },
+  { key: 'tv', label: null, icon: 'icon icon-tv' },
 ]
 
 export default function MobileTabs({

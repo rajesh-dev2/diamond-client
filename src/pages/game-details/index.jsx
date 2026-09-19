@@ -22,6 +22,7 @@ import {
   oddsByName,
   findSectionByFancyId,
   plByFancyId,
+  transformScorecard,
 } from '../../components/game-details/utils'
 
 // ── Store & APIs ───────────────────────────────────────────────────
@@ -30,6 +31,7 @@ import {
   usePlaceBetMutation,
   useGetBetsQuery,
   useGetFancyPlQuery,
+  useGetScorecardQuery,
 } from '../../store/api/authApi'
 import useMatchOddsSocket from '../../hooks/useMatchOddsSocket'
 
@@ -61,8 +63,17 @@ export default function GameDetails() {
   const title = eventInfo?.ename || 'Match Details'
   const date  = eventInfo?.stime  || ''
 
-  // Live markets from Socket.IO stream
-  const activeMarkets = marketData || []
+  // Virtual (isVirtual) matches ke liye har market/section ko forcibly
+  // "SUSPENDED" kar do — sab market components (Ladder/Fancy/OddEven/Number)
+  // pehle se hi section.gstatus check karte hain, isliye ek hi jagah force
+  // karna kaafi hai, har component ko alag se badalne ki zaroorat nahi.
+  const isVirtualMatch = Boolean(eventInfo?.isVirtual)
+  const activeMarkets = isVirtualMatch
+    ? (marketData || []).map((m) => ({
+        ...m,
+        section: (m.section || []).map((s) => ({ ...s, gstatus: 'SUSPENDED' })),
+      }))
+    : (marketData || [])
 
   // ── User Matched Bets ─────────────────────────────────────────
   const { data: myBets } = useGetBetsQuery()
@@ -71,6 +82,14 @@ export default function GameDetails() {
   // ── Fancy P&L Book ───────────────────────────────────────────
   const { data: fancyPl } = useGetFancyPlQuery(Number(eventId), { skip: !eventId })
   const fancyPlByFancyId  = plByFancyId(fancyPl)
+
+  // ── Live Scorecard (cricket only — etid 4) ────────────────────
+  const isCricket = Number(sportId) === 4
+  const { data: scorecardRaw } = useGetScorecardQuery(eventId, {
+    skip: !eventId || !isCricket,
+    pollingInterval: 6000,
+  })
+  const scoreData = isCricket ? transformScorecard(scorecardRaw) : null
 
   // ── Market Categorisation ─────────────────────────────────────
   const matchOddsMarket = activeMarkets.find((m) => m.gtype === 'match')
@@ -165,7 +184,9 @@ export default function GameDetails() {
             onTabChange={setActiveMobileTab}
             betCount={bets.length}
           />
-          {(activeMobileTab === 'odds' || isDesktop) && <Scorecard />}
+          {(activeMobileTab === 'odds' || isDesktop) && isCricket && (
+            <Scorecard scoreData={scoreData} />
+          )}
 
           {(activeMobileTab === 'odds' || isDesktop) && (
             activeMarkets.length === 0 ? (

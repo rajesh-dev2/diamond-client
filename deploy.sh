@@ -28,4 +28,4 @@ ssh -i "$KEY" "$HOST" "pm2 restart '$PM2_APP'"
 echo "✓ Deployed → $URL"
 
 # 192.241.135.125 DO
-# @wjx3@#j#JT7UCYt 
+# @#Devilsky@#8055s

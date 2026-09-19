@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { message } from 'antd'
 import LatestEvents from '../../components/LatestEvents'
 import SportsTab, { defaultTabs, mapSportsToTabs } from '../../components/SportsTab'
 import BetTable from '../../components/BetTable'
@@ -33,10 +34,13 @@ function mapEventsToMatches(events, etid) {
   return (events || []).map((event) => {
     const [sel1, sel2, selX] = event.matchOdds || []
 
+    const isVirtual = Boolean(event.isVirtual)
+
     return {
       id: event._id || event.gmid,
       title: event.ename,
-      link: `/game-details/${etid}/${event.gmid}`,
+      link: isVirtual ? null : `/game-details/${etid}/${event.gmid}`,
+      isVirtual,
       date: event.stime,
       live: Boolean(event.isLive || event.iB),
       icons: ['tv', 'f', 'BM'],
@@ -72,7 +76,12 @@ export default function Home() {
       return <RacingTable racingData={greyhoundRacingData} />
     }
 
-    return <BetTable matches={activeEtid ? mapEventsToMatches(events, activeEtid) : []} />
+    return (
+      <BetTable
+        matches={activeEtid ? mapEventsToMatches(events, activeEtid) : []}
+        onVirtualClick={() => message.error('Contact to upline')}
+      />
+    )
   }
 
   return (

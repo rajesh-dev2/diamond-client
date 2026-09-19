@@ -29,7 +29,7 @@ export default function RacingTable({ racingData }) {
         {tracks.map((track, idx) => (
           <div className="track-row" key={idx}>
             <div className="track-name-col">
-              {track.hasTv && <i className="fas fa-tv icon-tv me-1.5"></i>}
+              {track.hasTv && <i className="icon icon-tv tv-icon me-1.5"></i>}
               <span className="track-name">{track.name}</span>
             </div>
 
