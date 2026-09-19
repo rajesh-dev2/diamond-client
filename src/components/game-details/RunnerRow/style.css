@@ -14,9 +14,10 @@
 /* Runner name + PL area */
 .gdv2-runner-detail {
   display: flex;
-  width: calc(100% - 480px);
+  flex: 1;
+  min-width: 0;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 0 4px;
   font-size: 14px;

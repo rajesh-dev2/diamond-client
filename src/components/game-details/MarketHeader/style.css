@@ -46,11 +46,13 @@
 /* Header odd-box is shorter */
 .gdv2-market-header .gdv2-odd-box {
   min-height: 28px;
+  color: #333333;
 }
 
 .gdv2-market-header .gdv2-odd-box b {
   font-size: 16px;
   font-weight: 600;
+  color: #333333;
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
