@@ -25,7 +25,7 @@
     }
 
     .header-logo-img {
-      @apply h-auto w-[250px] block;
+      @apply h-auto max-w-[28%] block;
     }
 
     .header-user-controls {
