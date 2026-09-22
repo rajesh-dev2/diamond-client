@@ -1,0 +1,400 @@
+/* ═══════════════════════════════════════════════════════════════
+   1 Day Dragon Tiger (dt6) Stylesheet
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-page-container.dt6-page {
+  width: 100%;
+  user-select: none;
+  background-color: white;
+}
+
+/* ── Lock icon — top center ───────────────────────────────────── */
+.dt6-page .suspended-box::before {
+  background-position: center 6px !important;
+}
+
+/* ── Video Stream Section ─────────────────────────────────────── */
+.casino-page-container.dt6-page .casino-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.casino-page-container.dt6-page .video-box-container,
+.casino-page-container.dt6-page .casino-video-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.casino-page-container.dt6-page .casino-video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Sound toggle button */
+.casino-page-container.dt6-page .sound-toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.casino-page-container.dt6-page .sound-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.08);
+}
+
+/* ── Casino Detail Section ────────────────────────────────────── */
+.casino-page-container.dt6-page .casino-detail {
+  margin: 8px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLE 1 — Back/Lay + Pair
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Left box: fix header layout so nation-detail + Back + Lay each fill correctly */
+.dt6-page .casino-table-left-box .casino-table-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+.dt6-page .casino-table-left-box .casino-table-header .casino-nation-detail {
+  flex: 1;
+  width: auto !important;
+  min-width: 0;
+}
+
+.dt6-page .casino-table-left-box .casino-table-header .casino-odds-box {
+  flex: 0 0 72px;
+  width: 72px;
+  cursor: default;
+}
+
+/* Row layout — nation-detail flexible, odds boxes fixed */
+.dt6-page .casino-table-left-box .casino-table-row {
+  display: flex;
+  align-items: stretch;
+  min-height: 44px;
+}
+
+.dt6-page .casino-table-left-box .casino-table-row .casino-nation-detail {
+  flex: 1;
+  width: auto !important;
+}
+
+.dt6-page .casino-table-left-box .casino-table-row .casino-odds-box {
+  flex: 0 0 72px;
+  width: 72px;
+}
+
+/* Pair right-box */
+.dt6-page .casino-table-right-box.dtpair {
+  flex: 0 0 38%;
+  max-width: 38%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  border: 1px solid #c7c8ca;
+  background: #f7f7f7;
+  cursor: pointer;
+}
+
+.dt6-page .casino-table-right-box.dtpair > .casino-odds {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+  text-align: center;
+  width: 100%;
+}
+
+.dt6-page .casino-table-right-box.dtpair .casino-odds-box-theme {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 2px;
+  border-left: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLE 2 — Even/Odd (left) + Red/Black (right)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Even/Odd — same pattern as left box above */
+.dt6-page .casino-table-box:nth-child(2) .casino-table-left-box .casino-table-header .casino-nation-detail {
+  flex: 1;
+  width: auto !important;
+}
+
+.dt6-page .casino-table-box:nth-child(2) .casino-table-left-box .casino-table-header .casino-odds-box {
+  flex: 0 0 72px;
+  width: 72px;
+  cursor: default;
+}
+
+.dt6-page .casino-table-box:nth-child(2) .casino-table-left-box .casino-table-row .casino-nation-detail {
+  flex: 1;
+  width: auto !important;
+}
+
+.dt6-page .casino-table-box:nth-child(2) .casino-table-left-box .casino-table-row .casino-odds-box {
+  flex: 0 0 72px;
+  width: 72px;
+}
+
+/* Red/Black right-box */
+.dt6-page .casino-table-right-box.dtredblack {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #c7c8ca;
+  background: #f7f7f7;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-header .casino-nation-detail {
+  flex: 1;
+  width: auto !important;
+  padding: 4px 8px;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-header .casino-odds-box {
+  flex: 0 0 72px;
+  width: 72px;
+  cursor: default;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-row {
+  display: flex;
+  align-items: stretch;
+  min-height: 44px;
+  border-bottom: 1px solid #c7c8ca;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-row:last-child {
+  border-bottom: 0;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-row .casino-nation-detail {
+  flex: 1;
+  width: auto !important;
+}
+
+.dt6-page .casino-table-right-box.dtredblack .casino-table-row .casino-odds-box {
+  flex: 0 0 72px;
+  width: 72px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLE 3 — Full-width Suits (♠ ♥ ♣ ♦)
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-page-container.dt6-page .casino-table-full-box.dt1day-other-odds {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #c7c8ca;
+  background: #f7f7f7;
+  overflow: hidden;
+}
+
+.dt6-page .dt1day-other-odds .casino-table-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #c7c8ca;
+  min-height: 38px;
+}
+
+.dt6-page .dt1day-other-odds .casino-table-header .casino-nation-detail {
+  flex: 0 0 22%;
+  width: 22% !important;
+  padding: 4px 8px;
+}
+
+.dt6-page .dt1day-other-odds .casino-table-header .casino-odds-box {
+  flex: 1;
+  background: #f7f7f7;
+  color: #333;
+  font-size: 20px;
+  cursor: default;
+  border-left: 1px solid #c7c8ca;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dt6-page .dt1day-other-odds .casino-table-body .casino-table-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #c7c8ca;
+  min-height: 44px;
+}
+
+.dt6-page .dt1day-other-odds .casino-table-body .casino-table-row:last-child {
+  border-bottom: 0;
+}
+
+.dt6-page .dt1day-other-odds .casino-table-body .casino-nation-detail {
+  flex: 0 0 22%;
+  width: 22% !important;
+}
+
+.dt6-page .dt1day-other-odds .casino-table-body .casino-odds-box {
+  flex: 1;
+  border-left: 1px solid #c7c8ca;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CARD SUIT ICONS  (direct Unicode ♠ ♥ ♣ ♦ symbols)
+   ═══════════════════════════════════════════════════════════════ */
+
+.dt6-page .card-red {
+  color: #e51c23;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.dt6-page .card-black {
+  color: #212121;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.dt6-page .card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED THEME / UTILITY
+   ═══════════════════════════════════════════════════════════════ */
+
+.casino-odds-box-theme {
+  background: #2a76a8 !important;
+  color: #fff !important;
+}
+
+.casino-odds-box-theme .casino-odds {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESULT MODAL
+   ═══════════════════════════════════════════════════════════════ */
+
+.dt6-result-modal {
+  padding: 14px;
+  font-size: 13px;
+  color: #334155;
+}
+
+.dt6-result-round-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 13px;
+  color: #475569;
+}
+
+.dt6-result-winner {
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.dt6-result-winner.winner-d {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.dt6-result-winner.winner-t {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.dt6-result-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dt6-detail-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.dt6-detail-label {
+  font-size: 11px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dt6-detail-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dt6-page .casino-table-right-box.dtpair {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .dt6-result-details-grid {
+    grid-template-columns: 1fr;
+  }
+}

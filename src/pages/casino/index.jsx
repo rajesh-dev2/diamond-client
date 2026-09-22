@@ -15,6 +15,7 @@ import Lucky7 from './lucky7'
 import Lucky7B from './lucky7eu'
 import Ab20 from './ab20'
 import Abj from './abj'
+import Dt6 from './dt6'
 
 const CASINO_MAP = {
   goal2: Goal2,
@@ -32,6 +33,9 @@ const CASINO_MAP = {
   abj: Abj,
   ab2: Abj,
   'andar-bahar-2': Abj,
+  dt6: Dt6,
+  'dragon-tiger': Dt6,
+  'dt1day': Dt6,
 }
 
 
