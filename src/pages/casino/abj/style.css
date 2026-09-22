@@ -590,7 +590,7 @@
 
 .casino-page-container.abj-page .card-odd-box .card-img-box img,
 .casino-page-container.abj .card-odd-box .card-img-box img {
-  height: 52px;
+  height: 65px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -715,6 +715,11 @@
     justify-content: center;
   }
 
+  .casino-page-container.abj-page .card-odd-box .card-img-box img,
+  .casino-page-container.abj .card-odd-box .card-img-box img {
+    height: 45px;
+  }
+
   .casino-page-container.abj-page .ab2cards .card-odd-box,
   .casino-page-container.abj .ab2cards .card-odd-box {
     flex: 0 0 calc((100% - 32px) / 9);
@@ -723,7 +728,7 @@
 
   .casino-page-container.abj-page .ab2cards .card-odd-box .suspended-box img,
   .casino-page-container.abj .ab2cards .card-odd-box .suspended-box img {
-    height: 38px;
+    height: 45px;
     width: auto;
   }
 }
