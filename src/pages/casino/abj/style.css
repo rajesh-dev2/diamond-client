@@ -183,7 +183,7 @@
 
 .casino-page-container.abj-page .stream-card-box.black,
 .casino-page-container.abj .stream-card-box.black {
-  color: #111827;
+  color: #333;
 }
 
 .casino-page-container.abj-page .stream-card-suit,
@@ -227,7 +227,7 @@
 .casino-page-container.abj-page .casino-volume,
 .casino-page-container.abj .casino-volume {
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 200;
   line-height: 1;
   margin-top: 5px;
 }
@@ -281,7 +281,6 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
   width: 100%;
 }
 
@@ -306,6 +305,7 @@
   flex-direction: column;
   align-items: stretch;
   text-align: center;
+  margin-left: 2%;
 }
 
 .casino-page-container.abj-page .player-sa,
@@ -332,27 +332,14 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.casino-page-container.abj-page .player-sa-box:hover,
-.casino-page-container.abj .player-sa-box:hover {
-  transform: scale(1.02);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-}
-
 .casino-page-container.abj-page .player-sa-box .casino-odds,
 .casino-page-container.abj .player-sa-box .casino-odds {
-  font-size: 14px;
-  font-weight: 800;
-  color: #111827;
-  line-height: 1.1;
+  color: #333;
 }
 
 .casino-page-container.abj-page .player-sa-box .casino-volume,
 .casino-page-container.abj .player-sa-box .casino-volume {
-  font-size: 11px;
-  font-weight: 600;
-  color: #94a3b8;
-  margin-top: 2px;
-  line-height: 1;
+  color: #333;
 }
 
 .casino-page-container.abj-page .player-bet-box,
@@ -364,7 +351,6 @@
   background-color: #086cb8;
   color: #fff;
   margin-bottom: 5px;
-  min-height: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -374,27 +360,16 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
-.casino-page-container.abj-page .player-bet-box:hover:not(.suspended-box),
-.casino-page-container.abj .player-bet-box:hover:not(.suspended-box) {
-  transform: scale(1.02);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  background: #0060a0;
-}
 
 .casino-page-container.abj-page .player-bet-box .casino-odds,
 .casino-page-container.abj .player-bet-box .casino-odds {
-  font-weight: 800;
   color: #ffffff;
-  line-height: 1;
   white-space: nowrap;
 }
 
 .casino-page-container.abj-page .player-bet-box .casino-volume,
 .casino-page-container.abj .player-bet-box .casino-volume {
-  font-weight: 100;
-  color: #e0f2fe;
-  margin-top: 5px;
-  line-height: 1;
+  color: #fff;
 }
 
 .casino-page-container.abj-page .suspended-box,
@@ -505,19 +480,16 @@
 
 .casino-page-container.abj-page .ab2-box .casino-odds.text-center,
 .casino-page-container.abj .ab2-box .casino-odds.text-center {
-  font-size: 14px;
-  font-weight: 800;
   color: #1e293b;
-  min-height: 24px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
 }
 
 .casino-page-container.abj-page .ab2-box .casino-odds.text-center img,
 .casino-page-container.abj .ab2-box .casino-odds.text-center img {
-  height: 22px;
+  height: 35px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -527,7 +499,7 @@
 .casino-page-container.abj .ab2-box .casino-odds-box.back {
   background: #72bbef;
   border-radius: 3px;
-  min-height: 38px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -543,14 +515,11 @@
 
 .casino-page-container.abj-page .ab2-box .casino-odds-box.back .casino-odds,
 .casino-page-container.abj .ab2-box .casino-odds-box.back .casino-odds {
-  font-size: 14px;
-  font-weight: 800;
-  color: #111827;
+  color: #333;
 }
 
 .casino-page-container.abj-page .ab2-box .casino-odds-box.back.suspended-box,
 .casino-page-container.abj .ab2-box .casino-odds-box.back.suspended-box {
-  background: #94a3b8 !important;
   cursor: not-allowed;
   pointer-events: none;
   position: relative;
@@ -700,7 +669,6 @@
   .casino-page-container.abj .playera-bets {
     display: flex;
     flex-wrap: nowrap;
-    align-items: center;
     width: 100%;
     flex: 0 0 100%;
     margin-bottom: 10px;
@@ -714,18 +682,8 @@
     margin-bottom: 0;
   }
 
-  .casino-page-container.abj-page .player-sa-box,
-  .casino-page-container.abj .player-sa-box,
-  .casino-page-container.abj-page .player-bet-box,
-  .casino-page-container.abj .player-bet-box {
-    min-height: 44px;
-    padding: 3px 4px;
-  }
-
-  .casino-page-container.abj-page .player-sa-box .casino-odds,
-  .casino-page-container.abj .player-sa-box .casino-odds,
-  .casino-page-container.abj-page .player-bet-box .casino-odds,
-  .casino-page-container.abj .player-bet-box .casino-odds {
+  .casino-page-container.abj-page .playera-title,
+  .casino-page-container.abj .playera-title {
     font-size: 12px;
   }
 
@@ -746,7 +704,7 @@
   .casino-page-container.abj-page .casino-table-right-box,
   .casino-page-container.abj .casino-table-right-box {
     flex-direction: row !important;
-    padding: 8px 10px;
+    padding: 0px 10px;
     gap: 8px;
   }
 
