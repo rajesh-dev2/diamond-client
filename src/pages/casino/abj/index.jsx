@@ -278,7 +278,7 @@ export default function Abj() {
                       className="card-odd-box"
                       onClick={() => handleBet(`Card ${rank}`, '12.00')}
                     >
-                      <div className="suspended-box">
+                      <div className="card-img-box">
                         <img
                           src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/${rank}.png`}
                           alt={rank}
