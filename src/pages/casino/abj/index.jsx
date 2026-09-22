@@ -18,14 +18,6 @@ import CasinoCardSlider from '../../../components/CasinoCardSlider'
 import CasinoLastResults from '../../../components/CasinoLastResults'
 import './style.css'
 
-// Inline Lock SVG icon matching standard casino lock icon
-function LockIcon({ className = 'ab-lock-icon' }) {
-  return (
-    <svg className={className} viewBox="0 0 448 512" fill="currentColor">
-      <path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zM264 392c0 22.1-17.9 40-40 40s-40-17.9-40-40v-48c0-22.1 17.9-40 40-40s40 17.9 40 40v48zm32-168H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z" />
-    </svg>
-  )
-}
 
 /* ── Live Overlay Stream Cards Data (Demonstrating Live Dealing) ── */
 const STREAM_DEALING_STATE = {
@@ -46,38 +38,31 @@ const STREAM_DEALING_STATE = {
 }
 
 
-/* ── 13 Card Values Config (Andar & Bahar Deal State with Suspended Support) ── */
-const ANDAR_CARDS = [
-  { id: 1,  rank: 'A',  img: '0.jpg',  suspended: false },
-  { id: 2,  rank: '2',  img: '0.jpg',  suspended: false },
-  { id: 3,  rank: '3',  img: '3.jpg',  suspended: true },
-  { id: 4,  rank: '4',  img: '0.jpg',  suspended: false },
-  { id: 5,  rank: '5',  img: '5.jpg',  suspended: true },
-  { id: 6,  rank: '6',  img: '0.jpg',  suspended: false },
-  { id: 7,  rank: '7',  img: '0.jpg',  suspended: false },
-  { id: 8,  rank: '8',  img: '0.jpg',  suspended: false },
-  { id: 9,  rank: '9',  img: '0.jpg',  suspended: false },
-  { id: 10, rank: '10', img: '0.jpg',  suspended: false },
-  { id: 11, rank: 'J',  img: '0.jpg',  suspended: false },
-  { id: 12, rank: 'Q',  img: '0.jpg',  suspended: false },
-  { id: 13, rank: 'K',  img: '0.jpg',  suspended: false },
+/* ── 13 Card Values Config (A through K) ── */
+const CARD_RANKS = [
+  'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'
 ]
 
-const BAHAR_CARDS = [
-  { id: 1,  rank: 'A',  img: '21.jpg', suspended: true },
-  { id: 2,  rank: '2',  img: '22.jpg', suspended: true },
-  { id: 3,  rank: '3',  img: '0.jpg',  suspended: false },
-  { id: 4,  rank: '4',  img: '0.jpg',  suspended: false },
-  { id: 5,  rank: '5',  img: '0.jpg',  suspended: false },
-  { id: 6,  rank: '6',  img: '0.jpg',  suspended: false },
-  { id: 7,  rank: '7',  img: '0.jpg',  suspended: false },
-  { id: 8,  rank: '8',  img: '0.jpg',  suspended: false },
-  { id: 9,  rank: '9',  img: '0.jpg',  suspended: false },
-  { id: 10, rank: '10', img: '0.jpg',  suspended: false },
-  { id: 11, rank: 'J',  img: '0.jpg',  suspended: false },
-  { id: 12, rank: 'Q',  img: '32.jpg', suspended: true },
-  { id: 13, rank: 'K',  img: '0.jpg',  suspended: false },
-]
+const INITIAL_MARKET = {
+  playerA: {
+    sa: { name: 'Player A (SA)', odds: '15', volume: '15', suspended: false },
+    firstBet: { name: 'Player A First Bet', odds: '2', volume: '2', suspended: false },
+    secondBet: { name: 'Player A Second Bet', odds: '0', volume: '0', suspended: true },
+  },
+  playerB: {
+    sb: { name: 'Player B (SB)', odds: '15', volume: '15', suspended: false },
+    firstBet: { name: 'Player B First Bet', odds: '2', volume: '2', suspended: false },
+    secondBet: { name: 'Player B Second Bet', odds: '0', volume: '0', suspended: true },
+  },
+  odd: { name: 'ODD', odds: '1.83', suspended: false },
+  even: { name: 'EVEN', odds: '2.12', suspended: false },
+  suits: [
+    { key: 'spade', name: 'Spade', odds: '3.85', suspended: false, icon: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/icons/spade.png' },
+    { key: 'club', name: 'Club', odds: '3.85', suspended: false, icon: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/icons/club.png' },
+    { key: 'heart', name: 'Heart', odds: '3.85', suspended: false, icon: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/icons/heart.png' },
+    { key: 'diamond', name: 'Diamond', odds: '3.85', suspended: false, icon: 'https://versionobj.ecoassetsservice.com/v106/static/front/img/icons/diamond.png' },
+  ],
+}
 
 /* ── Last 10 Results (B, B, A, B, A, B, A, A, A, B) ───────────── */
 const LAST_RESULTS = [
@@ -99,6 +84,7 @@ export default function Abj() {
   const [isMuted, setIsMuted] = useState(true)
   const [roundId] = useState('124260916125354')
   const [streamCards] = useState(STREAM_DEALING_STATE)
+  const [market] = useState(INITIAL_MARKET)
 
   return (
     <CasinoLayout
@@ -163,87 +149,147 @@ export default function Abj() {
 
             {/* ── Casino Detail Section ── */}
             <div className="casino-detail">
-              {/* ── Casino Table (Andar Bahar 13-Card Board Table) ── */}
+              {/* ── Casino Table (Andar Bahar 2 New UI) ── */}
               <div className="casino-table">
-                <div className="casino-table-box">
-                  {/* ANDAR Box */}
-                  <div className="andar-box">
+                {/* ── Row 1: Player A & Player B Bets ── */}
+                <div className="casino-table-full-box">
+                  {/* Player A Bets */}
+                  <div className="playera-bets">
+                    <div className="playera-title">A</div>
                     <div
-                      className="ab-title"
-                      onClick={() => handleBet('Andar (A)', '1.98')}
+                      className="player-sa"
+                      onClick={() => !market.playerA.sa.suspended && handleBet(market.playerA.sa.name, market.playerA.sa.odds)}
                     >
-                      ANDAR
+                      <div className="player-sa-box">
+                        <div className="casino-odds">SA</div>
+                        <div className="casino-volume ">{market.playerA.sa.volume}</div>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
                     </div>
-                    <div className="ab-cards">
-                      {ANDAR_CARDS.map((card, idx) => (
-                        <div
-                          key={`andar-${card.id || idx}`}
-                          className={`card-odd-box ${card.suspended ? 'suspended' : ''}`.trim()}
-                          onClick={() => !card.suspended && handleBet(`Andar Card ${card.rank || idx + 1}`, '12.00')}
-                          title={`Andar Card ${card.rank || idx + 1}`}
-                        >
-                          <div className="card-img-wrap">
-                            <img
-                              src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/andar-bahar-cards/${card.img}`}
-                              alt={`Andar ${card.rank || idx + 1}`}
-                              onError={(e) => {
-                                e.currentTarget.src = '/img/game-card.png'
-                              }}
-                            />
-                            {card.suspended && (
-                              <div className="suspended-box">
-                                <LockIcon className="ab-lock-icon" />
-                              </div>
-                            )}
-                          </div>
-                          <div className="casino-nation-book"></div>
-                        </div>
-                      ))}
+                    <div
+                      className="player-bet"
+                      onClick={() => !market.playerA.firstBet.suspended && handleBet(market.playerA.firstBet.name, market.playerA.firstBet.odds)}
+                    >
+                      <div className="player-bet-box">
+                        <div className="casino-odds">First Bet</div>
+                        <div className="casino-volume ">{market.playerA.firstBet.volume}</div>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
                     </div>
+                    <div
+                      className="player-bet"
+                      onClick={() => !market.playerA.secondBet.suspended && handleBet(market.playerA.secondBet.name, market.playerA.secondBet.odds)}
+                    >
+                      <div className={`player-bet-box ${market.playerA.secondBet.suspended ? 'suspended-box' : ''}`}>
+                        <div className="casino-odds">Second Bet</div>
+                        <div className="casino-volume ">{market.playerA.secondBet.volume}</div>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
+                    </div>
+                    <div className="playera-title">A</div>
                   </div>
 
-                  {/* BAHAR Box */}
-                  <div className="bahar-box">
+                  {/* Player B Bets */}
+                  <div className="playera-bets">
+                    <div className="playera-title">B</div>
                     <div
-                      className="ab-title"
-                      onClick={() => handleBet('Bahar (B)', '1.98')}
+                      className="player-sa"
+                      onClick={() => !market.playerB.sb.suspended && handleBet(market.playerB.sb.name, market.playerB.sb.odds)}
                     >
-                      BAHAR
+                      <div className="player-sa-box">
+                        <div className="casino-odds">SB</div>
+                        <div className="casino-volume ">{market.playerB.sb.volume}</div>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
                     </div>
-                    <div className="ab-cards">
-                      {BAHAR_CARDS.map((card, idx) => (
-                        <div
-                          key={`bahar-${card.id || idx}`}
-                          className={`card-odd-box ${card.suspended ? 'suspended' : ''}`.trim()}
-                          onClick={() => !card.suspended && handleBet(`Bahar Card ${card.rank || idx + 1}`, '12.00')}
-                          title={`Bahar Card ${card.rank || idx + 1}`}
-                        >
-                          <div className="card-img-wrap">
-                            <img
-                              src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/andar-bahar-cards/${card.img}`}
-                              alt={`Bahar ${card.rank || idx + 1}`}
-                              onError={(e) => {
-                                e.currentTarget.src = '/img/game-card.png'
-                              }}
-                            />
-                            {card.suspended && (
-                              <div className="suspended-box">
-                                <LockIcon className="ab-lock-icon" />
-                              </div>
-                            )}
-                          </div>
-                          <div className="casino-nation-book"></div>
-                        </div>
-                      ))}
+                    <div
+                      className="player-bet"
+                      onClick={() => !market.playerB.firstBet.suspended && handleBet(market.playerB.firstBet.name, market.playerB.firstBet.odds)}
+                    >
+                      <div className="player-bet-box">
+                        <div className="casino-odds">First Bet</div>
+                        <div className="casino-volume ">{market.playerB.firstBet.volume}</div>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
                     </div>
+                    <div
+                      className="player-bet"
+                      onClick={() => !market.playerB.secondBet.suspended && handleBet(market.playerB.secondBet.name, market.playerB.secondBet.odds)}
+                    >
+                      <div className={`player-bet-box ${market.playerB.secondBet.suspended ? 'suspended-box' : ''}`}>
+                        <div className="casino-odds">Second Bet</div>
+                        <div className="casino-volume ">{market.playerB.secondBet.volume}</div>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
+                    </div>
+                    <div className="playera-title">B</div>
                   </div>
                 </div>
 
-                {/* ── Casino Remark Marquee ── */}
-                <div className="casino-remark mt-1">
-                  <marquee scrollamount="3">
-                    Payout : Bahar 1st Card 25% and All Other Andar-Bahar Cards 100%.
-                  </marquee>
+                {/* ── Row 2: ODD/EVEN & 4 Suits ── */}
+                <div className="casino-table-box mt-3">
+                  <div className="casino-table-left-box">
+                    <div
+                      className="ab2-box"
+                      onClick={() => !market.odd.suspended && handleBet(market.odd.name, market.odd.odds)}
+                    >
+                      <div className="casino-odds text-center">ODD</div>
+                      <div className={`casino-odds-box back ${market.odd.suspended ? 'suspended-box' : ''}`}>
+                        <span className="casino-odds">{market.odd.suspended ? '0' : market.odd.odds}</span>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
+                    </div>
+                    <div
+                      className="ab2-box"
+                      onClick={() => !market.even.suspended && handleBet(market.even.name, market.even.odds)}
+                    >
+                      <div className="casino-odds text-center">EVEN</div>
+                      <div className={`casino-odds-box back ${market.even.suspended ? 'suspended-box' : ''}`}>
+                        <span className="casino-odds">{market.even.suspended ? '0' : market.even.odds}</span>
+                      </div>
+                      <div className="casino-nation-book text-center"></div>
+                    </div>
+                  </div>
+
+                  <div className="casino-table-right-box">
+                    {market.suits.map((suit) => (
+                      <div
+                        key={suit.key}
+                        className="ab2-box"
+                        onClick={() => !suit.suspended && handleBet(suit.name, suit.odds)}
+                      >
+                        <div className="casino-odds text-center">
+                          <img src={suit.icon} alt={suit.name} />
+                        </div>
+                        <div className={`casino-odds-box back ${suit.suspended ? 'suspended-box' : ''}`}>
+                          <span className="casino-odds">{suit.suspended ? '0' : suit.odds}</span>
+                        </div>
+                        <div className="casino-nation-book text-center"></div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* ── Row 3: 13 Card Ranks ── */}
+                <div className="casino-table-full-box ab2cards mt-3">
+                  {CARD_RANKS.map((rank) => (
+                    <div
+                      key={rank}
+                      className="card-odd-box"
+                      onClick={() => handleBet(`Card ${rank}`, '12.00')}
+                    >
+                      <div className="suspended-box">
+                        <img
+                          src={`https://versionobj.ecoassetsservice.com/v106/static/front/img/cards/${rank}.png`}
+                          alt={rank}
+                          onError={(e) => {
+                            e.currentTarget.src = '/img/game-card.png'
+                          }}
+                        />
+                      </div>
+                      <div className="casino-nation-book"></div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
